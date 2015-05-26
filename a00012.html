@@ -89,12 +89,12 @@
 <div class="line"><span class="comment"> * C-library functions don&#39;t work when called from a Contiki thread. */</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00479.html">sys/mt.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00485.html">sys/mt.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">char</span> *ptr;</div>
 <div class="line"></div>
-<div class="line"><a name="a0"></a><a class="code" href="a00684.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(multi_threading_process, <span class="stringliteral">&quot;Multi-threading process&quot;</span>);</div>
+<div class="line"><a name="a0"></a><a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(multi_threading_process, <span class="stringliteral">&quot;Multi-threading process&quot;</span>);</div>
 <div class="line">AUTOSTART_PROCESSES(&amp;multi_threading_process);</div>
 <div class="line"></div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
@@ -102,11 +102,11 @@
 <div class="line">thread_func(<span class="keywordtype">char</span> *str, <span class="keywordtype">int</span> len)</div>
 <div class="line">{</div>
 <div class="line">  ptr = str + len;</div>
-<div class="line">  <a name="a1"></a><a class="code" href="a00682.html#ga821508e238ebc521234018e469afe636">mt_yield</a>();</div>
+<div class="line">  <a name="a1"></a><a class="code" href="a00811.html#ga821508e238ebc521234018e469afe636">mt_yield</a>();</div>
 <div class="line"></div>
 <div class="line">  <span class="keywordflow">if</span>(len) {</div>
 <div class="line">    thread_func(str, len - 1);</div>
-<div class="line">    <a class="code" href="a00682.html#ga821508e238ebc521234018e469afe636">mt_yield</a>();</div>
+<div class="line">    <a class="code" href="a00811.html#ga821508e238ebc521234018e469afe636">mt_yield</a>();</div>
 <div class="line">  }</div>
 <div class="line"></div>
 <div class="line">  ptr = str + len;</div>
@@ -118,52 +118,52 @@
 <div class="line">  <span class="keywordflow">while</span>(1) {</div>
 <div class="line">    thread_func((<span class="keywordtype">char</span> *)data, 9);</div>
 <div class="line">  }</div>
-<div class="line">  <a name="a2"></a><a class="code" href="a00682.html#gaae59ef816295a2dbf53efd86533fe87d">mt_exit</a>();</div>
+<div class="line">  <a name="a2"></a><a class="code" href="a00811.html#gaae59ef816295a2dbf53efd86533fe87d">mt_exit</a>();</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a3"></a><a class="code" href="a00701.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(multi_threading_process, ev, data)</div>
+<div class="line"><a name="a3"></a><a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(multi_threading_process, ev, data)</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span>mt_thread alpha_thread;</div>
 <div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span>mt_thread count_thread;</div>
 <div class="line"></div>
-<div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a4"></a><a class="code" href="a00056.html">etimer</a> <a name="_a5"></a><a class="code" href="a00084.html">timer</a>;</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a4"></a><a class="code" href="a00057.html">etimer</a> <a name="_a5"></a><a class="code" href="a00085.html">timer</a>;</div>
 <div class="line">  <span class="keyword">static</span> <span class="keywordtype">int</span> toggle;</div>
 <div class="line"></div>
-<div class="line">  <a name="a6"></a><a class="code" href="a00684.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
+<div class="line">  <a name="a6"></a><a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"></div>
-<div class="line">  <a name="a7"></a><a class="code" href="a00682.html#ga9b7e54b6a727e74f998736238a6ba424">mt_init</a>();</div>
-<div class="line">  <a name="a8"></a><a class="code" href="a00682.html#ga7eb58b7ea94b3c1b86494a43ef95fb9d">mt_start</a>(&amp;alpha_thread, thread_main, <span class="stringliteral">&quot;JIHGFEDCBA&quot;</span>);</div>
-<div class="line">  <a class="code" href="a00682.html#ga7eb58b7ea94b3c1b86494a43ef95fb9d">mt_start</a>(&amp;count_thread, thread_main, <span class="stringliteral">&quot;9876543210&quot;</span>);</div>
+<div class="line">  <a name="a7"></a><a class="code" href="a00811.html#ga9b7e54b6a727e74f998736238a6ba424">mt_init</a>();</div>
+<div class="line">  <a name="a8"></a><a class="code" href="a00811.html#ga7eb58b7ea94b3c1b86494a43ef95fb9d">mt_start</a>(&amp;alpha_thread, thread_main, <span class="stringliteral">&quot;JIHGFEDCBA&quot;</span>);</div>
+<div class="line">  <a class="code" href="a00811.html#ga7eb58b7ea94b3c1b86494a43ef95fb9d">mt_start</a>(&amp;count_thread, thread_main, <span class="stringliteral">&quot;9876543210&quot;</span>);</div>
 <div class="line"></div>
-<div class="line">  <a name="a9"></a><a class="code" href="a00680.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;<a class="code" href="a00084.html">timer</a>, <a name="a10"></a><a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> / 2);</div>
+<div class="line">  <a name="a9"></a><a class="code" href="a00809.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;<a class="code" href="a00085.html">timer</a>, <a name="a10"></a><a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> / 2);</div>
 <div class="line"></div>
 <div class="line">  <span class="keywordflow">while</span>(1) {</div>
-<div class="line">    <a name="a11"></a><a class="code" href="a00684.html#ga4f9c1d291e210793e8c4444762f748ba">PROCESS_WAIT_EVENT</a>();</div>
+<div class="line">    <a name="a11"></a><a class="code" href="a00813.html#ga4f9c1d291e210793e8c4444762f748ba">PROCESS_WAIT_EVENT</a>();</div>
 <div class="line">    <span class="keywordflow">if</span>(ev == PROCESS_EVENT_TIMER) {</div>
 <div class="line">      <span class="keywordflow">if</span>(toggle) {</div>
-<div class="line">        <a name="a12"></a><a class="code" href="a00682.html#ga2ceaab27edea6cebcdc92cbc3d412e1d">mt_exec</a>(&amp;alpha_thread);</div>
+<div class="line">        <a name="a12"></a><a class="code" href="a00811.html#ga2ceaab27edea6cebcdc92cbc3d412e1d">mt_exec</a>(&amp;alpha_thread);</div>
 <div class="line">        toggle--;</div>
 <div class="line">      } <span class="keywordflow">else</span> {</div>
-<div class="line">        <a class="code" href="a00682.html#ga2ceaab27edea6cebcdc92cbc3d412e1d">mt_exec</a>(&amp;count_thread);</div>
+<div class="line">        <a class="code" href="a00811.html#ga2ceaab27edea6cebcdc92cbc3d412e1d">mt_exec</a>(&amp;count_thread);</div>
 <div class="line">        toggle++;</div>
 <div class="line">      }</div>
 <div class="line">      puts(ptr);</div>
 <div class="line"></div>
-<div class="line">      <a class="code" href="a00680.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;<a class="code" href="a00084.html">timer</a>, <a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> / 2);</div>
+<div class="line">      <a class="code" href="a00809.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;<a class="code" href="a00085.html">timer</a>, <a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> / 2);</div>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">  </div>
-<div class="line">  <a name="a13"></a><a class="code" href="a00682.html#ga56186be13a78313ac222a9a11cef92b4">mt_stop</a>(&amp;alpha_thread);</div>
-<div class="line">  <a class="code" href="a00682.html#ga56186be13a78313ac222a9a11cef92b4">mt_stop</a>(&amp;count_thread);</div>
-<div class="line">  <a name="a14"></a><a class="code" href="a00682.html#gad4b502d5e08885704143bffe3d4565d6">mt_remove</a>();</div>
+<div class="line">  <a name="a13"></a><a class="code" href="a00811.html#ga56186be13a78313ac222a9a11cef92b4">mt_stop</a>(&amp;alpha_thread);</div>
+<div class="line">  <a class="code" href="a00811.html#ga56186be13a78313ac222a9a11cef92b4">mt_stop</a>(&amp;count_thread);</div>
+<div class="line">  <a name="a14"></a><a class="code" href="a00811.html#gad4b502d5e08885704143bffe3d4565d6">mt_remove</a>();</div>
 <div class="line"></div>
-<div class="line">  <a name="a15"></a><a class="code" href="a00684.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line">  <a name="a15"></a><a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:54 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

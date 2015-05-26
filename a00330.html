@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/llsec/anti-replay.c File Reference</title>
+<title>Contiki 3.x: core/net/ipv6/uip-nd6.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,51 +43,114 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_fad108bfa9b279bd5b48aa3dbd368b4b.html">llsec</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_2254bc981389a9495bd721183ae93a8d.html">ipv6</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">anti-replay.c File Reference</div>  </div>
+<div class="title">uip-nd6.c File Reference<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00889.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00890.html">uIP IPv6 specific features</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    Protects against replay attacks by comparing with the last
-    unicast or broadcast frame counter of the sender.</pre>  
+<p>Neighbor discovery (RFC 4861)  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00331_source.html">net/llsec/anti-replay.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00377_source.html">net/packetbuf.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00329_source.html">net/ipv6/uip-icmp6.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00331_source.html">net/ipv6/uip-nd6.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00327_source.html">net/ipv6/uip-ds6.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00257_source.html">net/ip/uip-nameserver.h</a>&quot;</code><br />
+<code>#include &quot;lib/random.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00255_source.html">net/ip/uip-debug.h</a>&quot;</code><br />
 </div>
 <p><a href="a00330_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga1b3fb7a54d9f16ba5a06f2f0c3df8f2b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga1b3fb7a54d9f16ba5a06f2f0c3df8f2b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00890.html#ga1b3fb7a54d9f16ba5a06f2f0c3df8f2b">UIP_ND6_OPT_HDR_BUF</a>&#160;&#160;&#160;((<a class="el" href="a00114.html">uip_nd6_opt_hdr</a> *)&amp;<a class="el" href="a00752.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[uip_l2_l3_icmp_hdr_len + nd6_opt_offset])</td></tr>
+<tr class="memdesc:ga1b3fb7a54d9f16ba5a06f2f0c3df8f2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to ND option. <br /></td></tr>
+<tr class="separator:ga1b3fb7a54d9f16ba5a06f2f0c3df8f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Pointers to the header structures.</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>All pointers except UIP_IP_BUF depend on uip_ext_len, which at packet reception, is the total length of the extension headers.</p>
+<p>The pointer to ND6 options header also depends on nd6_opt_offset, which we set in each function.</p>
+<p>Care should be taken when manipulating these buffers about the value of these length variables </p>
+</div></td></tr>
+<tr class="memitem:gaf966537cf73ee5973da59bba6b21b731"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf966537cf73ee5973da59bba6b21b731"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00890.html#gaf966537cf73ee5973da59bba6b21b731">UIP_IP_BUF</a>&#160;&#160;&#160;((struct uip_ip_hdr *)&amp;<a class="el" href="a00752.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[<a class="el" href="a00759.html#gae6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>])</td></tr>
+<tr class="memdesc:gaf966537cf73ee5973da59bba6b21b731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to IP header. <br /></td></tr>
+<tr class="separator:gaf966537cf73ee5973da59bba6b21b731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga56e76f46008562daae1447c012fd92e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga56e76f46008562daae1447c012fd92e2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00890.html#ga56e76f46008562daae1447c012fd92e2">UIP_ICMP_BUF</a>&#160;&#160;&#160;((struct uip_icmp_hdr *)&amp;<a class="el" href="a00752.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[<a class="el" href="a00889.html#ga488258fa3fa2856c84a9884842423086">uip_l2_l3_hdr_len</a>])</td></tr>
+<tr class="memdesc:ga56e76f46008562daae1447c012fd92e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to ICMP header. <br /></td></tr>
+<tr class="separator:ga56e76f46008562daae1447c012fd92e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf25cbf7fa2bcf572b14524ade98a5145"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00890.html#gaf25cbf7fa2bcf572b14524ade98a5145">UIP_ND6_RS_BUF</a>&#160;&#160;&#160;((<a class="el" href="a00119.html">uip_nd6_rs</a> *)&amp;<a class="el" href="a00752.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[uip_l2_l3_icmp_hdr_len])</td></tr>
+<tr class="separator:gaf25cbf7fa2bcf572b14524ade98a5145"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0d3d7ca8abf01ade6206c5b459be2dc8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0d3d7ca8abf01ade6206c5b459be2dc8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>UIP_ND6_RA_BUF</b>&#160;&#160;&#160;((<a class="el" href="a00117.html">uip_nd6_ra</a> *)&amp;<a class="el" href="a00752.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[uip_l2_l3_icmp_hdr_len])</td></tr>
+<tr class="separator:ga0d3d7ca8abf01ade6206c5b459be2dc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6a1488c6c2a18fac59b8ee60ec2406d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6a1488c6c2a18fac59b8ee60ec2406d8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>UIP_ND6_NS_BUF</b>&#160;&#160;&#160;((<a class="el" href="a00112.html">uip_nd6_ns</a> *)&amp;<a class="el" href="a00752.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[uip_l2_l3_icmp_hdr_len])</td></tr>
+<tr class="separator:ga6a1488c6c2a18fac59b8ee60ec2406d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6919e7532baee63c615fe349699a3af9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6919e7532baee63c615fe349699a3af9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>UIP_ND6_NA_BUF</b>&#160;&#160;&#160;((<a class="el" href="a00111.html">uip_nd6_na</a> *)&amp;<a class="el" href="a00752.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[uip_l2_l3_icmp_hdr_len])</td></tr>
+<tr class="separator:ga6919e7532baee63c615fe349699a3af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gaca1ccf3e9347650cea9cff59084fd976"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaca1ccf3e9347650cea9cff59084fd976"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00646.html#gaca1ccf3e9347650cea9cff59084fd976">anti_replay_set_counter</a> (void)</td></tr>
-<tr class="memdesc:gaca1ccf3e9347650cea9cff59084fd976"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the frame counter packetbuf attributes. <br /></td></tr>
-<tr class="separator:gaca1ccf3e9347650cea9cff59084fd976"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9680ee2ee285f92cfe86226287a4de49"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9680ee2ee285f92cfe86226287a4de49"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00646.html#ga9680ee2ee285f92cfe86226287a4de49">anti_replay_get_counter</a> (void)</td></tr>
-<tr class="memdesc:ga9680ee2ee285f92cfe86226287a4de49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the frame counter from packetbuf. <br /></td></tr>
-<tr class="separator:ga9680ee2ee285f92cfe86226287a4de49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga07f4bfca15d73885737535866bd097d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00646.html#ga07f4bfca15d73885737535866bd097d6">anti_replay_init_info</a> (struct anti_replay_info *info)</td></tr>
-<tr class="memdesc:ga07f4bfca15d73885737535866bd097d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the anti-replay information about the sender.  <a href="a00646.html#ga07f4bfca15d73885737535866bd097d6">More...</a><br /></td></tr>
-<tr class="separator:ga07f4bfca15d73885737535866bd097d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga344b34caa1a95c3b37939d874ce478bc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00646.html#ga344b34caa1a95c3b37939d874ce478bc">anti_replay_was_replayed</a> (struct anti_replay_info *info)</td></tr>
-<tr class="memdesc:ga344b34caa1a95c3b37939d874ce478bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if received frame was replayed.  <a href="a00646.html#ga344b34caa1a95c3b37939d874ce478bc">More...</a><br /></td></tr>
-<tr class="separator:ga344b34caa1a95c3b37939d874ce478bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2af535736966c71dc0c20034c0edad40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00890.html#ga2af535736966c71dc0c20034c0edad40">uip_nd6_ns_output</a> (uip_ipaddr_t *src, uip_ipaddr_t *dest, uip_ipaddr_t *tgt)</td></tr>
+<tr class="memdesc:ga2af535736966c71dc0c20034c0edad40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a neighbor solicitation, send a Neighbor Advertisement.  <a href="a00890.html#ga2af535736966c71dc0c20034c0edad40">More...</a><br /></td></tr>
+<tr class="separator:ga2af535736966c71dc0c20034c0edad40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga74ea36868298668e7ebb554da1dcab9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00890.html#ga74ea36868298668e7ebb554da1dcab9d">uip_nd6_rs_output</a> (void)</td></tr>
+<tr class="memdesc:ga74ea36868298668e7ebb554da1dcab9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a Router Solicitation.  <a href="a00890.html#ga74ea36868298668e7ebb554da1dcab9d">More...</a><br /></td></tr>
+<tr class="separator:ga74ea36868298668e7ebb554da1dcab9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33b8832107eb785014a4437bde0e0e18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00330.html#a33b8832107eb785014a4437bde0e0e18">ra_input</a> (void)</td></tr>
+<tr class="separator:a33b8832107eb785014a4437bde0e0e18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga90a852e215b6e23f5a59fd72e2e21a59"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga90a852e215b6e23f5a59fd72e2e21a59"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00890.html#ga90a852e215b6e23f5a59fd72e2e21a59">uip_nd6_init</a> ()</td></tr>
+<tr class="memdesc:ga90a852e215b6e23f5a59fd72e2e21a59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the uIP ND core. <br /></td></tr>
+<tr class="separator:ga90a852e215b6e23f5a59fd72e2e21a59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    Protects against replay attacks by comparing with the last
-    unicast or broadcast frame counter of the sender.</pre> <dl class="section author"><dt>Author</dt><dd>Konrad Krentz <a href="#" onclick="location.href='mai'+'lto:'+'kon'+'ra'+'d.k'+'re'+'ntz'+'@g'+'mai'+'l.'+'com'; return false;">konra<span style="display: none;">.nosp@m.</span>d.kr<span style="display: none;">.nosp@m.</span>entz@<span style="display: none;">.nosp@m.</span>gmai<span style="display: none;">.nosp@m.</span>l.com</a> </dd></dl>
+<div class="textblock"><p>Neighbor discovery (RFC 4861) </p>
+<dl class="section author"><dt>Author</dt><dd>Mathilde Durvy <a href="#" onclick="location.href='mai'+'lto:'+'mdu'+'rv'+'y@c'+'is'+'co.'+'co'+'m'; return false;">mdurv<span style="display: none;">.nosp@m.</span>y@ci<span style="display: none;">.nosp@m.</span>sco.c<span style="display: none;">.nosp@m.</span>om</a> </dd>
+<dd>
+Julien Abeille <a href="#" onclick="location.href='mai'+'lto:'+'jab'+'ei'+'lle'+'@c'+'isc'+'o.'+'com'; return false;">jabei<span style="display: none;">.nosp@m.</span>lle@<span style="display: none;">.nosp@m.</span>cisco<span style="display: none;">.nosp@m.</span>.com</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00330_source.html">anti-replay.c</a>.</p>
-</div></div><!-- contents -->
+<p>Definition in file <a class="el" href="a00330_source.html">uip-nd6.c</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a33b8832107eb785014a4437bde0e0e18"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ra_input </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>&lt; Pointer to IP header</p>
+<p>&lt; Pointer to IP header</p>
+<p>&lt; Pointer to IP header</p>
+<p>&lt; Pointer to IP header</p>
+<p>&lt; Pointer to IP header</p>
+<p>&lt; Pointer to IP header </p>
+
+<p>Definition at line <a class="el" href="a00330_source.html#l00815">815</a> of file <a class="el" href="a00330_source.html">uip-nd6.c</a>.</p>
+
+<p>References <a class="el" href="a00323_source.html#l00061">NBR_INCOMPLETE</a>, <a class="el" href="a00495_source.html#l00140">stimer_remaining()</a>, <a class="el" href="a00495_source.html#l00067">stimer_set()</a>, <a class="el" href="a00326_source.html#l00695">uip_ds6_compute_reachable_time()</a>, <a class="el" href="a00322_source.html#l00081">uip_ds6_nbr_add()</a>, <a class="el" href="a00326_source.html#l00533">uip_ds6_set_addr_iid()</a>, <a class="el" href="a00330_source.html#l00105">UIP_ICMP_BUF</a>, <a class="el" href="a00330_source.html#l00104">UIP_IP_BUF</a>, <a class="el" href="a00264_source.html#l01030">uip_ipaddr_copy</a>, <a class="el" href="a00264_source.html#l02062">uip_is_addr_link_local</a>, <a class="el" href="a00307_source.html#l00136">uip_len</a>, <a class="el" href="a00307_source.html#l00118">uip_lladdr</a>, <a class="el" href="a00256_source.html#l00095">uip_nameserver_update()</a>, <a class="el" href="a00331_source.html#l00055">UIP_ND6_HOP_LIMIT</a>, <a class="el" href="a00331_source.html#l00057">UIP_ND6_INFINITE_LIFETIME</a>, <a class="el" href="a00330_source.html#l00113">UIP_ND6_OPT_HDR_BUF</a>, and <a class="el" href="a00264_source.html#l01435">UIP_STAT</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/ip/slipdev.c File Reference</title>
+<title>Contiki 3.x: core/net/ip/resolv.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,41 +48,67 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">slipdev.c File Reference</div>  </div>
+<div class="title">resolv.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>SLIP protocol implementation.  
+<p><pre class="fragment">    DNS host name to IP address resolver.</pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00259_source.html">uip.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00242_source.html">slipdev.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00250_source.html">net/ip/tcpip.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00242_source.html">net/ip/resolv.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00263_source.html">net/ip/uip-udp-packet.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00257_source.html">net/ip/uip-nameserver.h</a>&quot;</code><br />
+<code>#include &quot;lib/random.h&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;ctype.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00327_source.html">net/ipv6/uip-ds6.h</a>&quot;</code><br />
 </div>
 <p><a href="a00241_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga494b62d830600b2bd76333eddfd8e49f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00745.html#ga494b62d830600b2bd76333eddfd8e49f">RESOLV_CONF_MAX_RETRIES</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:ga494b62d830600b2bd76333eddfd8e49f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum number of retries when asking for a name.  <a href="a00745.html#ga494b62d830600b2bd76333eddfd8e49f">More...</a><br /></td></tr>
+<tr class="separator:ga494b62d830600b2bd76333eddfd8e49f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gad974a53acdec0fcce9d1e5116cad3c48"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00618.html#gad974a53acdec0fcce9d1e5116cad3c48">slipdev_send</a> (void)</td></tr>
-<tr class="memdesc:gad974a53acdec0fcce9d1e5116cad3c48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send the packet in the uip_buf and uip_appdata buffers using the SLIP protocol.  <a href="a00618.html#gad974a53acdec0fcce9d1e5116cad3c48">More...</a><br /></td></tr>
-<tr class="separator:gad974a53acdec0fcce9d1e5116cad3c48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga83bf8726f83f07ff3b65f3ca6e6ed16a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00618.html#ga83bf8726f83f07ff3b65f3ca6e6ed16a">slipdev_poll</a> (void)</td></tr>
-<tr class="memdesc:ga83bf8726f83f07ff3b65f3ca6e6ed16a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll the SLIP device for an available packet.  <a href="a00618.html#ga83bf8726f83f07ff3b65f3ca6e6ed16a">More...</a><br /></td></tr>
-<tr class="separator:ga83bf8726f83f07ff3b65f3ca6e6ed16a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga24cdb292a83c88750cdc170546038d0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00618.html#ga24cdb292a83c88750cdc170546038d0d">slipdev_init</a> (void)</td></tr>
-<tr class="memdesc:ga24cdb292a83c88750cdc170546038d0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the SLIP module.  <a href="a00618.html#ga24cdb292a83c88750cdc170546038d0d">More...</a><br /></td></tr>
-<tr class="separator:ga24cdb292a83c88750cdc170546038d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga02c92affa10e94ecc3b2849e0aa598de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00745.html#ga02c92affa10e94ecc3b2849e0aa598de">resolv_set_hostname</a> (const char *hostname)</td></tr>
+<tr class="memdesc:ga02c92affa10e94ecc3b2849e0aa598de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the local hostname advertised by MDNS.  <a href="a00745.html#ga02c92affa10e94ecc3b2849e0aa598de">More...</a><br /></td></tr>
+<tr class="separator:ga02c92affa10e94ecc3b2849e0aa598de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga415096167f945c25da66b8e72dedddaf"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00745.html#ga415096167f945c25da66b8e72dedddaf">resolv_get_hostname</a> (void)</td></tr>
+<tr class="memdesc:ga415096167f945c25da66b8e72dedddaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the local hostname being advertised via MDNS.  <a href="a00745.html#ga415096167f945c25da66b8e72dedddaf">More...</a><br /></td></tr>
+<tr class="separator:ga415096167f945c25da66b8e72dedddaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1982a28eb301edc106a03f059cafaef7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00745.html#ga1982a28eb301edc106a03f059cafaef7">resolv_query</a> (const char *name)</td></tr>
+<tr class="memdesc:ga1982a28eb301edc106a03f059cafaef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queues a name so that a question for the name will be sent out.  <a href="a00745.html#ga1982a28eb301edc106a03f059cafaef7">More...</a><br /></td></tr>
+<tr class="separator:ga1982a28eb301edc106a03f059cafaef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga791a5c3ad16e6757a393f5e643121345"><td class="memItemLeft" align="right" valign="top">resolv_status_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00745.html#ga791a5c3ad16e6757a393f5e643121345">resolv_lookup</a> (const char *name, uip_ipaddr_t **ipaddr)</td></tr>
+<tr class="memdesc:ga791a5c3ad16e6757a393f5e643121345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look up a hostname in the array of known hostnames.  <a href="a00745.html#ga791a5c3ad16e6757a393f5e643121345">More...</a><br /></td></tr>
+<tr class="separator:ga791a5c3ad16e6757a393f5e643121345"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gac660d766beec5ca0444ca31eff27986d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac660d766beec5ca0444ca31eff27986d"></a>
+process_event_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00745.html#gac660d766beec5ca0444ca31eff27986d">resolv_event_found</a></td></tr>
+<tr class="memdesc:gac660d766beec5ca0444ca31eff27986d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event that is broadcasted when a DNS name has been resolved. <br /></td></tr>
+<tr class="separator:gac660d766beec5ca0444ca31eff27986d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>SLIP protocol implementation. </p>
-<dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'dun'+'ke'+'ls.'+'co'+'m'; return false;">adam@<span style="display: none;">.nosp@m.</span>dunk<span style="display: none;">.nosp@m.</span>els.c<span style="display: none;">.nosp@m.</span>om</a> </dd></dl>
+<div class="textblock"><pre class="fragment">    DNS host name to IP address resolver.</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'dun'+'ke'+'ls.'+'co'+'m'; return false;">adam@<span style="display: none;">.nosp@m.</span>dunk<span style="display: none;">.nosp@m.</span>els.c<span style="display: none;">.nosp@m.</span>om</a> </dd>
+<dd>
+Robert Quattlebaum <a href="#" onclick="location.href='mai'+'lto:'+'dar'+'co'+'@de'+'ep'+'dar'+'c.'+'com'; return false;">darco<span style="display: none;">.nosp@m.</span>@dee<span style="display: none;">.nosp@m.</span>pdarc<span style="display: none;">.nosp@m.</span>.com</a> <pre class="fragment">    This file implements a DNS host name to IP address resolver,
+    as well as an MDNS responder and resolver.</pre></dd></dl>
 
-<p>Definition in file <a class="el" href="a00241_source.html">slipdev.c</a>.</p>
+<p>Definition in file <a class="el" href="a00241_source.html">resolv.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

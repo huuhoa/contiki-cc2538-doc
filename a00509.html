@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/dev/flash-cca.h File Reference</title>
+<title>Contiki 3.x: cpu/cc2538/dev/ana-regs.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,66 +48,47 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">flash-cca.h File Reference<div class="ingroups"><a class="el" href="a00692.html">Contiki platforms</a> &raquo; <a class="el" href="a00693.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00690.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00704.html">cc2538 flash CCA</a></div></div>  </div>
+<div class="title">ana-regs.h File Reference<div class="ingroups"><a class="el" href="a00821.html">Contiki platforms</a> &raquo; <a class="el" href="a00822.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00819.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00841.html">cc2538 RF Core</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header file for the flash lock bit page and CCA definitions.  
+<p>Header with declarations of ANA_REGS module registers.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
-</div>
+
 <p><a href="a00509_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">Bootloader backdoor configuration bit fields</div></td></tr>
-<tr class="memitem:ga2b94e1c50cf0bd065d7d559effc52d82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2b94e1c50cf0bd065d7d559effc52d82"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#ga2b94e1c50cf0bd065d7d559effc52d82">FLASH_CCA_BOOTLDR_CFG_DISABLE</a>&#160;&#160;&#160;0xEFFFFFFF</td></tr>
-<tr class="memdesc:ga2b94e1c50cf0bd065d7d559effc52d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable backdoor function. <br /></td></tr>
-<tr class="separator:ga2b94e1c50cf0bd065d7d559effc52d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac2cabcee50c8b65650da6ae4decd3215"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac2cabcee50c8b65650da6ae4decd3215"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#gac2cabcee50c8b65650da6ae4decd3215">FLASH_CCA_BOOTLDR_CFG_ENABLE</a>&#160;&#160;&#160;0xF0FFFFFF</td></tr>
-<tr class="memdesc:gac2cabcee50c8b65650da6ae4decd3215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable backdoor function. <br /></td></tr>
-<tr class="separator:gac2cabcee50c8b65650da6ae4decd3215"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadc633c9c29bc8fd81a6ffef20a3ae7e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadc633c9c29bc8fd81a6ffef20a3ae7e1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#gadc633c9c29bc8fd81a6ffef20a3ae7e1">FLASH_CCA_BOOTLDR_CFG_ACTIVE_HIGH</a>&#160;&#160;&#160;0x08000000</td></tr>
-<tr class="memdesc:gadc633c9c29bc8fd81a6ffef20a3ae7e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selected pin on pad A active high. <br /></td></tr>
-<tr class="separator:gadc633c9c29bc8fd81a6ffef20a3ae7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaa37cffb88083d8cd39a274c8830332c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaaa37cffb88083d8cd39a274c8830332c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#gaaa37cffb88083d8cd39a274c8830332c">FLASH_CCA_BOOTLDR_CFG_PORT_A_PIN_M</a>&#160;&#160;&#160;0x07000000</td></tr>
-<tr class="memdesc:gaaa37cffb88083d8cd39a274c8830332c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selected pin on pad A mask. <br /></td></tr>
-<tr class="separator:gaaa37cffb88083d8cd39a274c8830332c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab94ffacb40ac5046ba1c0feaafb8f919"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab94ffacb40ac5046ba1c0feaafb8f919"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#gab94ffacb40ac5046ba1c0feaafb8f919">FLASH_CCA_BOOTLDR_CFG_PORT_A_PIN_S</a>&#160;&#160;&#160;24</td></tr>
-<tr class="memdesc:gab94ffacb40ac5046ba1c0feaafb8f919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selected pin on pad A shift. <br /></td></tr>
-<tr class="separator:gab94ffacb40ac5046ba1c0feaafb8f919"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Image valid definitions</div></td></tr>
-<tr class="memitem:gabaf0d6b39c7b4912fc54588c6ff1479f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gabaf0d6b39c7b4912fc54588c6ff1479f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#gabaf0d6b39c7b4912fc54588c6ff1479f">FLASH_CCA_IMAGE_VALID</a>&#160;&#160;&#160;0x00000000</td></tr>
-<tr class="memdesc:gabaf0d6b39c7b4912fc54588c6ff1479f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates valid image in flash. <br /></td></tr>
-<tr class="separator:gabaf0d6b39c7b4912fc54588c6ff1479f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Lock page / debug definitions</div></td></tr>
-<tr class="memitem:ga051f573c6d7c70d9014b33c5958e618c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga051f573c6d7c70d9014b33c5958e618c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#ga051f573c6d7c70d9014b33c5958e618c">FLASH_CCA_LOCKED</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:ga051f573c6d7c70d9014b33c5958e618c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Page or debug locked if bit == 0. <br /></td></tr>
-<tr class="separator:ga051f573c6d7c70d9014b33c5958e618c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf1bc4385562a6178dae3ed7dc0d93ec6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf1bc4385562a6178dae3ed7dc0d93ec6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#gaf1bc4385562a6178dae3ed7dc0d93ec6">FLASH_CCA_LOCK_DEBUG_BYTE</a>&#160;&#160;&#160;31</td></tr>
-<tr class="memdesc:gaf1bc4385562a6178dae3ed7dc0d93ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock byte containing the debug lock bit. <br /></td></tr>
-<tr class="separator:gaf1bc4385562a6178dae3ed7dc0d93ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa43405c2fd806fda255a7f88e4ebf3da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa43405c2fd806fda255a7f88e4ebf3da"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#gaa43405c2fd806fda255a7f88e4ebf3da">FLASH_CCA_LOCK_DEBUG_BIT</a>&#160;&#160;&#160;7</td></tr>
-<tr class="memdesc:gaa43405c2fd806fda255a7f88e4ebf3da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug lock bit position in the corresponding lock byte. <br /></td></tr>
-<tr class="separator:gaa43405c2fd806fda255a7f88e4ebf3da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">ANA_REGS register offsets</div></td></tr>
+<tr class="memitem:ga30f8c2c22afbedd81017779bca358f77"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga30f8c2c22afbedd81017779bca358f77"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ANA_REGS_IVCTRL</b>&#160;&#160;&#160;0x400D6004</td></tr>
+<tr class="separator:ga30f8c2c22afbedd81017779bca358f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">ANA_REGS_IVCTRL register bit masks</div></td></tr>
+<tr class="memitem:ga9697edcf2957e28885669e4bd2cf17a4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9697edcf2957e28885669e4bd2cf17a4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga9697edcf2957e28885669e4bd2cf17a4">ANA_REGS_IVCTRL_DAC_CURR_CTRL</a>&#160;&#160;&#160;0x00000030</td></tr>
+<tr class="memdesc:ga9697edcf2957e28885669e4bd2cf17a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controls bias current to DAC. <br /></td></tr>
+<tr class="separator:ga9697edcf2957e28885669e4bd2cf17a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga639af00d62ed751f64e8f29291bc7240"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga639af00d62ed751f64e8f29291bc7240"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga639af00d62ed751f64e8f29291bc7240">ANA_REGS_IVCTRL_LODIV_BIAS_CTRL</a>&#160;&#160;&#160;0x00000008</td></tr>
+<tr class="memdesc:ga639af00d62ed751f64e8f29291bc7240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controls bias current to LODIV. <br /></td></tr>
+<tr class="separator:ga639af00d62ed751f64e8f29291bc7240"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga17e33f7d562de423a68ae07951cb5309"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga17e33f7d562de423a68ae07951cb5309"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga17e33f7d562de423a68ae07951cb5309">ANA_REGS_IVCTRL_TXMIX_DC_CTRL</a>&#160;&#160;&#160;0x00000004</td></tr>
+<tr class="memdesc:ga17e33f7d562de423a68ae07951cb5309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controls DC bias in TXMIX. <br /></td></tr>
+<tr class="separator:ga17e33f7d562de423a68ae07951cb5309"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae376906a91eafc4c55d6ea103d1aa5f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae376906a91eafc4c55d6ea103d1aa5f0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gae376906a91eafc4c55d6ea103d1aa5f0">ANA_REGS_IVCTRL_PA_BIAS_CTRL</a>&#160;&#160;&#160;0x00000003</td></tr>
+<tr class="memdesc:gae376906a91eafc4c55d6ea103d1aa5f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controls bias current to PA. <br /></td></tr>
+<tr class="separator:gae376906a91eafc4c55d6ea103d1aa5f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header file for the flash lock bit page and CCA definitions. </p>
+<div class="textblock"><p>Header with declarations of ANA_REGS module registers. </p>
 
-<p>Definition in file <a class="el" href="a00509_source.html">flash-cca.h</a>.</p>
+<p>Definition in file <a class="el" href="a00509_source.html">ana-regs.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

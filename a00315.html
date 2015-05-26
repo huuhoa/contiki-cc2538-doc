@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/ipv6/sicslowpan.c File Reference</title>
+<title>Contiki 3.x: core/net/ipv6/multicast/uip-mcast6-route.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,153 +43,58 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_2254bc981389a9495bd721183ae93a8d.html">ipv6</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_2254bc981389a9495bd721183ae93a8d.html">ipv6</a></li><li class="navelem"><a class="el" href="dir_30f027f9ee303e3cf4f79ee531cc4eae.html">multicast</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">sicslowpan.c File Reference</div>  </div>
+<div class="title">uip-mcast6-route.c File Reference<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00889.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00890.html">uIP IPv6 specific features</a> &raquo; <a class="el" href="a00773.html">IPv6 Multicast Forwarding</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    6lowpan implementation (RFC4944 and draft-ietf-6lowpan-hc-06)</pre>  
+<p>Multicast routing table manipulation.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;contiki.h&quot;</code><br />
-<code>#include &quot;dev/watchdog.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00246_source.html">net/ip/tcpip.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00259_source.html">net/ip/uip.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00322_source.html">net/ipv6/uip-ds6.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00419_source.html">net/rime/rime.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00316_source.html">net/ipv6/sicslowpan.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00375_source.html">net/netstack.h</a>&quot;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00250_source.html">net/ip/uip-debug.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00181_source.html">lib/list.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00187_source.html">lib/memb.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00264_source.html">net/ip/uip.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00316_source.html">net/ipv6/multicast/uip-mcast6-route.h</a>&quot;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 </div>
 <p><a href="a00315_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:gad72dbcf6d0153db1b8d8a58001feed83"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00756.html#gad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a>&#160;&#160;&#160;DEBUG_NONE</td></tr>
-<tr class="memdesc:gad72dbcf6d0153db1b8d8a58001feed83"><td class="mdescLeft">&#160;</td><td class="mdescRight">FOR HC-06 COMPLIANCE TODO: -Add compression options to UDP, currently only supports both ports compressed or both ports elided.  <a href="a00756.html#gad72dbcf6d0153db1b8d8a58001feed83">More...</a><br /></td></tr>
-<tr class="separator:gad72dbcf6d0153db1b8d8a58001feed83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf213c8c71222bb86256fb3e37582242b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00756.html#gaf213c8c71222bb86256fb3e37582242b">MAC_MAX_PAYLOAD</a>&#160;&#160;&#160;(127 - 2)</td></tr>
-<tr class="memdesc:gaf213c8c71222bb86256fb3e37582242b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum available size for frame headers, link layer security-related overhead, as well as 6LoWPAN payload.  <a href="a00756.html#gaf213c8c71222bb86256fb3e37582242b">More...</a><br /></td></tr>
-<tr class="separator:gaf213c8c71222bb86256fb3e37582242b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8658f9fba39b8e2a8b08aedc0b0e216a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00756.html#ga8658f9fba39b8e2a8b08aedc0b0e216a">COMPRESSION_THRESHOLD</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:ga8658f9fba39b8e2a8b08aedc0b0e216a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some MAC layers need a minimum payload, which is configurable through the SICSLOWPAN_CONF_MIN_MAC_PAYLOAD option.  <a href="a00756.html#ga8658f9fba39b8e2a8b08aedc0b0e216a">More...</a><br /></td></tr>
-<tr class="separator:ga8658f9fba39b8e2a8b08aedc0b0e216a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2c312c370c91d9cc20fc0c97fd430fab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00756.html#ga2c312c370c91d9cc20fc0c97fd430fab">sicslowpan_buf</a>&#160;&#160;&#160;<a class="el" href="a00623.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a></td></tr>
-<tr class="memdesc:ga2c312c370c91d9cc20fc0c97fd430fab"><td class="mdescLeft">&#160;</td><td class="mdescRight">The buffer used for the 6lowpan processing is uip_buf.  <a href="a00756.html#ga2c312c370c91d9cc20fc0c97fd430fab">More...</a><br /></td></tr>
-<tr class="separator:ga2c312c370c91d9cc20fc0c97fd430fab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Pointers in the packetbuf buffer</div></td></tr>
-<tr class="memitem:gae7e67b8cf447158ce33136ad831063a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae7e67b8cf447158ce33136ad831063a2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_FRAG_PTR</b>&#160;&#160;&#160;(packetbuf_ptr)</td></tr>
-<tr class="separator:gae7e67b8cf447158ce33136ad831063a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6df7cec0001ae7ee30e6da93f231c1f5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6df7cec0001ae7ee30e6da93f231c1f5"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_FRAG_DISPATCH_SIZE</b>&#160;&#160;&#160;0   /* 16 bit */</td></tr>
-<tr class="separator:ga6df7cec0001ae7ee30e6da93f231c1f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf5c43711656f8da8b3a30908a3d0554c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf5c43711656f8da8b3a30908a3d0554c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_FRAG_TAG</b>&#160;&#160;&#160;2   /* 16 bit */</td></tr>
-<tr class="separator:gaf5c43711656f8da8b3a30908a3d0554c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4e3f1c38480fbddaafd6ae9848eefb13"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4e3f1c38480fbddaafd6ae9848eefb13"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_FRAG_OFFSET</b>&#160;&#160;&#160;4   /* 8 bit */</td></tr>
-<tr class="separator:ga4e3f1c38480fbddaafd6ae9848eefb13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaecb1b8527d8cb981c83027f3e41a589f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaecb1b8527d8cb981c83027f3e41a589f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_IPHC_BUF</b>&#160;&#160;&#160;((uint8_t *)(packetbuf_ptr + packetbuf_hdr_len))</td></tr>
-<tr class="separator:gaecb1b8527d8cb981c83027f3e41a589f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacfab7283848d71034178f72ca053065a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacfab7283848d71034178f72ca053065a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_HC1_PTR</b>&#160;&#160;&#160;(packetbuf_ptr + packetbuf_hdr_len)</td></tr>
-<tr class="separator:gacfab7283848d71034178f72ca053065a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae30ad39d122ab42ee88d51ddb80374f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae30ad39d122ab42ee88d51ddb80374f0"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_HC1_DISPATCH</b>&#160;&#160;&#160;0 /* 8 bit */</td></tr>
-<tr class="separator:gae30ad39d122ab42ee88d51ddb80374f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad892440614e9363a84e0f3495bf18917"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad892440614e9363a84e0f3495bf18917"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_HC1_ENCODING</b>&#160;&#160;&#160;1 /* 8 bit */</td></tr>
-<tr class="separator:gad892440614e9363a84e0f3495bf18917"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0c5c69c594f8248d556ee407f89e57bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0c5c69c594f8248d556ee407f89e57bb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_HC1_TTL</b>&#160;&#160;&#160;2 /* 8 bit */</td></tr>
-<tr class="separator:ga0c5c69c594f8248d556ee407f89e57bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0d5c747413cd03c61b44789e1ca0f7d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0d5c747413cd03c61b44789e1ca0f7d6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_HC1_HC_UDP_PTR</b>&#160;&#160;&#160;(packetbuf_ptr + packetbuf_hdr_len)</td></tr>
-<tr class="separator:ga0d5c747413cd03c61b44789e1ca0f7d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2fad2e2f3f46b7aaffcf0f69720208d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2fad2e2f3f46b7aaffcf0f69720208d4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_HC1_HC_UDP_DISPATCH</b>&#160;&#160;&#160;0 /* 8 bit */</td></tr>
-<tr class="separator:ga2fad2e2f3f46b7aaffcf0f69720208d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga720c65dcc2da676f37854f3d20139676"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga720c65dcc2da676f37854f3d20139676"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_HC1_HC_UDP_HC1_ENCODING</b>&#160;&#160;&#160;1 /* 8 bit */</td></tr>
-<tr class="separator:ga720c65dcc2da676f37854f3d20139676"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadc55a66444d028140f42c434b9d06a9a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadc55a66444d028140f42c434b9d06a9a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_HC1_HC_UDP_UDP_ENCODING</b>&#160;&#160;&#160;2 /* 8 bit */</td></tr>
-<tr class="separator:gadc55a66444d028140f42c434b9d06a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabf777029092473631185b6738e458aae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gabf777029092473631185b6738e458aae"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_HC1_HC_UDP_TTL</b>&#160;&#160;&#160;3 /* 8 bit */</td></tr>
-<tr class="separator:gabf777029092473631185b6738e458aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5fc2dbfadc33a4e2a4af9368d24e09e7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5fc2dbfadc33a4e2a4af9368d24e09e7"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_HC1_HC_UDP_PORTS</b>&#160;&#160;&#160;4 /* 8 bit */</td></tr>
-<tr class="separator:ga5fc2dbfadc33a4e2a4af9368d24e09e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga056acecfc238bb124029f110248d887b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga056acecfc238bb124029f110248d887b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PACKETBUF_HC1_HC_UDP_CHKSUM</b>&#160;&#160;&#160;5 /* 16 bit */</td></tr>
-<tr class="separator:ga056acecfc238bb124029f110248d887b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Pointers in the sicslowpan and uip buffer</div></td></tr>
-<tr class="memitem:gacf59918adf3deff8104332599b5fe616"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacf59918adf3deff8104332599b5fe616"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SICSLOWPAN_IP_BUF</b>&#160;&#160;&#160;((struct uip_ip_hdr *)&amp;<a class="el" href="a00756.html#ga2c312c370c91d9cc20fc0c97fd430fab">sicslowpan_buf</a>[<a class="el" href="a00630.html#gae6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>])</td></tr>
-<tr class="separator:gacf59918adf3deff8104332599b5fe616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadd8a0f9146e9a2f838cb26b52fe03757"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadd8a0f9146e9a2f838cb26b52fe03757"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SICSLOWPAN_UDP_BUF</b>&#160;&#160;&#160;((struct uip_udp_hdr *)&amp;<a class="el" href="a00756.html#ga2c312c370c91d9cc20fc0c97fd430fab">sicslowpan_buf</a>[UIP_LLIPH_LEN])</td></tr>
-<tr class="separator:gadd8a0f9146e9a2f838cb26b52fe03757"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf966537cf73ee5973da59bba6b21b731"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf966537cf73ee5973da59bba6b21b731"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>UIP_IP_BUF</b>&#160;&#160;&#160;((struct uip_ip_hdr *)&amp;<a class="el" href="a00623.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[<a class="el" href="a00630.html#gae6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>])</td></tr>
-<tr class="separator:gaf966537cf73ee5973da59bba6b21b731"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaed757731852d359419ae5270a02e7a4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaaed757731852d359419ae5270a02e7a4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>UIP_UDP_BUF</b>&#160;&#160;&#160;((struct uip_udp_hdr *)&amp;<a class="el" href="a00623.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[UIP_LLIPH_LEN])</td></tr>
-<tr class="separator:gaaed757731852d359419ae5270a02e7a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga83d4598ff0a0755acb9b094ceaf581ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga83d4598ff0a0755acb9b094ceaf581ba"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>UIP_TCP_BUF</b>&#160;&#160;&#160;((struct uip_tcp_hdr *)&amp;<a class="el" href="a00623.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[UIP_LLIPH_LEN])</td></tr>
-<tr class="separator:ga83d4598ff0a0755acb9b094ceaf581ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga56e76f46008562daae1447c012fd92e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga56e76f46008562daae1447c012fd92e2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>UIP_ICMP_BUF</b>&#160;&#160;&#160;((struct uip_icmp_hdr *)&amp;<a class="el" href="a00623.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[UIP_LLIPH_LEN])</td></tr>
-<tr class="separator:ga56e76f46008562daae1447c012fd92e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">General variables</div></td></tr>
-<tr><td colspan="2"><div class="groupHeader">HC06 specific variables</div></td></tr>
-<tr class="memitem:ga2df079d7449cb6b17a3708413e3723ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2df079d7449cb6b17a3708413e3723ee"></a>
-const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>unc_llconf</b> [] = {0x0f,0x28,0x22,0x20}</td></tr>
-<tr class="separator:ga2df079d7449cb6b17a3708413e3723ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafe53ac6b2ea34600007bb73234719e25"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafe53ac6b2ea34600007bb73234719e25"></a>
-const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>unc_ctxconf</b> [] = {0x00,0x88,0x82,0x80}</td></tr>
-<tr class="separator:gafe53ac6b2ea34600007bb73234719e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga831c6c26fe432e94fc040a91066ee6c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga831c6c26fe432e94fc040a91066ee6c1"></a>
-const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>unc_mxconf</b> [] = {0x0f, 0x25, 0x23, 0x21}</td></tr>
-<tr class="separator:ga831c6c26fe432e94fc040a91066ee6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaeb42420fafc4d7ca9adf070a7be719f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaeb42420fafc4d7ca9adf070a7be719f7"></a>
-const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>llprefix</b> [] = {0xfe, 0x80}</td></tr>
-<tr class="separator:gaeb42420fafc4d7ca9adf070a7be719f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Multicast Routing Table Manipulation</div></td></tr>
+<tr class="memitem:gae4362324282a84c0183cf6f6c03a17d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00773.html#gab2a6bf2497f813bfebbb4afa4caec4be">uip_mcast6_route_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00773.html#gae4362324282a84c0183cf6f6c03a17d7">uip_mcast6_route_lookup</a> (uip_ipaddr_t *group)</td></tr>
+<tr class="memdesc:gae4362324282a84c0183cf6f6c03a17d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lookup a multicast route.  <a href="a00773.html#gae4362324282a84c0183cf6f6c03a17d7">More...</a><br /></td></tr>
+<tr class="separator:gae4362324282a84c0183cf6f6c03a17d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabd62e65ad167478dea4800a0eabf3c29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00773.html#gab2a6bf2497f813bfebbb4afa4caec4be">uip_mcast6_route_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00773.html#gabd62e65ad167478dea4800a0eabf3c29">uip_mcast6_route_add</a> (uip_ipaddr_t *group)</td></tr>
+<tr class="memdesc:gabd62e65ad167478dea4800a0eabf3c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a multicast route.  <a href="a00773.html#gabd62e65ad167478dea4800a0eabf3c29">More...</a><br /></td></tr>
+<tr class="separator:gabd62e65ad167478dea4800a0eabf3c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaccd436a25e4a3d666438ea8fb995ec50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00773.html#gaccd436a25e4a3d666438ea8fb995ec50">uip_mcast6_route_rm</a> (<a class="el" href="a00773.html#gab2a6bf2497f813bfebbb4afa4caec4be">uip_mcast6_route_t</a> *route)</td></tr>
+<tr class="memdesc:gaccd436a25e4a3d666438ea8fb995ec50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a multicast route.  <a href="a00773.html#gaccd436a25e4a3d666438ea8fb995ec50">More...</a><br /></td></tr>
+<tr class="separator:gaccd436a25e4a3d666438ea8fb995ec50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4ae023cadf4e2bfd64ae30580a8f9c90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00773.html#gab2a6bf2497f813bfebbb4afa4caec4be">uip_mcast6_route_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00773.html#ga4ae023cadf4e2bfd64ae30580a8f9c90">uip_mcast6_route_list_head</a> (void)</td></tr>
+<tr class="memdesc:ga4ae023cadf4e2bfd64ae30580a8f9c90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a pointer to the start of the multicast routes list.  <a href="a00773.html#ga4ae023cadf4e2bfd64ae30580a8f9c90">More...</a><br /></td></tr>
+<tr class="separator:ga4ae023cadf4e2bfd64ae30580a8f9c90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga24b017ea0cccba325a11e211525bb11d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00773.html#ga24b017ea0cccba325a11e211525bb11d">uip_mcast6_route_count</a> (void)</td></tr>
+<tr class="memdesc:ga24b017ea0cccba325a11e211525bb11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the count of multicast routes.  <a href="a00773.html#ga24b017ea0cccba325a11e211525bb11d">More...</a><br /></td></tr>
+<tr class="separator:ga24b017ea0cccba325a11e211525bb11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafcc86294e2d277b9ccfe5e2745c4c9fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00773.html#gafcc86294e2d277b9ccfe5e2745c4c9fa">uip_mcast6_route_init</a> (void)</td></tr>
+<tr class="memdesc:gafcc86294e2d277b9ccfe5e2745c4c9fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multicast routing table init routine.  <a href="a00773.html#gafcc86294e2d277b9ccfe5e2745c4c9fa">More...</a><br /></td></tr>
+<tr class="separator:gafcc86294e2d277b9ccfe5e2745c4c9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    6lowpan implementation (RFC4944 and draft-ietf-6lowpan-hc-06)</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd>
-<dd>
-Nicolas Tsiftes <a href="#" onclick="location.href='mai'+'lto:'+'nvt'+'@s'+'ics'+'.s'+'e'; return false;">nvt@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a> </dd>
-<dd>
-Niclas Finne <a href="#" onclick="location.href='mai'+'lto:'+'nfi'+'@s'+'ics'+'.s'+'e'; return false;">nfi@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a> </dd>
-<dd>
-Mathilde Durvy <a href="#" onclick="location.href='mai'+'lto:'+'mdu'+'rv'+'y@c'+'is'+'co.'+'co'+'m'; return false;">mdurv<span style="display: none;">.nosp@m.</span>y@ci<span style="display: none;">.nosp@m.</span>sco.c<span style="display: none;">.nosp@m.</span>om</a> </dd>
-<dd>
-Julien Abeille <a href="#" onclick="location.href='mai'+'lto:'+'jab'+'ei'+'lle'+'@c'+'isc'+'o.'+'com'; return false;">jabei<span style="display: none;">.nosp@m.</span>lle@<span style="display: none;">.nosp@m.</span>cisco<span style="display: none;">.nosp@m.</span>.com</a> </dd>
-<dd>
-Joakim Eriksson <a href="#" onclick="location.href='mai'+'lto:'+'joa'+'ki'+'me@'+'si'+'cs.'+'se'; return false;">joaki<span style="display: none;">.nosp@m.</span>me@s<span style="display: none;">.nosp@m.</span>ics.s<span style="display: none;">.nosp@m.</span>e</a> </dd>
-<dd>
-Joel Hoglund <a href="#" onclick="location.href='mai'+'lto:'+'joe'+'l@'+'sic'+'s.'+'se'; return false;">joel@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
+<div class="textblock"><p>Multicast routing table manipulation. </p>
+<dl class="section author"><dt>Author</dt><dd>George Oikonomou - <a href="#" onclick="location.href='mai'+'lto:'+'oik'+'on'+'omo'+'u@'+'use'+'rs'+'.so'+'ur'+'cef'+'or'+'ge.'+'ne'+'t'; return false;">oikon<span style="display: none;">.nosp@m.</span>omou<span style="display: none;">.nosp@m.</span>@user<span style="display: none;">.nosp@m.</span>s.so<span style="display: none;">.nosp@m.</span>urcef<span style="display: none;">.nosp@m.</span>orge<span style="display: none;">.nosp@m.</span>.net</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00315_source.html">sicslowpan.c</a>.</p>
+<p>Definition in file <a class="el" href="a00315_source.html">uip-mcast6-route.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

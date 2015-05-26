@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/ipv4/uip-neighbor.h Source File</title>
+<title>Contiki 3.x: core/net/ipv4/uip-fw-drv.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,11 +48,11 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">uip-neighbor.h</div>  </div>
+<div class="title">uip-fw-drv.c</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00299.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2006, Swedish Institute of Computer Science.</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2004, Swedish Institute of Computer Science.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
@@ -81,42 +81,41 @@
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * This file is part of the Contiki operating system.</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         Header file for database of link-local neighbors, used by</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> *         IPv6 code and to be used by future ARP code.</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * \author</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> *         Adam Dunkels &lt;adam@sics.se&gt;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * Author: Adam Dunkels &lt;adam@sics.se&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00302.html">net/ipv4/uip-fw.h</a>&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#if !NETSTACK_CONF_WITH_IPV6</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(uip_fw_process, <span class="stringliteral">&quot;IP forwarding&quot;</span>);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#ifndef UIP_NEIGHBOR_H_</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#define UIP_NEIGHBOR_H_</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00259.html">net/ip/uip.h</a>&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(uip_fw_process, ev, data)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">struct </span>uip_neighbor_addr {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#if UIP_NEIGHBOR_CONF_ADDRTYPE</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  UIP_NEIGHBOR_CONF_ADDRTYPE addr;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">struct </span><a class="code" href="a00102.html">uip_eth_addr</a> addr;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  tcpip_set_outputfunc(<a class="code" href="a00769.html#gab892e0441d40434b4932c11705e7d1ab">uip_fw_output</a>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <a class="code" href="a00813.html#ga203e74a64e870015d3c2aa456c1ad5d9">PROCESS_WAIT_UNTIL</a>(ev == PROCESS_EVENT_EXIT);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> uip_neighbor_init(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span> uip_neighbor_add(uip_ipaddr_t *ipaddr, <span class="keyword">struct</span> uip_neighbor_addr *addr);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordtype">void</span> uip_neighbor_update(uip_ipaddr_t *ipaddr);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">struct </span>uip_neighbor_addr *uip_neighbor_lookup(uip_ipaddr_t *ipaddr);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> uip_neighbor_periodic(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* UIP-NEIGHBOR_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="a00259_html"><div class="ttname"><a href="a00259.html">uip.h</a></div><div class="ttdoc">Header file for the uIP TCP/IP stack. </div></div>
-<div class="ttc" id="a00102_html"><div class="ttname"><a href="a00102.html">uip_eth_addr</a></div><div class="ttdoc">802.3 address </div><div class="ttdef"><b>Definition:</b> <a href="a00259_source.html#l00135">uip.h:135</a></div></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_CONF_WITH_IPV6 */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="a00813_html_ga9c2681a0070eba8a7c9fdf4dbb6db05e"><div class="ttname"><a href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a></div><div class="ttdeci">#define PROCESS_END()</div><div class="ttdoc">Define the end of a process. </div><div class="ttdef"><b>Definition:</b> <a href="a00488_source.html#l00131">process.h:131</a></div></div>
+<div class="ttc" id="a00830_html_gad9ac47af91b8dc72c6a711aaec9690a0"><div class="ttname"><a href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a></div><div class="ttdeci">PROCESS_THREAD(cc2538_rf_process, ev, data)</div><div class="ttdoc">Implementation of the cc2538 RF driver process. </div><div class="ttdef"><b>Definition:</b> <a href="a00510_source.html#l00947">cc2538-rf.c:947</a></div></div>
+<div class="ttc" id="a00813_html_ga27e9b6fc13f0438e37a198f69b38b4cf"><div class="ttname"><a href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a></div><div class="ttdeci">#define PROCESS(name, strname)</div><div class="ttdoc">Declare a process. </div><div class="ttdef"><b>Definition:</b> <a href="a00488_source.html#l00307">process.h:307</a></div></div>
+<div class="ttc" id="a00813_html_ga8efc62947f2ca2c870f52896e0dc1a81"><div class="ttname"><a href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a></div><div class="ttdeci">#define PROCESS_BEGIN()</div><div class="ttdoc">Define the beginning of a process. </div><div class="ttdef"><b>Definition:</b> <a href="a00488_source.html#l00120">process.h:120</a></div></div>
+<div class="ttc" id="a00813_html_ga203e74a64e870015d3c2aa456c1ad5d9"><div class="ttname"><a href="a00813.html#ga203e74a64e870015d3c2aa456c1ad5d9">PROCESS_WAIT_UNTIL</a></div><div class="ttdeci">#define PROCESS_WAIT_UNTIL(c)</div><div class="ttdoc">Wait for a condition to occur. </div><div class="ttdef"><b>Definition:</b> <a href="a00488_source.html#l00192">process.h:192</a></div></div>
+<div class="ttc" id="a00769_html_gab892e0441d40434b4932c11705e7d1ab"><div class="ttname"><a href="a00769.html#gab892e0441d40434b4932c11705e7d1ab">uip_fw_output</a></div><div class="ttdeci">uint8_t uip_fw_output(void)</div><div class="ttdoc">Output an IP packet on the correct network interface. </div><div class="ttdef"><b>Definition:</b> <a href="a00301_source.html#l00354">uip-fw.c:354</a></div></div>
+<div class="ttc" id="a00302_html"><div class="ttname"><a href="a00302.html">uip-fw.h</a></div><div class="ttdoc">uIP packet forwarding header file. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:55 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

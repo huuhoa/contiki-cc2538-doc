@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/llsec/ccm-star.h Source File</title>
+<title>Contiki 3.x: core/net/linkaddr.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,16 +43,16 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_fad108bfa9b279bd5b48aa3dbd368b4b.html">llsec</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">ccm-star.h</div>  </div>
+<div class="title">linkaddr.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00333.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2013, Hasso-Plattner-Institut.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2007, Swedish Institute of Computer Science.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
@@ -85,65 +85,59 @@
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         CCM* header file.</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         Functions for manipulating Rime addresses</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * \author</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *         Konrad Krentz &lt;konrad.krentz@gmail.com&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *         Adam Dunkels &lt;adam@sics.se&gt;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * \addtogroup llsec802154</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * \addtogroup linkaddr</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * @{</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#ifndef CCM_STAR_H_</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define CCM_STAR_H_</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00334.html">net/linkaddr.h</a>&quot;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00349.html">net/mac/frame802154.h</a>&quot;</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/* see RFC 3610 */</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#define CCM_STAR_AUTH_FLAGS(Adata, M) ((Adata ? (1 &lt;&lt; 6) : 0) | (((M - 2) &gt;&gt; 1) &lt;&lt; 3) | 1)</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#define CCM_STAR_ENCRYPTION_FLAGS     1</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#ifdef CCM_STAR_CONF</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#define CCM_STAR CCM_STAR_CONF</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* CCM_STAR_CONF */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#define CCM_STAR ccm_star_driver</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* CCM_STAR_CONF */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> * Structure of CCM* drivers.</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="a00047.html">   64</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00047.html">ccm_star_driver</a> {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="comment"></span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">   /**</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">    * \brief         Generates a MIC over the frame in the packetbuf.</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    * \param result  The generated MIC will be put here</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">    * \param mic_len  &lt;= 16; set to LLSEC802154_MIC_LENGTH to be compliant</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="a00047.html#ae9e375be37204bdbb3c550671cb338b2">   71</a></span>&#160;  void (* <a class="code" href="a00047.html#ae9e375be37204bdbb3c550671cb338b2">mic</a>)(<span class="keyword">const</span> uint8_t *extended_source_address,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      uint8_t *result,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      uint8_t mic_len);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="comment"></span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">  /**</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">   * \brief XORs the frame in the packetbuf with the key stream.</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="a00047.html#abc98384f27a18ce4ea549702553625ba">   78</a></span>&#160;  void (* <a class="code" href="a00047.html#abc98384f27a18ce4ea549702553625ba">ctr</a>)(<span class="keyword">const</span> uint8_t *extended_source_address);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a00047.html">ccm_star_driver</a> CCM_STAR;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* CCM_STAR_H_ */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="ttc" id="a00047_html"><div class="ttname"><a href="a00047.html">ccm_star_driver</a></div><div class="ttdoc">Structure of CCM* drivers. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00064">ccm-star.h:64</a></div></div>
-<div class="ttc" id="a00047_html_ae9e375be37204bdbb3c550671cb338b2"><div class="ttname"><a href="a00047.html#ae9e375be37204bdbb3c550671cb338b2">ccm_star_driver::mic</a></div><div class="ttdeci">void(* mic)(const uint8_t *extended_source_address, uint8_t *result, uint8_t mic_len)</div><div class="ttdoc">Generates a MIC over the frame in the packetbuf. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00071">ccm-star.h:71</a></div></div>
-<div class="ttc" id="a00047_html_abc98384f27a18ce4ea549702553625ba"><div class="ttname"><a href="a00047.html#abc98384f27a18ce4ea549702553625ba">ccm_star_driver::ctr</a></div><div class="ttdeci">void(* ctr)(const uint8_t *extended_source_address)</div><div class="ttdoc">XORs the frame in the packetbuf with the key stream. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00078">ccm-star.h:78</a></div></div>
-<div class="ttc" id="a00349_html"><div class="ttname"><a href="a00349.html">frame802154.h</a></div><div class="ttdoc">802.15.4 frame creation and parsing functions </div></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">   48</a></span>&#160;linkaddr_t <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#if LINKADDR_SIZE == 2</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">const</span> linkaddr_t <a class="code" href="a00741.html#gaa8829a95f1d11a93a3ff75c8f5b2bffd">linkaddr_null</a> = { { 0, 0 } };</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#else </span><span class="comment">/*LINKADDR_SIZE == 2*/</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#if LINKADDR_SIZE == 8</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">const</span> linkaddr_t <a class="code" href="a00741.html#gaa8829a95f1d11a93a3ff75c8f5b2bffd">linkaddr_null</a> = { { 0, 0, 0, 0, 0, 0, 0, 0 } };</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/*LINKADDR_SIZE == 8*/</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/*LINKADDR_SIZE == 2*/</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="a00741.html#ga61b6a33229787905999787d55047aa80">   60</a></span>&#160;<a class="code" href="a00741.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(linkaddr_t *dest, <span class="keyword">const</span> linkaddr_t *src)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        memcpy(dest, src, LINKADDR_SIZE);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="a00741.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">   66</a></span>&#160;<a class="code" href="a00741.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(<span class="keyword">const</span> linkaddr_t *addr1, <span class="keyword">const</span> linkaddr_t *addr2)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> (memcmp(addr1, addr2, LINKADDR_SIZE) == 0);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a00741.html#ga5ec363b4d4a855f1c6c3da284451415a">   72</a></span>&#160;<a class="code" href="a00741.html#ga5ec363b4d4a855f1c6c3da284451415a">linkaddr_set_node_addr</a>(linkaddr_t *t)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <a class="code" href="a00741.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;<a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>, t);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">/** @} */</span></div>
+<div class="ttc" id="a00741_html_ga5ec363b4d4a855f1c6c3da284451415a"><div class="ttname"><a href="a00741.html#ga5ec363b4d4a855f1c6c3da284451415a">linkaddr_set_node_addr</a></div><div class="ttdeci">void linkaddr_set_node_addr(linkaddr_t *t)</div><div class="ttdoc">Set the address of the current node. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00072">linkaddr.c:72</a></div></div>
+<div class="ttc" id="a00741_html_gaaf0cefa6d20d20da33dfaf5098e7d16d"><div class="ttname"><a href="a00741.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a></div><div class="ttdeci">int linkaddr_cmp(const linkaddr_t *addr1, const linkaddr_t *addr2)</div><div class="ttdoc">Compare two Rime addresses. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00066">linkaddr.c:66</a></div></div>
+<div class="ttc" id="a00334_html"><div class="ttname"><a href="a00334.html">linkaddr.h</a></div><div class="ttdoc">    Header file for the Rime address representation  </div></div>
+<div class="ttc" id="a00741_html_ga03585f3e07ec49ec11cb4bbd17f3cf0e"><div class="ttname"><a href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a></div><div class="ttdeci">linkaddr_t linkaddr_node_addr</div><div class="ttdoc">The Rime address of the node. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00048">linkaddr.c:48</a></div></div>
+<div class="ttc" id="a00741_html_gaa8829a95f1d11a93a3ff75c8f5b2bffd"><div class="ttname"><a href="a00741.html#gaa8829a95f1d11a93a3ff75c8f5b2bffd">linkaddr_null</a></div><div class="ttdeci">const linkaddr_t linkaddr_null</div><div class="ttdoc">The null Rime address. </div></div>
+<div class="ttc" id="a00741_html_ga61b6a33229787905999787d55047aa80"><div class="ttname"><a href="a00741.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a></div><div class="ttdeci">void linkaddr_copy(linkaddr_t *dest, const linkaddr_t *src)</div><div class="ttdoc">Copy a Rime address. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00060">linkaddr.c:60</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:42 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:56 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

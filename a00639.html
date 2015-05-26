@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: Application specific configurations</title>
+<title>Contiki 3.x: examples/ipv6/multicast/project-conf.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,85 +31,42 @@
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
     </ul>
   </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d28a4824dc47e487b107a5db32ef43c4.html">examples</a></li><li class="navelem"><a class="el" href="dir_269f28271abffc49678ed89463a1797b.html">ipv6</a></li><li class="navelem"><a class="el" href="dir_a77039f6aa307c8c390111bc81343882.html">multicast</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
-<div class="title">Application specific configurations<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00760.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00628.html">Configuration options for uIP</a></div></div>  </div>
+<div class="title">project-conf.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>An uIP application is implemented using a single application function that is called by uIP whenever a TCP/IP event occurs.  
+<p><pre class="fragment">    Project specific configuration defines for the RPl multicast
+    example.</pre>  
 <a href="#details">More...</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:ga69646a81a922033c5281445a71f8ffed"><td class="memItemLeft" align="right" valign="top">typedef struct tcpip_uipstate&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00639.html#ga69646a81a922033c5281445a71f8ffed">uip_tcp_appstate_t</a></td></tr>
-<tr class="memdesc:ga69646a81a922033c5281445a71f8ffed"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the application state that is to be stored in the <a class="el" href="a00090.html" title="Representation of a uIP TCP connection. ">uip_conn</a> structure.  <a href="#ga69646a81a922033c5281445a71f8ffed">More...</a><br /></td></tr>
-<tr class="separator:ga69646a81a922033c5281445a71f8ffed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa92afb113e122f860392bfbd385f842e"><td class="memItemLeft" align="right" valign="top">typedef struct tcpip_uipstate&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00639.html#gaa92afb113e122f860392bfbd385f842e">uip_udp_appstate_t</a></td></tr>
-<tr class="memdesc:gaa92afb113e122f860392bfbd385f842e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the application state that is to be stored in the <a class="el" href="a00090.html" title="Representation of a uIP TCP connection. ">uip_conn</a> structure.  <a href="#gaa92afb113e122f860392bfbd385f842e">More...</a><br /></td></tr>
-<tr class="separator:gaa92afb113e122f860392bfbd385f842e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
+<div class="textblock"><code>#include &quot;<a class="el" href="a00314_source.html">net/ipv6/multicast/uip-mcast6-engines.h</a>&quot;</code><br />
+</div>
+<p><a href="a00639_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>An uIP application is implemented using a single application function that is called by uIP whenever a TCP/IP event occurs. </p>
-<p>The name of this function must be registered with uIP at compile time using the UIP_APPCALL definition.</p>
-<p>uIP applications can store the application state within the <a class="el" href="a00090.html" title="Representation of a uIP TCP connection. ">uip_conn</a> structure by specifying the type of the application structure by typedef:ing the type uip_tcp_appstate_t and uip_udp_appstate_t.</p>
-<p>The file containing the definitions must be included in the <a class="el" href="a00263.html" title="Configuration options for uIP. ">uipopt.h</a> file.</p>
-<p>The following example illustrates how this can look. </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> httpd_appcall(<span class="keywordtype">void</span>);</div>
-<div class="line"><span class="preprocessor">#define UIP_APPCALL     httpd_appcall</span></div>
-<div class="line"></div>
-<div class="line"><span class="keyword">struct </span>httpd_state {</div>
-<div class="line">uint8_t state;</div>
-<div class="line">uint16_t count;</div>
-<div class="line"><span class="keywordtype">char</span> *dataptr;</div>
-<div class="line"><span class="keywordtype">char</span> *script;</div>
-<div class="line">};</div>
-<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>httpd_state <a class="code" href="a00639.html#ga69646a81a922033c5281445a71f8ffed">uip_tcp_appstate_t</a></div>
-</div><!-- fragment --> <h2 class="groupheader">Typedef Documentation</h2>
-<a class="anchor" id="ga69646a81a922033c5281445a71f8ffed"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="a00639.html#ga69646a81a922033c5281445a71f8ffed">uip_tcp_appstate_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<div class="textblock"><pre class="fragment">    Project specific configuration defines for the RPl multicast
+    example.</pre> <dl class="section author"><dt>Author</dt><dd>George Oikonomou - <a href="#" onclick="location.href='mai'+'lto:'+'oik'+'on'+'omo'+'u@'+'use'+'rs'+'.so'+'ur'+'cef'+'or'+'ge.'+'ne'+'t'; return false;">oikon<span style="display: none;">.nosp@m.</span>omou<span style="display: none;">.nosp@m.</span>@user<span style="display: none;">.nosp@m.</span>s.so<span style="display: none;">.nosp@m.</span>urcef<span style="display: none;">.nosp@m.</span>orge<span style="display: none;">.nosp@m.</span>.net</a> </dd></dl>
 
-<p>The type of the application state that is to be stored in the <a class="el" href="a00090.html" title="Representation of a uIP TCP connection. ">uip_conn</a> structure. </p>
-<p>This usually is typedef:ed to a struct holding application state information. </p>
-
-<p>Definition at line <a class="el" href="a00246_source.html#l00086">86</a> of file <a class="el" href="a00246_source.html">tcpip.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gaa92afb113e122f860392bfbd385f842e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="a00639.html#gaa92afb113e122f860392bfbd385f842e">uip_udp_appstate_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The type of the application state that is to be stored in the <a class="el" href="a00090.html" title="Representation of a uIP TCP connection. ">uip_conn</a> structure. </p>
-<p>This usually is typedef:ed to a struct holding application state information. </p>
-
-<p>Definition at line <a class="el" href="a00246_source.html#l00085">85</a> of file <a class="el" href="a00246_source.html">tcpip.h</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition in file <a class="el" href="a00639_source.html">project-conf.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

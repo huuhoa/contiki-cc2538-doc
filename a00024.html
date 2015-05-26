@@ -81,14 +81,14 @@
 <div class="line"><span class="comment"> */</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00429.html">net/rime/rucb.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00435.html">net/rime/rucb.h</a>&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;dev/button-sensor.h&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;dev/leds.h&quot;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00128.html">cfs/cfs.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00191.html">lib/print-stats.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00129.html">cfs/cfs.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00193.html">lib/print-stats.h</a>&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"></div>
@@ -104,7 +104,7 @@
 <div class="line"></div>
 <div class="line"></div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a0"></a><a class="code" href="a00684.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_rucb_process, <span class="stringliteral">&quot;Rucb example&quot;</span>);</div>
+<div class="line"><a name="a0"></a><a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_rucb_process, <span class="stringliteral">&quot;Rucb example&quot;</span>);</div>
 <div class="line">AUTOSTART_PROCESSES(&amp;example_rucb_process);</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span></div>
@@ -132,7 +132,7 @@
 <div class="line">  bytecount += size;</div>
 <div class="line"></div>
 <div class="line">  <span class="keywordflow">if</span>(bytecount == FILESIZE) {</div>
-<div class="line">    printf(<span class="stringliteral">&quot;Completion time %lu / %u\n&quot;</span>, (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)<a name="a1"></a><a class="code" href="a00677.html#ga50c22f9b9d60dd1f9e59b63a3a6676b1">clock_time</a>() - start_time, <a name="a2"></a><a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a>);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;Completion time %lu / %u\n&quot;</span>, (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)<a name="a1"></a><a class="code" href="a00806.html#ga50c22f9b9d60dd1f9e59b63a3a6676b1">clock_time</a>() - start_time, <a name="a2"></a><a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a>);</div>
 <div class="line">    print_stats();</div>
 <div class="line">  }</div>
 <div class="line"></div>
@@ -145,26 +145,26 @@
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="preprocessor">#include &quot;sys/node-id.h&quot;</span></div>
 <div class="line"></div>
-<div class="line"><a name="a3"></a><a class="code" href="a00701.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_rucb_process, ev, data)</div>
+<div class="line"><a name="a3"></a><a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_rucb_process, ev, data)</div>
 <div class="line">{</div>
-<div class="line">  <a name="a4"></a><a class="code" href="a00684.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(rucb_close(&amp;rucb);)</div>
-<div class="line">  <a name="a5"></a><a class="code" href="a00684.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
+<div class="line">  <a name="a4"></a><a class="code" href="a00813.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(rucb_close(&amp;rucb);)</div>
+<div class="line">  <a name="a5"></a><a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"></div>
-<div class="line">  <a name="a6"></a><a class="code" href="a00684.html#ga29eb92d7ef01f486d70a90cc34800a5d">PROCESS_PAUSE</a>();</div>
+<div class="line">  <a name="a6"></a><a class="code" href="a00813.html#ga29eb92d7ef01f486d70a90cc34800a5d">PROCESS_PAUSE</a>();</div>
 <div class="line"></div>
 <div class="line">  </div>
 <div class="line">  rucb_open(&amp;rucb, 137, &amp;rucb_call);</div>
 <div class="line">  SENSORS_ACTIVATE(button_sensor);</div>
 <div class="line"></div>
-<div class="line">  <a class="code" href="a00684.html#ga29eb92d7ef01f486d70a90cc34800a5d">PROCESS_PAUSE</a>();</div>
+<div class="line">  <a class="code" href="a00813.html#ga29eb92d7ef01f486d70a90cc34800a5d">PROCESS_PAUSE</a>();</div>
 <div class="line"></div>
-<div class="line">  <span class="keywordflow">if</span>(<a name="a7"></a><a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0] == 51 &amp;&amp;</div>
-<div class="line">      <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1] == 0) {</div>
+<div class="line">  <span class="keywordflow">if</span>(<a name="a7"></a><a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0] == 51 &amp;&amp;</div>
+<div class="line">      <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1] == 0) {</div>
 <div class="line">    linkaddr_t recv;</div>
 <div class="line"></div>
 <div class="line">    recv.u8[0] = 52;</div>
 <div class="line">    recv.u8[1] = 0;</div>
-<div class="line">    start_time = <a class="code" href="a00677.html#ga50c22f9b9d60dd1f9e59b63a3a6676b1">clock_time</a>();</div>
+<div class="line">    start_time = <a class="code" href="a00806.html#ga50c22f9b9d60dd1f9e59b63a3a6676b1">clock_time</a>();</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/*printf(&quot;%u.%u: sending rucb to address %u.%u at time %u\n&quot;,</span></div>
 <div class="line"><span class="comment">        linkaddr_node_addr.u8[0],</span></div>
@@ -181,18 +181,18 @@
 <div class="line"></div>
 <div class="line">  <span class="keywordflow">while</span>(1) {</div>
 <div class="line"></div>
-<div class="line">    <a name="a8"></a><a class="code" href="a00684.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(ev == sensors_event &amp;&amp;</div>
+<div class="line">    <a name="a8"></a><a class="code" href="a00813.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(ev == sensors_event &amp;&amp;</div>
 <div class="line">                             data == &amp;button_sensor);</div>
 <div class="line">    <span class="comment">/*rucb_stop(&amp;rucb);*/</span></div>
 <div class="line"></div>
 <div class="line">  }</div>
-<div class="line">  <a name="a9"></a><a class="code" href="a00684.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line">  <a name="a9"></a><a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:54 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/slip-arch.c Source File</title>
+<title>Contiki 3.x: cpu/cc2538/dev/watchdog.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,12 +43,12 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_c433b04169c945a1c7f0848f853d4379.html">cpu</a></li><li class="navelem"><a class="el" href="dir_7a001c762ad797b9c41c11fadba7b7c6.html">cc2538</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_c433b04169c945a1c7f0848f853d4379.html">cpu</a></li><li class="navelem"><a class="el" href="dir_7a001c762ad797b9c41c11fadba7b7c6.html">cc2538</a></li><li class="navelem"><a class="el" href="dir_70b4e30ef8a68f9433888c03f92b7ecf.html">dev</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">slip-arch.c</div>  </div>
+<div class="title">watchdog.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00550.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
@@ -82,70 +82,113 @@
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * OF THE POSSIBILITY OF SUCH DAMAGE.</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> */</span><span class="comment"></span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * \addtogroup cc2538-char-io</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * \addtogroup cc2538</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * @{</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * Arch-specific SLIP functions for the cc2538</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * SLIP can be configured to operate over UART or over USB-Serial, depending</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * on the value of SLIP_ARCH_CONF_USB</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00587.html">contiki-conf.h</a>&quot;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &quot;dev/slip.h&quot;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00534.html">dev/uart.h</a>&quot;</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00556.html">usb/usb-serial.h</a>&quot;</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifndef SLIP_ARCH_CONF_USB</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#define SLIP_ARCH_CONF_USB 0</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#if SLIP_ARCH_CONF_USB</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#define write_byte(b) usb_serial_writeb(b)</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#define set_input(f)  usb_serial_set_input(f)</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#define flush()       usb_serial_flush()</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#define write_byte(b) uart_write_byte(SLIP_ARCH_CONF_UART, b)</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#define set_input(f)  uart_set_input(SLIP_ARCH_CONF_UART, f)</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define flush()</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * \defgroup cc2538-wdt cc2538 watchdog timer driver</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * Driver for the cc2538 Watchdog Timer</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * @{</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> * \file</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * Implementation of the cc2538 watchdog driver. The peripheral runs in</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * watchdog mode.</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00559.html">reg.h</a>&quot;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00503.html">cpu.h</a>&quot;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00533.html">dev/smwdthrosc.h</a>&quot;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/* Enabled by default */</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#ifndef WATCHDOG_CONF_ENABLE</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#define WATCHDOG_CONF_ENABLE 1</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#if WATCHDOG_CONF_ENABLE</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#define WATCHDOG_ENABLE SMWDTHROSC_WDCTL_EN</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define WATCHDOG_ENABLE 0</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#define SLIP_END     0300</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> * \brief Write a byte over SLIP</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"> * \param c the byte</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="a00695.html#ga0bdfcf5778cecf50bf206d976438e8d9">   67</a></span>&#160;<a class="code" href="a00695.html#ga0bdfcf5778cecf50bf206d976438e8d9">slip_arch_writeb</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> c)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  write_byte(c);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordflow">if</span>(c == SLIP_END) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    flush();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> * \brief Initialise the arch-specific SLIP driver</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> * \param ubr Ignored for the cc2538</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="a00695.html#ga9968f75d6fd206d47a813fdda9b687bc">   80</a></span>&#160;<a class="code" href="a00695.html#ga9968f75d6fd206d47a813fdda9b687bc">slip_arch_init</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> ubr)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;{</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  set_input(slip_input_byte);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="ttc" id="a00695_html_ga9968f75d6fd206d47a813fdda9b687bc"><div class="ttname"><a href="a00695.html#ga9968f75d6fd206d47a813fdda9b687bc">slip_arch_init</a></div><div class="ttdeci">void slip_arch_init(unsigned long ubr)</div><div class="ttdoc">Initialise the arch-specific SLIP driver. </div><div class="ttdef"><b>Definition:</b> <a href="a00550_source.html#l00080">slip-arch.c:80</a></div></div>
-<div class="ttc" id="a00556_html"><div class="ttname"><a href="a00556.html">usb-serial.h</a></div><div class="ttdoc">Header file for cc2538&#39;s UART-like I/O over USB. </div></div>
-<div class="ttc" id="a00587_html"><div class="ttname"><a href="a00587.html">contiki-conf.h</a></div><div class="ttdoc">Configuration for the cc2538dk platform. </div></div>
-<div class="ttc" id="a00695_html_ga0bdfcf5778cecf50bf206d976438e8d9"><div class="ttname"><a href="a00695.html#ga0bdfcf5778cecf50bf206d976438e8d9">slip_arch_writeb</a></div><div class="ttdeci">void slip_arch_writeb(unsigned char c)</div><div class="ttdoc">Write a byte over SLIP. </div><div class="ttdef"><b>Definition:</b> <a href="a00550_source.html#l00067">slip-arch.c:67</a></div></div>
-<div class="ttc" id="a00534_html"><div class="ttname"><a href="a00534.html">uart.h</a></div><div class="ttdoc">Header file for the cc2538 UART driver. </div></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">/** \brief Initialisation function for the WDT. Currently simply explicitly</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"> * sets the WDT interval to max interval */</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="a00852.html#gad3e3f89e8fb1ad9489dc281c05335f5f">   63</a></span>&#160;<a class="code" href="a00852.html#gad3e3f89e8fb1ad9489dc281c05335f5f">watchdog_init</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="comment">/* Max interval, don&#39;t enable yet */</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  REG(<a class="code" href="a00844.html#ga0a6b2cffc3c89a9364b24417f9e07026">SMWDTHROSC_WDCTL</a>) = 0;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">/** \brief Starts the WDT in watchdog mode if enabled by user configuration,</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"> * maximum interval */</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a00852.html#ga9eeb628cdc696984c5fe147b8237483b">   72</a></span>&#160;<a class="code" href="a00852.html#ga9eeb628cdc696984c5fe147b8237483b">watchdog_start</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="comment">/* Max interval (32768), watchdog mode, enable if configured to do so */</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  REG(<a class="code" href="a00844.html#ga0a6b2cffc3c89a9364b24417f9e07026">SMWDTHROSC_WDCTL</a>) = WATCHDOG_ENABLE;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"> * \brief Writes the WDT clear sequence.</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> * Due to how the SMWDTHROSC_WDCTL works, it is OK to simply write these bits</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> * rather than use RMW operations.</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="a00852.html#gaccad26fa5b82a39e7f552662fbb6ef6f">   85</a></span>&#160;<a class="code" href="a00852.html#gaccad26fa5b82a39e7f552662fbb6ef6f">watchdog_periodic</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  REG(<a class="code" href="a00844.html#ga0a6b2cffc3c89a9364b24417f9e07026">SMWDTHROSC_WDCTL</a>) = (<a class="code" href="a00844.html#ga7f7508ccd4d477ef38780631226d92d9">SMWDTHROSC_WDCTL_CLR_3</a> | <a class="code" href="a00844.html#ga5a48e17a0b34ef9a60f0476a84813fda">SMWDTHROSC_WDCTL_CLR_1</a>);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  REG(<a class="code" href="a00844.html#ga0a6b2cffc3c89a9364b24417f9e07026">SMWDTHROSC_WDCTL</a>) = (<a class="code" href="a00844.html#gada23c18875bfd51b76b6918fff9bbe86">SMWDTHROSC_WDCTL_CLR_2</a> | <a class="code" href="a00844.html#ga6cf1ff4bbab6b915a83f3f71c2bbf262">SMWDTHROSC_WDCTL_CLR_0</a>);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">/** \brief In watchdog mode, the WDT can not be stopped. This function is</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> * defined here to satisfy API requirements.</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="a00852.html#ga284d9a9542a5fa2c84bf4a70bfbc80aa">   95</a></span>&#160;<a class="code" href="a00852.html#ga284d9a9542a5fa2c84bf4a70bfbc80aa">watchdog_stop</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">/** \brief Keeps control until the WDT throws a reset signal. Starts the WDT</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"> * if not already started. */</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="a00852.html#ga0d8773d4a0cc24f654f0ad6e64cb7d4a">  103</a></span>&#160;<a class="code" href="a00852.html#ga0d8773d4a0cc24f654f0ad6e64cb7d4a">watchdog_reboot</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;{</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <a class="code" href="a00823.html#ga27985ec9aa0a42ef61af6bc122ac9eeb">INTERRUPTS_DISABLE</a>();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="comment">/*</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">   * If the WDT is not started, set minimum interval and start</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">   * If the WDT is started, this will have no effect</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  REG(<a class="code" href="a00844.html#ga0a6b2cffc3c89a9364b24417f9e07026">SMWDTHROSC_WDCTL</a>) = <a class="code" href="a00844.html#gae9abc25220364f5c788ba00d1e6a1141">SMWDTHROSC_WDCTL_INT</a> | <a class="code" href="a00844.html#ga037eda2868ab0a2e8da93425a3bd67d2">SMWDTHROSC_WDCTL_EN</a>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordflow">while</span>(1);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}<span class="comment"></span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"> * @}</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"> * @}</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment"> */</span></div>
+<div class="ttc" id="a00844_html_ga0a6b2cffc3c89a9364b24417f9e07026"><div class="ttname"><a href="a00844.html#ga0a6b2cffc3c89a9364b24417f9e07026">SMWDTHROSC_WDCTL</a></div><div class="ttdeci">#define SMWDTHROSC_WDCTL</div><div class="ttdoc">Watchdog Control. </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00050">smwdthrosc.h:50</a></div></div>
+<div class="ttc" id="a00852_html_gaccad26fa5b82a39e7f552662fbb6ef6f"><div class="ttname"><a href="a00852.html#gaccad26fa5b82a39e7f552662fbb6ef6f">watchdog_periodic</a></div><div class="ttdeci">void watchdog_periodic(void)</div><div class="ttdoc">Writes the WDT clear sequence. </div><div class="ttdef"><b>Definition:</b> <a href="a00550_source.html#l00085">watchdog.c:85</a></div></div>
+<div class="ttc" id="a00503_html"><div class="ttname"><a href="a00503.html">cpu.h</a></div><div class="ttdoc">Header file with prototypes for interrupt control on the cc2538 Cortex-M3 micro. </div></div>
+<div class="ttc" id="a00844_html_gada23c18875bfd51b76b6918fff9bbe86"><div class="ttname"><a href="a00844.html#gada23c18875bfd51b76b6918fff9bbe86">SMWDTHROSC_WDCTL_CLR_2</a></div><div class="ttdeci">#define SMWDTHROSC_WDCTL_CLR_2</div><div class="ttdoc">Clear timer mask[2]. </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00069">smwdthrosc.h:69</a></div></div>
+<div class="ttc" id="a00559_html"><div class="ttname"><a href="a00559.html">reg.h</a></div><div class="ttdoc">Header file with register manipulation macro definitions. </div></div>
+<div class="ttc" id="a00852_html_ga0d8773d4a0cc24f654f0ad6e64cb7d4a"><div class="ttname"><a href="a00852.html#ga0d8773d4a0cc24f654f0ad6e64cb7d4a">watchdog_reboot</a></div><div class="ttdeci">void watchdog_reboot(void)</div><div class="ttdoc">Keeps control until the WDT throws a reset signal. </div><div class="ttdef"><b>Definition:</b> <a href="a00550_source.html#l00103">watchdog.c:103</a></div></div>
+<div class="ttc" id="a00852_html_gad3e3f89e8fb1ad9489dc281c05335f5f"><div class="ttname"><a href="a00852.html#gad3e3f89e8fb1ad9489dc281c05335f5f">watchdog_init</a></div><div class="ttdeci">void watchdog_init(void)</div><div class="ttdoc">Initialisation function for the WDT. </div><div class="ttdef"><b>Definition:</b> <a href="a00550_source.html#l00063">watchdog.c:63</a></div></div>
+<div class="ttc" id="a00844_html_gae9abc25220364f5c788ba00d1e6a1141"><div class="ttname"><a href="a00844.html#gae9abc25220364f5c788ba00d1e6a1141">SMWDTHROSC_WDCTL_INT</a></div><div class="ttdeci">#define SMWDTHROSC_WDCTL_INT</div><div class="ttdoc">Interval Select mask. </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00074">smwdthrosc.h:74</a></div></div>
+<div class="ttc" id="a00852_html_ga284d9a9542a5fa2c84bf4a70bfbc80aa"><div class="ttname"><a href="a00852.html#ga284d9a9542a5fa2c84bf4a70bfbc80aa">watchdog_stop</a></div><div class="ttdeci">void watchdog_stop(void)</div><div class="ttdoc">In watchdog mode, the WDT can not be stopped. </div><div class="ttdef"><b>Definition:</b> <a href="a00550_source.html#l00095">watchdog.c:95</a></div></div>
+<div class="ttc" id="a00844_html_ga5a48e17a0b34ef9a60f0476a84813fda"><div class="ttname"><a href="a00844.html#ga5a48e17a0b34ef9a60f0476a84813fda">SMWDTHROSC_WDCTL_CLR_1</a></div><div class="ttdeci">#define SMWDTHROSC_WDCTL_CLR_1</div><div class="ttdoc">Clear timer mask[1]. </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00070">smwdthrosc.h:70</a></div></div>
+<div class="ttc" id="a00823_html_ga27985ec9aa0a42ef61af6bc122ac9eeb"><div class="ttname"><a href="a00823.html#ga27985ec9aa0a42ef61af6bc122ac9eeb">INTERRUPTS_DISABLE</a></div><div class="ttdeci">#define INTERRUPTS_DISABLE()</div><div class="ttdoc">Disables all CPU interrupts. </div><div class="ttdef"><b>Definition:</b> <a href="a00503_source.html#l00067">cpu.h:67</a></div></div>
+<div class="ttc" id="a00844_html_ga7f7508ccd4d477ef38780631226d92d9"><div class="ttname"><a href="a00844.html#ga7f7508ccd4d477ef38780631226d92d9">SMWDTHROSC_WDCTL_CLR_3</a></div><div class="ttdeci">#define SMWDTHROSC_WDCTL_CLR_3</div><div class="ttdoc">Clear timer mask[3]. </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00068">smwdthrosc.h:68</a></div></div>
+<div class="ttc" id="a00844_html_ga037eda2868ab0a2e8da93425a3bd67d2"><div class="ttname"><a href="a00844.html#ga037eda2868ab0a2e8da93425a3bd67d2">SMWDTHROSC_WDCTL_EN</a></div><div class="ttdeci">#define SMWDTHROSC_WDCTL_EN</div><div class="ttdoc">Enable mask. </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00072">smwdthrosc.h:72</a></div></div>
+<div class="ttc" id="a00533_html"><div class="ttname"><a href="a00533.html">smwdthrosc.h</a></div><div class="ttdoc">Header file with register declarations and bit masks for the cc2538 Sleep Timer and Watchdog...</div></div>
+<div class="ttc" id="a00852_html_ga9eeb628cdc696984c5fe147b8237483b"><div class="ttname"><a href="a00852.html#ga9eeb628cdc696984c5fe147b8237483b">watchdog_start</a></div><div class="ttdeci">void watchdog_start(void)</div><div class="ttdoc">Starts the WDT in watchdog mode if enabled by user configuration, maximum interval. </div><div class="ttdef"><b>Definition:</b> <a href="a00550_source.html#l00072">watchdog.c:72</a></div></div>
+<div class="ttc" id="a00844_html_ga6cf1ff4bbab6b915a83f3f71c2bbf262"><div class="ttname"><a href="a00844.html#ga6cf1ff4bbab6b915a83f3f71c2bbf262">SMWDTHROSC_WDCTL_CLR_0</a></div><div class="ttdeci">#define SMWDTHROSC_WDCTL_CLR_0</div><div class="ttdoc">Clear timer mask[0]. </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00071">smwdthrosc.h:71</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:56 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

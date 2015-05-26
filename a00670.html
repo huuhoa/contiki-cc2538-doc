@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: Single-hop reliable unicast</title>
+<title>Contiki 3.x: examples/ipv6/native-border-router/border-router-cmds.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,31 +31,41 @@
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
     </ul>
   </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d28a4824dc47e487b107a5db32ef43c4.html">examples</a></li><li class="navelem"><a class="el" href="dir_269f28271abffc49678ed89463a1797b.html">ipv6</a></li><li class="navelem"><a class="el" href="dir_ca71a91b00d4a429d72d924fad9cb71b.html">native-border-router</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Single-hop reliable unicast<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00754.html">The Rime communication stack</a></div></div>  </div>
+<div class="title">border-router-cmds.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>The reliable single-hop unicast primitive (runicast) reliably sends a packet to a single-hop neighbor.  
+<p><pre class="fragment">    Sets up some commands for the border router
+</pre>  
 <a href="#details">More...</a></p>
+
+<p><a href="a00670_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>The reliable single-hop unicast primitive (runicast) reliably sends a packet to a single-hop neighbor. </p>
-<p>The runicast primitive uses acknowledgements and retransmissions to ensure that the neighbor successfully receives the packet. When the receiver has acknowledged the packet, the ruc module notifies the sending application via a callback. The ruc primitive uses the stubborn single-hop unicast primitive to do retransmissions. Thus, the ruc primitive does not have to manage the details of setting up timers and doing retransmissions, but can concentrate on dealing with acknowledgements.</p>
-<p>The runicast primitive adds two packet attributes: the single-hop packet type and the single-hop packet ID. The runicast primitive uses the packet ID attribute as a sequence number for matching acknowledgement packets to the corresponding data packets.</p>
-<p>The application or protocol that uses the runicast primitive can specify the maximum number of transmissions that the ruc module should attempt before the packet times out. If a packet times out, the application or protocol that sent the packet is notified with a callback.</p>
-<h1><a class="anchor" id="runicast-channels"></a>
-Channels</h1>
-<p>The runicast module uses 1 channel. </p>
-</div><!-- contents -->
+<div class="textblock"><pre class="fragment">    Sets up some commands for the border router
+</pre> <dl class="section author"><dt>Author</dt><dd>Niclas Finne <a href="#" onclick="location.href='mai'+'lto:'+'nfi'+'@s'+'ics'+'.s'+'e'; return false;">nfi@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a> Joakim Eriksson <a href="#" onclick="location.href='mai'+'lto:'+'joa'+'ki'+'me@'+'si'+'cs.'+'se'; return false;">joaki<span style="display: none;">.nosp@m.</span>me@s<span style="display: none;">.nosp@m.</span>ics.s<span style="display: none;">.nosp@m.</span>e</a> </dd></dl>
+
+<p>Definition in file <a class="el" href="a00670_source.html">border-router-cmds.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

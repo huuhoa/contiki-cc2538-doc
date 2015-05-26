@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: Best-effort multihop forwarding</title>
+<title>Contiki 3.x: examples/cc2538dk/mqtt-demo/mqtt-demo.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,30 +31,63 @@
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
     </ul>
   </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d28a4824dc47e487b107a5db32ef43c4.html">examples</a></li><li class="navelem"><a class="el" href="dir_9cce5a00cd4126330295f6df3035ea0e.html">cc2538dk</a></li><li class="navelem"><a class="el" href="dir_aef6050216791e754ccef236443735c6.html">mqtt-demo</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
-<div class="title">Best-effort multihop forwarding<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00754.html">The Rime communication stack</a></div></div>  </div>
+<div class="title">mqtt-demo.c File Reference<div class="ingroups"><a class="el" href="a00821.html">Contiki platforms</a> &raquo; <a class="el" href="a00822.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00853.html">cc2538 Example Projects</a> &raquo; <a class="el" href="a00856.html">CC2538DK MQTT Demo Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>The multihop module implements a multihop forwarding mechanism.  
+<p>An MQTT example for the cc2538dk platform.  
 <a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;contiki-conf.h&quot;</code><br />
+<code>#include &quot;rpl/rpl-private.h&quot;</code><br />
+<code>#include &quot;mqtt.h&quot;</code><br />
+<code>#include &quot;net/rpl/rpl.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00264_source.html">net/ip/uip.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00329_source.html">net/ipv6/uip-icmp6.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00321_source.html">net/ipv6/sicslowpan.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00478_source.html">sys/etimer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00473_source.html">sys/ctimer.h</a>&quot;</code><br />
+<code>#include &quot;lib/sensors.h&quot;</code><br />
+<code>#include &quot;dev/button-sensor.h&quot;</code><br />
+<code>#include &quot;dev/leds.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00512_source.html">dev/cc2538-sensors.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+</div>
+<p><a href="a00659_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga07e36f7b7648769da198e53fa7478e5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga07e36f7b7648769da198e53fa7478e5d"></a>
+typedef struct mqtt_client_config&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00856.html#ga07e36f7b7648769da198e53fa7478e5d">mqtt_client_config_t</a></td></tr>
+<tr class="memdesc:ga07e36f7b7648769da198e53fa7478e5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data structure declaration for the MQTT client configuration. <br /></td></tr>
+<tr class="separator:ga07e36f7b7648769da198e53fa7478e5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>The multihop module implements a multihop forwarding mechanism. </p>
-<p>Routes must have already been setup with the route_add() function. Setting up routes is done with another Rime module such as the <a class="el" href="a00666.html">route-discovery module</a>.</p>
-<p>The multihop sends a packet to an identified node in the network by using multi-hop forwarding at each node in the network. The application or protocol that uses the multihop primitive supplies a routing function for selecting the next-hop neighbor. If the multihop primitive is requested to send a packet for which no suitable next hop neighbor is found, the caller is immediately notified of this and may choose to initiate a route discovery process.</p>
-<h1><a class="anchor" id="multihop-channels"></a>
-Channels</h1>
-<p>The multihop module uses 1 channel. </p>
-</div><!-- contents -->
+<div class="textblock"><p>An MQTT example for the cc2538dk platform. </p>
+
+<p>Definition in file <a class="el" href="a00659_source.html">mqtt-demo.c</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

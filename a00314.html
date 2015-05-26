@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/ipv6/multicast/uip-mcast6.h File Reference</title>
+<title>Contiki 3.x: core/net/ipv6/multicast/uip-mcast6-engines.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,45 +48,42 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">uip-mcast6.h File Reference<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00760.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00761.html">uIP IPv6 specific features</a> &raquo; <a class="el" href="a00644.html">IPv6 Multicast Forwarding</a></div></div>  </div>
+<div class="title">uip-mcast6-engines.h File Reference<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00889.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00890.html">uIP IPv6 specific features</a> &raquo; <a class="el" href="a00773.html">IPv6 Multicast Forwarding</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This header file contains configuration directives for uIPv6 multicast support.  
+<p>Header file with definition of multicast engine constants.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00587_source.html">contiki-conf.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00309_source.html">net/ipv6/multicast/uip-mcast6-engines.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00311_source.html">net/ipv6/multicast/uip-mcast6-route.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00308_source.html">net/ipv6/multicast/smrf.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00306_source.html">net/ipv6/multicast/roll-tm.h</a>&quot;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-</div>
+
 <p><a href="a00314_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00107.html">uip_mcast6_driver</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The data structure used to represent a multicast engine.  <a href="a00107.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga809ec8adbbd2ff2a34d432b0141817a3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00644.html#ga809ec8adbbd2ff2a34d432b0141817a3">uip_mcast6_get_address_scope</a>(a)&#160;&#160;&#160;((a)-&gt;u8[1] &amp; 0x0F)</td></tr>
-<tr class="memdesc:ga809ec8adbbd2ff2a34d432b0141817a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a multicast address' scope.  <a href="a00644.html#ga809ec8adbbd2ff2a34d432b0141817a3">More...</a><br /></td></tr>
-<tr class="separator:ga809ec8adbbd2ff2a34d432b0141817a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad3abaf410d3087a20d37066b6cbd357f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad3abaf410d3087a20d37066b6cbd357f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00773.html#gad3abaf410d3087a20d37066b6cbd357f">UIP_MCAST6_ENGINE_NONE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:gad3abaf410d3087a20d37066b6cbd357f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selecting this disables mcast. <br /></td></tr>
+<tr class="separator:gad3abaf410d3087a20d37066b6cbd357f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga894db640eee7bddd9f582c6285f417a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga894db640eee7bddd9f582c6285f417a6"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00773.html#ga894db640eee7bddd9f582c6285f417a6">UIP_MCAST6_ENGINE_SMRF</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:ga894db640eee7bddd9f582c6285f417a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The SMRF engine. <br /></td></tr>
+<tr class="separator:ga894db640eee7bddd9f582c6285f417a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaec2cc159a64f8244eb376042d3906f45"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaec2cc159a64f8244eb376042d3906f45"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00773.html#gaec2cc159a64f8244eb376042d3906f45">UIP_MCAST6_ENGINE_ROLL_TM</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memdesc:gaec2cc159a64f8244eb376042d3906f45"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ROLL TM engine. <br /></td></tr>
+<tr class="separator:gaec2cc159a64f8244eb376042d3906f45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This header file contains configuration directives for uIPv6 multicast support. </p>
+<div class="textblock"><p>Header file with definition of multicast engine constants. </p>
+<p>When writing a new engine, add it here with a unique number and then modify <a class="el" href="a00319.html" title="This header file contains configuration directives for uIPv6 multicast support. ">uip-mcast6.h</a> accordingly</p>
 <dl class="section author"><dt>Author</dt><dd>George Oikonomou - <a href="#" onclick="location.href='mai'+'lto:'+'oik'+'on'+'omo'+'u@'+'use'+'rs'+'.so'+'ur'+'cef'+'or'+'ge.'+'ne'+'t'; return false;">oikon<span style="display: none;">.nosp@m.</span>omou<span style="display: none;">.nosp@m.</span>@user<span style="display: none;">.nosp@m.</span>s.so<span style="display: none;">.nosp@m.</span>urcef<span style="display: none;">.nosp@m.</span>orge<span style="display: none;">.nosp@m.</span>.net</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00314_source.html">uip-mcast6.h</a>.</p>
+<p>Definition in file <a class="el" href="a00314_source.html">uip-mcast6-engines.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

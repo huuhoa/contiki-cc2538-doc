@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: LLSEC driver using a network-wide key (NONCORESEC)</title>
+<title>Contiki 3.x: examples/cc2530dk/sensors-demo.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,25 +31,51 @@
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
     </ul>
   </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d28a4824dc47e487b107a5db32ef43c4.html">examples</a></li><li class="navelem"><a class="el" href="dir_66d1ca94d4218005dede68ffb160fdb7.html">cc2530dk</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">LLSEC driver using a network-wide key (NONCORESEC)<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00645.html">Link Layer Security</a></div></div>  </div>
+<div class="title">sensors-demo.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Noncompromise-resilient 802.15.4 security.  
+<p><pre class="fragment">    Example to demonstrate-test cc2530 sensor functionality</pre>  
 <a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
+<code>#include &quot;contiki-conf.h&quot;</code><br />
+<code>#include &quot;dev/leds.h&quot;</code><br />
+<code>#include &quot;dev/button-sensor.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00709_source.html">dev/adc-sensor.h</a>&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+</div>
+<p><a href="a00648_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Noncompromise-resilient 802.15.4 security. </p>
-</div><!-- contents -->
+<div class="textblock"><pre class="fragment">    Example to demonstrate-test cc2530 sensor functionality</pre> <p>B1 turns LED_GREEN on and off.</p>
+<p>The node takes readings from the various sensors every x seconds and prints out the results.</p>
+<p>We use floats here to translate the AD conversion results to meaningful values. However, our printf does not have f support so we use an ugly hack to print out the value by extracting the integral part and then the fractional part. Don't try this at home.</p>
+<p>Temperature: Math is correct, the sensor needs calibration per device. I currently use default values for the math which may result in very incorrect values in degrees C. See TI Design Note DN102 about the offset calibration.</p>
+<p>Supply Voltage (VDD): For VDD, math is correct, conversion is correct. See DN101 for details.</p>
+<p>Make sure you enable/disable things in contiki-conf.h</p>
+<dl class="section author"><dt>Author</dt><dd>George Oikonomou - <a href="#" onclick="location.href='mai'+'lto:'+'oik'+'on'+'omo'+'u@'+'use'+'rs'+'.so'+'ur'+'cef'+'or'+'ge.'+'ne'+'t'; return false;">oikon<span style="display: none;">.nosp@m.</span>omou<span style="display: none;">.nosp@m.</span>@user<span style="display: none;">.nosp@m.</span>s.so<span style="display: none;">.nosp@m.</span>urcef<span style="display: none;">.nosp@m.</span>orge<span style="display: none;">.nosp@m.</span>.net</a> </dd></dl>
+
+<p>Definition in file <a class="el" href="a00648_source.html">sensors-demo.c</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

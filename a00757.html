@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: Contiki system</title>
+<title>Contiki 3.x: Configuration options for uIP</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -40,63 +40,50 @@
   <div class="summary">
 <a href="#groups">Modules</a>  </div>
   <div class="headertitle">
-<div class="title">Contiki system</div>  </div>
+<div class="title">Configuration options for uIP<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00889.html">The uIP TCP/IP stack</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>uIP is configured using the per-project configuration file "uipopt.h".  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
 Modules</h2></td></tr>
-<tr class="memitem:a00595"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00595.html">The Contiki file system interface</a></td></tr>
-<tr class="memdesc:a00595"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Contiki file system interface (CFS) defines an abstract API for reading directories and for reading and writing files. <br /></td></tr>
+<tr class="memitem:a00758"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html">Static configuration options</a></td></tr>
+<tr class="memdesc:a00758"><td class="mdescLeft">&#160;</td><td class="mdescRight">These configuration options can be used for setting the IP address settings statically, but only if UIP_FIXEDADDR is set to 1. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00673"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00673.html">Implicit network time synchronization</a></td></tr>
-<tr class="memdesc:a00673"><td class="mdescLeft">&#160;</td><td class="mdescRight">This crude and simple network time synchronization module synchronizes clocks of all nodes in a network. <br /></td></tr>
+<tr class="memitem:a00759"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00759.html">General configuration options</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00676"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00676.html">Argument buffer</a></td></tr>
-<tr class="memdesc:a00676"><td class="mdescLeft">&#160;</td><td class="mdescRight">The argument buffer can be used when passing an argument from an exiting process to a process that has not been created yet. <br /></td></tr>
+<tr class="memitem:a00760"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html">IP configuration options</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00677"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00677.html">Clock library</a></td></tr>
-<tr class="memdesc:a00677"><td class="mdescLeft">&#160;</td><td class="mdescRight">The clock library is the interface between Contiki and the platform specific clock functionality. <br /></td></tr>
+<tr class="memitem:a00761"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00761.html">IPv6 configuration options</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00678"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00678.html">Communication power accounting</a></td></tr>
-<tr class="memdesc:a00678"><td class="mdescLeft">&#160;</td><td class="mdescRight">The compower module accumulates power consumption information and attributes it to communication activities. <br /></td></tr>
+<tr class="memitem:a00762"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00762.html">UDP configuration options</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00679"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00679.html">Callback timer</a></td></tr>
-<tr class="memdesc:a00679"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ctimer module provides a timer mechanism that calls a specified C function when a ctimer expires. <br /></td></tr>
+<tr class="memitem:a00763"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00763.html">TCP configuration options</a></td></tr>
+<tr class="memdesc:a00763"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the function that should be called when UDP datagrams arrive. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00680"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00680.html">Event timers</a></td></tr>
-<tr class="memdesc:a00680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event timers provides a way to generate timed events. <br /></td></tr>
+<tr class="memitem:a00764"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00764.html">ARP configuration options</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00042"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00042.html">The Contiki program loader</a></td></tr>
-<tr class="memdesc:a00042"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Contiki program loader is an abstract interface for loading and starting programs. <br /></td></tr>
+<tr class="memitem:a00765"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00765.html">layer 2 options (for ipv6)</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00682"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00682.html">Multi-threading library</a></td></tr>
-<tr class="memdesc:a00682"><td class="mdescLeft">&#160;</td><td class="mdescRight">The event driven Contiki kernel does not provide multi-threading by itself - instead, preemptive multi-threading is implemented as a library that optionally can be linked with applications. <br /></td></tr>
+<tr class="memitem:a00766"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00766.html">6lowpan options (for ipv6)</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00684"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00684.html">Contiki processes</a></td></tr>
-<tr class="memdesc:a00684"><td class="mdescLeft">&#160;</td><td class="mdescRight">A process in Contiki consists of a single <a class="el" href="a00752.html">protothread</a>. <br /></td></tr>
+<tr class="memitem:a00767"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00767.html">CPU architecture configuration</a></td></tr>
+<tr class="memdesc:a00767"><td class="mdescLeft">&#160;</td><td class="mdescRight">The CPU architecture configuration is where the endianess of the CPU on which uIP is to be run is specified. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00686"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00686.html">Real-time task scheduling</a></td></tr>
-<tr class="memdesc:a00686"><td class="mdescLeft">&#160;</td><td class="mdescRight">The real-time module handles the scheduling and execution of real-time tasks (with predictable execution times). <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00687"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00687.html">Seconds timer library</a></td></tr>
-<tr class="memdesc:a00687"><td class="mdescLeft">&#160;</td><td class="mdescRight">The stimer library provides functions for setting, resetting and restarting timers, and for checking if a timer has expired. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00688"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00688.html">Contiki subprocesses</a></td></tr>
-<tr class="memdesc:a00688"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Contiki subprocess is a "process-in-a-process". <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00689"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00689.html">Timer library</a></td></tr>
-<tr class="memdesc:a00689"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Contiki kernel does not provide support for timed events. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00752"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00752.html">Protothreads</a></td></tr>
-<tr class="memdesc:a00752"><td class="mdescLeft">&#160;</td><td class="mdescRight">Protothreads are a type of lightweight stackless threads designed for severly memory constrained systems such as deeply embedded systems or sensor network nodes. <br /></td></tr>
+<tr class="memitem:a00768"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00768.html">Application specific configurations</a></td></tr>
+<tr class="memdesc:a00768"><td class="mdescLeft">&#160;</td><td class="mdescRight">An uIP application is implemented using a single application function that is called by uIP whenever a TCP/IP event occurs. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>uIP is configured using the per-project configuration file "uipopt.h". </p>
+<p>This file contains all compile-time options for uIP and should be tweaked to match each specific project. The uIP distribution contains a documented example "uipopt.h" that can be copied and modified for each project.</p>
+<dl class="section note"><dt>Note</dt><dd>Contiki does not use the <a class="el" href="a00268.html" title="Configuration options for uIP. ">uipopt.h</a> file to configure uIP, but uses a per-port uip-conf.h file that should be edited instead. </dd></dl>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

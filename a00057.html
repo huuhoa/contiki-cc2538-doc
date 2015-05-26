@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: frame802154_aux_hdr_t Struct Reference</title>
+<title>Contiki 3.x: etimer Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -44,45 +44,25 @@
   </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">frame802154_aux_hdr_t Struct Reference<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00649.html">802.15.4 frame creation and parsing</a></div></div>  </div>
+<div class="title">etimer Struct Reference<div class="ingroups"><a class="el" href="a00886.html">Contiki system</a> &raquo; <a class="el" href="a00809.html">Event timers</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>802.15.4 Aux security header  
+<p>A timer.  
  <a href="a00057.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00349_source.html">core/net/mac/frame802154.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:a690ecad0f9b0cbb4f1fcfbaf88c69cfd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a690ecad0f9b0cbb4f1fcfbaf88c69cfd"></a>
-<a class="el" href="a00059.html">frame802154_scf_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00057.html#a690ecad0f9b0cbb4f1fcfbaf88c69cfd">security_control</a></td></tr>
-<tr class="memdesc:a690ecad0f9b0cbb4f1fcfbaf88c69cfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Security control bitfield. <br /></td></tr>
-<tr class="separator:a690ecad0f9b0cbb4f1fcfbaf88c69cfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d4c9cfe19fa342bea2a54a4c3f4a830"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d4c9cfe19fa342bea2a54a4c3f4a830"></a>
-frame802154_frame_counter_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00057.html#a7d4c9cfe19fa342bea2a54a4c3f4a830">frame_counter</a></td></tr>
-<tr class="memdesc:a7d4c9cfe19fa342bea2a54a4c3f4a830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frame counter, used for security. <br /></td></tr>
-<tr class="separator:a7d4c9cfe19fa342bea2a54a4c3f4a830"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba34e16b74ef3642fbaba1b158d0fdee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aba34e16b74ef3642fbaba1b158d0fdee"></a>
-frame802154_key_source_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00057.html#aba34e16b74ef3642fbaba1b158d0fdee">key_source</a></td></tr>
-<tr class="memdesc:aba34e16b74ef3642fbaba1b158d0fdee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Key Source subfield. <br /></td></tr>
-<tr class="separator:aba34e16b74ef3642fbaba1b158d0fdee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab08045359fea5559a127385d38922d6b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab08045359fea5559a127385d38922d6b"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00057.html#ab08045359fea5559a127385d38922d6b">key_index</a></td></tr>
-<tr class="memdesc:ab08045359fea5559a127385d38922d6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Key Index subfield. <br /></td></tr>
-<tr class="separator:ab08045359fea5559a127385d38922d6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
+<p><code>#include &lt;<a class="el" href="a00478_source.html">core/sys/etimer.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>802.15.4 Aux security header </p>
-
-<p>Definition at line <a class="el" href="a00349_source.html#l00164">164</a> of file <a class="el" href="a00349_source.html">frame802154.h</a>.</p>
+<div class="textblock"><p>A timer. </p>
+<p>This structure is used for declaring a timer. The timer must be set with <a class="el" href="a00809.html#gadb6c83643bbca82b614c50b27c586302" title="Set an event timer. ">etimer_set()</a> before it can be used. </p>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="a00013.html#_a9">example-announcement.c</a>, <a class="el" href="a00015.html#_a4">example-broadcast.c</a>, <a class="el" href="a00017.html#_a4">example-collect.c</a>, <a class="el" href="a00003.html#_a1">example-program.c</a>, <a class="el" href="a00029.html#_a16">example-runicast.c</a>, <a class="el" href="a00033.html#_a4">example-unicast.c</a>, and <a class="el" href="a00011.html#_a4">multi-threading.c</a>.</dd>
+</dl>
+<p>Definition at line <a class="el" href="a00478_source.html#l00076">76</a> of file <a class="el" href="a00478_source.html">etimer.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:59 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

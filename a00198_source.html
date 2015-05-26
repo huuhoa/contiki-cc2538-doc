@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/lib/sensors.h Source File</title>
+<title>Contiki 3.x: core/lib/ringbuf.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,11 +48,11 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">sensors.h</div>  </div>
+<div class="title">ringbuf.c</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2009, Swedish Institute of Computer Science</span></div>
+<a href="a00198.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2008, Swedish Institute of Computer Science.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
@@ -82,52 +82,92 @@
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * This file is part of the Contiki operating system.</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#ifndef SENSORS_H_</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#define SENSORS_H_</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/* some constants for the configure API */</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#define SENSORS_HW_INIT 128 </span><span class="comment">/* internal - used only for initialization */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#define SENSORS_ACTIVE 129 </span><span class="comment">/* ACTIVE =&gt; 0 -&gt; turn off, 1 -&gt; turn on */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#define SENSORS_READY 130 </span><span class="comment">/* read only */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#define SENSORS_ACTIVATE(sensor) (sensor).configure(SENSORS_ACTIVE, 1)</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#define SENSORS_DEACTIVATE(sensor) (sensor).configure(SENSORS_ACTIVE, 0)</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define SENSORS_SENSOR(name, type, value, configure, status)        \</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">const struct sensors_sensor name = { type, value, configure, status }</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define SENSORS_NUM (sizeof(sensors) / sizeof(struct sensors_sensor *))</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#define SENSORS(...) \</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">const struct sensors_sensor *sensors[] = {__VA_ARGS__, NULL};       \</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">unsigned char sensors_flags[SENSORS_NUM]</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">struct </span>sensors_sensor {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">char</span> *       type;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  int          (* value)     (<span class="keywordtype">int</span> type);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  int          (* configure) (<span class="keywordtype">int</span> type, <span class="keywordtype">int</span> value);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  int          (* status)    (<span class="keywordtype">int</span> type);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">const</span> <span class="keyword">struct </span>sensors_sensor *sensors_find(<span class="keyword">const</span> <span class="keywordtype">char</span> *type);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">const</span> <span class="keyword">struct </span>sensors_sensor *sensors_next(<span class="keyword">const</span> <span class="keyword">struct</span> sensors_sensor *s);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">const</span> <span class="keyword">struct </span>sensors_sensor *sensors_first(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> sensors_changed(<span class="keyword">const</span> <span class="keyword">struct</span> sensors_sensor *s);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">extern</span> process_event_t sensors_event;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<a class="code" href="a00684.html#ga96ff784b76d6edef302610d69664025f">PROCESS_NAME</a>(sensors_process);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SENSORS_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="a00684_html_ga96ff784b76d6edef302610d69664025f"><div class="ttname"><a href="a00684.html#ga96ff784b76d6edef302610d69664025f">PROCESS_NAME</a></div><div class="ttdeci">#define PROCESS_NAME(name)</div><div class="ttdoc">Declare the name of a process. </div><div class="ttdef"><b>Definition:</b> <a href="a00482_source.html#l00286">process.h:286</a></div></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * \file</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         Ring buffer library implementation</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * \author</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *         Adam Dunkels &lt;adam@sics.se&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00199.html">lib/ringbuf.h</a>&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a00736.html#ga5e40b0459813787a4e67fceb0aab5fd6">   43</a></span>&#160;<a class="code" href="a00736.html#ga5e40b0459813787a4e67fceb0aab5fd6">ringbuf_init</a>(<span class="keyword">struct</span> <a class="code" href="a00077.html">ringbuf</a> *r, uint8_t *dataptr, uint8_t size)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  r-&gt;data = dataptr;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  r-&gt;mask = size - 1;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  r-&gt;put_ptr = 0;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  r-&gt;get_ptr = 0;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="a00736.html#ga2a370b54ed5d194e188a94e505b48eeb">   52</a></span>&#160;<a class="code" href="a00736.html#ga2a370b54ed5d194e188a94e505b48eeb">ringbuf_put</a>(<span class="keyword">struct</span> <a class="code" href="a00077.html">ringbuf</a> *r, uint8_t c)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="comment">/* Check if buffer is full. If it is full, return 0 to indicate that</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">     the element was not inserted into the buffer.</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">     XXX: there is a potential risk for a race condition here, because</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     the -&gt;get_ptr field may be written concurrently by the</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">     ringbuf_get() function. To avoid this, access to -&gt;get_ptr must</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">     be atomic. We use an uint8_t type, which makes access atomic on</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">     most platforms, but C does not guarantee this.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">  */</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordflow">if</span>(((r-&gt;put_ptr - r-&gt;get_ptr) &amp; r-&gt;mask) == r-&gt;mask) {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  r-&gt;data[r-&gt;put_ptr] = c;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  r-&gt;put_ptr = (r-&gt;put_ptr + 1) &amp; r-&gt;mask;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a00736.html#ga2972cc12c40c75e5c883e831ff8c14ab">   72</a></span>&#160;<a class="code" href="a00736.html#ga2972cc12c40c75e5c883e831ff8c14ab">ringbuf_get</a>(<span class="keyword">struct</span> <a class="code" href="a00077.html">ringbuf</a> *r)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  uint8_t c;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="comment">/* Check if there are bytes in the buffer. If so, we return the</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">     first one and increase the pointer. If there are no bytes left, we</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">     return -1.</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">     XXX: there is a potential risk for a race condition here, because</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">     the -&gt;put_ptr field may be written concurrently by the</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">     ringbuf_put() function. To avoid this, access to -&gt;get_ptr must</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">     be atomic. We use an uint8_t type, which makes access atomic on</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">     most platforms, but C does not guarantee this.</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">  */</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordflow">if</span>(((r-&gt;put_ptr - r-&gt;get_ptr) &amp; r-&gt;mask) &gt; 0) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    c = r-&gt;data[r-&gt;get_ptr];</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    r-&gt;get_ptr = (r-&gt;get_ptr + 1) &amp; r-&gt;mask;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">return</span> c;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="a00736.html#ga0c16200911b10f8137499825b5803b8d">   96</a></span>&#160;<a class="code" href="a00736.html#ga0c16200911b10f8137499825b5803b8d">ringbuf_size</a>(<span class="keyword">struct</span> <a class="code" href="a00077.html">ringbuf</a> *r)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;{</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">return</span> r-&gt;mask + 1;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="a00736.html#ga8b3f31407ae7e5a98f9cedcb6f5bd82b">  102</a></span>&#160;<a class="code" href="a00736.html#ga8b3f31407ae7e5a98f9cedcb6f5bd82b">ringbuf_elements</a>(<span class="keyword">struct</span> <a class="code" href="a00077.html">ringbuf</a> *r)</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordflow">return</span> (r-&gt;put_ptr - r-&gt;get_ptr) &amp; r-&gt;mask;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="ttc" id="a00736_html_ga8b3f31407ae7e5a98f9cedcb6f5bd82b"><div class="ttname"><a href="a00736.html#ga8b3f31407ae7e5a98f9cedcb6f5bd82b">ringbuf_elements</a></div><div class="ttdeci">int ringbuf_elements(struct ringbuf *r)</div><div class="ttdoc">Get the number of elements currently in the ring buffer. </div><div class="ttdef"><b>Definition:</b> <a href="a00198_source.html#l00102">ringbuf.c:102</a></div></div>
+<div class="ttc" id="a00199_html"><div class="ttname"><a href="a00199.html">ringbuf.h</a></div><div class="ttdoc">    Header file for the ring buffer library  </div></div>
+<div class="ttc" id="a00736_html_ga2a370b54ed5d194e188a94e505b48eeb"><div class="ttname"><a href="a00736.html#ga2a370b54ed5d194e188a94e505b48eeb">ringbuf_put</a></div><div class="ttdeci">int ringbuf_put(struct ringbuf *r, uint8_t c)</div><div class="ttdoc">Insert a byte into the ring buffer. </div><div class="ttdef"><b>Definition:</b> <a href="a00198_source.html#l00052">ringbuf.c:52</a></div></div>
+<div class="ttc" id="a00736_html_ga5e40b0459813787a4e67fceb0aab5fd6"><div class="ttname"><a href="a00736.html#ga5e40b0459813787a4e67fceb0aab5fd6">ringbuf_init</a></div><div class="ttdeci">void ringbuf_init(struct ringbuf *r, uint8_t *dataptr, uint8_t size)</div><div class="ttdoc">Initialize a ring buffer. </div><div class="ttdef"><b>Definition:</b> <a href="a00198_source.html#l00043">ringbuf.c:43</a></div></div>
+<div class="ttc" id="a00077_html"><div class="ttname"><a href="a00077.html">ringbuf</a></div><div class="ttdoc">Structure that holds the state of a ring buffer. </div><div class="ttdef"><b>Definition:</b> <a href="a00199_source.html#l00068">ringbuf.h:68</a></div></div>
+<div class="ttc" id="a00736_html_ga2972cc12c40c75e5c883e831ff8c14ab"><div class="ttname"><a href="a00736.html#ga2972cc12c40c75e5c883e831ff8c14ab">ringbuf_get</a></div><div class="ttdeci">int ringbuf_get(struct ringbuf *r)</div><div class="ttdoc">Get a byte from the ring buffer. </div><div class="ttdef"><b>Definition:</b> <a href="a00198_source.html#l00072">ringbuf.c:72</a></div></div>
+<div class="ttc" id="a00736_html_ga0c16200911b10f8137499825b5803b8d"><div class="ttname"><a href="a00736.html#ga0c16200911b10f8137499825b5803b8d">ringbuf_size</a></div><div class="ttdeci">int ringbuf_size(struct ringbuf *r)</div><div class="ttdoc">Get the size of a ring buffer. </div><div class="ttdef"><b>Definition:</b> <a href="a00198_source.html#l00096">ringbuf.c:96</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:55 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

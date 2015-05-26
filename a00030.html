@@ -83,10 +83,10 @@
 <div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00419.html">net/rime/rime.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00425.html">net/rime/rime.h</a>&quot;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00179.html">lib/list.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00185.html">lib/memb.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00181.html">lib/list.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00187.html">lib/memb.h</a>&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;dev/button-sensor.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;dev/leds.h&quot;</span></div>
@@ -95,7 +95,7 @@
 <div class="line"><span class="preprocessor">#define NUM_HISTORY_ENTRIES 4</span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a0"></a><a class="code" href="a00684.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(test_runicast_process, <span class="stringliteral">&quot;runicast test&quot;</span>);</div>
+<div class="line"><a name="a0"></a><a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(test_runicast_process, <span class="stringliteral">&quot;runicast test&quot;</span>);</div>
 <div class="line">AUTOSTART_PROCESSES(&amp;test_runicast_process);</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="comment">/* OPTIONAL: Sender history.</span></div>
@@ -106,28 +106,28 @@
 <div class="line">  linkaddr_t addr;</div>
 <div class="line">  uint8_t seq;</div>
 <div class="line">};</div>
-<div class="line"><a name="a1"></a><a class="code" href="a00603.html#ga1e61a00c396ab8bd4141f54772e310ce">LIST</a>(history_table);</div>
-<div class="line"><a name="a2"></a><a class="code" href="a00605.html#gaf31774d02a69fd3f1c2b282454438cba">MEMB</a>(history_mem, <span class="keyword">struct</span> history_entry, NUM_HISTORY_ENTRIES);</div>
+<div class="line"><a name="a1"></a><a class="code" href="a00732.html#ga1e61a00c396ab8bd4141f54772e310ce">LIST</a>(history_table);</div>
+<div class="line"><a name="a2"></a><a class="code" href="a00734.html#gaf31774d02a69fd3f1c2b282454438cba">MEMB</a>(history_mem, <span class="keyword">struct</span> history_entry, NUM_HISTORY_ENTRIES);</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span></div>
 <div class="line">recv_runicast(<span class="keyword">struct</span> runicast_conn *c, <span class="keyword">const</span> linkaddr_t *from, uint8_t seqno)</div>
 <div class="line">{</div>
 <div class="line">  <span class="comment">/* OPTIONAL: Sender history */</span></div>
 <div class="line">  <span class="keyword">struct </span>history_entry *e = NULL;</div>
-<div class="line">  <span class="keywordflow">for</span>(e = <a name="a3"></a><a class="code" href="a00603.html#gacc0723982dcfcc54cfa6ba932ee63051">list_head</a>(history_table); e != NULL; e = e-&gt;next) {</div>
-<div class="line">    <span class="keywordflow">if</span>(<a name="a4"></a><a class="code" href="a00612.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(&amp;e-&gt;addr, from)) {</div>
+<div class="line">  <span class="keywordflow">for</span>(e = <a name="a3"></a><a class="code" href="a00732.html#gacc0723982dcfcc54cfa6ba932ee63051">list_head</a>(history_table); e != NULL; e = e-&gt;next) {</div>
+<div class="line">    <span class="keywordflow">if</span>(<a name="a4"></a><a class="code" href="a00741.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(&amp;e-&gt;addr, from)) {</div>
 <div class="line">      <span class="keywordflow">break</span>;</div>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">if</span>(e == NULL) {</div>
 <div class="line">    <span class="comment">/* Create new history entry */</span></div>
-<div class="line">    e = <a name="a5"></a><a class="code" href="a00605.html#ga9eb12536c921ee25d3886ed9640fe6fe">memb_alloc</a>(&amp;history_mem);</div>
+<div class="line">    e = <a name="a5"></a><a class="code" href="a00734.html#ga9eb12536c921ee25d3886ed9640fe6fe">memb_alloc</a>(&amp;history_mem);</div>
 <div class="line">    <span class="keywordflow">if</span>(e == NULL) {</div>
-<div class="line">      e = <a name="a6"></a><a class="code" href="a00603.html#ga34e6b487c378343356299f048f8011ad">list_chop</a>(history_table); <span class="comment">/* Remove oldest at full history */</span></div>
+<div class="line">      e = <a name="a6"></a><a class="code" href="a00732.html#ga34e6b487c378343356299f048f8011ad">list_chop</a>(history_table); <span class="comment">/* Remove oldest at full history */</span></div>
 <div class="line">    }</div>
-<div class="line">    <a name="a7"></a><a class="code" href="a00612.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;e-&gt;addr, from);</div>
+<div class="line">    <a name="a7"></a><a class="code" href="a00741.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;e-&gt;addr, from);</div>
 <div class="line">    e-&gt;seq = seqno;</div>
-<div class="line">    <a name="a8"></a><a class="code" href="a00603.html#gaaa39517a2e9ec81c34e4740d43ea7150">list_push</a>(history_table, e);</div>
+<div class="line">    <a name="a8"></a><a class="code" href="a00732.html#gaaa39517a2e9ec81c34e4740d43ea7150">list_push</a>(history_table, e);</div>
 <div class="line">  } <span class="keywordflow">else</span> {</div>
 <div class="line">    <span class="comment">/* Detect duplicate callback */</span></div>
 <div class="line">    <span class="keywordflow">if</span>(e-&gt;seq == seqno) {</div>
@@ -159,40 +159,40 @@
 <div class="line">                                                             timedout_runicast};</div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">struct </span>runicast_conn runicast;</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a9"></a><a class="code" href="a00701.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(test_runicast_process, ev, data)</div>
+<div class="line"><a name="a9"></a><a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(test_runicast_process, ev, data)</div>
 <div class="line">{</div>
-<div class="line">  <a name="a10"></a><a class="code" href="a00684.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(runicast_close(&amp;runicast);)</div>
+<div class="line">  <a name="a10"></a><a class="code" href="a00813.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(runicast_close(&amp;runicast);)</div>
 <div class="line"></div>
-<div class="line">  <a name="a11"></a><a class="code" href="a00684.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
+<div class="line">  <a name="a11"></a><a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"></div>
 <div class="line">  runicast_open(&amp;runicast, 144, &amp;runicast_callbacks);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/* OPTIONAL: Sender history */</span></div>
-<div class="line">  <a name="a12"></a><a class="code" href="a00603.html#ga10fe9694aceedc8308cc543b9b95d9c9">list_init</a>(history_table);</div>
-<div class="line">  <a name="a13"></a><a class="code" href="a00605.html#gab8f8dad927b501d8b4ed4340d1bcf4fb">memb_init</a>(&amp;history_mem);</div>
+<div class="line">  <a name="a12"></a><a class="code" href="a00732.html#ga10fe9694aceedc8308cc543b9b95d9c9">list_init</a>(history_table);</div>
+<div class="line">  <a name="a13"></a><a class="code" href="a00734.html#gab8f8dad927b501d8b4ed4340d1bcf4fb">memb_init</a>(&amp;history_mem);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/* Receiver node: do nothing */</span></div>
-<div class="line">  <span class="keywordflow">if</span>(<a name="a14"></a><a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0] == 1 &amp;&amp;</div>
-<div class="line">     <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1] == 0) {</div>
-<div class="line">    <a name="a15"></a><a class="code" href="a00684.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(0);</div>
+<div class="line">  <span class="keywordflow">if</span>(<a name="a14"></a><a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0] == 1 &amp;&amp;</div>
+<div class="line">     <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1] == 0) {</div>
+<div class="line">    <a name="a15"></a><a class="code" href="a00813.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(0);</div>
 <div class="line">  }</div>
 <div class="line"></div>
 <div class="line">  <span class="keywordflow">while</span>(1) {</div>
-<div class="line">    <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a16"></a><a class="code" href="a00056.html">etimer</a> et;</div>
+<div class="line">    <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a16"></a><a class="code" href="a00057.html">etimer</a> et;</div>
 <div class="line"></div>
-<div class="line">    <a name="a17"></a><a class="code" href="a00680.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;et, 10*<a name="a18"></a><a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a>);</div>
-<div class="line">    <a class="code" href="a00684.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(<a name="a19"></a><a class="code" href="a00680.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;et));</div>
+<div class="line">    <a name="a17"></a><a class="code" href="a00809.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;et, 10*<a name="a18"></a><a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a>);</div>
+<div class="line">    <a class="code" href="a00813.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(<a name="a19"></a><a class="code" href="a00809.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;et));</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordflow">if</span>(!runicast_is_transmitting(&amp;runicast)) {</div>
 <div class="line">      linkaddr_t recv;</div>
 <div class="line"></div>
-<div class="line">      <a name="a20"></a><a class="code" href="a00613.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(<span class="stringliteral">&quot;Hello&quot;</span>, 5);</div>
+<div class="line">      <a name="a20"></a><a class="code" href="a00742.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(<span class="stringliteral">&quot;Hello&quot;</span>, 5);</div>
 <div class="line">      recv.u8[0] = 1;</div>
 <div class="line">      recv.u8[1] = 0;</div>
 <div class="line"></div>
 <div class="line">      printf(<span class="stringliteral">&quot;%u.%u: sending runicast to address %u.%u\n&quot;</span>,</div>
-<div class="line">             <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0],</div>
-<div class="line">             <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
+<div class="line">             <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0],</div>
+<div class="line">             <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
 <div class="line">             recv.u8[0],</div>
 <div class="line">             recv.u8[1]);</div>
 <div class="line"></div>
@@ -200,13 +200,13 @@
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line"></div>
-<div class="line">  <a name="a21"></a><a class="code" href="a00684.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line">  <a name="a21"></a><a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:54 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

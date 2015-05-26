@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: SICSLoWMAC Implementation</title>
+<title>Contiki 3.x: Variables used in uIP device drivers</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -37,80 +37,73 @@
   </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">SICSLoWMAC Implementation<div class="ingroups"><a class="el" href="a00788.html">Rf230mac</a></div></div>  </div>
+<div class="title">Variables used in uIP device drivers<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00889.html">The uIP TCP/IP stack</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="macintro"></a>
-1. Introduction</h1>
-<p>The phase1 MAC implemented to support the IPv6/6LoWPAN stack within the Contiki project is a light weight yet adequate beginning. This phase supports point to point data connectivity between a router device and an end device. The router is the RZ USB stick from the ATAVRRZRAVEN kit. The end node is the AVR Raven from the ATAVRRZRAVEN kit. The picture below shows the complete ATAVRRZRAVEN kit. </p><pre class="fragment">\image html raven.png
-</pre><p>The next phases will implement a commissioning concept including scan, and beacon generation. These kinds of primitives will allow dynamic network formation. Additionally, routing and low power/sleep will be implemented in following phases.</p>
-<h1><a class="anchor" id="macprereqs"></a>
-2. Prerequisites</h1>
-<p>See the <a class="el" href="a00758.html">Running Contiki with uIPv6 and SICSlowpan support on Atmel RAVEN hardware</a> for required systems setup configuration.</p>
-<h1><a class="anchor" id="macoverview"></a>
-3. MAC Overview</h1>
-<p>This MAC follows the recommendations of RFC4944 with respect to data frames and acknowledgements (i.e. all data frames are acknowledged). At the time of this writing (phase 1) beacons (frames) and association events are not implemented. Additionally, data frames always carry both source and destination addresses. PANID compression (intra-pan) is not used so both source and destination PANID's are present in the frame.</p>
-<p>The SICSLoWMAC supports the IEEE 802.15.4 Data Request primitive and the Data Request Indication primitive. The data request primitive constructs a <b>proper</b> 802.15.4 frame for transmission over the air while the data indication parses a received frame for processing in higher layers (6LoWPAN). The source code for the mac can be found in the sicslowmac.[c,h] files.</p>
-<p>To assemble a frame a MAC header is constructed with certain presumptions:</p><ol type="1">
-<li>Long source and destination addresses are used.</li>
-<li>A hard coded PANID is used.</li>
-<li>A hard coded channel is used.</li>
-<li>Acknowledgements are used.</li>
-<li>Up to 3 auto retry attempts are used.</li>
-</ol>
-<p>These and other variables are defined in <a class="el" href="a00359.html" title="    MAC driver header file  ">mac.h</a>.</p>
-<p>Given this data and the output of the 6LoWPAN function, the MAC can construct the data frame and the Frame Control Field for transmission.</p>
-<p>An IEEE 802.15.4 MAC data frame consists of the fields shown below: </p><pre class="fragment">\image html dataframe.png
-</pre><p>The Frame Control Field (FCF) consist of the fields shown below: </p><pre class="fragment">\image html fcf.jpg
 
-\note The MAC address of each node is expected to be stored in EEPROM and
-</pre><p> retrieved during the initialization process immediately after power on.</p>
-<h1><a class="anchor" id="macrelationship"></a>
-4. 6LoWPAN, MAC and Radio Relationship</h1>
-<p>The output function of the 6LoWPAN layer (<a class="el" href="a00315.html" title="    6lowpan implementation (RFC4944 and draft-ietf-6lowpan-hc-06) ">sicslowpan.c</a>) is the input function to the MAC (<a class="el" href="a00369.html" title="    MAC interface for packaging radio packets into 802.15.4 frames ">sicslowmac.c</a>). The output function of the MAC is the input function of the radio (radio.c). When the radio receives a frame over the air it processes it in its TRX_END event function. If the frame passes address and CRC filtering it is queued in the MAC event queue. Subsequently, when the MAC task is processed, the received frame is parsed and handed off to the 6LoWPAN layer via its input function. These relationships are depicted below: </p><pre class="fragment">\image html layers.png
-</pre><h1><a class="anchor" id="maccode"></a>
-5. Source Code Location</h1>
-<p>The source code for the MAC, Radio and support functions is located in the path:</p><ul>
-<li>\cpu\avr\radio<ul>
-<li>\rf230</li>
-<li>\mac</li>
-<li>\ieee-manager</li>
-</ul>
-</li>
-</ul>
-<ol type="1">
-<li>The \rf230 folder contains the low level HAL drivers to access and control the radio as well as the low level frame formatting and parsing functions.</li>
-<li>The \mac folder contains the MAC layer code, the generic MAC initialization functions and the defines mentioned in section 3.</li>
-<li>The \ieee-manager folder contains the access functions for various PIB variables and radio functions such as channel setting.</li>
-</ol>
-<p>The source code for the Raven platforms is located in the path:</p><ul>
-<li>\platform<ul>
-<li>\avr-raven</li>
-<li>\avr-ravenlcd</li>
-<li>\avr-ravenusb</li>
-</ul>
-</li>
-</ul>
-<ol type="1">
-<li>The \avr-raven folder contains the source code to initialize and start the raven board.</li>
-<li>The \avr-ravenlcd folder contains the complete source code to initialize and start the ATmega3209P on raven board in a user interface capacity. See the Doxygen generated documentation for more information.</li>
-<li>The \avr-ravenusb folder contains the source code to initialize and start the raven USB stick as a network interface on either Linux or Windows platforms. Note that appropriate drivers are located in the path:<ul>
-<li>\cpu\avr\dev\usb\INF</li>
-</ul>
-</li>
-</ol>
-<h1><a class="anchor" id="macavrstudio"></a>
-6. AVR Studio Project Location</h1>
-<p>There are two projects that utilize the Logo Certified IPv6 and 6LoWPAN layers contributed to the Contiki project by Cisco. These are ping-ipv6and webserver-ipv6 applications. They are located in the following paths:</p><ul>
-<li>\examples\webserver-ipv6 and</li>
-<li>\examples\ping-ipv6</li>
-</ul>
-<p>The ping-ipv6 application will allow the USB stick to ping the Raven board while the webserver-ipv6 application will allow the raven board to serve a web page. When the ravenlcd-3290 application is programmed into the ATmega3290P on the Raven board, the Raven board can ping the USB stick and it can periodically update the temperature in the appropriate web page when served. </p>
+<p>uIP has a few global variables that are used in device drivers for uIP.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ga96b8904e098e8f1f896379732f1996be"><td class="memItemLeft" align="right" valign="top">CCIF uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00755.html#ga96b8904e098e8f1f896379732f1996be">uip_len</a></td></tr>
+<tr class="memdesc:ga96b8904e098e8f1f896379732f1996be"><td class="mdescLeft">&#160;</td><td class="mdescRight">The length of the packet in the uip_buf buffer.  <a href="#ga96b8904e098e8f1f896379732f1996be">More...</a><br /></td></tr>
+<tr class="separator:ga96b8904e098e8f1f896379732f1996be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0c63b80e0f8038403df5fee2bac3aab8"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00755.html#ga0c63b80e0f8038403df5fee2bac3aab8">uip_ext_len</a></td></tr>
+<tr class="memdesc:ga0c63b80e0f8038403df5fee2bac3aab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The length of the extension headers.  <a href="#ga0c63b80e0f8038403df5fee2bac3aab8">More...</a><br /></td></tr>
+<tr class="separator:ga0c63b80e0f8038403df5fee2bac3aab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>uIP has a few global variables that are used in device drivers for uIP. </p>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="ga0c63b80e0f8038403df5fee2bac3aab8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t uip_ext_len</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The length of the extension headers. </p>
+<p>The length of the extension headers.</p>
+<p>updated each time we process a header </p>
+
+<p>Definition at line <a class="el" href="a00332_source.html#l00143">143</a> of file <a class="el" href="a00332_source.html">uip6.c</a>.</p>
+
+<p>Referenced by <a class="el" href="a00249_source.html#l00529">tcpip_input()</a>, <a class="el" href="a00249_source.html#l00540">tcpip_ipv6_output()</a>, <a class="el" href="a00328_source.html#l00208">uip_icmp6_error_output()</a>, and <a class="el" href="a00330_source.html#l00332">uip_nd6_ns_output()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga96b8904e098e8f1f896379732f1996be"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CCIF uint16_t uip_len</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The length of the packet in the uip_buf buffer. </p>
+<p>The global variable uip_len holds the length of the packet in the uip_buf buffer.</p>
+<p>When the network device driver calls the uIP input function, uip_len should be set to the length of the packet in the uip_buf buffer.</p>
+<p>When sending packets, the device driver should use the contents of the uip_len variable to determine the length of the outgoing packet. </p>
+
+<p>Definition at line <a class="el" href="a00307_source.html#l00136">136</a> of file <a class="el" href="a00307_source.html">uip.c</a>.</p>
+
+<p>Referenced by <a class="el" href="a00330_source.html#l00815">ra_input()</a>, <a class="el" href="a00245_source.html#l00095">slipdev_send()</a>, <a class="el" href="a00249_source.html#l00529">tcpip_input()</a>, <a class="el" href="a00249_source.html#l00540">tcpip_ipv6_output()</a>, <a class="el" href="a00308_source.html#l00283">uip_arp_arpin()</a>, <a class="el" href="a00308_source.html#l00363">uip_arp_out()</a>, <a class="el" href="a00326_source.html#l00145">uip_ds6_periodic()</a>, <a class="el" href="a00301_source.html#l00403">uip_fw_forward()</a>, <a class="el" href="a00301_source.html#l00354">uip_fw_output()</a>, <a class="el" href="a00328_source.html#l00208">uip_icmp6_error_output()</a>, <a class="el" href="a00328_source.html#l00295">uip_icmp6_send()</a>, <a class="el" href="a00330_source.html#l00332">uip_nd6_ns_output()</a>, <a class="el" href="a00330_source.html#l00768">uip_nd6_rs_output()</a>, <a class="el" href="a00307_source.html#l00666">uip_process()</a>, and <a class="el" href="a00260_source.html#l00054">uip_split_output()</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/dev/soc-adc.h File Reference</title>
+<title>Contiki 3.x: cpu/cc2538/dev/rfcore-ffsm.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,230 +48,210 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">soc-adc.h File Reference<div class="ingroups"><a class="el" href="a00692.html">Contiki platforms</a> &raquo; <a class="el" href="a00693.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00690.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00716.html">cc2538 ADC and RNG</a></div></div>  </div>
+<div class="title">rfcore-ffsm.h File Reference<div class="ingroups"><a class="el" href="a00821.html">Contiki platforms</a> &raquo; <a class="el" href="a00822.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00819.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00841.html">cc2538 RF Core</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header file with register declarations for the cc2538 ADC and H/W RNG.  
+<p>Header with declarations of the RF Core FFSM registers.  
 <a href="#details">More...</a></p>
 
 <p><a href="a00527_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">ADC and RNG Register offset declarations</div></td></tr>
-<tr class="memitem:gaec223d6ae6e9baf21756a19a5e56ac18"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaec223d6ae6e9baf21756a19a5e56ac18"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gaec223d6ae6e9baf21756a19a5e56ac18">SOC_ADC_ADCCON1</a>&#160;&#160;&#160;0x400D7000</td></tr>
-<tr class="memdesc:gaec223d6ae6e9baf21756a19a5e56ac18"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC Control 1. <br /></td></tr>
-<tr class="separator:gaec223d6ae6e9baf21756a19a5e56ac18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga484c04856d450bfcce526f12fa9e5954"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga484c04856d450bfcce526f12fa9e5954"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga484c04856d450bfcce526f12fa9e5954">SOC_ADC_ADCCON2</a>&#160;&#160;&#160;0x400D7004</td></tr>
-<tr class="memdesc:ga484c04856d450bfcce526f12fa9e5954"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC Control 2. <br /></td></tr>
-<tr class="separator:ga484c04856d450bfcce526f12fa9e5954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf65a07a4ba7c5d39f4b49818442c75be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf65a07a4ba7c5d39f4b49818442c75be"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gaf65a07a4ba7c5d39f4b49818442c75be">SOC_ADC_ADCCON3</a>&#160;&#160;&#160;0x400D7008</td></tr>
-<tr class="memdesc:gaf65a07a4ba7c5d39f4b49818442c75be"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC Control 3. <br /></td></tr>
-<tr class="separator:gaf65a07a4ba7c5d39f4b49818442c75be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga62f4fb33bf88d010f161905893a2d81d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga62f4fb33bf88d010f161905893a2d81d"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga62f4fb33bf88d010f161905893a2d81d">SOC_ADC_ADCL</a>&#160;&#160;&#160;0x400D700C</td></tr>
-<tr class="memdesc:ga62f4fb33bf88d010f161905893a2d81d"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC Result, least significant part. <br /></td></tr>
-<tr class="separator:ga62f4fb33bf88d010f161905893a2d81d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga02b5dc57b9696acc0b7a8465eb9b5029"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga02b5dc57b9696acc0b7a8465eb9b5029"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga02b5dc57b9696acc0b7a8465eb9b5029">SOC_ADC_ADCH</a>&#160;&#160;&#160;0x400D7010</td></tr>
-<tr class="memdesc:ga02b5dc57b9696acc0b7a8465eb9b5029"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC Result, most significant part. <br /></td></tr>
-<tr class="separator:ga02b5dc57b9696acc0b7a8465eb9b5029"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga490b4286236790aa8cf8fb0eb72375ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga490b4286236790aa8cf8fb0eb72375ff"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga490b4286236790aa8cf8fb0eb72375ff">SOC_ADC_RNDL</a>&#160;&#160;&#160;0x400D7014</td></tr>
-<tr class="memdesc:ga490b4286236790aa8cf8fb0eb72375ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">RNG low byte. <br /></td></tr>
-<tr class="separator:ga490b4286236790aa8cf8fb0eb72375ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga76e935b97285d0dacff26e56eb0377fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga76e935b97285d0dacff26e56eb0377fd"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga76e935b97285d0dacff26e56eb0377fd">SOC_ADC_RNDH</a>&#160;&#160;&#160;0x400D7018</td></tr>
-<tr class="memdesc:ga76e935b97285d0dacff26e56eb0377fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">RNG high byte. <br /></td></tr>
-<tr class="separator:ga76e935b97285d0dacff26e56eb0377fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga771f98bd6e4ced5f4e5c6cca4935483c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga771f98bd6e4ced5f4e5c6cca4935483c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga771f98bd6e4ced5f4e5c6cca4935483c">SOC_ADC_CMPCTL</a>&#160;&#160;&#160;0x400D7024</td></tr>
-<tr class="memdesc:ga771f98bd6e4ced5f4e5c6cca4935483c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analog comparator control and status. <br /></td></tr>
-<tr class="separator:ga771f98bd6e4ced5f4e5c6cca4935483c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">SOC_ADC_ADCCON1 register bit masks</div></td></tr>
-<tr class="memitem:ga159dc788785de863e00d298c1d18234c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga159dc788785de863e00d298c1d18234c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga159dc788785de863e00d298c1d18234c">SOC_ADC_ADCCON1_EOC</a>&#160;&#160;&#160;0x00000080</td></tr>
-<tr class="memdesc:ga159dc788785de863e00d298c1d18234c"><td class="mdescLeft">&#160;</td><td class="mdescRight">End of conversion. <br /></td></tr>
-<tr class="separator:ga159dc788785de863e00d298c1d18234c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaeb4fef872911f4a049a2cbdd2dbe80de"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaeb4fef872911f4a049a2cbdd2dbe80de"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gaeb4fef872911f4a049a2cbdd2dbe80de">SOC_ADC_ADCCON1_ST</a>&#160;&#160;&#160;0x00000040</td></tr>
-<tr class="memdesc:gaeb4fef872911f4a049a2cbdd2dbe80de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start conversion. <br /></td></tr>
-<tr class="separator:gaeb4fef872911f4a049a2cbdd2dbe80de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadfb38f10dc2ec827bd43d8b460677ad5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadfb38f10dc2ec827bd43d8b460677ad5"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gadfb38f10dc2ec827bd43d8b460677ad5">SOC_ADC_ADCCON1_STSEL</a>&#160;&#160;&#160;0x00000030</td></tr>
-<tr class="memdesc:gadfb38f10dc2ec827bd43d8b460677ad5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start select. <br /></td></tr>
-<tr class="separator:gadfb38f10dc2ec827bd43d8b460677ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga66753e51962cb2a906b56ee5822e6d37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga66753e51962cb2a906b56ee5822e6d37"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga66753e51962cb2a906b56ee5822e6d37">SOC_ADC_ADCCON1_RCTRL</a>&#160;&#160;&#160;0x0000000C</td></tr>
-<tr class="memdesc:ga66753e51962cb2a906b56ee5822e6d37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controls the 16-bit RNG. <br /></td></tr>
-<tr class="separator:ga66753e51962cb2a906b56ee5822e6d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga53fdeed168498a76897b8302f0b658eb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga53fdeed168498a76897b8302f0b658eb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga53fdeed168498a76897b8302f0b658eb">SOC_ADC_ADCCON1_RCTRL1</a>&#160;&#160;&#160;0x00000008</td></tr>
-<tr class="memdesc:ga53fdeed168498a76897b8302f0b658eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">RCTRL high bit. <br /></td></tr>
-<tr class="separator:ga53fdeed168498a76897b8302f0b658eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga830dae3aa8c1f50b8d332b9e68cea0b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga830dae3aa8c1f50b8d332b9e68cea0b9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga830dae3aa8c1f50b8d332b9e68cea0b9">SOC_ADC_ADCCON1_RCTRL0</a>&#160;&#160;&#160;0x00000004</td></tr>
-<tr class="memdesc:ga830dae3aa8c1f50b8d332b9e68cea0b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">RCTRL low bit. <br /></td></tr>
-<tr class="separator:ga830dae3aa8c1f50b8d332b9e68cea0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">SOC_ADC_ADCCON2 register bit masks</div></td></tr>
-<tr class="memitem:ga8efdd6d59042658ecd43ec95ef4921f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8efdd6d59042658ecd43ec95ef4921f0"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga8efdd6d59042658ecd43ec95ef4921f0">SOC_ADC_ADCCON2_SREF</a>&#160;&#160;&#160;0x000000C0</td></tr>
-<tr class="memdesc:ga8efdd6d59042658ecd43ec95ef4921f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference voltage for sequence. <br /></td></tr>
-<tr class="separator:ga8efdd6d59042658ecd43ec95ef4921f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7b1cfc1d32263b121842039321c00a89"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7b1cfc1d32263b121842039321c00a89"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga7b1cfc1d32263b121842039321c00a89">SOC_ADC_ADCCON2_SDIV</a>&#160;&#160;&#160;0x00000030</td></tr>
-<tr class="memdesc:ga7b1cfc1d32263b121842039321c00a89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decimation rate for sequence. <br /></td></tr>
-<tr class="separator:ga7b1cfc1d32263b121842039321c00a89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4b0039839be5d643c70787acd3bc65dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4b0039839be5d643c70787acd3bc65dc"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga4b0039839be5d643c70787acd3bc65dc">SOC_ADC_ADCCON2_SCH</a>&#160;&#160;&#160;0x0000000F</td></tr>
-<tr class="memdesc:ga4b0039839be5d643c70787acd3bc65dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence channel select. <br /></td></tr>
-<tr class="separator:ga4b0039839be5d643c70787acd3bc65dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">SOC_ADC_ADCCON3 register bit masks</div></td></tr>
-<tr class="memitem:ga8622110f4312bd12718d9969714501e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8622110f4312bd12718d9969714501e8"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga8622110f4312bd12718d9969714501e8">SOC_ADC_ADCCON3_EREF</a>&#160;&#160;&#160;0x000000C0</td></tr>
-<tr class="memdesc:ga8622110f4312bd12718d9969714501e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference voltage for extra. <br /></td></tr>
-<tr class="separator:ga8622110f4312bd12718d9969714501e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga42e5f0ec3853fd35e1634a9ed35a5261"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga42e5f0ec3853fd35e1634a9ed35a5261"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga42e5f0ec3853fd35e1634a9ed35a5261">SOC_ADC_ADCCON3_EDIV</a>&#160;&#160;&#160;0x00000030</td></tr>
-<tr class="memdesc:ga42e5f0ec3853fd35e1634a9ed35a5261"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decimation rate for extra. <br /></td></tr>
-<tr class="separator:ga42e5f0ec3853fd35e1634a9ed35a5261"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf590cfa9e75fa59ca7f58d06a6008d51"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf590cfa9e75fa59ca7f58d06a6008d51"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gaf590cfa9e75fa59ca7f58d06a6008d51">SOC_ADC_ADCCON3_ECH</a>&#160;&#160;&#160;0x0000000F</td></tr>
-<tr class="memdesc:gaf590cfa9e75fa59ca7f58d06a6008d51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single channel select. <br /></td></tr>
-<tr class="separator:gaf590cfa9e75fa59ca7f58d06a6008d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">SOC_ADC_ADCCONx registers field values</div></td></tr>
-<tr class="memitem:gade32bf78618153c5534e901355ef0b2d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gade32bf78618153c5534e901355ef0b2d"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gade32bf78618153c5534e901355ef0b2d">SOC_ADC_ADCCON_REF_INT</a>&#160;&#160;&#160;(0 &lt;&lt; 6)</td></tr>
-<tr class="memdesc:gade32bf78618153c5534e901355ef0b2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal reference. <br /></td></tr>
-<tr class="separator:gade32bf78618153c5534e901355ef0b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga598fe6e4f370cca314d426218bae91bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga598fe6e4f370cca314d426218bae91bf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga598fe6e4f370cca314d426218bae91bf">SOC_ADC_ADCCON_REF_EXT_SINGLE</a>&#160;&#160;&#160;(1 &lt;&lt; 6)</td></tr>
-<tr class="memdesc:ga598fe6e4f370cca314d426218bae91bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">External reference on AIN7 pin. <br /></td></tr>
-<tr class="separator:ga598fe6e4f370cca314d426218bae91bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad0642cf65eb3c3b517004831e9640e0f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad0642cf65eb3c3b517004831e9640e0f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gad0642cf65eb3c3b517004831e9640e0f">SOC_ADC_ADCCON_REF_AVDD5</a>&#160;&#160;&#160;(2 &lt;&lt; 6)</td></tr>
-<tr class="memdesc:gad0642cf65eb3c3b517004831e9640e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">AVDD5 pin. <br /></td></tr>
-<tr class="separator:gad0642cf65eb3c3b517004831e9640e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0a38be3ab7a82e8659f51729ea6085cf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0a38be3ab7a82e8659f51729ea6085cf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga0a38be3ab7a82e8659f51729ea6085cf">SOC_ADC_ADCCON_REF_EXT_DIFF</a>&#160;&#160;&#160;(3 &lt;&lt; 6)</td></tr>
-<tr class="memdesc:ga0a38be3ab7a82e8659f51729ea6085cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">External reference on AIN6-AIN7 differential input. <br /></td></tr>
-<tr class="separator:ga0a38be3ab7a82e8659f51729ea6085cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4f6bea4591ee8721f4fb31a34b2cdd54"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4f6bea4591ee8721f4fb31a34b2cdd54"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga4f6bea4591ee8721f4fb31a34b2cdd54">SOC_ADC_ADCCON_DIV_64</a>&#160;&#160;&#160;(0 &lt;&lt; 4)</td></tr>
-<tr class="memdesc:ga4f6bea4591ee8721f4fb31a34b2cdd54"><td class="mdescLeft">&#160;</td><td class="mdescRight">64 decimation rate (7 bits ENOB) <br /></td></tr>
-<tr class="separator:ga4f6bea4591ee8721f4fb31a34b2cdd54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacb8c06f0b6145457ec5179cdff017062"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacb8c06f0b6145457ec5179cdff017062"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gacb8c06f0b6145457ec5179cdff017062">SOC_ADC_ADCCON_DIV_128</a>&#160;&#160;&#160;(1 &lt;&lt; 4)</td></tr>
-<tr class="memdesc:gacb8c06f0b6145457ec5179cdff017062"><td class="mdescLeft">&#160;</td><td class="mdescRight">128 decimation rate (9 bits ENOB) <br /></td></tr>
-<tr class="separator:gacb8c06f0b6145457ec5179cdff017062"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4a5b25e817eeedb28be6ec369834855b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4a5b25e817eeedb28be6ec369834855b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga4a5b25e817eeedb28be6ec369834855b">SOC_ADC_ADCCON_DIV_256</a>&#160;&#160;&#160;(2 &lt;&lt; 4)</td></tr>
-<tr class="memdesc:ga4a5b25e817eeedb28be6ec369834855b"><td class="mdescLeft">&#160;</td><td class="mdescRight">256 decimation rate (10 bits ENOB) <br /></td></tr>
-<tr class="separator:ga4a5b25e817eeedb28be6ec369834855b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacf04de44f50b961d49067912d8d30f48"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacf04de44f50b961d49067912d8d30f48"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gacf04de44f50b961d49067912d8d30f48">SOC_ADC_ADCCON_DIV_512</a>&#160;&#160;&#160;(3 &lt;&lt; 4)</td></tr>
-<tr class="memdesc:gacf04de44f50b961d49067912d8d30f48"><td class="mdescLeft">&#160;</td><td class="mdescRight">512 decimation rate (12 bits ENOB) <br /></td></tr>
-<tr class="separator:gacf04de44f50b961d49067912d8d30f48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafe102a005b582b9857480004c03f1f49"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafe102a005b582b9857480004c03f1f49"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gafe102a005b582b9857480004c03f1f49">SOC_ADC_ADCCON_CH_AIN0</a>&#160;&#160;&#160;0x0</td></tr>
-<tr class="memdesc:gafe102a005b582b9857480004c03f1f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN0. <br /></td></tr>
-<tr class="separator:gafe102a005b582b9857480004c03f1f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab4095dbaa306828d1c498cd94a46964a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab4095dbaa306828d1c498cd94a46964a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gab4095dbaa306828d1c498cd94a46964a">SOC_ADC_ADCCON_CH_AIN1</a>&#160;&#160;&#160;0x1</td></tr>
-<tr class="memdesc:gab4095dbaa306828d1c498cd94a46964a"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN1. <br /></td></tr>
-<tr class="separator:gab4095dbaa306828d1c498cd94a46964a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaca4e9bf5a6cc6f7aaa971f3d7bc68b2d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaca4e9bf5a6cc6f7aaa971f3d7bc68b2d"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gaca4e9bf5a6cc6f7aaa971f3d7bc68b2d">SOC_ADC_ADCCON_CH_AIN2</a>&#160;&#160;&#160;0x2</td></tr>
-<tr class="memdesc:gaca4e9bf5a6cc6f7aaa971f3d7bc68b2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN2. <br /></td></tr>
-<tr class="separator:gaca4e9bf5a6cc6f7aaa971f3d7bc68b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga62ee3a575b0a6d490cbf56ea0d77d8ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga62ee3a575b0a6d490cbf56ea0d77d8ee"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga62ee3a575b0a6d490cbf56ea0d77d8ee">SOC_ADC_ADCCON_CH_AIN3</a>&#160;&#160;&#160;0x3</td></tr>
-<tr class="memdesc:ga62ee3a575b0a6d490cbf56ea0d77d8ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN3. <br /></td></tr>
-<tr class="separator:ga62ee3a575b0a6d490cbf56ea0d77d8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacf6b1254213e5385d8d39f6cccfe1414"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacf6b1254213e5385d8d39f6cccfe1414"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gacf6b1254213e5385d8d39f6cccfe1414">SOC_ADC_ADCCON_CH_AIN4</a>&#160;&#160;&#160;0x4</td></tr>
-<tr class="memdesc:gacf6b1254213e5385d8d39f6cccfe1414"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN4. <br /></td></tr>
-<tr class="separator:gacf6b1254213e5385d8d39f6cccfe1414"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga31de5c511016fe86d7a9a096a88f3b6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga31de5c511016fe86d7a9a096a88f3b6a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga31de5c511016fe86d7a9a096a88f3b6a">SOC_ADC_ADCCON_CH_AIN5</a>&#160;&#160;&#160;0x5</td></tr>
-<tr class="memdesc:ga31de5c511016fe86d7a9a096a88f3b6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN5. <br /></td></tr>
-<tr class="separator:ga31de5c511016fe86d7a9a096a88f3b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad35d437f4c3c4cbbdb7fc4b6bcc6c2ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad35d437f4c3c4cbbdb7fc4b6bcc6c2ec"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gad35d437f4c3c4cbbdb7fc4b6bcc6c2ec">SOC_ADC_ADCCON_CH_AIN6</a>&#160;&#160;&#160;0x6</td></tr>
-<tr class="memdesc:gad35d437f4c3c4cbbdb7fc4b6bcc6c2ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN6. <br /></td></tr>
-<tr class="separator:gad35d437f4c3c4cbbdb7fc4b6bcc6c2ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab3550d6acaf5f8a2bb96c2d58f356f27"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab3550d6acaf5f8a2bb96c2d58f356f27"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gab3550d6acaf5f8a2bb96c2d58f356f27">SOC_ADC_ADCCON_CH_AIN7</a>&#160;&#160;&#160;0x7</td></tr>
-<tr class="memdesc:gab3550d6acaf5f8a2bb96c2d58f356f27"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN7. <br /></td></tr>
-<tr class="separator:gab3550d6acaf5f8a2bb96c2d58f356f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga17caeccf1fc06cfc75a62b334af55562"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga17caeccf1fc06cfc75a62b334af55562"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga17caeccf1fc06cfc75a62b334af55562">SOC_ADC_ADCCON_CH_AIN0_AIN1</a>&#160;&#160;&#160;0x8</td></tr>
-<tr class="memdesc:ga17caeccf1fc06cfc75a62b334af55562"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN0-AIN1. <br /></td></tr>
-<tr class="separator:ga17caeccf1fc06cfc75a62b334af55562"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3aa43d264aca45b622ff0635aa6a7300"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3aa43d264aca45b622ff0635aa6a7300"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga3aa43d264aca45b622ff0635aa6a7300">SOC_ADC_ADCCON_CH_AIN2_AIN3</a>&#160;&#160;&#160;0x9</td></tr>
-<tr class="memdesc:ga3aa43d264aca45b622ff0635aa6a7300"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN2-AIN3. <br /></td></tr>
-<tr class="separator:ga3aa43d264aca45b622ff0635aa6a7300"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga45b93f9325210082933adb1f446b279b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga45b93f9325210082933adb1f446b279b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga45b93f9325210082933adb1f446b279b">SOC_ADC_ADCCON_CH_AIN4_AIN5</a>&#160;&#160;&#160;0xA</td></tr>
-<tr class="memdesc:ga45b93f9325210082933adb1f446b279b"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN4-AIN5. <br /></td></tr>
-<tr class="separator:ga45b93f9325210082933adb1f446b279b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga200d65b7135afa2605ae2df41191ad74"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga200d65b7135afa2605ae2df41191ad74"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga200d65b7135afa2605ae2df41191ad74">SOC_ADC_ADCCON_CH_AIN6_AIN7</a>&#160;&#160;&#160;0xB</td></tr>
-<tr class="memdesc:ga200d65b7135afa2605ae2df41191ad74"><td class="mdescLeft">&#160;</td><td class="mdescRight">AIN6-AIN7. <br /></td></tr>
-<tr class="separator:ga200d65b7135afa2605ae2df41191ad74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa0baac2a8ee167e7a7da0d8dbbda21fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa0baac2a8ee167e7a7da0d8dbbda21fb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gaa0baac2a8ee167e7a7da0d8dbbda21fb">SOC_ADC_ADCCON_CH_GND</a>&#160;&#160;&#160;0xC</td></tr>
-<tr class="memdesc:gaa0baac2a8ee167e7a7da0d8dbbda21fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">GND. <br /></td></tr>
-<tr class="separator:gaa0baac2a8ee167e7a7da0d8dbbda21fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2e0279dce8cdb5ef14c23567e8c4b2f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2e0279dce8cdb5ef14c23567e8c4b2f4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga2e0279dce8cdb5ef14c23567e8c4b2f4">SOC_ADC_ADCCON_CH_TEMP</a>&#160;&#160;&#160;0xE</td></tr>
-<tr class="memdesc:ga2e0279dce8cdb5ef14c23567e8c4b2f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temperature sensor. <br /></td></tr>
-<tr class="separator:ga2e0279dce8cdb5ef14c23567e8c4b2f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6b5e729890f623c5b036cdeb5f85a560"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6b5e729890f623c5b036cdeb5f85a560"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga6b5e729890f623c5b036cdeb5f85a560">SOC_ADC_ADCCON_CH_VDD_3</a>&#160;&#160;&#160;0xF</td></tr>
-<tr class="memdesc:ga6b5e729890f623c5b036cdeb5f85a560"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/3. <br /></td></tr>
-<tr class="separator:ga6b5e729890f623c5b036cdeb5f85a560"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">SOC_ADC_ADC[L:H] register bit masks</div></td></tr>
-<tr class="memitem:ga91537d799b772fe0b954e80d20cad756"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga91537d799b772fe0b954e80d20cad756"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga91537d799b772fe0b954e80d20cad756">SOC_ADC_ADCL_ADC</a>&#160;&#160;&#160;0x000000FC</td></tr>
-<tr class="memdesc:ga91537d799b772fe0b954e80d20cad756"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC Result, least significant part. <br /></td></tr>
-<tr class="separator:ga91537d799b772fe0b954e80d20cad756"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaec5be4df9f39543bd51d7892d9f73718"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaec5be4df9f39543bd51d7892d9f73718"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gaec5be4df9f39543bd51d7892d9f73718">SOC_ADC_ADCH_ADC</a>&#160;&#160;&#160;0x000000FF</td></tr>
-<tr class="memdesc:gaec5be4df9f39543bd51d7892d9f73718"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC Result, most significant part. <br /></td></tr>
-<tr class="separator:gaec5be4df9f39543bd51d7892d9f73718"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">SOC_ADC_RND[L:H] register bit masks</div></td></tr>
-<tr class="memitem:ga30685f1bfd29061c009f6f443fa3da27"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga30685f1bfd29061c009f6f443fa3da27"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga30685f1bfd29061c009f6f443fa3da27">SOC_ADC_RNDL_RNDL</a>&#160;&#160;&#160;0x000000FF</td></tr>
-<tr class="memdesc:ga30685f1bfd29061c009f6f443fa3da27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random value/seed or CRC result low byte. <br /></td></tr>
-<tr class="separator:ga30685f1bfd29061c009f6f443fa3da27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa7364b25148bee79dd0a801444d97f90"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa7364b25148bee79dd0a801444d97f90"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gaa7364b25148bee79dd0a801444d97f90">SOC_ADC_RNDH_RNDH</a>&#160;&#160;&#160;0x000000FF</td></tr>
-<tr class="memdesc:gaa7364b25148bee79dd0a801444d97f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random value or CRC result/input data, high byte. <br /></td></tr>
-<tr class="separator:gaa7364b25148bee79dd0a801444d97f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">SOC_ADC_CMPCTL register bit masks</div></td></tr>
-<tr class="memitem:gaf6627c49144939ed8ec97f0ae106afaf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf6627c49144939ed8ec97f0ae106afaf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#gaf6627c49144939ed8ec97f0ae106afaf">SOC_ADC_CMPCTL_EN</a>&#160;&#160;&#160;0x00000002</td></tr>
-<tr class="memdesc:gaf6627c49144939ed8ec97f0ae106afaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Comparator enable. <br /></td></tr>
-<tr class="separator:gaf6627c49144939ed8ec97f0ae106afaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga01471fd97b7612e475bf397112393e7f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga01471fd97b7612e475bf397112393e7f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00716.html#ga01471fd97b7612e475bf397112393e7f">SOC_ADC_CMPCTL_OUTPUT</a>&#160;&#160;&#160;0x00000001</td></tr>
-<tr class="memdesc:ga01471fd97b7612e475bf397112393e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Comparator output. <br /></td></tr>
-<tr class="separator:ga01471fd97b7612e475bf397112393e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">RFCORE_FFSM register offsets</div></td></tr>
+<tr class="memitem:gae6d9f21b530afc737850344ac90359f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae6d9f21b530afc737850344ac90359f6"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gae6d9f21b530afc737850344ac90359f6">RFCORE_FFSM_SRCRESMASK0</a>&#160;&#160;&#160;0x40088580</td></tr>
+<tr class="memdesc:gae6d9f21b530afc737850344ac90359f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Src addr matching result. <br /></td></tr>
+<tr class="separator:gae6d9f21b530afc737850344ac90359f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae9ada8d56f23316ad544eee4e98f718a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae9ada8d56f23316ad544eee4e98f718a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gae9ada8d56f23316ad544eee4e98f718a">RFCORE_FFSM_SRCRESMASK1</a>&#160;&#160;&#160;0x40088584</td></tr>
+<tr class="memdesc:gae9ada8d56f23316ad544eee4e98f718a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Src addr matching result. <br /></td></tr>
+<tr class="separator:gae9ada8d56f23316ad544eee4e98f718a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0dc8f6742f4e90a155a1d310ed6323e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0dc8f6742f4e90a155a1d310ed6323e3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga0dc8f6742f4e90a155a1d310ed6323e3">RFCORE_FFSM_SRCRESMASK2</a>&#160;&#160;&#160;0x40088588</td></tr>
+<tr class="memdesc:ga0dc8f6742f4e90a155a1d310ed6323e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Src addr matching result. <br /></td></tr>
+<tr class="separator:ga0dc8f6742f4e90a155a1d310ed6323e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6187372f763e739b82af436fe74c4cbd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6187372f763e739b82af436fe74c4cbd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga6187372f763e739b82af436fe74c4cbd">RFCORE_FFSM_SRCRESINDEX</a>&#160;&#160;&#160;0x4008858C</td></tr>
+<tr class="memdesc:ga6187372f763e739b82af436fe74c4cbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Src addr matching result. <br /></td></tr>
+<tr class="separator:ga6187372f763e739b82af436fe74c4cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga88b3a2120c54cab0e525162d6db49342"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga88b3a2120c54cab0e525162d6db49342"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga88b3a2120c54cab0e525162d6db49342">RFCORE_FFSM_SRCEXTPENDEN0</a>&#160;&#160;&#160;0x40088590</td></tr>
+<tr class="memdesc:ga88b3a2120c54cab0e525162d6db49342"><td class="mdescLeft">&#160;</td><td class="mdescRight">Src addr matching control. <br /></td></tr>
+<tr class="separator:ga88b3a2120c54cab0e525162d6db49342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa45b7874212ae416d7f4b8213008c4c2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa45b7874212ae416d7f4b8213008c4c2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gaa45b7874212ae416d7f4b8213008c4c2">RFCORE_FFSM_SRCEXTPENDEN1</a>&#160;&#160;&#160;0x40088594</td></tr>
+<tr class="memdesc:gaa45b7874212ae416d7f4b8213008c4c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Src addr matching control. <br /></td></tr>
+<tr class="separator:gaa45b7874212ae416d7f4b8213008c4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga10eea7053ccde8b1dd1cb5e646a30e1e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga10eea7053ccde8b1dd1cb5e646a30e1e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga10eea7053ccde8b1dd1cb5e646a30e1e">RFCORE_FFSM_SRCEXTPENDEN2</a>&#160;&#160;&#160;0x40088598</td></tr>
+<tr class="memdesc:ga10eea7053ccde8b1dd1cb5e646a30e1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Src addr matching control. <br /></td></tr>
+<tr class="separator:ga10eea7053ccde8b1dd1cb5e646a30e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2f1d431346c21961e8b7472cd4347149"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2f1d431346c21961e8b7472cd4347149"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga2f1d431346c21961e8b7472cd4347149">RFCORE_FFSM_SRCSHORTPENDEN0</a>&#160;&#160;&#160;0x4008859C</td></tr>
+<tr class="memdesc:ga2f1d431346c21961e8b7472cd4347149"><td class="mdescLeft">&#160;</td><td class="mdescRight">Src addr matching control. <br /></td></tr>
+<tr class="separator:ga2f1d431346c21961e8b7472cd4347149"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadecd8a612b69cf166b3fcf7b131b14e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadecd8a612b69cf166b3fcf7b131b14e5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gadecd8a612b69cf166b3fcf7b131b14e5">RFCORE_FFSM_SRCSHORTPENDEN1</a>&#160;&#160;&#160;0x400885A0</td></tr>
+<tr class="memdesc:gadecd8a612b69cf166b3fcf7b131b14e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Src addr matching control. <br /></td></tr>
+<tr class="separator:gadecd8a612b69cf166b3fcf7b131b14e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7f115276124678123618454fee32fca4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7f115276124678123618454fee32fca4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga7f115276124678123618454fee32fca4">RFCORE_FFSM_SRCSHORTPENDEN2</a>&#160;&#160;&#160;0x400885A4</td></tr>
+<tr class="memdesc:ga7f115276124678123618454fee32fca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Src addr matching control. <br /></td></tr>
+<tr class="separator:ga7f115276124678123618454fee32fca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga737923cafe8c3d374e3ee01bfdf57f26"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga737923cafe8c3d374e3ee01bfdf57f26"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga737923cafe8c3d374e3ee01bfdf57f26">RFCORE_FFSM_EXT_ADDR0</a>&#160;&#160;&#160;0x400885A8</td></tr>
+<tr class="memdesc:ga737923cafe8c3d374e3ee01bfdf57f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:ga737923cafe8c3d374e3ee01bfdf57f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga11f8c7315ab2035371e30a0214af115c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga11f8c7315ab2035371e30a0214af115c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga11f8c7315ab2035371e30a0214af115c">RFCORE_FFSM_EXT_ADDR1</a>&#160;&#160;&#160;0x400885AC</td></tr>
+<tr class="memdesc:ga11f8c7315ab2035371e30a0214af115c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:ga11f8c7315ab2035371e30a0214af115c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4388fb0aef8ff6742d371b5fa879ff71"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4388fb0aef8ff6742d371b5fa879ff71"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga4388fb0aef8ff6742d371b5fa879ff71">RFCORE_FFSM_EXT_ADDR2</a>&#160;&#160;&#160;0x400885B0</td></tr>
+<tr class="memdesc:ga4388fb0aef8ff6742d371b5fa879ff71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:ga4388fb0aef8ff6742d371b5fa879ff71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ad5a7db6b555955dcdd8f075770d3f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8ad5a7db6b555955dcdd8f075770d3f1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga8ad5a7db6b555955dcdd8f075770d3f1">RFCORE_FFSM_EXT_ADDR3</a>&#160;&#160;&#160;0x400885B4</td></tr>
+<tr class="memdesc:ga8ad5a7db6b555955dcdd8f075770d3f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:ga8ad5a7db6b555955dcdd8f075770d3f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga17c60f9eca7ff19bd5457a566b5eef7d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga17c60f9eca7ff19bd5457a566b5eef7d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga17c60f9eca7ff19bd5457a566b5eef7d">RFCORE_FFSM_EXT_ADDR4</a>&#160;&#160;&#160;0x400885B8</td></tr>
+<tr class="memdesc:ga17c60f9eca7ff19bd5457a566b5eef7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:ga17c60f9eca7ff19bd5457a566b5eef7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6e721bc00d2f0e02774598fe4b9db74c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6e721bc00d2f0e02774598fe4b9db74c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga6e721bc00d2f0e02774598fe4b9db74c">RFCORE_FFSM_EXT_ADDR5</a>&#160;&#160;&#160;0x400885BC</td></tr>
+<tr class="memdesc:ga6e721bc00d2f0e02774598fe4b9db74c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:ga6e721bc00d2f0e02774598fe4b9db74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga921ce2bd9e0ae3e16c1f7dc6fc2ccc9d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga921ce2bd9e0ae3e16c1f7dc6fc2ccc9d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga921ce2bd9e0ae3e16c1f7dc6fc2ccc9d">RFCORE_FFSM_EXT_ADDR6</a>&#160;&#160;&#160;0x400885C0</td></tr>
+<tr class="memdesc:ga921ce2bd9e0ae3e16c1f7dc6fc2ccc9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:ga921ce2bd9e0ae3e16c1f7dc6fc2ccc9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga614b6b7cf0ac8b066501150454703017"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga614b6b7cf0ac8b066501150454703017"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga614b6b7cf0ac8b066501150454703017">RFCORE_FFSM_EXT_ADDR7</a>&#160;&#160;&#160;0x400885C4</td></tr>
+<tr class="memdesc:ga614b6b7cf0ac8b066501150454703017"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:ga614b6b7cf0ac8b066501150454703017"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga02476d7a783c06b23c87e4f0370d24cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga02476d7a783c06b23c87e4f0370d24cd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga02476d7a783c06b23c87e4f0370d24cd">RFCORE_FFSM_PAN_ID0</a>&#160;&#160;&#160;0x400885C8</td></tr>
+<tr class="memdesc:ga02476d7a783c06b23c87e4f0370d24cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:ga02476d7a783c06b23c87e4f0370d24cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa55da6cdb07ef47041669c199f23d3f2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa55da6cdb07ef47041669c199f23d3f2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gaa55da6cdb07ef47041669c199f23d3f2">RFCORE_FFSM_PAN_ID1</a>&#160;&#160;&#160;0x400885CC</td></tr>
+<tr class="memdesc:gaa55da6cdb07ef47041669c199f23d3f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:gaa55da6cdb07ef47041669c199f23d3f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacf2a0f8720d6f52f92fedb3c65b9247d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacf2a0f8720d6f52f92fedb3c65b9247d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gacf2a0f8720d6f52f92fedb3c65b9247d">RFCORE_FFSM_SHORT_ADDR0</a>&#160;&#160;&#160;0x400885D0</td></tr>
+<tr class="memdesc:gacf2a0f8720d6f52f92fedb3c65b9247d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:gacf2a0f8720d6f52f92fedb3c65b9247d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab3668cb0963850e1e598ecb50974e0ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab3668cb0963850e1e598ecb50974e0ad"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gab3668cb0963850e1e598ecb50974e0ad">RFCORE_FFSM_SHORT_ADDR1</a>&#160;&#160;&#160;0x400885D4</td></tr>
+<tr class="memdesc:gab3668cb0963850e1e598ecb50974e0ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local address information. <br /></td></tr>
+<tr class="separator:gab3668cb0963850e1e598ecb50974e0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">RFCORE_FFSM_SRCRESMASK[0:2] register bit masks</div></td></tr>
+<tr class="memitem:ga4c7d716afc52e53a6b7a977145dbb013"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4c7d716afc52e53a6b7a977145dbb013"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga4c7d716afc52e53a6b7a977145dbb013">RFCORE_FFSM_SRCRESMASK0_SRCRESMASK0</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga4c7d716afc52e53a6b7a977145dbb013"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ext addr match. <br /></td></tr>
+<tr class="separator:ga4c7d716afc52e53a6b7a977145dbb013"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga607df7e00ba52cb10596d33b3cbcbcc3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga607df7e00ba52cb10596d33b3cbcbcc3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga607df7e00ba52cb10596d33b3cbcbcc3">RFCORE_FFSM_SRCRESMASK1_SRCRESMASK1</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga607df7e00ba52cb10596d33b3cbcbcc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Short addr match. <br /></td></tr>
+<tr class="separator:ga607df7e00ba52cb10596d33b3cbcbcc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga556e893728abb8082dcb192d74adf0df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga556e893728abb8082dcb192d74adf0df"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga556e893728abb8082dcb192d74adf0df">RFCORE_FFSM_SRCRESMASK2_SRCRESMASK2</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga556e893728abb8082dcb192d74adf0df"><td class="mdescLeft">&#160;</td><td class="mdescRight">24-bit mask <br /></td></tr>
+<tr class="separator:ga556e893728abb8082dcb192d74adf0df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">RFCORE_FFSM_SRCRESINDEX register bit masks</div></td></tr>
+<tr class="memitem:ga612b727283c64851b80e6c9695c5dfff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga612b727283c64851b80e6c9695c5dfff"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga612b727283c64851b80e6c9695c5dfff">RFCORE_FFSM_SRCRESINDEX_SRCRESINDEX</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga612b727283c64851b80e6c9695c5dfff"><td class="mdescLeft">&#160;</td><td class="mdescRight">LS Entry bit index. <br /></td></tr>
+<tr class="separator:ga612b727283c64851b80e6c9695c5dfff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">RFCORE_FFSM_SRCEXTPENDEN[0:2] register bit masks</div></td></tr>
+<tr class="memitem:ga6dcecb64cf5af737d293691f6a1702ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6dcecb64cf5af737d293691f6a1702ee"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga6dcecb64cf5af737d293691f6a1702ee">RFCORE_FFSM_SRCEXTPENDEN0_SRCEXTPENDEN0</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga6dcecb64cf5af737d293691f6a1702ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">8 LSBs <br /></td></tr>
+<tr class="separator:ga6dcecb64cf5af737d293691f6a1702ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae78608b64a04c3c1dcf9d2020b032a17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae78608b64a04c3c1dcf9d2020b032a17"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gae78608b64a04c3c1dcf9d2020b032a17">RFCORE_FFSM_SRCEXTPENDEN1_SRCEXTPENDEN1</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:gae78608b64a04c3c1dcf9d2020b032a17"><td class="mdescLeft">&#160;</td><td class="mdescRight">8 middle bits <br /></td></tr>
+<tr class="separator:gae78608b64a04c3c1dcf9d2020b032a17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab5f64399b0a22f26f361ccd9dd0667ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab5f64399b0a22f26f361ccd9dd0667ac"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gab5f64399b0a22f26f361ccd9dd0667ac">RFCORE_FFSM_SRCEXTPENDEN2_SRCEXTPENDEN2</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:gab5f64399b0a22f26f361ccd9dd0667ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">8 MSBs <br /></td></tr>
+<tr class="separator:gab5f64399b0a22f26f361ccd9dd0667ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">RFCORE_FFSM_SRCSHORTPENDEN[0:2] register bit masks</div></td></tr>
+<tr class="memitem:ga36681301c3fb040a4ba59cbb9a3ff9ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga36681301c3fb040a4ba59cbb9a3ff9ee"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga36681301c3fb040a4ba59cbb9a3ff9ee">RFCORE_FFSM_SRCSHORTPENDEN0_SRCSHORTPENDEN0</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga36681301c3fb040a4ba59cbb9a3ff9ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">8 LSBs <br /></td></tr>
+<tr class="separator:ga36681301c3fb040a4ba59cbb9a3ff9ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa3761ae657c94c6c8852584d7fe2d4d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa3761ae657c94c6c8852584d7fe2d4d3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gaa3761ae657c94c6c8852584d7fe2d4d3">RFCORE_FFSM_SRCSHORTPENDEN1_SRCSHORTPENDEN1</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:gaa3761ae657c94c6c8852584d7fe2d4d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">8 middle <br /></td></tr>
+<tr class="separator:gaa3761ae657c94c6c8852584d7fe2d4d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga82c8407866c5c9a4a024c3ec8322a375"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga82c8407866c5c9a4a024c3ec8322a375"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga82c8407866c5c9a4a024c3ec8322a375">RFCORE_FFSM_SRCSHORTPENDEN2_SRCSHORTPENDEN2</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga82c8407866c5c9a4a024c3ec8322a375"><td class="mdescLeft">&#160;</td><td class="mdescRight">8 MSBs <br /></td></tr>
+<tr class="separator:ga82c8407866c5c9a4a024c3ec8322a375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">RFCORE_FFSM_EXT_ADDR[0:7] register bit masks</div></td></tr>
+<tr class="memitem:gacfd1cf7bb04fcf38d0541c0aead324b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacfd1cf7bb04fcf38d0541c0aead324b4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gacfd1cf7bb04fcf38d0541c0aead324b4">RFCORE_FFSM_EXT_ADDR0_EXT_ADDR0</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:gacfd1cf7bb04fcf38d0541c0aead324b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">EXT_ADDR[7:0]. <br /></td></tr>
+<tr class="separator:gacfd1cf7bb04fcf38d0541c0aead324b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga62af73004e54e82467905d94218ef978"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga62af73004e54e82467905d94218ef978"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga62af73004e54e82467905d94218ef978">RFCORE_FFSM_EXT_ADDR1_EXT_ADDR1</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga62af73004e54e82467905d94218ef978"><td class="mdescLeft">&#160;</td><td class="mdescRight">EXT_ADDR[15:8]. <br /></td></tr>
+<tr class="separator:ga62af73004e54e82467905d94218ef978"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga38f80520b6e75db135f4610f792ed944"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga38f80520b6e75db135f4610f792ed944"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga38f80520b6e75db135f4610f792ed944">RFCORE_FFSM_EXT_ADDR2_EXT_ADDR2</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga38f80520b6e75db135f4610f792ed944"><td class="mdescLeft">&#160;</td><td class="mdescRight">EXT_ADDR[23:16]. <br /></td></tr>
+<tr class="separator:ga38f80520b6e75db135f4610f792ed944"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3f593ba96c3274adbe61eb1f447a457f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3f593ba96c3274adbe61eb1f447a457f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga3f593ba96c3274adbe61eb1f447a457f">RFCORE_FFSM_EXT_ADDR3_EXT_ADDR3</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga3f593ba96c3274adbe61eb1f447a457f"><td class="mdescLeft">&#160;</td><td class="mdescRight">EXT_ADDR[31:24]. <br /></td></tr>
+<tr class="separator:ga3f593ba96c3274adbe61eb1f447a457f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6311b0c47d9fa4bc660207b9ccc20b2d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6311b0c47d9fa4bc660207b9ccc20b2d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga6311b0c47d9fa4bc660207b9ccc20b2d">RFCORE_FFSM_EXT_ADDR4_EXT_ADDR4</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga6311b0c47d9fa4bc660207b9ccc20b2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">EXT_ADDR[39:32]. <br /></td></tr>
+<tr class="separator:ga6311b0c47d9fa4bc660207b9ccc20b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5317728beb42847011fbf658218b4ab0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5317728beb42847011fbf658218b4ab0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga5317728beb42847011fbf658218b4ab0">RFCORE_FFSM_EXT_ADDR5_EXT_ADDR5</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga5317728beb42847011fbf658218b4ab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">EXT_ADDR[47:40]. <br /></td></tr>
+<tr class="separator:ga5317728beb42847011fbf658218b4ab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5690384913bb459a102f1b41c584b64c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5690384913bb459a102f1b41c584b64c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga5690384913bb459a102f1b41c584b64c">RFCORE_FFSM_EXT_ADDR6_EXT_ADDR6</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga5690384913bb459a102f1b41c584b64c"><td class="mdescLeft">&#160;</td><td class="mdescRight">EXT_ADDR[55:48]. <br /></td></tr>
+<tr class="separator:ga5690384913bb459a102f1b41c584b64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad0c7c79c03e9810037c2ce73d8b8e9f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad0c7c79c03e9810037c2ce73d8b8e9f1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gad0c7c79c03e9810037c2ce73d8b8e9f1">RFCORE_FFSM_EXT_ADDR7_EXT_ADDR7</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:gad0c7c79c03e9810037c2ce73d8b8e9f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">EXT_ADDR[63:56]. <br /></td></tr>
+<tr class="separator:gad0c7c79c03e9810037c2ce73d8b8e9f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">RFCORE_FFSM_PAN_ID[0:1] register bit masks</div></td></tr>
+<tr class="memitem:ga52fbc5fe74ce638b5bec370c7d411d1d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga52fbc5fe74ce638b5bec370c7d411d1d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga52fbc5fe74ce638b5bec370c7d411d1d">RFCORE_FFSM_PAN_ID0_PAN_ID0</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga52fbc5fe74ce638b5bec370c7d411d1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">PAN_ID[7:0]. <br /></td></tr>
+<tr class="separator:ga52fbc5fe74ce638b5bec370c7d411d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad89aebe4c3baffce26b8f95034f2129e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad89aebe4c3baffce26b8f95034f2129e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gad89aebe4c3baffce26b8f95034f2129e">RFCORE_FFSM_PAN_ID1_PAN_ID1</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:gad89aebe4c3baffce26b8f95034f2129e"><td class="mdescLeft">&#160;</td><td class="mdescRight">PAN_ID[15:8]. <br /></td></tr>
+<tr class="separator:gad89aebe4c3baffce26b8f95034f2129e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">RFCORE_FFSM_SHORT_ADDR[0:1] register bit masks</div></td></tr>
+<tr class="memitem:ga920f2a9d0c46d71fc8d17c060d064b4d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga920f2a9d0c46d71fc8d17c060d064b4d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#ga920f2a9d0c46d71fc8d17c060d064b4d">RFCORE_FFSM_SHORT_ADDR0_SHORT_ADDR0</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga920f2a9d0c46d71fc8d17c060d064b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHORT_ADDR[7:0]. <br /></td></tr>
+<tr class="separator:ga920f2a9d0c46d71fc8d17c060d064b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb3010509f336993cc8e97925f75a82a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gabb3010509f336993cc8e97925f75a82a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00841.html#gabb3010509f336993cc8e97925f75a82a">RFCORE_FFSM_SHORT_ADDR1_SHORT_ADDR1</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:gabb3010509f336993cc8e97925f75a82a"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHORT_ADDR[15:8]. <br /></td></tr>
+<tr class="separator:gabb3010509f336993cc8e97925f75a82a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header file with register declarations for the cc2538 ADC and H/W RNG. </p>
+<div class="textblock"><p>Header with declarations of the RF Core FFSM registers. </p>
 
-<p>Definition in file <a class="el" href="a00527_source.html">soc-adc.h</a>.</p>
+<p>Definition in file <a class="el" href="a00527_source.html">rfcore-ffsm.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

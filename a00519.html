@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/dev/nvic.h File Reference</title>
+<title>Contiki 3.x: cpu/cc2538/dev/gptimer.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,472 +47,587 @@
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">nvic.h File Reference<div class="ingroups"><a class="el" href="a00692.html">Contiki platforms</a> &raquo; <a class="el" href="a00693.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00690.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00710.html">cc2538 Nested Vectored Interrupt Controller</a></div></div>  </div>
+<div class="title">gptimer.h File Reference<div class="ingroups"><a class="el" href="a00821.html">Contiki platforms</a> &raquo; <a class="el" href="a00822.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00819.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00835.html">cc2538 General-Purpose Timers</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header file for the ARM Nested Vectored Interrupt Controller.  
+<p>Header file for the cc2538 General Purpose Timers.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
-</div>
+
 <p><a href="a00519_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">NVIC Constants and Configuration</div></td></tr>
-<tr class="memitem:gaccf40b169290e87d966a9aabc1646e32"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaccf40b169290e87d966a9aabc1646e32"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NVIC_VTABLE_IN_SRAM</b>&#160;&#160;&#160;0x20000000</td></tr>
-<tr class="separator:gaccf40b169290e87d966a9aabc1646e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga497e0d112cf94a8ea0d019efa2473a43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga497e0d112cf94a8ea0d019efa2473a43"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NVIC_VTABLE_IN_CODE</b>&#160;&#160;&#160;0x00000000</td></tr>
-<tr class="separator:ga497e0d112cf94a8ea0d019efa2473a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga27a8980c50154ccbe0b89edb8343a365"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga27a8980c50154ccbe0b89edb8343a365"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NVIC_INTERRUPT_ENABLED</b>&#160;&#160;&#160;0x00000001</td></tr>
-<tr class="separator:ga27a8980c50154ccbe0b89edb8343a365"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9ad01349124004d859083763c489f5fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9ad01349124004d859083763c489f5fd"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NVIC_INTERRUPT_DISABLED</b>&#160;&#160;&#160;0x00000000</td></tr>
-<tr class="separator:ga9ad01349124004d859083763c489f5fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacd223d54476ebfc1c8e78c96cde592d9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacd223d54476ebfc1c8e78c96cde592d9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NVIC_CONF_VTABLE_BASE</b>&#160;&#160;&#160;NVIC_VTABLE_IN_CODE</td></tr>
-<tr class="separator:gacd223d54476ebfc1c8e78c96cde592d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga50a128edc037a3d328f42bdb413a643e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga50a128edc037a3d328f42bdb413a643e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NVIC_CONF_VTABLE_OFFSET</b>&#160;&#160;&#160;0x200000</td></tr>
-<tr class="separator:ga50a128edc037a3d328f42bdb413a643e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">NVIC Interrupt assignments</div></td></tr>
-<tr class="memitem:gae514dee475978c38dbf30e28c4c241fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae514dee475978c38dbf30e28c4c241fe"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gae514dee475978c38dbf30e28c4c241fe">NVIC_INT_GPIO_PORT_A</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:gae514dee475978c38dbf30e28c4c241fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPIO port A. <br /></td></tr>
-<tr class="separator:gae514dee475978c38dbf30e28c4c241fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafc90948c1080a14a1c8b384cc3a41be0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafc90948c1080a14a1c8b384cc3a41be0"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gafc90948c1080a14a1c8b384cc3a41be0">NVIC_INT_GPIO_PORT_B</a>&#160;&#160;&#160;1</td></tr>
-<tr class="memdesc:gafc90948c1080a14a1c8b384cc3a41be0"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPIO port B. <br /></td></tr>
-<tr class="separator:gafc90948c1080a14a1c8b384cc3a41be0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga29b12f0468882def60171b04c06e0c25"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga29b12f0468882def60171b04c06e0c25"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga29b12f0468882def60171b04c06e0c25">NVIC_INT_GPIO_PORT_C</a>&#160;&#160;&#160;2</td></tr>
-<tr class="memdesc:ga29b12f0468882def60171b04c06e0c25"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPIO port C. <br /></td></tr>
-<tr class="separator:ga29b12f0468882def60171b04c06e0c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga38a2fd93067ff595dbecc075c3ff2ab5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga38a2fd93067ff595dbecc075c3ff2ab5"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga38a2fd93067ff595dbecc075c3ff2ab5">NVIC_INT_GPIO_PORT_D</a>&#160;&#160;&#160;3</td></tr>
-<tr class="memdesc:ga38a2fd93067ff595dbecc075c3ff2ab5"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPIO port D. <br /></td></tr>
-<tr class="separator:ga38a2fd93067ff595dbecc075c3ff2ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga393d2e17e85972b46a35d8fad6baf19f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga393d2e17e85972b46a35d8fad6baf19f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga393d2e17e85972b46a35d8fad6baf19f">NVIC_INT_UART0</a>&#160;&#160;&#160;5</td></tr>
-<tr class="memdesc:ga393d2e17e85972b46a35d8fad6baf19f"><td class="mdescLeft">&#160;</td><td class="mdescRight">UART0. <br /></td></tr>
-<tr class="separator:ga393d2e17e85972b46a35d8fad6baf19f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad8c591e4951d9a61a324c9883dcf54eb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad8c591e4951d9a61a324c9883dcf54eb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gad8c591e4951d9a61a324c9883dcf54eb">NVIC_INT_UART1</a>&#160;&#160;&#160;6</td></tr>
-<tr class="memdesc:gad8c591e4951d9a61a324c9883dcf54eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">UART1. <br /></td></tr>
-<tr class="separator:gad8c591e4951d9a61a324c9883dcf54eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3e7683cfffd105bbdba91b9eae573e40"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3e7683cfffd105bbdba91b9eae573e40"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga3e7683cfffd105bbdba91b9eae573e40">NVIC_INT_SSI0</a>&#160;&#160;&#160;7</td></tr>
-<tr class="memdesc:ga3e7683cfffd105bbdba91b9eae573e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">SSI0. <br /></td></tr>
-<tr class="separator:ga3e7683cfffd105bbdba91b9eae573e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga04de54219c12ebfe3e677ce086d6e4dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga04de54219c12ebfe3e677ce086d6e4dc"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga04de54219c12ebfe3e677ce086d6e4dc">NVIC_INT_I2C</a>&#160;&#160;&#160;8</td></tr>
-<tr class="memdesc:ga04de54219c12ebfe3e677ce086d6e4dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">I2C. <br /></td></tr>
-<tr class="separator:ga04de54219c12ebfe3e677ce086d6e4dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0d2db308c773d34ffae385cea80ce0f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0d2db308c773d34ffae385cea80ce0f9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga0d2db308c773d34ffae385cea80ce0f9">NVIC_INT_ADC</a>&#160;&#160;&#160;14</td></tr>
-<tr class="memdesc:ga0d2db308c773d34ffae385cea80ce0f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC. <br /></td></tr>
-<tr class="separator:ga0d2db308c773d34ffae385cea80ce0f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4ab0bfe5bd9275833477fb7d3fa5db34"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4ab0bfe5bd9275833477fb7d3fa5db34"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga4ab0bfe5bd9275833477fb7d3fa5db34">NVIC_INT_WDT</a>&#160;&#160;&#160;18</td></tr>
-<tr class="memdesc:ga4ab0bfe5bd9275833477fb7d3fa5db34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Watchdog Timer. <br /></td></tr>
-<tr class="separator:ga4ab0bfe5bd9275833477fb7d3fa5db34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaeaeb493d2461056006eeffb2ea080ab9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaeaeb493d2461056006eeffb2ea080ab9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gaeaeb493d2461056006eeffb2ea080ab9">NVIC_INT_GPTIMER_0A</a>&#160;&#160;&#160;19</td></tr>
-<tr class="memdesc:gaeaeb493d2461056006eeffb2ea080ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTimer 0A. <br /></td></tr>
-<tr class="separator:gaeaeb493d2461056006eeffb2ea080ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7452239cd440b6a7941bfe3ad8696be2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7452239cd440b6a7941bfe3ad8696be2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga7452239cd440b6a7941bfe3ad8696be2">NVIC_INT_GPTIMER_0B</a>&#160;&#160;&#160;20</td></tr>
-<tr class="memdesc:ga7452239cd440b6a7941bfe3ad8696be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTimer 0B. <br /></td></tr>
-<tr class="separator:ga7452239cd440b6a7941bfe3ad8696be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2309eb15354623a4e0e4a1b6a7ed8914"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2309eb15354623a4e0e4a1b6a7ed8914"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga2309eb15354623a4e0e4a1b6a7ed8914">NVIC_INT_GPTIMER_1A</a>&#160;&#160;&#160;21</td></tr>
-<tr class="memdesc:ga2309eb15354623a4e0e4a1b6a7ed8914"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTimer 1A. <br /></td></tr>
-<tr class="separator:ga2309eb15354623a4e0e4a1b6a7ed8914"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae5cd16eb494ca43ee4a0e8cde2ccbd0e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae5cd16eb494ca43ee4a0e8cde2ccbd0e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gae5cd16eb494ca43ee4a0e8cde2ccbd0e">NVIC_INT_GPTIMER_1B</a>&#160;&#160;&#160;22</td></tr>
-<tr class="memdesc:gae5cd16eb494ca43ee4a0e8cde2ccbd0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTimer 1B. <br /></td></tr>
-<tr class="separator:gae5cd16eb494ca43ee4a0e8cde2ccbd0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9918a28e1caf52f48aa80bb1c66d850e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9918a28e1caf52f48aa80bb1c66d850e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga9918a28e1caf52f48aa80bb1c66d850e">NVIC_INT_GPTIMER_2A</a>&#160;&#160;&#160;23</td></tr>
-<tr class="memdesc:ga9918a28e1caf52f48aa80bb1c66d850e"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTimer 2A. <br /></td></tr>
-<tr class="separator:ga9918a28e1caf52f48aa80bb1c66d850e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafce03a6cde020ef1e7fbb831499b2787"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafce03a6cde020ef1e7fbb831499b2787"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gafce03a6cde020ef1e7fbb831499b2787">NVIC_INT_GPTIMER_2B</a>&#160;&#160;&#160;24</td></tr>
-<tr class="memdesc:gafce03a6cde020ef1e7fbb831499b2787"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTimer 2B. <br /></td></tr>
-<tr class="separator:gafce03a6cde020ef1e7fbb831499b2787"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga75071fd9441677138c83ef7d55f6a467"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga75071fd9441677138c83ef7d55f6a467"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga75071fd9441677138c83ef7d55f6a467">NVIC_INT_ADC_CMP</a>&#160;&#160;&#160;25</td></tr>
-<tr class="memdesc:ga75071fd9441677138c83ef7d55f6a467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analog Comparator. <br /></td></tr>
-<tr class="separator:ga75071fd9441677138c83ef7d55f6a467"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3834c93a9da94723631be00bd6570c95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3834c93a9da94723631be00bd6570c95"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga3834c93a9da94723631be00bd6570c95">NVIC_INT_RF_RXTX_ALT</a>&#160;&#160;&#160;26</td></tr>
-<tr class="memdesc:ga3834c93a9da94723631be00bd6570c95"><td class="mdescLeft">&#160;</td><td class="mdescRight">RF TX/RX (Alternate) <br /></td></tr>
-<tr class="separator:ga3834c93a9da94723631be00bd6570c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga12d0aeb485cd1f83528916de3af71063"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga12d0aeb485cd1f83528916de3af71063"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga12d0aeb485cd1f83528916de3af71063">NVIC_INT_RF_ERR_ALT</a>&#160;&#160;&#160;27</td></tr>
-<tr class="memdesc:ga12d0aeb485cd1f83528916de3af71063"><td class="mdescLeft">&#160;</td><td class="mdescRight">RF Error (Alternate) <br /></td></tr>
-<tr class="separator:ga12d0aeb485cd1f83528916de3af71063"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadee1eb1b1d2e8b271778718eac2bf4ea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadee1eb1b1d2e8b271778718eac2bf4ea"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gadee1eb1b1d2e8b271778718eac2bf4ea">NVIC_INT_SYS_CTRL</a>&#160;&#160;&#160;28</td></tr>
-<tr class="memdesc:gadee1eb1b1d2e8b271778718eac2bf4ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">System Control. <br /></td></tr>
-<tr class="separator:gadee1eb1b1d2e8b271778718eac2bf4ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab70b71440d4be5b3118ff48d26debf0e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab70b71440d4be5b3118ff48d26debf0e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gab70b71440d4be5b3118ff48d26debf0e">NVIC_INT_FLASH_CTRL</a>&#160;&#160;&#160;29</td></tr>
-<tr class="memdesc:gab70b71440d4be5b3118ff48d26debf0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flash memory control. <br /></td></tr>
-<tr class="separator:gab70b71440d4be5b3118ff48d26debf0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga06b4f1cf27c60359676f7f4688a7b10a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga06b4f1cf27c60359676f7f4688a7b10a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga06b4f1cf27c60359676f7f4688a7b10a">NVIC_INT_AES_ALT</a>&#160;&#160;&#160;30</td></tr>
-<tr class="memdesc:ga06b4f1cf27c60359676f7f4688a7b10a"><td class="mdescLeft">&#160;</td><td class="mdescRight">AES (Alternate) <br /></td></tr>
-<tr class="separator:ga06b4f1cf27c60359676f7f4688a7b10a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga13d59c45eef77017a5343c91f72abdcd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga13d59c45eef77017a5343c91f72abdcd"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga13d59c45eef77017a5343c91f72abdcd">NVIC_INT_PKA_ALT</a>&#160;&#160;&#160;31</td></tr>
-<tr class="memdesc:ga13d59c45eef77017a5343c91f72abdcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">PKA (Alternate) <br /></td></tr>
-<tr class="separator:ga13d59c45eef77017a5343c91f72abdcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9f44b50cbcc1b7990f12c6657a5297b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9f44b50cbcc1b7990f12c6657a5297b9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga9f44b50cbcc1b7990f12c6657a5297b9">NVIC_INT_SM_TIMER_ALT</a>&#160;&#160;&#160;32</td></tr>
-<tr class="memdesc:ga9f44b50cbcc1b7990f12c6657a5297b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">SM Timer (Alternate) <br /></td></tr>
-<tr class="separator:ga9f44b50cbcc1b7990f12c6657a5297b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac9b631495410af22135a1d163d132558"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac9b631495410af22135a1d163d132558"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gac9b631495410af22135a1d163d132558">NVIC_INT_MAC_TIMER_ALT</a>&#160;&#160;&#160;33</td></tr>
-<tr class="memdesc:gac9b631495410af22135a1d163d132558"><td class="mdescLeft">&#160;</td><td class="mdescRight">MAC Timer (Alternate) <br /></td></tr>
-<tr class="separator:gac9b631495410af22135a1d163d132558"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaecdcb5acb0e133370093f272d70ad993"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaecdcb5acb0e133370093f272d70ad993"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gaecdcb5acb0e133370093f272d70ad993">NVIC_INT_SSI1</a>&#160;&#160;&#160;34</td></tr>
-<tr class="memdesc:gaecdcb5acb0e133370093f272d70ad993"><td class="mdescLeft">&#160;</td><td class="mdescRight">SSI1. <br /></td></tr>
-<tr class="separator:gaecdcb5acb0e133370093f272d70ad993"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3ab5f15df8b019a884a84897b182f8e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3ab5f15df8b019a884a84897b182f8e1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga3ab5f15df8b019a884a84897b182f8e1">NVIC_INT_GPTIMER_3A</a>&#160;&#160;&#160;35</td></tr>
-<tr class="memdesc:ga3ab5f15df8b019a884a84897b182f8e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTimer 3A. <br /></td></tr>
-<tr class="separator:ga3ab5f15df8b019a884a84897b182f8e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae10306b5279712e3156766873de98c35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae10306b5279712e3156766873de98c35"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gae10306b5279712e3156766873de98c35">NVIC_INT_GPTIMER_3B</a>&#160;&#160;&#160;36</td></tr>
-<tr class="memdesc:gae10306b5279712e3156766873de98c35"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTimer 3B. <br /></td></tr>
-<tr class="separator:gae10306b5279712e3156766873de98c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadfe0bc9fb7824f455b1f4e430dd1358b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadfe0bc9fb7824f455b1f4e430dd1358b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gadfe0bc9fb7824f455b1f4e430dd1358b">NVIC_INT_UDMA</a>&#160;&#160;&#160;46</td></tr>
-<tr class="memdesc:gadfe0bc9fb7824f455b1f4e430dd1358b"><td class="mdescLeft">&#160;</td><td class="mdescRight">uDMA software <br /></td></tr>
-<tr class="separator:gadfe0bc9fb7824f455b1f4e430dd1358b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8822cf5397a000943f6a2875ebf22c44"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8822cf5397a000943f6a2875ebf22c44"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga8822cf5397a000943f6a2875ebf22c44">NVIC_INT_UDMA_ERR</a>&#160;&#160;&#160;47</td></tr>
-<tr class="memdesc:ga8822cf5397a000943f6a2875ebf22c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">uDMA error <br /></td></tr>
-<tr class="separator:ga8822cf5397a000943f6a2875ebf22c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2e60f7ec0183c0ec03fcbb2ac7928fcd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2e60f7ec0183c0ec03fcbb2ac7928fcd"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga2e60f7ec0183c0ec03fcbb2ac7928fcd">NVIC_INT_USB</a>&#160;&#160;&#160;140</td></tr>
-<tr class="memdesc:ga2e60f7ec0183c0ec03fcbb2ac7928fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">USB. <br /></td></tr>
-<tr class="separator:ga2e60f7ec0183c0ec03fcbb2ac7928fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9ca4d131868579d7f103d2cc2c5cf8bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9ca4d131868579d7f103d2cc2c5cf8bd"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga9ca4d131868579d7f103d2cc2c5cf8bd">NVIC_INT_RF_RXTX</a>&#160;&#160;&#160;141</td></tr>
-<tr class="memdesc:ga9ca4d131868579d7f103d2cc2c5cf8bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">RF Core Rx/Tx. <br /></td></tr>
-<tr class="separator:ga9ca4d131868579d7f103d2cc2c5cf8bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5c26190109643c3bcd9be48d260edeab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5c26190109643c3bcd9be48d260edeab"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga5c26190109643c3bcd9be48d260edeab">NVIC_INT_RF_ERR</a>&#160;&#160;&#160;142</td></tr>
-<tr class="memdesc:ga5c26190109643c3bcd9be48d260edeab"><td class="mdescLeft">&#160;</td><td class="mdescRight">RF Core Error. <br /></td></tr>
-<tr class="separator:ga5c26190109643c3bcd9be48d260edeab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaca06d6eb7a7c05eb1cdf3f9b367ca193"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaca06d6eb7a7c05eb1cdf3f9b367ca193"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gaca06d6eb7a7c05eb1cdf3f9b367ca193">NVIC_INT_AES</a>&#160;&#160;&#160;143</td></tr>
-<tr class="memdesc:gaca06d6eb7a7c05eb1cdf3f9b367ca193"><td class="mdescLeft">&#160;</td><td class="mdescRight">AES. <br /></td></tr>
-<tr class="separator:gaca06d6eb7a7c05eb1cdf3f9b367ca193"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4ec0aae6da84121427207b1c70edcbf8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4ec0aae6da84121427207b1c70edcbf8"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga4ec0aae6da84121427207b1c70edcbf8">NVIC_INT_PKA</a>&#160;&#160;&#160;144</td></tr>
-<tr class="memdesc:ga4ec0aae6da84121427207b1c70edcbf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">PKA. <br /></td></tr>
-<tr class="separator:ga4ec0aae6da84121427207b1c70edcbf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac3632e5ebdee6d8531cbcefdb9a6ef50"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac3632e5ebdee6d8531cbcefdb9a6ef50"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gac3632e5ebdee6d8531cbcefdb9a6ef50">NVIC_INT_SM_TIMER</a>&#160;&#160;&#160;145</td></tr>
-<tr class="memdesc:gac3632e5ebdee6d8531cbcefdb9a6ef50"><td class="mdescLeft">&#160;</td><td class="mdescRight">SM Timer. <br /></td></tr>
-<tr class="separator:gac3632e5ebdee6d8531cbcefdb9a6ef50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga125fdd40726968e48da3f0ee33247914"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga125fdd40726968e48da3f0ee33247914"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga125fdd40726968e48da3f0ee33247914">NVIC_INT_MACTIMER</a>&#160;&#160;&#160;146</td></tr>
-<tr class="memdesc:ga125fdd40726968e48da3f0ee33247914"><td class="mdescLeft">&#160;</td><td class="mdescRight">MAC Timer. <br /></td></tr>
-<tr class="separator:ga125fdd40726968e48da3f0ee33247914"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">NVIC Register Declarations</div></td></tr>
-<tr class="memitem:ga0daccf03d4cbd559a3018bbb9cd96ad3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0daccf03d4cbd559a3018bbb9cd96ad3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga0daccf03d4cbd559a3018bbb9cd96ad3">NVIC_EN0</a>&#160;&#160;&#160;0xE000E100</td></tr>
-<tr class="memdesc:ga0daccf03d4cbd559a3018bbb9cd96ad3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 0-31 Set Enable. <br /></td></tr>
-<tr class="separator:ga0daccf03d4cbd559a3018bbb9cd96ad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9829912cd8ad095150c59f0007a70db5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9829912cd8ad095150c59f0007a70db5"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga9829912cd8ad095150c59f0007a70db5">NVIC_EN1</a>&#160;&#160;&#160;0xE000E104</td></tr>
-<tr class="memdesc:ga9829912cd8ad095150c59f0007a70db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 32-54 Set Enable. <br /></td></tr>
-<tr class="separator:ga9829912cd8ad095150c59f0007a70db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8e296d3fe1f71f9c8d31a81f06a11b4e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8e296d3fe1f71f9c8d31a81f06a11b4e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga8e296d3fe1f71f9c8d31a81f06a11b4e">NVIC_EN2</a>&#160;&#160;&#160;0xE000E108</td></tr>
-<tr class="memdesc:ga8e296d3fe1f71f9c8d31a81f06a11b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 64-95 Set Enable. <br /></td></tr>
-<tr class="separator:ga8e296d3fe1f71f9c8d31a81f06a11b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga48a6eda009e5561d2b1c01257f873528"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga48a6eda009e5561d2b1c01257f873528"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga48a6eda009e5561d2b1c01257f873528">NVIC_EN3</a>&#160;&#160;&#160;0xE000E10C</td></tr>
-<tr class="memdesc:ga48a6eda009e5561d2b1c01257f873528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 96-127 Set Enable. <br /></td></tr>
-<tr class="separator:ga48a6eda009e5561d2b1c01257f873528"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga03e9b69fd65de83a38074563a5f93c35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga03e9b69fd65de83a38074563a5f93c35"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga03e9b69fd65de83a38074563a5f93c35">NVIC_EN4</a>&#160;&#160;&#160;0xE000E110</td></tr>
-<tr class="memdesc:ga03e9b69fd65de83a38074563a5f93c35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 128-131 Set Enable. <br /></td></tr>
-<tr class="separator:ga03e9b69fd65de83a38074563a5f93c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac9888a13dfbc4e6f087ffb299b784cd3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac9888a13dfbc4e6f087ffb299b784cd3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gac9888a13dfbc4e6f087ffb299b784cd3">NVIC_DIS0</a>&#160;&#160;&#160;0xE000E180</td></tr>
-<tr class="memdesc:gac9888a13dfbc4e6f087ffb299b784cd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 0-31 Clear Enable. <br /></td></tr>
-<tr class="separator:gac9888a13dfbc4e6f087ffb299b784cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9f8f5c06e619e8230d854fe86cd6f1ca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9f8f5c06e619e8230d854fe86cd6f1ca"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga9f8f5c06e619e8230d854fe86cd6f1ca">NVIC_DIS1</a>&#160;&#160;&#160;0xE000E184</td></tr>
-<tr class="memdesc:ga9f8f5c06e619e8230d854fe86cd6f1ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 32-54 Clear Enable. <br /></td></tr>
-<tr class="separator:ga9f8f5c06e619e8230d854fe86cd6f1ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3de8688830bcf9e79f1e450f1b4cf65e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3de8688830bcf9e79f1e450f1b4cf65e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga3de8688830bcf9e79f1e450f1b4cf65e">NVIC_DIS2</a>&#160;&#160;&#160;0xE000E188</td></tr>
-<tr class="memdesc:ga3de8688830bcf9e79f1e450f1b4cf65e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 64-95 Clear Enable. <br /></td></tr>
-<tr class="separator:ga3de8688830bcf9e79f1e450f1b4cf65e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac936c75dd75a1b13e3a58bfb87275473"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac936c75dd75a1b13e3a58bfb87275473"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gac936c75dd75a1b13e3a58bfb87275473">NVIC_DIS3</a>&#160;&#160;&#160;0xE000E18C</td></tr>
-<tr class="memdesc:gac936c75dd75a1b13e3a58bfb87275473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 96-127 Clear Enable. <br /></td></tr>
-<tr class="separator:gac936c75dd75a1b13e3a58bfb87275473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4938b6e3cb616e5655f546d4fd1be773"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4938b6e3cb616e5655f546d4fd1be773"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga4938b6e3cb616e5655f546d4fd1be773">NVIC_DIS4</a>&#160;&#160;&#160;0xE000E190</td></tr>
-<tr class="memdesc:ga4938b6e3cb616e5655f546d4fd1be773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 128-131 Clear Enable. <br /></td></tr>
-<tr class="separator:ga4938b6e3cb616e5655f546d4fd1be773"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1c227f4e486e43e89889548daf74a8bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga1c227f4e486e43e89889548daf74a8bf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga1c227f4e486e43e89889548daf74a8bf">NVIC_PEND0</a>&#160;&#160;&#160;0xE000E200</td></tr>
-<tr class="memdesc:ga1c227f4e486e43e89889548daf74a8bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 0-31 Set Pending. <br /></td></tr>
-<tr class="separator:ga1c227f4e486e43e89889548daf74a8bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab97ab845d8d2750beede3fa0b49d1064"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab97ab845d8d2750beede3fa0b49d1064"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gab97ab845d8d2750beede3fa0b49d1064">NVIC_PEND1</a>&#160;&#160;&#160;0xE000E204</td></tr>
-<tr class="memdesc:gab97ab845d8d2750beede3fa0b49d1064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 32-54 Set Pending. <br /></td></tr>
-<tr class="separator:gab97ab845d8d2750beede3fa0b49d1064"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadca9ac0a1e7edd8fefe49008099ab8e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadca9ac0a1e7edd8fefe49008099ab8e6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gadca9ac0a1e7edd8fefe49008099ab8e6">NVIC_PEND2</a>&#160;&#160;&#160;0xE000E208</td></tr>
-<tr class="memdesc:gadca9ac0a1e7edd8fefe49008099ab8e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 64-95 Set Pending. <br /></td></tr>
-<tr class="separator:gadca9ac0a1e7edd8fefe49008099ab8e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacde0d489c11893d48674b803c707eb96"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacde0d489c11893d48674b803c707eb96"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gacde0d489c11893d48674b803c707eb96">NVIC_PEND3</a>&#160;&#160;&#160;0xE000E20C</td></tr>
-<tr class="memdesc:gacde0d489c11893d48674b803c707eb96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 96-127 Set Pending. <br /></td></tr>
-<tr class="separator:gacde0d489c11893d48674b803c707eb96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae739baea6cd152ada46c2a3e2d904e46"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae739baea6cd152ada46c2a3e2d904e46"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gae739baea6cd152ada46c2a3e2d904e46">NVIC_PEND4</a>&#160;&#160;&#160;0xE000E210</td></tr>
-<tr class="memdesc:gae739baea6cd152ada46c2a3e2d904e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 128-131 Set Pending. <br /></td></tr>
-<tr class="separator:gae739baea6cd152ada46c2a3e2d904e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5f10bf99e21c6b76d3431a518071fd71"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5f10bf99e21c6b76d3431a518071fd71"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga5f10bf99e21c6b76d3431a518071fd71">NVIC_UNPEND0</a>&#160;&#160;&#160;0xE000E280</td></tr>
-<tr class="memdesc:ga5f10bf99e21c6b76d3431a518071fd71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 0-31 Clear Pending. <br /></td></tr>
-<tr class="separator:ga5f10bf99e21c6b76d3431a518071fd71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga17db90deb5ddafd6aa4b4f1f3568fc43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga17db90deb5ddafd6aa4b4f1f3568fc43"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga17db90deb5ddafd6aa4b4f1f3568fc43">NVIC_UNPEND1</a>&#160;&#160;&#160;0xE000E284</td></tr>
-<tr class="memdesc:ga17db90deb5ddafd6aa4b4f1f3568fc43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 32-54 Clear Pending. <br /></td></tr>
-<tr class="separator:ga17db90deb5ddafd6aa4b4f1f3568fc43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4deddcd9463a41363f447d21f1c206cf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4deddcd9463a41363f447d21f1c206cf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga4deddcd9463a41363f447d21f1c206cf">NVIC_UNPEND2</a>&#160;&#160;&#160;0xE000E288</td></tr>
-<tr class="memdesc:ga4deddcd9463a41363f447d21f1c206cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 64-95 Clear Pending. <br /></td></tr>
-<tr class="separator:ga4deddcd9463a41363f447d21f1c206cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad49408c20bf59d89d3bc8fb88fc8e5bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad49408c20bf59d89d3bc8fb88fc8e5bd"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gad49408c20bf59d89d3bc8fb88fc8e5bd">NVIC_UNPEND3</a>&#160;&#160;&#160;0xE000E28C</td></tr>
-<tr class="memdesc:gad49408c20bf59d89d3bc8fb88fc8e5bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 96-127 Clear Pending. <br /></td></tr>
-<tr class="separator:gad49408c20bf59d89d3bc8fb88fc8e5bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9e7502ef5375ba716868e1b54bd9eb7f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9e7502ef5375ba716868e1b54bd9eb7f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga9e7502ef5375ba716868e1b54bd9eb7f">NVIC_UNPEND4</a>&#160;&#160;&#160;0xE000E290</td></tr>
-<tr class="memdesc:ga9e7502ef5375ba716868e1b54bd9eb7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 128-131 Clear Pending. <br /></td></tr>
-<tr class="separator:ga9e7502ef5375ba716868e1b54bd9eb7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac000f145a5bace31e22573a57248c781"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac000f145a5bace31e22573a57248c781"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gac000f145a5bace31e22573a57248c781">NVIC_ACTIVE0</a>&#160;&#160;&#160;0xE000E300</td></tr>
-<tr class="memdesc:gac000f145a5bace31e22573a57248c781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 0-31 Active Bit. <br /></td></tr>
-<tr class="separator:gac000f145a5bace31e22573a57248c781"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab477cde51d26aecc301161b117b7bb56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab477cde51d26aecc301161b117b7bb56"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gab477cde51d26aecc301161b117b7bb56">NVIC_ACTIVE1</a>&#160;&#160;&#160;0xE000E304</td></tr>
-<tr class="memdesc:gab477cde51d26aecc301161b117b7bb56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 32-54 Active Bit. <br /></td></tr>
-<tr class="separator:gab477cde51d26aecc301161b117b7bb56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf871d057f8e22806fd4e8af17b08bb6e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf871d057f8e22806fd4e8af17b08bb6e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gaf871d057f8e22806fd4e8af17b08bb6e">NVIC_ACTIVE2</a>&#160;&#160;&#160;0xE000E308</td></tr>
-<tr class="memdesc:gaf871d057f8e22806fd4e8af17b08bb6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 64-95 Active Bit. <br /></td></tr>
-<tr class="separator:gaf871d057f8e22806fd4e8af17b08bb6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga510bdeac1f0693e89c7346b19e2dc34c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga510bdeac1f0693e89c7346b19e2dc34c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga510bdeac1f0693e89c7346b19e2dc34c">NVIC_ACTIVE3</a>&#160;&#160;&#160;0xE000E30C</td></tr>
-<tr class="memdesc:ga510bdeac1f0693e89c7346b19e2dc34c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 96-127 Active Bit. <br /></td></tr>
-<tr class="separator:ga510bdeac1f0693e89c7346b19e2dc34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaedee6c3b69e16c5ef0bd651a9f350367"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaedee6c3b69e16c5ef0bd651a9f350367"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gaedee6c3b69e16c5ef0bd651a9f350367">NVIC_ACTIVE4</a>&#160;&#160;&#160;0xE000E310</td></tr>
-<tr class="memdesc:gaedee6c3b69e16c5ef0bd651a9f350367"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 128-131 Active Bit. <br /></td></tr>
-<tr class="separator:gaedee6c3b69e16c5ef0bd651a9f350367"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga18cea92c71bd04c864eb6d2ed7438885"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga18cea92c71bd04c864eb6d2ed7438885"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga18cea92c71bd04c864eb6d2ed7438885">NVIC_PRI0</a>&#160;&#160;&#160;0xE000E400</td></tr>
-<tr class="memdesc:ga18cea92c71bd04c864eb6d2ed7438885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 0-3 Priority. <br /></td></tr>
-<tr class="separator:ga18cea92c71bd04c864eb6d2ed7438885"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1a9e2a8df93a2504c1a55aa95962a73a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga1a9e2a8df93a2504c1a55aa95962a73a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga1a9e2a8df93a2504c1a55aa95962a73a">NVIC_PRI1</a>&#160;&#160;&#160;0xE000E404</td></tr>
-<tr class="memdesc:ga1a9e2a8df93a2504c1a55aa95962a73a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 4-7 Priority. <br /></td></tr>
-<tr class="separator:ga1a9e2a8df93a2504c1a55aa95962a73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8c7e668b3262773a397fc25c4d0cdbcb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8c7e668b3262773a397fc25c4d0cdbcb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga8c7e668b3262773a397fc25c4d0cdbcb">NVIC_PRI2</a>&#160;&#160;&#160;0xE000E408</td></tr>
-<tr class="memdesc:ga8c7e668b3262773a397fc25c4d0cdbcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 8-11 Priority. <br /></td></tr>
-<tr class="separator:ga8c7e668b3262773a397fc25c4d0cdbcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga94acb841e721388468ac76b29f44ab06"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga94acb841e721388468ac76b29f44ab06"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga94acb841e721388468ac76b29f44ab06">NVIC_PRI3</a>&#160;&#160;&#160;0xE000E40C</td></tr>
-<tr class="memdesc:ga94acb841e721388468ac76b29f44ab06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 12-15 Priority. <br /></td></tr>
-<tr class="separator:ga94acb841e721388468ac76b29f44ab06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf966c67de90708e2137c37fba54e91bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf966c67de90708e2137c37fba54e91bc"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gaf966c67de90708e2137c37fba54e91bc">NVIC_PRI4</a>&#160;&#160;&#160;0xE000E410</td></tr>
-<tr class="memdesc:gaf966c67de90708e2137c37fba54e91bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 16-19 Priority. <br /></td></tr>
-<tr class="separator:gaf966c67de90708e2137c37fba54e91bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3d0ccbe9b6733e7f3003a356b9ec998c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3d0ccbe9b6733e7f3003a356b9ec998c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga3d0ccbe9b6733e7f3003a356b9ec998c">NVIC_PRI5</a>&#160;&#160;&#160;0xE000E414</td></tr>
-<tr class="memdesc:ga3d0ccbe9b6733e7f3003a356b9ec998c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 20-23 Priority. <br /></td></tr>
-<tr class="separator:ga3d0ccbe9b6733e7f3003a356b9ec998c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga517055d422a98ee117e548da8bab6cd2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga517055d422a98ee117e548da8bab6cd2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga517055d422a98ee117e548da8bab6cd2">NVIC_PRI6</a>&#160;&#160;&#160;0xE000E418</td></tr>
-<tr class="memdesc:ga517055d422a98ee117e548da8bab6cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 24-27 Priority. <br /></td></tr>
-<tr class="separator:ga517055d422a98ee117e548da8bab6cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacb5880381bb3ccc41a43769cbb7d0380"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacb5880381bb3ccc41a43769cbb7d0380"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gacb5880381bb3ccc41a43769cbb7d0380">NVIC_PRI7</a>&#160;&#160;&#160;0xE000E41C</td></tr>
-<tr class="memdesc:gacb5880381bb3ccc41a43769cbb7d0380"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 28-31 Priority. <br /></td></tr>
-<tr class="separator:gacb5880381bb3ccc41a43769cbb7d0380"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3a4b85819dabf11849c195cd486e9998"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3a4b85819dabf11849c195cd486e9998"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga3a4b85819dabf11849c195cd486e9998">NVIC_PRI8</a>&#160;&#160;&#160;0xE000E420</td></tr>
-<tr class="memdesc:ga3a4b85819dabf11849c195cd486e9998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 32-35 Priority. <br /></td></tr>
-<tr class="separator:ga3a4b85819dabf11849c195cd486e9998"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8078d70d80da47831a9747b799dd9edb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8078d70d80da47831a9747b799dd9edb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga8078d70d80da47831a9747b799dd9edb">NVIC_PRI9</a>&#160;&#160;&#160;0xE000E424</td></tr>
-<tr class="memdesc:ga8078d70d80da47831a9747b799dd9edb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 36-39 Priority. <br /></td></tr>
-<tr class="separator:ga8078d70d80da47831a9747b799dd9edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga11d56252a7d015637eba9501f52633b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga11d56252a7d015637eba9501f52633b6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga11d56252a7d015637eba9501f52633b6">NVIC_PRI10</a>&#160;&#160;&#160;0xE000E428</td></tr>
-<tr class="memdesc:ga11d56252a7d015637eba9501f52633b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 40-43 Priority. <br /></td></tr>
-<tr class="separator:ga11d56252a7d015637eba9501f52633b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0c59a490d0dd67147dcae93b45c0f109"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0c59a490d0dd67147dcae93b45c0f109"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga0c59a490d0dd67147dcae93b45c0f109">NVIC_PRI11</a>&#160;&#160;&#160;0xE000E42C</td></tr>
-<tr class="memdesc:ga0c59a490d0dd67147dcae93b45c0f109"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 44-47 Priority. <br /></td></tr>
-<tr class="separator:ga0c59a490d0dd67147dcae93b45c0f109"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga155fb32059321478ae7fbad99d384f2f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga155fb32059321478ae7fbad99d384f2f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga155fb32059321478ae7fbad99d384f2f">NVIC_PRI12</a>&#160;&#160;&#160;0xE000E430</td></tr>
-<tr class="memdesc:ga155fb32059321478ae7fbad99d384f2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 48-51 Priority. <br /></td></tr>
-<tr class="separator:ga155fb32059321478ae7fbad99d384f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad1d93011f649138c55405a816a6d9800"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad1d93011f649138c55405a816a6d9800"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gad1d93011f649138c55405a816a6d9800">NVIC_PRI13</a>&#160;&#160;&#160;0xE000E434</td></tr>
-<tr class="memdesc:gad1d93011f649138c55405a816a6d9800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 52-53 Priority. <br /></td></tr>
-<tr class="separator:gad1d93011f649138c55405a816a6d9800"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga163ac0da371b2faffba35e7c51bddf69"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga163ac0da371b2faffba35e7c51bddf69"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga163ac0da371b2faffba35e7c51bddf69">NVIC_PRI14</a>&#160;&#160;&#160;0xE000E438</td></tr>
-<tr class="memdesc:ga163ac0da371b2faffba35e7c51bddf69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 56-59 Priority. <br /></td></tr>
-<tr class="separator:ga163ac0da371b2faffba35e7c51bddf69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga38c109f2985b5c3877fc8f7f9ceebf75"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga38c109f2985b5c3877fc8f7f9ceebf75"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga38c109f2985b5c3877fc8f7f9ceebf75">NVIC_PRI15</a>&#160;&#160;&#160;0xE000E43C</td></tr>
-<tr class="memdesc:ga38c109f2985b5c3877fc8f7f9ceebf75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 60-63 Priority. <br /></td></tr>
-<tr class="separator:ga38c109f2985b5c3877fc8f7f9ceebf75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2eff8fcba140ec15e6d597d1504264a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2eff8fcba140ec15e6d597d1504264a6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga2eff8fcba140ec15e6d597d1504264a6">NVIC_PRI16</a>&#160;&#160;&#160;0xE000E440</td></tr>
-<tr class="memdesc:ga2eff8fcba140ec15e6d597d1504264a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 64-67 Priority. <br /></td></tr>
-<tr class="separator:ga2eff8fcba140ec15e6d597d1504264a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga24880b174f48925af3c6d0289771299a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga24880b174f48925af3c6d0289771299a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga24880b174f48925af3c6d0289771299a">NVIC_PRI17</a>&#160;&#160;&#160;0xE000E444</td></tr>
-<tr class="memdesc:ga24880b174f48925af3c6d0289771299a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 68-71 Priority. <br /></td></tr>
-<tr class="separator:ga24880b174f48925af3c6d0289771299a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9e0e1d9190a7f221b4202c4b38ec2c23"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9e0e1d9190a7f221b4202c4b38ec2c23"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga9e0e1d9190a7f221b4202c4b38ec2c23">NVIC_PRI18</a>&#160;&#160;&#160;0xE000E448</td></tr>
-<tr class="memdesc:ga9e0e1d9190a7f221b4202c4b38ec2c23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 72-75 Priority. <br /></td></tr>
-<tr class="separator:ga9e0e1d9190a7f221b4202c4b38ec2c23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga343012fe7c4a899cd7f8649d66ef5fb1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga343012fe7c4a899cd7f8649d66ef5fb1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga343012fe7c4a899cd7f8649d66ef5fb1">NVIC_PRI19</a>&#160;&#160;&#160;0xE000E44C</td></tr>
-<tr class="memdesc:ga343012fe7c4a899cd7f8649d66ef5fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 76-79 Priority. <br /></td></tr>
-<tr class="separator:ga343012fe7c4a899cd7f8649d66ef5fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafa8c32e0b14411cb053216d573bdc3f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafa8c32e0b14411cb053216d573bdc3f6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gafa8c32e0b14411cb053216d573bdc3f6">NVIC_PRI20</a>&#160;&#160;&#160;0xE000E450</td></tr>
-<tr class="memdesc:gafa8c32e0b14411cb053216d573bdc3f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 80-83 Priority. <br /></td></tr>
-<tr class="separator:gafa8c32e0b14411cb053216d573bdc3f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab8c3971a48ea63fba5ea8e17717cd926"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab8c3971a48ea63fba5ea8e17717cd926"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gab8c3971a48ea63fba5ea8e17717cd926">NVIC_PRI21</a>&#160;&#160;&#160;0xE000E454</td></tr>
-<tr class="memdesc:gab8c3971a48ea63fba5ea8e17717cd926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 84-87 Priority. <br /></td></tr>
-<tr class="separator:gab8c3971a48ea63fba5ea8e17717cd926"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2e383a6d48e4d28b7e710e6278b56b55"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2e383a6d48e4d28b7e710e6278b56b55"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga2e383a6d48e4d28b7e710e6278b56b55">NVIC_PRI22</a>&#160;&#160;&#160;0xE000E458</td></tr>
-<tr class="memdesc:ga2e383a6d48e4d28b7e710e6278b56b55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 88-91 Priority. <br /></td></tr>
-<tr class="separator:ga2e383a6d48e4d28b7e710e6278b56b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadf02d3ed29dc6aa2b0db48984e4bdf39"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadf02d3ed29dc6aa2b0db48984e4bdf39"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gadf02d3ed29dc6aa2b0db48984e4bdf39">NVIC_PRI23</a>&#160;&#160;&#160;0xE000E45C</td></tr>
-<tr class="memdesc:gadf02d3ed29dc6aa2b0db48984e4bdf39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 92-95 Priority. <br /></td></tr>
-<tr class="separator:gadf02d3ed29dc6aa2b0db48984e4bdf39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac9366a6a9f20fa2bbc2e4e5a52c068c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac9366a6a9f20fa2bbc2e4e5a52c068c9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gac9366a6a9f20fa2bbc2e4e5a52c068c9">NVIC_PRI24</a>&#160;&#160;&#160;0xE000E460</td></tr>
-<tr class="memdesc:gac9366a6a9f20fa2bbc2e4e5a52c068c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 96-99 Priority. <br /></td></tr>
-<tr class="separator:gac9366a6a9f20fa2bbc2e4e5a52c068c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafe27fe8b84ab5b20a964b6b4168c903a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafe27fe8b84ab5b20a964b6b4168c903a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gafe27fe8b84ab5b20a964b6b4168c903a">NVIC_PRI25</a>&#160;&#160;&#160;0xE000E464</td></tr>
-<tr class="memdesc:gafe27fe8b84ab5b20a964b6b4168c903a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 100-103 Priority. <br /></td></tr>
-<tr class="separator:gafe27fe8b84ab5b20a964b6b4168c903a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaebfad3444b121076cc6cb32235a5c5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaaebfad3444b121076cc6cb32235a5c5b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gaaebfad3444b121076cc6cb32235a5c5b">NVIC_PRI26</a>&#160;&#160;&#160;0xE000E468</td></tr>
-<tr class="memdesc:gaaebfad3444b121076cc6cb32235a5c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 104-107 Priority. <br /></td></tr>
-<tr class="separator:gaaebfad3444b121076cc6cb32235a5c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa06a7e4198d41474a5f6f22c19468c42"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa06a7e4198d41474a5f6f22c19468c42"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gaa06a7e4198d41474a5f6f22c19468c42">NVIC_PRI27</a>&#160;&#160;&#160;0xE000E46C</td></tr>
-<tr class="memdesc:gaa06a7e4198d41474a5f6f22c19468c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 108-111 Priority. <br /></td></tr>
-<tr class="separator:gaa06a7e4198d41474a5f6f22c19468c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacc016217a09721e7f2d8208f6a64759b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacc016217a09721e7f2d8208f6a64759b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gacc016217a09721e7f2d8208f6a64759b">NVIC_PRI28</a>&#160;&#160;&#160;0xE000E470</td></tr>
-<tr class="memdesc:gacc016217a09721e7f2d8208f6a64759b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 112-115 Priority. <br /></td></tr>
-<tr class="separator:gacc016217a09721e7f2d8208f6a64759b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga33fb2f8e23e77abe3c715acf0087631e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga33fb2f8e23e77abe3c715acf0087631e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga33fb2f8e23e77abe3c715acf0087631e">NVIC_PRI29</a>&#160;&#160;&#160;0xE000E474</td></tr>
-<tr class="memdesc:ga33fb2f8e23e77abe3c715acf0087631e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 116-119 Priority. <br /></td></tr>
-<tr class="separator:ga33fb2f8e23e77abe3c715acf0087631e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga58e28d01171df299c73abd6d2d20155f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga58e28d01171df299c73abd6d2d20155f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga58e28d01171df299c73abd6d2d20155f">NVIC_PRI30</a>&#160;&#160;&#160;0xE000E478</td></tr>
-<tr class="memdesc:ga58e28d01171df299c73abd6d2d20155f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 120-123 Priority. <br /></td></tr>
-<tr class="separator:ga58e28d01171df299c73abd6d2d20155f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga96295fc75f6873c5a973af8600d15bbe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga96295fc75f6873c5a973af8600d15bbe"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga96295fc75f6873c5a973af8600d15bbe">NVIC_PRI31</a>&#160;&#160;&#160;0xE000E47C</td></tr>
-<tr class="memdesc:ga96295fc75f6873c5a973af8600d15bbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 124-127 Priority. <br /></td></tr>
-<tr class="separator:ga96295fc75f6873c5a973af8600d15bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab67dba70ea174720f0edf71ab018ba9e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab67dba70ea174720f0edf71ab018ba9e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gab67dba70ea174720f0edf71ab018ba9e">NVIC_PRI32</a>&#160;&#160;&#160;0xE000E480</td></tr>
-<tr class="memdesc:gab67dba70ea174720f0edf71ab018ba9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 128-131 Priority. <br /></td></tr>
-<tr class="separator:gab67dba70ea174720f0edf71ab018ba9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga06d223e88ce0e03e265dc49fb63a97f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga06d223e88ce0e03e265dc49fb63a97f9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga06d223e88ce0e03e265dc49fb63a97f9">NVIC_PRI33</a>&#160;&#160;&#160;0xE000E480</td></tr>
-<tr class="memdesc:ga06d223e88ce0e03e265dc49fb63a97f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 132-135 Priority. <br /></td></tr>
-<tr class="separator:ga06d223e88ce0e03e265dc49fb63a97f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa146b483bffc0ad38ed81bf29f5187ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa146b483bffc0ad38ed81bf29f5187ef"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gaa146b483bffc0ad38ed81bf29f5187ef">NVIC_PRI34</a>&#160;&#160;&#160;0xE000E484</td></tr>
-<tr class="memdesc:gaa146b483bffc0ad38ed81bf29f5187ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 136-139 Priority. <br /></td></tr>
-<tr class="separator:gaa146b483bffc0ad38ed81bf29f5187ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga954b1d1b4f1c5f5f4855a0f215199d5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga954b1d1b4f1c5f5f4855a0f215199d5b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga954b1d1b4f1c5f5f4855a0f215199d5b">NVIC_PRI35</a>&#160;&#160;&#160;0xE000E488</td></tr>
-<tr class="memdesc:ga954b1d1b4f1c5f5f4855a0f215199d5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 140-143 Priority. <br /></td></tr>
-<tr class="separator:ga954b1d1b4f1c5f5f4855a0f215199d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5d3478dde4b6350f3730cbfbf5e54abf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5d3478dde4b6350f3730cbfbf5e54abf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga5d3478dde4b6350f3730cbfbf5e54abf">NVIC_PRI36</a>&#160;&#160;&#160;0xE000E48c</td></tr>
-<tr class="memdesc:ga5d3478dde4b6350f3730cbfbf5e54abf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt 144-147 Priority. <br /></td></tr>
-<tr class="separator:ga5d3478dde4b6350f3730cbfbf5e54abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:gaab3b149a69ec69c8ad495d0e16513257"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaab3b149a69ec69c8ad495d0e16513257"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gaab3b149a69ec69c8ad495d0e16513257">nvic_init</a> ()</td></tr>
-<tr class="memdesc:gaab3b149a69ec69c8ad495d0e16513257"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises the NVIC driver. <br /></td></tr>
-<tr class="separator:gaab3b149a69ec69c8ad495d0e16513257"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga66ca0b5ff65e65c106f416aa8bbcd4df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga66ca0b5ff65e65c106f416aa8bbcd4df">nvic_interrupt_enable</a> (uint32_t intr)</td></tr>
-<tr class="memdesc:ga66ca0b5ff65e65c106f416aa8bbcd4df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables interrupt intr.  <a href="a00710.html#ga66ca0b5ff65e65c106f416aa8bbcd4df">More...</a><br /></td></tr>
-<tr class="separator:ga66ca0b5ff65e65c106f416aa8bbcd4df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae66f8a3ef682cbb5f4dd4e551b92dabb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gae66f8a3ef682cbb5f4dd4e551b92dabb">nvic_interrupt_disable</a> (uint32_t intr)</td></tr>
-<tr class="memdesc:gae66f8a3ef682cbb5f4dd4e551b92dabb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables interrupt intr.  <a href="a00710.html#gae66f8a3ef682cbb5f4dd4e551b92dabb">More...</a><br /></td></tr>
-<tr class="separator:gae66f8a3ef682cbb5f4dd4e551b92dabb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac1e3ae2faca20c74f736705c9de4e8cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gac1e3ae2faca20c74f736705c9de4e8cd">nvic_interrupt_en_restore</a> (uint32_t intr, uint8_t v)</td></tr>
-<tr class="memdesc:gac1e3ae2faca20c74f736705c9de4e8cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables interrupt intr if v &gt; 0.  <a href="a00710.html#gac1e3ae2faca20c74f736705c9de4e8cd">More...</a><br /></td></tr>
-<tr class="separator:gac1e3ae2faca20c74f736705c9de4e8cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad237bcd66ad537e3672fa678200bacd9"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#gad237bcd66ad537e3672fa678200bacd9">nvic_interrupt_en_save</a> (uint32_t intr)</td></tr>
-<tr class="memdesc:gad237bcd66ad537e3672fa678200bacd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the interrupt enabled status for intr.  <a href="a00710.html#gad237bcd66ad537e3672fa678200bacd9">More...</a><br /></td></tr>
-<tr class="separator:gad237bcd66ad537e3672fa678200bacd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7bc74c27d4ac1b62b5037c572430f0f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga7bc74c27d4ac1b62b5037c572430f0f6">nvic_interrupt_pend</a> (uint32_t intr)</td></tr>
-<tr class="memdesc:ga7bc74c27d4ac1b62b5037c572430f0f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets intr to pending.  <a href="a00710.html#ga7bc74c27d4ac1b62b5037c572430f0f6">More...</a><br /></td></tr>
-<tr class="separator:ga7bc74c27d4ac1b62b5037c572430f0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga74e12e9710fc39daeaf2b790f891117f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00710.html#ga74e12e9710fc39daeaf2b790f891117f">nvic_interrupt_unpend</a> (uint32_t intr)</td></tr>
-<tr class="memdesc:ga74e12e9710fc39daeaf2b790f891117f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets intr to no longer pending.  <a href="a00710.html#ga74e12e9710fc39daeaf2b790f891117f">More...</a><br /></td></tr>
-<tr class="separator:ga74e12e9710fc39daeaf2b790f891117f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Base addresses for the GPT register instances</div></td></tr>
+<tr class="memitem:ga6ccbb138c56f67c194862a836770106b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6ccbb138c56f67c194862a836770106b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga6ccbb138c56f67c194862a836770106b">GPT_0_BASE</a>&#160;&#160;&#160;0x40030000</td></tr>
+<tr class="memdesc:ga6ccbb138c56f67c194862a836770106b"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTIMER0. <br /></td></tr>
+<tr class="separator:ga6ccbb138c56f67c194862a836770106b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabda326aa5d9156cb337aa7f7e9419b32"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gabda326aa5d9156cb337aa7f7e9419b32"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gabda326aa5d9156cb337aa7f7e9419b32">GPT_1_BASE</a>&#160;&#160;&#160;0x40031000</td></tr>
+<tr class="memdesc:gabda326aa5d9156cb337aa7f7e9419b32"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTIMER1. <br /></td></tr>
+<tr class="separator:gabda326aa5d9156cb337aa7f7e9419b32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6a5829cca53c51f9168720f746775e7c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6a5829cca53c51f9168720f746775e7c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga6a5829cca53c51f9168720f746775e7c">GPT_2_BASE</a>&#160;&#160;&#160;0x40032000</td></tr>
+<tr class="memdesc:ga6a5829cca53c51f9168720f746775e7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTIMER2. <br /></td></tr>
+<tr class="separator:ga6a5829cca53c51f9168720f746775e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf20e4acf3b3c9638f556da0d0cda73c2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf20e4acf3b3c9638f556da0d0cda73c2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaf20e4acf3b3c9638f556da0d0cda73c2">GPT_3_BASE</a>&#160;&#160;&#160;0x40033000</td></tr>
+<tr class="memdesc:gaf20e4acf3b3c9638f556da0d0cda73c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTIMER3. <br /></td></tr>
+<tr class="separator:gaf20e4acf3b3c9638f556da0d0cda73c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER Register offset declarations</div></td></tr>
+<tr class="memitem:ga64302d3ef9b8d71338d85c133ea6845f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga64302d3ef9b8d71338d85c133ea6845f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga64302d3ef9b8d71338d85c133ea6845f">GPTIMER_CFG</a>&#160;&#160;&#160;0x00000000</td></tr>
+<tr class="memdesc:ga64302d3ef9b8d71338d85c133ea6845f"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM configuration. <br /></td></tr>
+<tr class="separator:ga64302d3ef9b8d71338d85c133ea6845f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7117fb0e876876b0052e4c1acf359d39"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7117fb0e876876b0052e4c1acf359d39"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga7117fb0e876876b0052e4c1acf359d39">GPTIMER_TAMR</a>&#160;&#160;&#160;0x00000004</td></tr>
+<tr class="memdesc:ga7117fb0e876876b0052e4c1acf359d39"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer A mode. <br /></td></tr>
+<tr class="separator:ga7117fb0e876876b0052e4c1acf359d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga325b0408b575ae3076183c3d436fe4a3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga325b0408b575ae3076183c3d436fe4a3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga325b0408b575ae3076183c3d436fe4a3">GPTIMER_TBMR</a>&#160;&#160;&#160;0x00000008</td></tr>
+<tr class="memdesc:ga325b0408b575ae3076183c3d436fe4a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer B mode. <br /></td></tr>
+<tr class="separator:ga325b0408b575ae3076183c3d436fe4a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf9f34c588c81926622776b8cc424cce0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf9f34c588c81926622776b8cc424cce0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaf9f34c588c81926622776b8cc424cce0">GPTIMER_CTL</a>&#160;&#160;&#160;0x0000000C</td></tr>
+<tr class="memdesc:gaf9f34c588c81926622776b8cc424cce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM control. <br /></td></tr>
+<tr class="separator:gaf9f34c588c81926622776b8cc424cce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0478e1c92fc842e3a21136dcadebc0c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0478e1c92fc842e3a21136dcadebc0c9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga0478e1c92fc842e3a21136dcadebc0c9">GPTIMER_SYNC</a>&#160;&#160;&#160;0x00000010</td></tr>
+<tr class="memdesc:ga0478e1c92fc842e3a21136dcadebc0c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM synchronize (0 only) <br /></td></tr>
+<tr class="separator:ga0478e1c92fc842e3a21136dcadebc0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga90c3a78dffb9a7d30b7f48e86fafe5c7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga90c3a78dffb9a7d30b7f48e86fafe5c7"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga90c3a78dffb9a7d30b7f48e86fafe5c7">GPTIMER_IMR</a>&#160;&#160;&#160;0x00000018</td></tr>
+<tr class="memdesc:ga90c3a78dffb9a7d30b7f48e86fafe5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM interrupt mask. <br /></td></tr>
+<tr class="separator:ga90c3a78dffb9a7d30b7f48e86fafe5c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0dd0e71236ad9e854b63ca5872995a87"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0dd0e71236ad9e854b63ca5872995a87"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga0dd0e71236ad9e854b63ca5872995a87">GPTIMER_RIS</a>&#160;&#160;&#160;0x0000001C</td></tr>
+<tr class="memdesc:ga0dd0e71236ad9e854b63ca5872995a87"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM raw interrupt status. <br /></td></tr>
+<tr class="separator:ga0dd0e71236ad9e854b63ca5872995a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga77a7252be5761a78cd40faee1b495661"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga77a7252be5761a78cd40faee1b495661"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga77a7252be5761a78cd40faee1b495661">GPTIMER_MIS</a>&#160;&#160;&#160;0x00000020</td></tr>
+<tr class="memdesc:ga77a7252be5761a78cd40faee1b495661"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM masked interrupt status. <br /></td></tr>
+<tr class="separator:ga77a7252be5761a78cd40faee1b495661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae9885e660bdc27ef648c7260ec2043c4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae9885e660bdc27ef648c7260ec2043c4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gae9885e660bdc27ef648c7260ec2043c4">GPTIMER_ICR</a>&#160;&#160;&#160;0x00000024</td></tr>
+<tr class="memdesc:gae9885e660bdc27ef648c7260ec2043c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM interrupt clear. <br /></td></tr>
+<tr class="separator:gae9885e660bdc27ef648c7260ec2043c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab8ea67699dc62e73075dfab78cf1a40c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab8ea67699dc62e73075dfab78cf1a40c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gab8ea67699dc62e73075dfab78cf1a40c">GPTIMER_TAILR</a>&#160;&#160;&#160;0x00000028</td></tr>
+<tr class="memdesc:gab8ea67699dc62e73075dfab78cf1a40c"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer A interval load. <br /></td></tr>
+<tr class="separator:gab8ea67699dc62e73075dfab78cf1a40c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga74166263092d03e9ab2b6bbf6df2c46f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga74166263092d03e9ab2b6bbf6df2c46f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga74166263092d03e9ab2b6bbf6df2c46f">GPTIMER_TBILR</a>&#160;&#160;&#160;0x0000002C</td></tr>
+<tr class="memdesc:ga74166263092d03e9ab2b6bbf6df2c46f"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer B interval load. <br /></td></tr>
+<tr class="separator:ga74166263092d03e9ab2b6bbf6df2c46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga345207cb5ad1cea30b308e901cd36aa4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga345207cb5ad1cea30b308e901cd36aa4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga345207cb5ad1cea30b308e901cd36aa4">GPTIMER_TAMATCHR</a>&#160;&#160;&#160;0x00000030</td></tr>
+<tr class="memdesc:ga345207cb5ad1cea30b308e901cd36aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer A match. <br /></td></tr>
+<tr class="separator:ga345207cb5ad1cea30b308e901cd36aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga993f2107a5c314786d1b63397954ea8f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga993f2107a5c314786d1b63397954ea8f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga993f2107a5c314786d1b63397954ea8f">GPTIMER_TBMATCHR</a>&#160;&#160;&#160;0x00000034</td></tr>
+<tr class="memdesc:ga993f2107a5c314786d1b63397954ea8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer B match. <br /></td></tr>
+<tr class="separator:ga993f2107a5c314786d1b63397954ea8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabf984505b2cfbf977e4ad7e98ca9ee90"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gabf984505b2cfbf977e4ad7e98ca9ee90"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gabf984505b2cfbf977e4ad7e98ca9ee90">GPTIMER_TAPR</a>&#160;&#160;&#160;0x00000038</td></tr>
+<tr class="memdesc:gabf984505b2cfbf977e4ad7e98ca9ee90"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer A prescale. <br /></td></tr>
+<tr class="separator:gabf984505b2cfbf977e4ad7e98ca9ee90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga062aa5b6a9df2c1857c36279385a5efc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga062aa5b6a9df2c1857c36279385a5efc"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga062aa5b6a9df2c1857c36279385a5efc">GPTIMER_TBPR</a>&#160;&#160;&#160;0x0000003C</td></tr>
+<tr class="memdesc:ga062aa5b6a9df2c1857c36279385a5efc"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer B prescale. <br /></td></tr>
+<tr class="separator:ga062aa5b6a9df2c1857c36279385a5efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga043d46faf0f190326c6b037182e68bb3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga043d46faf0f190326c6b037182e68bb3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga043d46faf0f190326c6b037182e68bb3">GPTIMER_TAPMR</a>&#160;&#160;&#160;0x00000040</td></tr>
+<tr class="memdesc:ga043d46faf0f190326c6b037182e68bb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer A prescale match. <br /></td></tr>
+<tr class="separator:ga043d46faf0f190326c6b037182e68bb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2e87fac5398549a98e68985da4835382"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2e87fac5398549a98e68985da4835382"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga2e87fac5398549a98e68985da4835382">GPTIMER_TBPMR</a>&#160;&#160;&#160;0x00000044</td></tr>
+<tr class="memdesc:ga2e87fac5398549a98e68985da4835382"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer B prescale match. <br /></td></tr>
+<tr class="separator:ga2e87fac5398549a98e68985da4835382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa532a78ae2fb77bbb09283299360bd57"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa532a78ae2fb77bbb09283299360bd57"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaa532a78ae2fb77bbb09283299360bd57">GPTIMER_TAR</a>&#160;&#160;&#160;0x00000048</td></tr>
+<tr class="memdesc:gaa532a78ae2fb77bbb09283299360bd57"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer A. <br /></td></tr>
+<tr class="separator:gaa532a78ae2fb77bbb09283299360bd57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga323ae5dd4f0d6efa2e267afefb535b19"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga323ae5dd4f0d6efa2e267afefb535b19"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga323ae5dd4f0d6efa2e267afefb535b19">GPTIMER_TBR</a>&#160;&#160;&#160;0x0000004C</td></tr>
+<tr class="memdesc:ga323ae5dd4f0d6efa2e267afefb535b19"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer B. <br /></td></tr>
+<tr class="separator:ga323ae5dd4f0d6efa2e267afefb535b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac7d28a43108c483ae686ce01096a92f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac7d28a43108c483ae686ce01096a92f7"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gac7d28a43108c483ae686ce01096a92f7">GPTIMER_TAV</a>&#160;&#160;&#160;0x00000050</td></tr>
+<tr class="memdesc:gac7d28a43108c483ae686ce01096a92f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer A value. <br /></td></tr>
+<tr class="separator:gac7d28a43108c483ae686ce01096a92f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga52f46fb0e7b9f261f4727fe6c4bab40d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga52f46fb0e7b9f261f4727fe6c4bab40d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga52f46fb0e7b9f261f4727fe6c4bab40d">GPTIMER_TBV</a>&#160;&#160;&#160;0x00000054</td></tr>
+<tr class="memdesc:ga52f46fb0e7b9f261f4727fe6c4bab40d"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer B value. <br /></td></tr>
+<tr class="separator:ga52f46fb0e7b9f261f4727fe6c4bab40d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga926fc2c5b05be6de0c2eeb4fe10d9a9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga926fc2c5b05be6de0c2eeb4fe10d9a9c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga926fc2c5b05be6de0c2eeb4fe10d9a9c">GPTIMER_RTCPD</a>&#160;&#160;&#160;0x00000058</td></tr>
+<tr class="memdesc:ga926fc2c5b05be6de0c2eeb4fe10d9a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM RTC predivide. <br /></td></tr>
+<tr class="separator:ga926fc2c5b05be6de0c2eeb4fe10d9a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa4305ababf40deb9547202e02a218582"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa4305ababf40deb9547202e02a218582"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaa4305ababf40deb9547202e02a218582">GPTIMER_TAPS</a>&#160;&#160;&#160;0x0000005C</td></tr>
+<tr class="memdesc:gaa4305ababf40deb9547202e02a218582"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer A prescale snapshot. <br /></td></tr>
+<tr class="separator:gaa4305ababf40deb9547202e02a218582"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaba021c3e2179ddaef9c9a714a0b97ad0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaba021c3e2179ddaef9c9a714a0b97ad0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaba021c3e2179ddaef9c9a714a0b97ad0">GPTIMER_TBPS</a>&#160;&#160;&#160;0x00000060</td></tr>
+<tr class="memdesc:gaba021c3e2179ddaef9c9a714a0b97ad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer B prescale snapshot. <br /></td></tr>
+<tr class="separator:gaba021c3e2179ddaef9c9a714a0b97ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0f17650cbaab5358495af6c9fa2caeeb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0f17650cbaab5358495af6c9fa2caeeb"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga0f17650cbaab5358495af6c9fa2caeeb">GPTIMER_TAPV</a>&#160;&#160;&#160;0x00000064</td></tr>
+<tr class="memdesc:ga0f17650cbaab5358495af6c9fa2caeeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer A prescale value. <br /></td></tr>
+<tr class="separator:ga0f17650cbaab5358495af6c9fa2caeeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2ea995847b4394c7556f919fdf35eb5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa2ea995847b4394c7556f919fdf35eb5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaa2ea995847b4394c7556f919fdf35eb5">GPTIMER_TBPV</a>&#160;&#160;&#160;0x00000068</td></tr>
+<tr class="memdesc:gaa2ea995847b4394c7556f919fdf35eb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM Timer B prescale value. <br /></td></tr>
+<tr class="separator:gaa2ea995847b4394c7556f919fdf35eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3ad5d67531103eb42c371ce6a1573094"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3ad5d67531103eb42c371ce6a1573094"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga3ad5d67531103eb42c371ce6a1573094">GPTIMER_PP</a>&#160;&#160;&#160;0x00000FC0</td></tr>
+<tr class="memdesc:ga3ad5d67531103eb42c371ce6a1573094"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPTM peripheral properties. <br /></td></tr>
+<tr class="separator:ga3ad5d67531103eb42c371ce6a1573094"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_CFG register bit masks</div></td></tr>
+<tr class="memitem:gac4ae0864885145b2142287771360fe9b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac4ae0864885145b2142287771360fe9b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gac4ae0864885145b2142287771360fe9b">GPTIMER_CFG_GPTMCFG</a>&#160;&#160;&#160;0x00000007</td></tr>
+<tr class="memdesc:gac4ae0864885145b2142287771360fe9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">configuration <br /></td></tr>
+<tr class="separator:gac4ae0864885145b2142287771360fe9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TnMR bit values</div></td></tr>
+<tr class="memitem:ga7376c7f7dd3e14d50480ce98096798ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7376c7f7dd3e14d50480ce98096798ef"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPTIMER_TAMR_TAMR_ONE_SHOT</b>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="separator:ga7376c7f7dd3e14d50480ce98096798ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa915255cca52bc2088035d58b816584d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa915255cca52bc2088035d58b816584d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPTIMER_TAMR_TAMR_PERIODIC</b>&#160;&#160;&#160;0x00000002</td></tr>
+<tr class="separator:gaa915255cca52bc2088035d58b816584d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7b9bdb8b97145a662f17a879a5062f01"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7b9bdb8b97145a662f17a879a5062f01"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPTIMER_TAMR_TAMR_CAPTURE</b>&#160;&#160;&#160;0x00000003</td></tr>
+<tr class="separator:ga7b9bdb8b97145a662f17a879a5062f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab9f79872b93427c2e4f9fed07d4fbf17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab9f79872b93427c2e4f9fed07d4fbf17"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPTIMER_TBMR_TBMR_ONE_SHOT</b>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="separator:gab9f79872b93427c2e4f9fed07d4fbf17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacfbe483c13b3e1617af66a416a072e0b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacfbe483c13b3e1617af66a416a072e0b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPTIMER_TBMR_TBMR_PERIODIC</b>&#160;&#160;&#160;0x00000002</td></tr>
+<tr class="separator:gacfbe483c13b3e1617af66a416a072e0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6b8146ee12c1478dae055198443368a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6b8146ee12c1478dae055198443368a1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPTIMER_TBMR_TBMR_CAPTURE</b>&#160;&#160;&#160;0x00000003</td></tr>
+<tr class="separator:ga6b8146ee12c1478dae055198443368a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TAMR register bit masks</div></td></tr>
+<tr class="memitem:gadc3d0c2124d7b17ed314d211c09e49fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadc3d0c2124d7b17ed314d211c09e49fb"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gadc3d0c2124d7b17ed314d211c09e49fb">GPTIMER_TAMR_TAPLO</a>&#160;&#160;&#160;0x00000800</td></tr>
+<tr class="memdesc:gadc3d0c2124d7b17ed314d211c09e49fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy PWM operation. <br /></td></tr>
+<tr class="separator:gadc3d0c2124d7b17ed314d211c09e49fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6e920afdf15b271d6eefa863967e5b15"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6e920afdf15b271d6eefa863967e5b15"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga6e920afdf15b271d6eefa863967e5b15">GPTIMER_TAMR_TAMRSU</a>&#160;&#160;&#160;0x00000400</td></tr>
+<tr class="memdesc:ga6e920afdf15b271d6eefa863967e5b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A match register update mode. <br /></td></tr>
+<tr class="separator:ga6e920afdf15b271d6eefa863967e5b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab4ad3caebfc411469cc7dc66d0cd48da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab4ad3caebfc411469cc7dc66d0cd48da"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gab4ad3caebfc411469cc7dc66d0cd48da">GPTIMER_TAMR_TAPWMIE</a>&#160;&#160;&#160;0x00000200</td></tr>
+<tr class="memdesc:gab4ad3caebfc411469cc7dc66d0cd48da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A PWM interrupt enable. <br /></td></tr>
+<tr class="separator:gab4ad3caebfc411469cc7dc66d0cd48da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab0539ed83284c444cf200b1614421481"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab0539ed83284c444cf200b1614421481"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gab0539ed83284c444cf200b1614421481">GPTIMER_TAMR_TAILD</a>&#160;&#160;&#160;0x00000100</td></tr>
+<tr class="memdesc:gab0539ed83284c444cf200b1614421481"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A PWM interval load write. <br /></td></tr>
+<tr class="separator:gab0539ed83284c444cf200b1614421481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac161c0def7c673c495250f693636b5d5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac161c0def7c673c495250f693636b5d5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gac161c0def7c673c495250f693636b5d5">GPTIMER_TAMR_TASNAPS</a>&#160;&#160;&#160;0x00000080</td></tr>
+<tr class="memdesc:gac161c0def7c673c495250f693636b5d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A snap-shot mode. <br /></td></tr>
+<tr class="separator:gac161c0def7c673c495250f693636b5d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0ded52c660ca88c22e12cb22f80ee7b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0ded52c660ca88c22e12cb22f80ee7b2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga0ded52c660ca88c22e12cb22f80ee7b2">GPTIMER_TAMR_TAWOT</a>&#160;&#160;&#160;0x00000040</td></tr>
+<tr class="memdesc:ga0ded52c660ca88c22e12cb22f80ee7b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A wait-on-trigger. <br /></td></tr>
+<tr class="separator:ga0ded52c660ca88c22e12cb22f80ee7b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga662faebf4aeca48facac044d51f9f545"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga662faebf4aeca48facac044d51f9f545"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga662faebf4aeca48facac044d51f9f545">GPTIMER_TAMR_TAMIE</a>&#160;&#160;&#160;0x00000020</td></tr>
+<tr class="memdesc:ga662faebf4aeca48facac044d51f9f545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A match interrupt enable. <br /></td></tr>
+<tr class="separator:ga662faebf4aeca48facac044d51f9f545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacb0959b1393efe83846fa6f91a4155c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacb0959b1393efe83846fa6f91a4155c9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gacb0959b1393efe83846fa6f91a4155c9">GPTIMER_TAMR_TACDIR</a>&#160;&#160;&#160;0x00000010</td></tr>
+<tr class="memdesc:gacb0959b1393efe83846fa6f91a4155c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A count direction. <br /></td></tr>
+<tr class="separator:gacb0959b1393efe83846fa6f91a4155c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ee9f65c313a34f94199e42e7dc22265"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8ee9f65c313a34f94199e42e7dc22265"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga8ee9f65c313a34f94199e42e7dc22265">GPTIMER_TAMR_TAAMS</a>&#160;&#160;&#160;0x00000008</td></tr>
+<tr class="memdesc:ga8ee9f65c313a34f94199e42e7dc22265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A alternate mode. <br /></td></tr>
+<tr class="separator:ga8ee9f65c313a34f94199e42e7dc22265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga77df033f1c7f8ec4c6da2e2cc078fb0a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga77df033f1c7f8ec4c6da2e2cc078fb0a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga77df033f1c7f8ec4c6da2e2cc078fb0a">GPTIMER_TAMR_TACMR</a>&#160;&#160;&#160;0x00000004</td></tr>
+<tr class="memdesc:ga77df033f1c7f8ec4c6da2e2cc078fb0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A capture mode. <br /></td></tr>
+<tr class="separator:ga77df033f1c7f8ec4c6da2e2cc078fb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5944afa778ddbfb908319ec96b071a68"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5944afa778ddbfb908319ec96b071a68"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga5944afa778ddbfb908319ec96b071a68">GPTIMER_TAMR_TAMR</a>&#160;&#160;&#160;0x00000003</td></tr>
+<tr class="memdesc:ga5944afa778ddbfb908319ec96b071a68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A mode. <br /></td></tr>
+<tr class="separator:ga5944afa778ddbfb908319ec96b071a68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TBMR register bit masks</div></td></tr>
+<tr class="memitem:ga4609f97d54c5049a8ecfb67779d4424b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4609f97d54c5049a8ecfb67779d4424b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga4609f97d54c5049a8ecfb67779d4424b">GPTIMER_TBMR_TBPLO</a>&#160;&#160;&#160;0x00000800</td></tr>
+<tr class="memdesc:ga4609f97d54c5049a8ecfb67779d4424b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy PWM operation. <br /></td></tr>
+<tr class="separator:ga4609f97d54c5049a8ecfb67779d4424b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga275b539eb2f4684d02017a948f215001"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga275b539eb2f4684d02017a948f215001"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga275b539eb2f4684d02017a948f215001">GPTIMER_TBMR_TBMRSU</a>&#160;&#160;&#160;0x00000400</td></tr>
+<tr class="memdesc:ga275b539eb2f4684d02017a948f215001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B match register update mode. <br /></td></tr>
+<tr class="separator:ga275b539eb2f4684d02017a948f215001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae0974727989f294d943d0edda6370937"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae0974727989f294d943d0edda6370937"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gae0974727989f294d943d0edda6370937">GPTIMER_TBMR_TBPWMIE</a>&#160;&#160;&#160;0x00000200</td></tr>
+<tr class="memdesc:gae0974727989f294d943d0edda6370937"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B PWM interrupt enable. <br /></td></tr>
+<tr class="separator:gae0974727989f294d943d0edda6370937"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacb10b8fca890a3dd6e8fe2017e27c72d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacb10b8fca890a3dd6e8fe2017e27c72d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gacb10b8fca890a3dd6e8fe2017e27c72d">GPTIMER_TBMR_TBILD</a>&#160;&#160;&#160;0x00000100</td></tr>
+<tr class="memdesc:gacb10b8fca890a3dd6e8fe2017e27c72d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B PWM interval load write. <br /></td></tr>
+<tr class="separator:gacb10b8fca890a3dd6e8fe2017e27c72d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacbbe637dbd510b9e667d70b7c44bb763"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacbbe637dbd510b9e667d70b7c44bb763"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gacbbe637dbd510b9e667d70b7c44bb763">GPTIMER_TBMR_TBSNAPS</a>&#160;&#160;&#160;0x00000080</td></tr>
+<tr class="memdesc:gacbbe637dbd510b9e667d70b7c44bb763"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B snap-shot mode. <br /></td></tr>
+<tr class="separator:gacbbe637dbd510b9e667d70b7c44bb763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga37057202770d2511da6095246e498938"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga37057202770d2511da6095246e498938"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga37057202770d2511da6095246e498938">GPTIMER_TBMR_TBWOT</a>&#160;&#160;&#160;0x00000040</td></tr>
+<tr class="memdesc:ga37057202770d2511da6095246e498938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B wait-on-trigger. <br /></td></tr>
+<tr class="separator:ga37057202770d2511da6095246e498938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gace0fd793846313e4cd3054d845906965"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gace0fd793846313e4cd3054d845906965"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gace0fd793846313e4cd3054d845906965">GPTIMER_TBMR_TBMIE</a>&#160;&#160;&#160;0x00000020</td></tr>
+<tr class="memdesc:gace0fd793846313e4cd3054d845906965"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B match interrupt enable. <br /></td></tr>
+<tr class="separator:gace0fd793846313e4cd3054d845906965"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa3226f35121ceec7f2e0b5d60bf51093"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa3226f35121ceec7f2e0b5d60bf51093"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaa3226f35121ceec7f2e0b5d60bf51093">GPTIMER_TBMR_TBCDIR</a>&#160;&#160;&#160;0x00000010</td></tr>
+<tr class="memdesc:gaa3226f35121ceec7f2e0b5d60bf51093"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B count direction. <br /></td></tr>
+<tr class="separator:gaa3226f35121ceec7f2e0b5d60bf51093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1872c101c260576f0cb72e52d881ca1e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga1872c101c260576f0cb72e52d881ca1e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga1872c101c260576f0cb72e52d881ca1e">GPTIMER_TBMR_TBAMS</a>&#160;&#160;&#160;0x00000008</td></tr>
+<tr class="memdesc:ga1872c101c260576f0cb72e52d881ca1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B alternate mode. <br /></td></tr>
+<tr class="separator:ga1872c101c260576f0cb72e52d881ca1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1985d45c10265cfbd355a02aee09c17a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga1985d45c10265cfbd355a02aee09c17a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga1985d45c10265cfbd355a02aee09c17a">GPTIMER_TBMR_TBCMR</a>&#160;&#160;&#160;0x00000004</td></tr>
+<tr class="memdesc:ga1985d45c10265cfbd355a02aee09c17a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B capture mode. <br /></td></tr>
+<tr class="separator:ga1985d45c10265cfbd355a02aee09c17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6098f61ead77fc5c607bdfc12dc3ed08"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6098f61ead77fc5c607bdfc12dc3ed08"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga6098f61ead77fc5c607bdfc12dc3ed08">GPTIMER_TBMR_TBMR</a>&#160;&#160;&#160;0x00000003</td></tr>
+<tr class="memdesc:ga6098f61ead77fc5c607bdfc12dc3ed08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B mode. <br /></td></tr>
+<tr class="separator:ga6098f61ead77fc5c607bdfc12dc3ed08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_CTL register bit masks</div></td></tr>
+<tr class="memitem:ga524286626ec2ba160111a0e2e2129bf0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga524286626ec2ba160111a0e2e2129bf0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga524286626ec2ba160111a0e2e2129bf0">GPTIMER_CTL_TBPWML</a>&#160;&#160;&#160;0x00004000</td></tr>
+<tr class="memdesc:ga524286626ec2ba160111a0e2e2129bf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B PWM output level. <br /></td></tr>
+<tr class="separator:ga524286626ec2ba160111a0e2e2129bf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga83253391c95a021ff41707cbca08ca72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga83253391c95a021ff41707cbca08ca72"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga83253391c95a021ff41707cbca08ca72">GPTIMER_CTL_TBOTE</a>&#160;&#160;&#160;0x00002000</td></tr>
+<tr class="memdesc:ga83253391c95a021ff41707cbca08ca72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B output trigger enable. <br /></td></tr>
+<tr class="separator:ga83253391c95a021ff41707cbca08ca72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa17296307fb1feb75d2d6a1e4ea54a3c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa17296307fb1feb75d2d6a1e4ea54a3c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaa17296307fb1feb75d2d6a1e4ea54a3c">GPTIMER_CTL_TBEVENT</a>&#160;&#160;&#160;0x00000C00</td></tr>
+<tr class="memdesc:gaa17296307fb1feb75d2d6a1e4ea54a3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B event mode. <br /></td></tr>
+<tr class="separator:gaa17296307fb1feb75d2d6a1e4ea54a3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa49d5fe0be56619d11043b994d1b5b4b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa49d5fe0be56619d11043b994d1b5b4b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaa49d5fe0be56619d11043b994d1b5b4b">GPTIMER_CTL_TBSTALL</a>&#160;&#160;&#160;0x00000200</td></tr>
+<tr class="memdesc:gaa49d5fe0be56619d11043b994d1b5b4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B stall enable. <br /></td></tr>
+<tr class="separator:gaa49d5fe0be56619d11043b994d1b5b4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga983f1bb2e7d6afa28dd8a82a81f44910"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga983f1bb2e7d6afa28dd8a82a81f44910"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga983f1bb2e7d6afa28dd8a82a81f44910">GPTIMER_CTL_TBEN</a>&#160;&#160;&#160;0x00000100</td></tr>
+<tr class="memdesc:ga983f1bb2e7d6afa28dd8a82a81f44910"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B enable. <br /></td></tr>
+<tr class="separator:ga983f1bb2e7d6afa28dd8a82a81f44910"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6328cd5dccc6a1965ee82869a540bf5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6328cd5dccc6a1965ee82869a540bf5d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga6328cd5dccc6a1965ee82869a540bf5d">GPTIMER_CTL_TAPWML</a>&#160;&#160;&#160;0x00000040</td></tr>
+<tr class="memdesc:ga6328cd5dccc6a1965ee82869a540bf5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A PWM output level. <br /></td></tr>
+<tr class="separator:ga6328cd5dccc6a1965ee82869a540bf5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga65d346a8e9351dc1dec8efcc68dd4d11"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga65d346a8e9351dc1dec8efcc68dd4d11"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga65d346a8e9351dc1dec8efcc68dd4d11">GPTIMER_CTL_TAOTE</a>&#160;&#160;&#160;0x00000020</td></tr>
+<tr class="memdesc:ga65d346a8e9351dc1dec8efcc68dd4d11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A output trigger enable. <br /></td></tr>
+<tr class="separator:ga65d346a8e9351dc1dec8efcc68dd4d11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae51f6daec1cea6312cd07d11ac9df133"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae51f6daec1cea6312cd07d11ac9df133"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gae51f6daec1cea6312cd07d11ac9df133">GPTIMER_CTL_RTCEN</a>&#160;&#160;&#160;0x00000010</td></tr>
+<tr class="memdesc:gae51f6daec1cea6312cd07d11ac9df133"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTC enable. <br /></td></tr>
+<tr class="separator:gae51f6daec1cea6312cd07d11ac9df133"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabd8bdc375d24aa493aa23bdbe2754014"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gabd8bdc375d24aa493aa23bdbe2754014"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gabd8bdc375d24aa493aa23bdbe2754014">GPTIMER_CTL_TAEVENT</a>&#160;&#160;&#160;0x0000000C</td></tr>
+<tr class="memdesc:gabd8bdc375d24aa493aa23bdbe2754014"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A event mode. <br /></td></tr>
+<tr class="separator:gabd8bdc375d24aa493aa23bdbe2754014"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae6beffbc1475e952702dc00c80419738"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae6beffbc1475e952702dc00c80419738"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gae6beffbc1475e952702dc00c80419738">GPTIMER_CTL_TASTALL</a>&#160;&#160;&#160;0x00000002</td></tr>
+<tr class="memdesc:gae6beffbc1475e952702dc00c80419738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A stall enable. <br /></td></tr>
+<tr class="separator:gae6beffbc1475e952702dc00c80419738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaabb227a1ea685fdffd5063cdd1ad0d92"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaabb227a1ea685fdffd5063cdd1ad0d92"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaabb227a1ea685fdffd5063cdd1ad0d92">GPTIMER_CTL_TAEN</a>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="memdesc:gaabb227a1ea685fdffd5063cdd1ad0d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A enable. <br /></td></tr>
+<tr class="separator:gaabb227a1ea685fdffd5063cdd1ad0d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_SYNC register bit masks</div></td></tr>
+<tr class="memitem:gaa099f8d1f986951bd27735fb251121b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa099f8d1f986951bd27735fb251121b9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaa099f8d1f986951bd27735fb251121b9">GPTIMER_SYNC_SYNC3</a>&#160;&#160;&#160;0x000000C0</td></tr>
+<tr class="memdesc:gaa099f8d1f986951bd27735fb251121b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronize GPTM3. <br /></td></tr>
+<tr class="separator:gaa099f8d1f986951bd27735fb251121b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafd3bd6cc14896a36c44c095eafb79a49"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafd3bd6cc14896a36c44c095eafb79a49"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gafd3bd6cc14896a36c44c095eafb79a49">GPTIMER_SYNC_SYNC2</a>&#160;&#160;&#160;0x00000030</td></tr>
+<tr class="memdesc:gafd3bd6cc14896a36c44c095eafb79a49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronize GPTM2. <br /></td></tr>
+<tr class="separator:gafd3bd6cc14896a36c44c095eafb79a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4a0633302d16ab5ccac6e40089cc9842"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4a0633302d16ab5ccac6e40089cc9842"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga4a0633302d16ab5ccac6e40089cc9842">GPTIMER_SYNC_SYNC1</a>&#160;&#160;&#160;0x0000000C</td></tr>
+<tr class="memdesc:ga4a0633302d16ab5ccac6e40089cc9842"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronize GPTM1. <br /></td></tr>
+<tr class="separator:ga4a0633302d16ab5ccac6e40089cc9842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad3dad7353d5cb1dd0da4b791f1a2845b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad3dad7353d5cb1dd0da4b791f1a2845b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gad3dad7353d5cb1dd0da4b791f1a2845b">GPTIMER_SYNC_SYNC0</a>&#160;&#160;&#160;0x00000003</td></tr>
+<tr class="memdesc:gad3dad7353d5cb1dd0da4b791f1a2845b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronize GPTM0. <br /></td></tr>
+<tr class="separator:gad3dad7353d5cb1dd0da4b791f1a2845b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_IMR register bit masks</div></td></tr>
+<tr class="memitem:ga223d5db9183ab2551faa5b0dfcc3757f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga223d5db9183ab2551faa5b0dfcc3757f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga223d5db9183ab2551faa5b0dfcc3757f">GPTIMER_IMR_TBMIM</a>&#160;&#160;&#160;0x00000800</td></tr>
+<tr class="memdesc:ga223d5db9183ab2551faa5b0dfcc3757f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B match int mask. <br /></td></tr>
+<tr class="separator:ga223d5db9183ab2551faa5b0dfcc3757f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab341f740b591783627816cea8c3482cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab341f740b591783627816cea8c3482cd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gab341f740b591783627816cea8c3482cd">GPTIMER_IMR_CBEIM</a>&#160;&#160;&#160;0x00000400</td></tr>
+<tr class="memdesc:gab341f740b591783627816cea8c3482cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B capture event int mask. <br /></td></tr>
+<tr class="separator:gab341f740b591783627816cea8c3482cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6e20d84677d8be3231305e3d89becb79"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6e20d84677d8be3231305e3d89becb79"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga6e20d84677d8be3231305e3d89becb79">GPTIMER_IMR_CBMIM</a>&#160;&#160;&#160;0x00000200</td></tr>
+<tr class="memdesc:ga6e20d84677d8be3231305e3d89becb79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B capture match int mask. <br /></td></tr>
+<tr class="separator:ga6e20d84677d8be3231305e3d89becb79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga023f8dcd8603b97d04d52ac791957526"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga023f8dcd8603b97d04d52ac791957526"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga023f8dcd8603b97d04d52ac791957526">GPTIMER_IMR_TBTOIM</a>&#160;&#160;&#160;0x00000100</td></tr>
+<tr class="memdesc:ga023f8dcd8603b97d04d52ac791957526"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B time-out int mask. <br /></td></tr>
+<tr class="separator:ga023f8dcd8603b97d04d52ac791957526"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa15db6674e7300be644bc86b163714c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa15db6674e7300be644bc86b163714c9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaa15db6674e7300be644bc86b163714c9">GPTIMER_IMR_TAMIM</a>&#160;&#160;&#160;0x00000010</td></tr>
+<tr class="memdesc:gaa15db6674e7300be644bc86b163714c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A match int mask. <br /></td></tr>
+<tr class="separator:gaa15db6674e7300be644bc86b163714c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaac6f9296f3fd73791f28d052134cce01"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaac6f9296f3fd73791f28d052134cce01"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaac6f9296f3fd73791f28d052134cce01">GPTIMER_IMR_RTCIM</a>&#160;&#160;&#160;0x00000008</td></tr>
+<tr class="memdesc:gaac6f9296f3fd73791f28d052134cce01"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTC int mask. <br /></td></tr>
+<tr class="separator:gaac6f9296f3fd73791f28d052134cce01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2746376bda4f7dd7dce1a8d9c2c276e9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2746376bda4f7dd7dce1a8d9c2c276e9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga2746376bda4f7dd7dce1a8d9c2c276e9">GPTIMER_IMR_CAEIM</a>&#160;&#160;&#160;0x00000004</td></tr>
+<tr class="memdesc:ga2746376bda4f7dd7dce1a8d9c2c276e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A capture event int mask. <br /></td></tr>
+<tr class="separator:ga2746376bda4f7dd7dce1a8d9c2c276e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga30c397cd81fd271adc2a65eb8f1e8254"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga30c397cd81fd271adc2a65eb8f1e8254"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga30c397cd81fd271adc2a65eb8f1e8254">GPTIMER_IMR_CAMIM</a>&#160;&#160;&#160;0x00000002</td></tr>
+<tr class="memdesc:ga30c397cd81fd271adc2a65eb8f1e8254"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A capture match int mask. <br /></td></tr>
+<tr class="separator:ga30c397cd81fd271adc2a65eb8f1e8254"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac6aa21e22e62eba6e4eb735133c59c87"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac6aa21e22e62eba6e4eb735133c59c87"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gac6aa21e22e62eba6e4eb735133c59c87">GPTIMER_IMR_TATOIM</a>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="memdesc:gac6aa21e22e62eba6e4eb735133c59c87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A time-out int mask. <br /></td></tr>
+<tr class="separator:gac6aa21e22e62eba6e4eb735133c59c87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_RIS register bit masks</div></td></tr>
+<tr class="memitem:ga64a7dcae4977e47ec8d03d5205c3faf0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga64a7dcae4977e47ec8d03d5205c3faf0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga64a7dcae4977e47ec8d03d5205c3faf0">GPTIMER_RIS_TBMRIS</a>&#160;&#160;&#160;0x00000800</td></tr>
+<tr class="memdesc:ga64a7dcae4977e47ec8d03d5205c3faf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B match raw status. <br /></td></tr>
+<tr class="separator:ga64a7dcae4977e47ec8d03d5205c3faf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf30810e22f8cdb1b16bf7553afe6922c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf30810e22f8cdb1b16bf7553afe6922c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaf30810e22f8cdb1b16bf7553afe6922c">GPTIMER_RIS_CBERIS</a>&#160;&#160;&#160;0x00000400</td></tr>
+<tr class="memdesc:gaf30810e22f8cdb1b16bf7553afe6922c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B capture event raw status. <br /></td></tr>
+<tr class="separator:gaf30810e22f8cdb1b16bf7553afe6922c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3397ad71959ed458339f87527482ec41"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3397ad71959ed458339f87527482ec41"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga3397ad71959ed458339f87527482ec41">GPTIMER_RIS_CBMRIS</a>&#160;&#160;&#160;0x00000200</td></tr>
+<tr class="memdesc:ga3397ad71959ed458339f87527482ec41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B capture match raw status. <br /></td></tr>
+<tr class="separator:ga3397ad71959ed458339f87527482ec41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga39e06f716b4105f7a7c7dd601cfedf25"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga39e06f716b4105f7a7c7dd601cfedf25"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga39e06f716b4105f7a7c7dd601cfedf25">GPTIMER_RIS_TBTORIS</a>&#160;&#160;&#160;0x00000100</td></tr>
+<tr class="memdesc:ga39e06f716b4105f7a7c7dd601cfedf25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B time-out raw status. <br /></td></tr>
+<tr class="separator:ga39e06f716b4105f7a7c7dd601cfedf25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac0065a3fd56899e3d5d68c88e255b01c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac0065a3fd56899e3d5d68c88e255b01c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gac0065a3fd56899e3d5d68c88e255b01c">GPTIMER_RIS_TAMRIS</a>&#160;&#160;&#160;0x00000010</td></tr>
+<tr class="memdesc:gac0065a3fd56899e3d5d68c88e255b01c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A match raw status. <br /></td></tr>
+<tr class="separator:gac0065a3fd56899e3d5d68c88e255b01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0c8acb5c9d7773f8c79888f7348f9d66"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0c8acb5c9d7773f8c79888f7348f9d66"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga0c8acb5c9d7773f8c79888f7348f9d66">GPTIMER_RIS_RTCRIS</a>&#160;&#160;&#160;0x00000008</td></tr>
+<tr class="memdesc:ga0c8acb5c9d7773f8c79888f7348f9d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTC raw status. <br /></td></tr>
+<tr class="separator:ga0c8acb5c9d7773f8c79888f7348f9d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga51f4f4db1d4e0edf417f7d675a208bff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga51f4f4db1d4e0edf417f7d675a208bff"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga51f4f4db1d4e0edf417f7d675a208bff">GPTIMER_RIS_CAERIS</a>&#160;&#160;&#160;0x00000004</td></tr>
+<tr class="memdesc:ga51f4f4db1d4e0edf417f7d675a208bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A capture event raw status. <br /></td></tr>
+<tr class="separator:ga51f4f4db1d4e0edf417f7d675a208bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga24badc516076e442eeee81a0a527b1d2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga24badc516076e442eeee81a0a527b1d2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga24badc516076e442eeee81a0a527b1d2">GPTIMER_RIS_CAMRIS</a>&#160;&#160;&#160;0x00000002</td></tr>
+<tr class="memdesc:ga24badc516076e442eeee81a0a527b1d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A capture match raw status. <br /></td></tr>
+<tr class="separator:ga24badc516076e442eeee81a0a527b1d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4757b6c4a1ecfefe9427a244247b87d2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4757b6c4a1ecfefe9427a244247b87d2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga4757b6c4a1ecfefe9427a244247b87d2">GPTIMER_RIS_TATORIS</a>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="memdesc:ga4757b6c4a1ecfefe9427a244247b87d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A time-out raw status. <br /></td></tr>
+<tr class="separator:ga4757b6c4a1ecfefe9427a244247b87d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_MIS register bit masks</div></td></tr>
+<tr class="memitem:gac225b08ce1a08bdced900ae94236075b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac225b08ce1a08bdced900ae94236075b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gac225b08ce1a08bdced900ae94236075b">GPTIMER_MIS_TBMMIS</a>&#160;&#160;&#160;0x00000800</td></tr>
+<tr class="memdesc:gac225b08ce1a08bdced900ae94236075b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B match masked status. <br /></td></tr>
+<tr class="separator:gac225b08ce1a08bdced900ae94236075b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3b82267ae12106d15a2bc3a9be0c11e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3b82267ae12106d15a2bc3a9be0c11e6"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga3b82267ae12106d15a2bc3a9be0c11e6">GPTIMER_MIS_CBEMIS</a>&#160;&#160;&#160;0x00000400</td></tr>
+<tr class="memdesc:ga3b82267ae12106d15a2bc3a9be0c11e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B capture event masked status. <br /></td></tr>
+<tr class="separator:ga3b82267ae12106d15a2bc3a9be0c11e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga589b45ae73afb57c715ed2824fa67a0b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga589b45ae73afb57c715ed2824fa67a0b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga589b45ae73afb57c715ed2824fa67a0b">GPTIMER_MIS_CBMMIS</a>&#160;&#160;&#160;0x00000200</td></tr>
+<tr class="memdesc:ga589b45ae73afb57c715ed2824fa67a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B capture match masked status. <br /></td></tr>
+<tr class="separator:ga589b45ae73afb57c715ed2824fa67a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadeb53cde3cfa7b4d5bf255a7d13cd9d0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadeb53cde3cfa7b4d5bf255a7d13cd9d0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gadeb53cde3cfa7b4d5bf255a7d13cd9d0">GPTIMER_MIS_TBTOMIS</a>&#160;&#160;&#160;0x00000100</td></tr>
+<tr class="memdesc:gadeb53cde3cfa7b4d5bf255a7d13cd9d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B time-out masked status. <br /></td></tr>
+<tr class="separator:gadeb53cde3cfa7b4d5bf255a7d13cd9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5ae91aedb4a0b3aa34c476290f8a3c05"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5ae91aedb4a0b3aa34c476290f8a3c05"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga5ae91aedb4a0b3aa34c476290f8a3c05">GPTIMER_MIS_TAMRIS</a>&#160;&#160;&#160;0x00000010</td></tr>
+<tr class="memdesc:ga5ae91aedb4a0b3aa34c476290f8a3c05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A match masked status. <br /></td></tr>
+<tr class="separator:ga5ae91aedb4a0b3aa34c476290f8a3c05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3340c5b0f7ca64c786784de67d7ce143"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3340c5b0f7ca64c786784de67d7ce143"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga3340c5b0f7ca64c786784de67d7ce143">GPTIMER_MIS_RTCMIS</a>&#160;&#160;&#160;0x00000008</td></tr>
+<tr class="memdesc:ga3340c5b0f7ca64c786784de67d7ce143"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTC masked status. <br /></td></tr>
+<tr class="separator:ga3340c5b0f7ca64c786784de67d7ce143"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3123d828e2ce6e79d267f819da0ced3b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3123d828e2ce6e79d267f819da0ced3b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga3123d828e2ce6e79d267f819da0ced3b">GPTIMER_MIS_CAEMIS</a>&#160;&#160;&#160;0x00000004</td></tr>
+<tr class="memdesc:ga3123d828e2ce6e79d267f819da0ced3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A capture event masked status. <br /></td></tr>
+<tr class="separator:ga3123d828e2ce6e79d267f819da0ced3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5500f987df56f95c2b9792e3aaa5a41a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5500f987df56f95c2b9792e3aaa5a41a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga5500f987df56f95c2b9792e3aaa5a41a">GPTIMER_MIS_CAMMIS</a>&#160;&#160;&#160;0x00000002</td></tr>
+<tr class="memdesc:ga5500f987df56f95c2b9792e3aaa5a41a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A capture match masked status. <br /></td></tr>
+<tr class="separator:ga5500f987df56f95c2b9792e3aaa5a41a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga172fd7da76a1af81ef9627209cd07004"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga172fd7da76a1af81ef9627209cd07004"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga172fd7da76a1af81ef9627209cd07004">GPTIMER_MIS_TATOMIS</a>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="memdesc:ga172fd7da76a1af81ef9627209cd07004"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A time-out masked status. <br /></td></tr>
+<tr class="separator:ga172fd7da76a1af81ef9627209cd07004"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_ICR register bit masks</div></td></tr>
+<tr class="memitem:ga79caf5eeade27b349b5040d408b53e0f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga79caf5eeade27b349b5040d408b53e0f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga79caf5eeade27b349b5040d408b53e0f">GPTIMER_ICR_WUECINT</a>&#160;&#160;&#160;0x00010000</td></tr>
+<tr class="memdesc:ga79caf5eeade27b349b5040d408b53e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">write update error int clear <br /></td></tr>
+<tr class="separator:ga79caf5eeade27b349b5040d408b53e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab6585ee563a6d1dd4cf3665aecdcb6b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab6585ee563a6d1dd4cf3665aecdcb6b2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gab6585ee563a6d1dd4cf3665aecdcb6b2">GPTIMER_ICR_TBMCINT</a>&#160;&#160;&#160;0x00000800</td></tr>
+<tr class="memdesc:gab6585ee563a6d1dd4cf3665aecdcb6b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B match int clear. <br /></td></tr>
+<tr class="separator:gab6585ee563a6d1dd4cf3665aecdcb6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga33dc9b349cd1c8e8adc497cb2145fe35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga33dc9b349cd1c8e8adc497cb2145fe35"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga33dc9b349cd1c8e8adc497cb2145fe35">GPTIMER_ICR_CBECINT</a>&#160;&#160;&#160;0x00000400</td></tr>
+<tr class="memdesc:ga33dc9b349cd1c8e8adc497cb2145fe35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B capture event int clear. <br /></td></tr>
+<tr class="separator:ga33dc9b349cd1c8e8adc497cb2145fe35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga811a5011b60855bc90a4089f375ddc37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga811a5011b60855bc90a4089f375ddc37"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga811a5011b60855bc90a4089f375ddc37">GPTIMER_ICR_CBMCINT</a>&#160;&#160;&#160;0x00000200</td></tr>
+<tr class="memdesc:ga811a5011b60855bc90a4089f375ddc37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B capture match int clear. <br /></td></tr>
+<tr class="separator:ga811a5011b60855bc90a4089f375ddc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf9b93bf2489363b553dce054832b3dc3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf9b93bf2489363b553dce054832b3dc3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaf9b93bf2489363b553dce054832b3dc3">GPTIMER_ICR_TBTOCINT</a>&#160;&#160;&#160;0x00000100</td></tr>
+<tr class="memdesc:gaf9b93bf2489363b553dce054832b3dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B time-out int clear. <br /></td></tr>
+<tr class="separator:gaf9b93bf2489363b553dce054832b3dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae47eca8d02f4516f6d6a24bc8749b46c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae47eca8d02f4516f6d6a24bc8749b46c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gae47eca8d02f4516f6d6a24bc8749b46c">GPTIMER_ICR_TAMCINT</a>&#160;&#160;&#160;0x00000010</td></tr>
+<tr class="memdesc:gae47eca8d02f4516f6d6a24bc8749b46c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A match int clear. <br /></td></tr>
+<tr class="separator:gae47eca8d02f4516f6d6a24bc8749b46c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga71955f7bb31590c7b7898ae2f603fc8b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga71955f7bb31590c7b7898ae2f603fc8b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga71955f7bb31590c7b7898ae2f603fc8b">GPTIMER_ICR_RTCCINT</a>&#160;&#160;&#160;0x00000008</td></tr>
+<tr class="memdesc:ga71955f7bb31590c7b7898ae2f603fc8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTC interrupt clear. <br /></td></tr>
+<tr class="separator:ga71955f7bb31590c7b7898ae2f603fc8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6344ff47b6e2b0ea6d29c8169474945a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6344ff47b6e2b0ea6d29c8169474945a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga6344ff47b6e2b0ea6d29c8169474945a">GPTIMER_ICR_CAECINT</a>&#160;&#160;&#160;0x00000004</td></tr>
+<tr class="memdesc:ga6344ff47b6e2b0ea6d29c8169474945a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A capture event int clear. <br /></td></tr>
+<tr class="separator:ga6344ff47b6e2b0ea6d29c8169474945a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga30bf1d3c36f14a80683c1210906ba815"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga30bf1d3c36f14a80683c1210906ba815"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga30bf1d3c36f14a80683c1210906ba815">GPTIMER_ICR_CAMCINT</a>&#160;&#160;&#160;0x00000002</td></tr>
+<tr class="memdesc:ga30bf1d3c36f14a80683c1210906ba815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A capture match int clear. <br /></td></tr>
+<tr class="separator:ga30bf1d3c36f14a80683c1210906ba815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga675e5f953b7519db8dfe0d4ba92b0e13"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga675e5f953b7519db8dfe0d4ba92b0e13"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga675e5f953b7519db8dfe0d4ba92b0e13">GPTIMER_ICR_TATOCINT</a>&#160;&#160;&#160;0x00000001</td></tr>
+<tr class="memdesc:ga675e5f953b7519db8dfe0d4ba92b0e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A time-out int clear. <br /></td></tr>
+<tr class="separator:ga675e5f953b7519db8dfe0d4ba92b0e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TAILR register bit masks</div></td></tr>
+<tr class="memitem:ga7d7e9edd18d45f50fac2791715a64ec0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7d7e9edd18d45f50fac2791715a64ec0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga7d7e9edd18d45f50fac2791715a64ec0">GPTIMER_TAILR_TAILR</a>&#160;&#160;&#160;0xFFFFFFFF</td></tr>
+<tr class="memdesc:ga7d7e9edd18d45f50fac2791715a64ec0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A interval load register. <br /></td></tr>
+<tr class="separator:ga7d7e9edd18d45f50fac2791715a64ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TBILR register bit masks</div></td></tr>
+<tr class="memitem:ga2e22458b5a6e5eaab468470a23782287"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2e22458b5a6e5eaab468470a23782287"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga2e22458b5a6e5eaab468470a23782287">GPTIMER_TBILR_TBILR</a>&#160;&#160;&#160;0x0000FFFF</td></tr>
+<tr class="memdesc:ga2e22458b5a6e5eaab468470a23782287"><td class="mdescLeft">&#160;</td><td class="mdescRight">B interval load register. <br /></td></tr>
+<tr class="separator:ga2e22458b5a6e5eaab468470a23782287"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TAMATCHR register bit masks</div></td></tr>
+<tr class="memitem:ga1b992c9e91b3dbb44d767c82f6ded407"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga1b992c9e91b3dbb44d767c82f6ded407"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga1b992c9e91b3dbb44d767c82f6ded407">GPTIMER_TAMATCHR_TAMR</a>&#160;&#160;&#160;0xFFFFFFFF</td></tr>
+<tr class="memdesc:ga1b992c9e91b3dbb44d767c82f6ded407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A match register. <br /></td></tr>
+<tr class="separator:ga1b992c9e91b3dbb44d767c82f6ded407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TBMATCHR register bit masks</div></td></tr>
+<tr class="memitem:gaa5e7383b1811e9cb0d5c1fcd03522e24"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa5e7383b1811e9cb0d5c1fcd03522e24"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaa5e7383b1811e9cb0d5c1fcd03522e24">GPTIMER_TBMATCHR_TBMR</a>&#160;&#160;&#160;0x0000FFFF</td></tr>
+<tr class="memdesc:gaa5e7383b1811e9cb0d5c1fcd03522e24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B match register. <br /></td></tr>
+<tr class="separator:gaa5e7383b1811e9cb0d5c1fcd03522e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TAPR register bit masks</div></td></tr>
+<tr class="memitem:gace35e0141c8eed1bd7455a46e977d3bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gace35e0141c8eed1bd7455a46e977d3bd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gace35e0141c8eed1bd7455a46e977d3bd">GPTIMER_TAPR_TAPSR</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:gace35e0141c8eed1bd7455a46e977d3bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A prescale. <br /></td></tr>
+<tr class="separator:gace35e0141c8eed1bd7455a46e977d3bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TBPR register bit masks</div></td></tr>
+<tr class="memitem:ga9dc4a6c3a5254a690c320e9fb26a0394"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9dc4a6c3a5254a690c320e9fb26a0394"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga9dc4a6c3a5254a690c320e9fb26a0394">GPTIMER_TBPR_TBPSR</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga9dc4a6c3a5254a690c320e9fb26a0394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B prescale. <br /></td></tr>
+<tr class="separator:ga9dc4a6c3a5254a690c320e9fb26a0394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TAPMR register bit masks</div></td></tr>
+<tr class="memitem:ga81109bab92c16b90011f565747f986fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga81109bab92c16b90011f565747f986fc"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga81109bab92c16b90011f565747f986fc">GPTIMER_TAPMR_TAPSR</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:ga81109bab92c16b90011f565747f986fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A prescale match. <br /></td></tr>
+<tr class="separator:ga81109bab92c16b90011f565747f986fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TBPMR register bit masks</div></td></tr>
+<tr class="memitem:gaa2b59a1f040fb3bf8eab7e88bfb86716"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa2b59a1f040fb3bf8eab7e88bfb86716"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaa2b59a1f040fb3bf8eab7e88bfb86716">GPTIMER_TBPMR_TBPSR</a>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="memdesc:gaa2b59a1f040fb3bf8eab7e88bfb86716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B prescale match. <br /></td></tr>
+<tr class="separator:gaa2b59a1f040fb3bf8eab7e88bfb86716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TAR register bit masks</div></td></tr>
+<tr class="memitem:ga74d6eaeada36255f61e65ed578f3bc03"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga74d6eaeada36255f61e65ed578f3bc03"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga74d6eaeada36255f61e65ed578f3bc03">GPTIMER_TAR_TAR</a>&#160;&#160;&#160;0xFFFFFFFF</td></tr>
+<tr class="memdesc:ga74d6eaeada36255f61e65ed578f3bc03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A register. <br /></td></tr>
+<tr class="separator:ga74d6eaeada36255f61e65ed578f3bc03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TBR register bit masks</div></td></tr>
+<tr class="memitem:gaa0e32b7074b590b052960552116a27b1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa0e32b7074b590b052960552116a27b1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaa0e32b7074b590b052960552116a27b1">GPTIMER_TBR_TBR</a>&#160;&#160;&#160;0x0000FFFF</td></tr>
+<tr class="memdesc:gaa0e32b7074b590b052960552116a27b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B register. <br /></td></tr>
+<tr class="separator:gaa0e32b7074b590b052960552116a27b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TAV register bit masks</div></td></tr>
+<tr class="memitem:gab4b9d7af22ef5008d196cf1c4300cdbd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab4b9d7af22ef5008d196cf1c4300cdbd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gab4b9d7af22ef5008d196cf1c4300cdbd">GPTIMER_TAV_TAV</a>&#160;&#160;&#160;0xFFFFFFFF</td></tr>
+<tr class="memdesc:gab4b9d7af22ef5008d196cf1c4300cdbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A register. <br /></td></tr>
+<tr class="separator:gab4b9d7af22ef5008d196cf1c4300cdbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TBV register bit masks</div></td></tr>
+<tr class="memitem:ga437fb13161ec48940ba0efcdc6be3442"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga437fb13161ec48940ba0efcdc6be3442"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga437fb13161ec48940ba0efcdc6be3442">GPTIMER_TBV_PRE</a>&#160;&#160;&#160;0x00FF0000</td></tr>
+<tr class="memdesc:ga437fb13161ec48940ba0efcdc6be3442"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B prescale register. <br /></td></tr>
+<tr class="separator:ga437fb13161ec48940ba0efcdc6be3442"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga90e7d5d371884cb8fce501e0f9641eaf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga90e7d5d371884cb8fce501e0f9641eaf"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga90e7d5d371884cb8fce501e0f9641eaf">GPTIMER_TBV_TBV</a>&#160;&#160;&#160;0x0000FFFF</td></tr>
+<tr class="memdesc:ga90e7d5d371884cb8fce501e0f9641eaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B register. <br /></td></tr>
+<tr class="separator:ga90e7d5d371884cb8fce501e0f9641eaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_RTCPD register bit masks</div></td></tr>
+<tr class="memitem:gaf6c842a017796a86555d66d0a83a4746"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf6c842a017796a86555d66d0a83a4746"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaf6c842a017796a86555d66d0a83a4746">GPTIMER_RTCPD_RTCPD</a>&#160;&#160;&#160;0x0000FFFF</td></tr>
+<tr class="memdesc:gaf6c842a017796a86555d66d0a83a4746"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTC predivider. <br /></td></tr>
+<tr class="separator:gaf6c842a017796a86555d66d0a83a4746"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TAPS register bit masks</div></td></tr>
+<tr class="memitem:ga5e7dabb04da117e427abcb73305ad0ea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5e7dabb04da117e427abcb73305ad0ea"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga5e7dabb04da117e427abcb73305ad0ea">GPTIMER_TAPS_PSS</a>&#160;&#160;&#160;0x0000FFFF</td></tr>
+<tr class="memdesc:ga5e7dabb04da117e427abcb73305ad0ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A prescaler. <br /></td></tr>
+<tr class="separator:ga5e7dabb04da117e427abcb73305ad0ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TBPS register bit masks</div></td></tr>
+<tr class="memitem:gafce9fd4d08c76ad7cd1b5f8bde342f9f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafce9fd4d08c76ad7cd1b5f8bde342f9f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gafce9fd4d08c76ad7cd1b5f8bde342f9f">GPTIMER_TBPS_PSS</a>&#160;&#160;&#160;0x0000FFFF</td></tr>
+<tr class="memdesc:gafce9fd4d08c76ad7cd1b5f8bde342f9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B prescaler. <br /></td></tr>
+<tr class="separator:gafce9fd4d08c76ad7cd1b5f8bde342f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TAPV register bit masks</div></td></tr>
+<tr class="memitem:ga5b233672c9f951625c2aa725f46f4dac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5b233672c9f951625c2aa725f46f4dac"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga5b233672c9f951625c2aa725f46f4dac">GPTIMER_TAPV_PSV</a>&#160;&#160;&#160;0x0000FFFF</td></tr>
+<tr class="memdesc:ga5b233672c9f951625c2aa725f46f4dac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer A prescaler value. <br /></td></tr>
+<tr class="separator:ga5b233672c9f951625c2aa725f46f4dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_TBPV register bit masks</div></td></tr>
+<tr class="memitem:gad7ffa630fb8dcd1de23b5eee0213ef7a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad7ffa630fb8dcd1de23b5eee0213ef7a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gad7ffa630fb8dcd1de23b5eee0213ef7a">GPTIMER_TBPV_PSV</a>&#160;&#160;&#160;0x0000FFFF</td></tr>
+<tr class="memdesc:gad7ffa630fb8dcd1de23b5eee0213ef7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer B prescaler value. <br /></td></tr>
+<tr class="separator:gad7ffa630fb8dcd1de23b5eee0213ef7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">GPTIMER_PP register bit masks</div></td></tr>
+<tr class="memitem:gaf99784f36904fdf0f4c6fe0a9aa160aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf99784f36904fdf0f4c6fe0a9aa160aa"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#gaf99784f36904fdf0f4c6fe0a9aa160aa">GPTIMER_PP_ALTCLK</a>&#160;&#160;&#160;0x00000040</td></tr>
+<tr class="memdesc:gaf99784f36904fdf0f4c6fe0a9aa160aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternate clock source. <br /></td></tr>
+<tr class="separator:gaf99784f36904fdf0f4c6fe0a9aa160aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga11f2288998e6f08c26a7671f31dde6f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga11f2288998e6f08c26a7671f31dde6f0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga11f2288998e6f08c26a7671f31dde6f0">GPTIMER_PP_SYNCNT</a>&#160;&#160;&#160;0x00000020</td></tr>
+<tr class="memdesc:ga11f2288998e6f08c26a7671f31dde6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronized start. <br /></td></tr>
+<tr class="separator:ga11f2288998e6f08c26a7671f31dde6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga86aaf3528c6efb39a375abc1329b065a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga86aaf3528c6efb39a375abc1329b065a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga86aaf3528c6efb39a375abc1329b065a">GPTIMER_PP_CHAIN</a>&#160;&#160;&#160;0x00000010</td></tr>
+<tr class="memdesc:ga86aaf3528c6efb39a375abc1329b065a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chain with other timers. <br /></td></tr>
+<tr class="separator:ga86aaf3528c6efb39a375abc1329b065a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4703a19990fa7c5f4498143a7d931a48"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4703a19990fa7c5f4498143a7d931a48"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00835.html#ga4703a19990fa7c5f4498143a7d931a48">GPTIMER_PP_SIZE</a>&#160;&#160;&#160;0x0000000F</td></tr>
+<tr class="memdesc:ga4703a19990fa7c5f4498143a7d931a48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer size. <br /></td></tr>
+<tr class="separator:ga4703a19990fa7c5f4498143a7d931a48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header file for the ARM Nested Vectored Interrupt Controller. </p>
+<div class="textblock"><p>Header file for the cc2538 General Purpose Timers. </p>
 
-<p>Definition in file <a class="el" href="a00519_source.html">nvic.h</a>.</p>
+<p>Definition in file <a class="el" href="a00519_source.html">gptimer.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

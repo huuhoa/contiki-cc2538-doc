@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/dev/mpu.h Source File</title>
+<title>Contiki 3.x: cpu/cc2538/dev/gpio.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,7 +48,7 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">mpu.h</div>  </div>
+<div class="title">gpio.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00517.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
@@ -82,47 +82,116 @@
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * OF THE POSSIBILITY OF SUCH DAMAGE.</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> */</span><span class="comment"></span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * \addtogroup cc2538</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * \addtogroup cc2538-gpio</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * @{</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * \defgroup cc2538-mpu cc2538 Memory Protection Unit</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * Driver for the cc2538 Memory Protection Unit</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * Header file for the ARM Memory Protection Unit</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#ifndef MPU_H_</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#define MPU_H_</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * \file</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * Implementation of the cc2538 GPIO controller</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00476.html">sys/energest.h</a>&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;dev/leds.h&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00518.html">dev/gpio.h</a>&quot;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00526.html">dev/nvic.h</a>&quot;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00559.html">reg.h</a>&quot;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;lpm.h&quot;</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00709.html#ga9c12c4d6d88eb5cafe464cd81e64e2db">   46</a></span>&#160;<span class="preprocessor">#define MPU_MPU_TYPE           0xE000ED90 </span><span class="comment">/**&lt; MPU Type */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="a00709.html#gad8a855f108fbc76153e04042e02844a7">   47</a></span>&#160;<span class="preprocessor">#define MPU_MPU_CTRL           0xE000ED94 </span><span class="comment">/**&lt; MPU Control */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a00709.html#ga955d8731297894a3d363d6f603713936">   48</a></span>&#160;<span class="preprocessor">#define MPU_MPU_NUMBER         0xE000ED98 </span><span class="comment">/**&lt; MPU Region Number */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="a00709.html#ga0c7bc12d0f98e77fcefe4f7b83f0ed76">   49</a></span>&#160;<span class="preprocessor">#define MPU_MPU_BASE           0xE000ED9C </span><span class="comment">/**&lt; MPU Region Base Address */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="a00709.html#ga11b963943567ed67724ab87e9921f0b3">   50</a></span>&#160;<span class="preprocessor">#define MPU_MPU_ATTR           0xE000EDA0 </span><span class="comment">/**&lt; MPU Region Attribute and Size */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="a00709.html#ga86c8df87023a824fe17024dd922c1d28">   51</a></span>&#160;<span class="preprocessor">#define MPU_MPU_BASE1          0xE000EDA4 </span><span class="comment">/**&lt; MPU Region Base Address Alias 1 */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="a00709.html#ga07207b434dff92638b9c195985ec97e8">   52</a></span>&#160;<span class="preprocessor">#define MPU_MPU_ATTR1          0xE000EDA8 </span><span class="comment">/**&lt; MPU Region Attribute and Size Alias 1 */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="a00709.html#ga96acad5967c6f0f12f0ac373dfeccefe">   53</a></span>&#160;<span class="preprocessor">#define MPU_MPU_BASE2          0xE000EDAC </span><span class="comment">/**&lt; MPU Region Base Address Alias 2 */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="a00709.html#ga040ae7b5c069e704d4d80a4467bac0b6">   54</a></span>&#160;<span class="preprocessor">#define MPU_MPU_ATTR2          0xE000EDB0 </span><span class="comment">/**&lt; MPU Region Attribute and Size Alias 2*/</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="a00709.html#ga484b0b8623917e3dc4db6c0f7dafabdf">   55</a></span>&#160;<span class="preprocessor">#define MPU_MPU_BASE3          0xE000EDB4 </span><span class="comment">/**&lt; MPU Region Base Address Alias 3 */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="a00709.html#ga65c792b1abb52c28b9ed4d9257986d06">   56</a></span>&#160;<span class="preprocessor">#define MPU_MPU_ATTR3          0xE000EDB8 </span><span class="comment">/**&lt; MPU Region Attribute and Size Alias 3*/</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="a00709.html#ga398fc8723ed35f587718d6f59910a951">   57</a></span>&#160;<span class="preprocessor">#define MPU_DBG_CTRL           0xE000EDF0 </span><span class="comment">/**&lt; Debug Control and Status Reg */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="a00709.html#gac6785b712654baaf88675ac7f688a5ed">   58</a></span>&#160;<span class="preprocessor">#define MPU_DBG_XFER           0xE000EDF4 </span><span class="comment">/**&lt; Debug Core Reg. Transfer Select */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="a00709.html#gaa9bae391334aab70db2fcaabe2ff145d">   59</a></span>&#160;<span class="preprocessor">#define MPU_DBG_DATA           0xE000EDF8 </span><span class="comment">/**&lt; Debug Core Register Data */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="a00709.html#ga86857c4266fcc41e8fbd3d9b8126b2bd">   60</a></span>&#160;<span class="preprocessor">#define MPU_DBG_INT            0xE000EDFC </span><span class="comment">/**&lt; Debug Reset Interrupt Control */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="a00709.html#gafcc6c1c3ca08f63a8ee1118040e70857">   61</a></span>&#160;<span class="preprocessor">#define MPU_SW_TRIG            0xE000EF00 </span><span class="comment">/**&lt; Software Trigger Interrupt */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* MPU_H_ */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> * @}</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> * @}</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * \brief Pointer to a function to be called when a GPIO interrupt is detected.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * Callbacks for Port A, Pins[0:7] are stored in positions [0:7] of this</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> * buffer, Port B callbacks in [8:15] and so on</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">static</span> <a class="code" href="a00834.html#gae1d2f3a50c40b62a37058daefe841d14">gpio_callback_t</a> gpio_callbacks[32];</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="a00834.html#gad97cc2a45eb96a512789c62309b10437">   56</a></span>&#160;<a class="code" href="a00834.html#gad97cc2a45eb96a512789c62309b10437">gpio_register_callback</a>(<a class="code" href="a00834.html#gae1d2f3a50c40b62a37058daefe841d14">gpio_callback_t</a> f, uint8_t port, uint8_t pin)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  gpio_callbacks[(port &lt;&lt; 3) + pin] = f;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/** \brief Run through all registered GPIO callbacks and invoke those</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> * associated with the \a port and the pins specified by \a mask</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> * \param mask Search callbacks associated with pins specified by this mask</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"> * \param port Search callbacks associated with this port. Here, port is</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> * specified as a number between 0 and 3. Port A: 0, Port B: 1 etc */</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="a00834.html#gaa1480803bbc2a5fadef2b8468271f9c1">   67</a></span>&#160;<a class="code" href="a00834.html#gaa1480803bbc2a5fadef2b8468271f9c1">notify</a>(uint8_t mask, uint8_t port)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  uint8_t i;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <a class="code" href="a00834.html#gae1d2f3a50c40b62a37058daefe841d14">gpio_callback_t</a> *f = &amp;gpio_callbacks[port &lt;&lt; 3];</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">for</span>(i = 0; i &lt; 8; i++) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">if</span>(mask &amp; (1 &lt;&lt; i)) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keywordflow">if</span>((*f) != NULL) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        (*f)(port, i);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    f++;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">/** \brief Interrupt service routine for Port \a port</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"> * \param port Number between 0 and 3. Port A: 0, Port B: 1, etc.</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;gpio_port_isr(uint8_t port)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  uint32_t base;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  uint8_t int_status, power_up_int_status;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="a00826.html#ga4138a502282e17470a3e94c6c386fa26">lpm_exit</a>();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  ENERGEST_ON(ENERGEST_TYPE_IRQ);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  base = <a class="code" href="a00834.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a>(port);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  int_status = <a class="code" href="a00834.html#gad2d82b4a623acf8a534090242e636daa">GPIO_GET_MASKED_INT_STATUS</a>(base);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  power_up_int_status = <a class="code" href="a00834.html#ga668abac06022d01de6cfe778a1fb90b8">GPIO_GET_POWER_UP_INT_STATUS</a>(port);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <a class="code" href="a00834.html#gaa1480803bbc2a5fadef2b8468271f9c1">notify</a>(int_status | power_up_int_status, port);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <a class="code" href="a00834.html#gaa8b828b3b2f906a918af7d12d70c5a94">GPIO_CLEAR_INTERRUPT</a>(base, int_status);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <a class="code" href="a00834.html#gae30f164299014fd4508f9ad9247c9551">GPIO_CLEAR_POWER_UP_INTERRUPT</a>(port, power_up_int_status);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  ENERGEST_OFF(ENERGEST_TYPE_IRQ);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#define GPIO_PORT_ISR(lowercase_port, uppercase_port) \</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">void \</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">gpio_port_##lowercase_port##_isr(void) \</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">{ \</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">  gpio_port_isr(GPIO_##uppercase_port##_NUM); \</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">}</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;GPIO_PORT_ISR(a, A)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;GPIO_PORT_ISR(b, B)</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;GPIO_PORT_ISR(c, C)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;GPIO_PORT_ISR(d, D)</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="a00834.html#ga84f88a73b7bafb4c856cb7ba9f6fe8b5">  119</a></span>&#160;<a class="code" href="a00834.html#ga84f88a73b7bafb4c856cb7ba9f6fe8b5">gpio_init</a>()</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;{</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  memset(gpio_callbacks, 0, <span class="keyword">sizeof</span>(gpio_callbacks));</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;}<span class="comment"></span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">/** @} */</span></div>
+<div class="ttc" id="a00834_html_ga684b5fe1b034e081bcae368743dd5c04"><div class="ttname"><a href="a00834.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a></div><div class="ttdeci">#define GPIO_PORT_TO_BASE(PORT)</div><div class="ttdoc">Converts a port number to the port base address. </div><div class="ttdef"><b>Definition:</b> <a href="a00518_source.html#l00329">gpio.h:329</a></div></div>
+<div class="ttc" id="a00559_html"><div class="ttname"><a href="a00559.html">reg.h</a></div><div class="ttdoc">Header file with register manipulation macro definitions. </div></div>
+<div class="ttc" id="a00476_html"><div class="ttname"><a href="a00476.html">energest.h</a></div><div class="ttdoc">    Header file for the energy estimation mechanism  </div></div>
+<div class="ttc" id="a00834_html_gae30f164299014fd4508f9ad9247c9551"><div class="ttname"><a href="a00834.html#gae30f164299014fd4508f9ad9247c9551">GPIO_CLEAR_POWER_UP_INTERRUPT</a></div><div class="ttdeci">#define GPIO_CLEAR_POWER_UP_INTERRUPT(PORT, PIN_MASK)</div><div class="ttdoc">Clear power-up interrupt triggering for pins with PIN_MASK of port PORT. </div><div class="ttdef"><b>Definition:</b> <a href="a00518_source.html#l00311">gpio.h:311</a></div></div>
+<div class="ttc" id="a00834_html_gaa1480803bbc2a5fadef2b8468271f9c1"><div class="ttname"><a href="a00834.html#gaa1480803bbc2a5fadef2b8468271f9c1">notify</a></div><div class="ttdeci">void notify(uint8_t mask, uint8_t port)</div><div class="ttdoc">Run through all registered GPIO callbacks and invoke those associated with the port and the pins spec...</div><div class="ttdef"><b>Definition:</b> <a href="a00517_source.html#l00067">gpio.c:67</a></div></div>
+<div class="ttc" id="a00834_html_ga84f88a73b7bafb4c856cb7ba9f6fe8b5"><div class="ttname"><a href="a00834.html#ga84f88a73b7bafb4c856cb7ba9f6fe8b5">gpio_init</a></div><div class="ttdeci">void gpio_init()</div><div class="ttdoc">Initialise the GPIO module. </div><div class="ttdef"><b>Definition:</b> <a href="a00517_source.html#l00119">gpio.c:119</a></div></div>
+<div class="ttc" id="a00518_html"><div class="ttname"><a href="a00518.html">gpio.h</a></div><div class="ttdoc">Header file with register and macro declarations for the cc2538 GPIO module. </div></div>
+<div class="ttc" id="a00826_html_ga4138a502282e17470a3e94c6c386fa26"><div class="ttname"><a href="a00826.html#ga4138a502282e17470a3e94c6c386fa26">lpm_exit</a></div><div class="ttdeci">#define lpm_exit()</div><div class="ttdoc">Perform an &#39;Exit Deep Sleep&#39; sequence. </div><div class="ttdef"><b>Definition:</b> <a href="a00555_source.html#l00213">lpm.h:213</a></div></div>
+<div class="ttc" id="a00526_html"><div class="ttname"><a href="a00526.html">nvic.h</a></div><div class="ttdoc">Header file for the ARM Nested Vectored Interrupt Controller. </div></div>
+<div class="ttc" id="a00834_html_gae1d2f3a50c40b62a37058daefe841d14"><div class="ttname"><a href="a00834.html#gae1d2f3a50c40b62a37058daefe841d14">gpio_callback_t</a></div><div class="ttdeci">void(* gpio_callback_t)(uint8_t port, uint8_t pin)</div><div class="ttdoc">Type definition for callbacks invoked by the GPIO ISRs. </div><div class="ttdef"><b>Definition:</b> <a href="a00518_source.html#l00065">gpio.h:65</a></div></div>
+<div class="ttc" id="a00834_html_gaa8b828b3b2f906a918af7d12d70c5a94"><div class="ttname"><a href="a00834.html#gaa8b828b3b2f906a918af7d12d70c5a94">GPIO_CLEAR_INTERRUPT</a></div><div class="ttdeci">#define GPIO_CLEAR_INTERRUPT(PORT_BASE, PIN_MASK)</div><div class="ttdoc">Clear interrupt triggering for pins with PIN_MASK of port with PORT_BASE. </div><div class="ttdef"><b>Definition:</b> <a href="a00518_source.html#l00243">gpio.h:243</a></div></div>
+<div class="ttc" id="a00834_html_ga668abac06022d01de6cfe778a1fb90b8"><div class="ttname"><a href="a00834.html#ga668abac06022d01de6cfe778a1fb90b8">GPIO_GET_POWER_UP_INT_STATUS</a></div><div class="ttdeci">#define GPIO_GET_POWER_UP_INT_STATUS(PORT)</div><div class="ttdoc">Get power-up interrupt status of port PORT. </div><div class="ttdef"><b>Definition:</b> <a href="a00518_source.html#l00303">gpio.h:303</a></div></div>
+<div class="ttc" id="a00834_html_gad97cc2a45eb96a512789c62309b10437"><div class="ttname"><a href="a00834.html#gad97cc2a45eb96a512789c62309b10437">gpio_register_callback</a></div><div class="ttdeci">void gpio_register_callback(gpio_callback_t f, uint8_t port, uint8_t pin)</div><div class="ttdoc">Register GPIO callback. </div><div class="ttdef"><b>Definition:</b> <a href="a00517_source.html#l00056">gpio.c:56</a></div></div>
+<div class="ttc" id="a00834_html_gad2d82b4a623acf8a534090242e636daa"><div class="ttname"><a href="a00834.html#gad2d82b4a623acf8a534090242e636daa">GPIO_GET_MASKED_INT_STATUS</a></div><div class="ttdeci">#define GPIO_GET_MASKED_INT_STATUS(PORT_BASE)</div><div class="ttdoc">Get masked interrupt status of port with PORT_BASE. </div><div class="ttdef"><b>Definition:</b> <a href="a00518_source.html#l00235">gpio.h:235</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:42 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:56 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

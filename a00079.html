@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: sicslowpan_addr_context Struct Reference</title>
+<title>Contiki 3.x: rtimer Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,24 +45,24 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">sicslowpan_addr_context Struct Reference<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00760.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00756.html">6LoWPAN implementation</a></div></div>  </div>
+<div class="title">rtimer Struct Reference<div class="ingroups"><a class="el" href="a00886.html">Contiki system</a> &raquo; <a class="el" href="a00815.html">Real-time task scheduling</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>The header for fragments.  
+<p>Representation of a real-time task.  
  <a href="a00079.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00316_source.html">core/net/ipv6/sicslowpan.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00494_source.html">core/sys/rtimer.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The header for fragments. </p>
-<dl class="section note"><dt>Note</dt><dd>We do not define different structures for FRAG1 and FRAGN headers, which are different. For FRAG1, the offset field is just not used The HC1 header when HC_UDP is not used</dd></dl>
-<p>When all fields are compressed and HC_UDP is not used, we use this structure. If HC_UDP is used, the ttl is in another spot, and we use the sicslowpan_hc1_hc_udp structure HC1 followed by HC_UDP An address context for IPHC address compression each context can have upto 8 bytes </p>
-
-<p>Definition at line <a class="el" href="a00316_source.html#l00222">222</a> of file <a class="el" href="a00316_source.html">sicslowpan.h</a>.</p>
+<div class="textblock"><p>Representation of a real-time task. </p>
+<p>This structure represents a real-time task and is used by the real-time module and the architecture specific support module for the real-time module. </p>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="a00025.html#_a11">example-rudolph1.c</a>.</dd>
+</dl>
+<p>Definition at line <a class="el" href="a00494_source.html#l00084">84</a> of file <a class="el" href="a00494_source.html">rtimer.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:59 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

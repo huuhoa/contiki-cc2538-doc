@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/sys/lc-addrlabels.h File Reference</title>
+<title>Contiki 3.x: core/sys/ctimer.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,38 +48,49 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">lc-addrlabels.h File Reference<div class="ingroups"><a class="el" href="a00757.html">Contiki system</a> &raquo; <a class="el" href="a00752.html">Protothreads</a> &raquo; <a class="el" href="a00681.html">Local continuations</a></div></div>  </div>
+<div class="title">ctimer.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of local continuations based on the "Labels as
-values" feature of gcc.  
+<p><pre class="fragment">    Header file for the callback timer
+</pre>  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &quot;<a class="el" href="a00478_source.html">sys/etimer.h</a>&quot;</code><br />
+</div>
 <p><a href="a00473_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:gafad6704adb116cc16edb80f744e7239d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafad6704adb116cc16edb80f744e7239d"></a>
-typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00681.html#gafad6704adb116cc16edb80f744e7239d">lc_t</a></td></tr>
-<tr class="memdesc:gafad6704adb116cc16edb80f744e7239d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The local continuation type. <br /></td></tr>
-<tr class="separator:gafad6704adb116cc16edb80f744e7239d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga4ba45d8a9f22b2deb1b91e3ca96be8f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00808.html#ga4ba45d8a9f22b2deb1b91e3ca96be8f2">ctimer_reset</a> (struct ctimer *c)</td></tr>
+<tr class="memdesc:ga4ba45d8a9f22b2deb1b91e3ca96be8f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset a callback timer with the same interval as was previously set.  <a href="a00808.html#ga4ba45d8a9f22b2deb1b91e3ca96be8f2">More...</a><br /></td></tr>
+<tr class="separator:ga4ba45d8a9f22b2deb1b91e3ca96be8f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaddaf856390b1f3f572b62def662088aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00808.html#gaddaf856390b1f3f572b62def662088aa">ctimer_restart</a> (struct ctimer *c)</td></tr>
+<tr class="memdesc:gaddaf856390b1f3f572b62def662088aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restart a callback timer from the current point in time.  <a href="a00808.html#gaddaf856390b1f3f572b62def662088aa">More...</a><br /></td></tr>
+<tr class="separator:gaddaf856390b1f3f572b62def662088aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga27fd17da97a91042bfb1adf1991cc545"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00808.html#ga27fd17da97a91042bfb1adf1991cc545">ctimer_set</a> (struct ctimer *c, clock_time_t t, void(*f)(void *), void *ptr)</td></tr>
+<tr class="memdesc:ga27fd17da97a91042bfb1adf1991cc545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a callback timer.  <a href="a00808.html#ga27fd17da97a91042bfb1adf1991cc545">More...</a><br /></td></tr>
+<tr class="separator:ga27fd17da97a91042bfb1adf1991cc545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga18f970561c46fe308991fcf8002838b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00808.html#ga18f970561c46fe308991fcf8002838b4">ctimer_stop</a> (struct ctimer *c)</td></tr>
+<tr class="memdesc:ga18f970561c46fe308991fcf8002838b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop a pending callback timer.  <a href="a00808.html#ga18f970561c46fe308991fcf8002838b4">More...</a><br /></td></tr>
+<tr class="separator:ga18f970561c46fe308991fcf8002838b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2f9b6e3e3b86848124f344c8d020ea35"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00808.html#ga2f9b6e3e3b86848124f344c8d020ea35">ctimer_expired</a> (struct ctimer *c)</td></tr>
+<tr class="memdesc:ga2f9b6e3e3b86848124f344c8d020ea35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a callback timer has expired.  <a href="a00808.html#ga2f9b6e3e3b86848124f344c8d020ea35">More...</a><br /></td></tr>
+<tr class="separator:ga2f9b6e3e3b86848124f344c8d020ea35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0b183fdc4a1b4be0630a29dfe4fbf3a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00808.html#ga0b183fdc4a1b4be0630a29dfe4fbf3a2">ctimer_init</a> (void)</td></tr>
+<tr class="memdesc:ga0b183fdc4a1b4be0630a29dfe4fbf3a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the callback timer library.  <a href="a00808.html#ga0b183fdc4a1b4be0630a29dfe4fbf3a2">More...</a><br /></td></tr>
+<tr class="separator:ga0b183fdc4a1b4be0630a29dfe4fbf3a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of local continuations based on the "Labels as
-values" feature of gcc. </p>
-<dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a></dd></dl>
-<p>This implementation of local continuations is based on a special feature of the GCC C compiler called "labels as values". This feature allows assigning pointers with the address of the code corresponding to a particular C label.</p>
-<p>For more information, see the GCC documentation: <a href="http://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html">http://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html</a></p>
-<p>Thanks to dividuum for finding the nice local scope label implementation. </p>
+<div class="textblock"><pre class="fragment">    Header file for the callback timer
+</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00473_source.html">lc-addrlabels.h</a>.</p>
+<p>Definition in file <a class="el" href="a00473_source.html">ctimer.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

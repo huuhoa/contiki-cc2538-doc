@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/rime/stbroadcast.c File Reference</title>
+<title>Contiki 3.x: core/net/rime/rudolph1.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,48 +47,30 @@
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">stbroadcast.c File Reference</div>  </div>
+<div class="title">rudolph1.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    Implementation of the Rime module Stubborn Anonymous
-    BroadCast (stbroadcast)
+<p><pre class="fragment">    Rudolph1: a simple block data flooding protocol
 </pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00437_source.html">net/rime/stbroadcast.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00419_source.html">net/rime/rime.h</a>&quot;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00425_source.html">net/rime/rime.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00437_source.html">net/rime/rudolph1.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00129_source.html">cfs/cfs.h</a>&quot;</code><br />
 </div>
 <p><a href="a00436_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga5e664483972ac30a905ff5a9705f4fbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00671.html#ga5e664483972ac30a905ff5a9705f4fbe">stbroadcast_open</a> (struct <a class="el" href="a00082.html">stbroadcast_conn</a> *c, uint16_t channel, const struct stbroadcast_callbacks *u)</td></tr>
-<tr class="memdesc:ga5e664483972ac30a905ff5a9705f4fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up a stbroadcast connection.  <a href="a00671.html#ga5e664483972ac30a905ff5a9705f4fbe">More...</a><br /></td></tr>
-<tr class="separator:ga5e664483972ac30a905ff5a9705f4fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadaeb0423d49bb5660d19e422146a8f43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00671.html#gadaeb0423d49bb5660d19e422146a8f43">stbroadcast_set_timer</a> (struct <a class="el" href="a00082.html">stbroadcast_conn</a> *c, clock_time_t t)</td></tr>
-<tr class="memdesc:gadaeb0423d49bb5660d19e422146a8f43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the retransmission time of the current stubborn message.  <a href="a00671.html#gadaeb0423d49bb5660d19e422146a8f43">More...</a><br /></td></tr>
-<tr class="separator:gadaeb0423d49bb5660d19e422146a8f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga42af8ffbb43c703de5c2c63bc01e47b8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00671.html#ga42af8ffbb43c703de5c2c63bc01e47b8">stbroadcast_send_stubborn</a> (struct <a class="el" href="a00082.html">stbroadcast_conn</a> *c, clock_time_t t)</td></tr>
-<tr class="memdesc:ga42af8ffbb43c703de5c2c63bc01e47b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a stubborn message.  <a href="a00671.html#ga42af8ffbb43c703de5c2c63bc01e47b8">More...</a><br /></td></tr>
-<tr class="separator:ga42af8ffbb43c703de5c2c63bc01e47b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga32fe12e6008e7c3726e22df674e1a655"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00671.html#ga32fe12e6008e7c3726e22df674e1a655">stbroadcast_cancel</a> (struct <a class="el" href="a00082.html">stbroadcast_conn</a> *c)</td></tr>
-<tr class="memdesc:ga32fe12e6008e7c3726e22df674e1a655"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel the current stubborn message.  <a href="a00671.html#ga32fe12e6008e7c3726e22df674e1a655">More...</a><br /></td></tr>
-<tr class="separator:ga32fe12e6008e7c3726e22df674e1a655"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    Implementation of the Rime module Stubborn Anonymous
-    BroadCast (stbroadcast)
+<div class="textblock"><pre class="fragment">    Rudolph1: a simple block data flooding protocol
 </pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00436_source.html">stbroadcast.c</a>.</p>
+<p>Definition in file <a class="el" href="a00436_source.html">rudolph1.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/sys/arg.c File Reference</title>
+<title>Contiki 3.x: core/net/rpl/rpl-mrhof.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,42 +43,31 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_3442c9320093d68a374887e630e7f580.html">sys</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_9205d7a945a6c58bd5b8f887f828cbdd.html">rpl</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">arg.c File Reference</div>  </div>
+<div class="title">rpl-mrhof.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Argument buffer for passing arguments when starting processes.  
+<p><pre class="fragment">    The Minimum Rank with Hysteresis Objective Function (MRHOF)</pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
-<code>#include &quot;sys/arg.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;net/rpl/rpl-private.h&quot;</code><br />
+<code>#include &quot;net/nbr-table.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00255_source.html">net/ip/uip-debug.h</a>&quot;</code><br />
 </div>
 <p><a href="a00458_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga676976f783fae79b700abd0feb860de4"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00676.html#ga676976f783fae79b700abd0feb860de4">arg_alloc</a> (char size)</td></tr>
-<tr class="memdesc:ga676976f783fae79b700abd0feb860de4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates an argument buffer.  <a href="a00676.html#ga676976f783fae79b700abd0feb860de4">More...</a><br /></td></tr>
-<tr class="separator:ga676976f783fae79b700abd0feb860de4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa9a428d1b0a677fc321895add50b6231"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00676.html#gaa9a428d1b0a677fc321895add50b6231">arg_free</a> (char *arg)</td></tr>
-<tr class="memdesc:gaa9a428d1b0a677fc321895add50b6231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocates an argument buffer.  <a href="a00676.html#gaa9a428d1b0a677fc321895add50b6231">More...</a><br /></td></tr>
-<tr class="separator:gaa9a428d1b0a677fc321895add50b6231"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Argument buffer for passing arguments when starting processes. </p>
-<dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'dun'+'ke'+'ls.'+'co'+'m'; return false;">adam@<span style="display: none;">.nosp@m.</span>dunk<span style="display: none;">.nosp@m.</span>els.c<span style="display: none;">.nosp@m.</span>om</a> </dd></dl>
+<div class="textblock"><pre class="fragment">    The Minimum Rank with Hysteresis Objective Function (MRHOF)</pre> <p>This implementation uses the estimated number of transmissions (ETX) as the additive routing metric, and also provides stubs for the energy metric.</p>
+<dl class="section author"><dt>Author</dt><dd>Joakim Eriksson <a href="#" onclick="location.href='mai'+'lto:'+'joa'+'ki'+'me@'+'si'+'cs.'+'se'; return false;">joaki<span style="display: none;">.nosp@m.</span>me@s<span style="display: none;">.nosp@m.</span>ics.s<span style="display: none;">.nosp@m.</span>e</a>, Nicolas Tsiftes <a href="#" onclick="location.href='mai'+'lto:'+'nvt'+'@s'+'ics'+'.s'+'e'; return false;">nvt@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00458_source.html">arg.c</a>.</p>
+<p>Definition in file <a class="el" href="a00458_source.html">rpl-mrhof.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

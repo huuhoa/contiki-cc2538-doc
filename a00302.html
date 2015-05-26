@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/ipv4/uip.c File Reference</title>
+<title>Contiki 3.x: core/net/ipv4/uip-fw.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,96 +48,98 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">uip.c File Reference</div>  </div>
+<div class="title">uip-fw.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>The uIP TCP/IP stack code.  
+<p>uIP packet forwarding header file.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00259_source.html">net/ip/uip.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00263_source.html">net/ip/uipopt.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00304_source.html">net/ipv4/uip_arp.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00260_source.html">net/ip/uip_arch.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00299_source.html">net/ipv4/uip-neighbor.h</a>&quot;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00462_source.html">sys/cc.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00264_source.html">net/ip/uip.h</a>&quot;</code><br />
 </div>
 <p><a href="a00302_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00105.html">uip_fw_netif</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representation of a uIP network interface.  <a href="a00105.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga6bdb97e217db4401d4433eb330293eaf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#ga6bdb97e217db4401d4433eb330293eaf">UIP_FW_NETIF</a>(ip1, ip2, ip3, ip4, nm1, nm2, nm3, nm4, outputfunc)</td></tr>
+<tr class="memdesc:ga6bdb97e217db4401d4433eb330293eaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiating macro for a uIP network interface.  <a href="a00769.html#ga6bdb97e217db4401d4433eb330293eaf">More...</a><br /></td></tr>
+<tr class="separator:ga6bdb97e217db4401d4433eb330293eaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7acf2b0aff9ebcfb2f94dc6471055ca2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#ga7acf2b0aff9ebcfb2f94dc6471055ca2">uip_fw_setipaddr</a>(netif, addr)</td></tr>
+<tr class="memdesc:ga7acf2b0aff9ebcfb2f94dc6471055ca2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the IP address of a network interface.  <a href="a00769.html#ga7acf2b0aff9ebcfb2f94dc6471055ca2">More...</a><br /></td></tr>
+<tr class="separator:ga7acf2b0aff9ebcfb2f94dc6471055ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadb02b40bfdb470acb6268ac71e22fc04"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#gadb02b40bfdb470acb6268ac71e22fc04">uip_fw_setnetmask</a>(netif, addr)</td></tr>
+<tr class="memdesc:gadb02b40bfdb470acb6268ac71e22fc04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the netmask of a network interface.  <a href="a00769.html#gadb02b40bfdb470acb6268ac71e22fc04">More...</a><br /></td></tr>
+<tr class="separator:gadb02b40bfdb470acb6268ac71e22fc04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6836699b9dc9e93034c65b748fc1a9d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6836699b9dc9e93034c65b748fc1a9d3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#ga6836699b9dc9e93034c65b748fc1a9d3">UIP_FW_LOCAL</a></td></tr>
+<tr class="memdesc:ga6836699b9dc9e93034c65b748fc1a9d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A non-error message that indicates that a packet should be processed locally. <br /></td></tr>
+<tr class="separator:ga6836699b9dc9e93034c65b748fc1a9d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab3604366e1ccf7ac576e2a72845e0b7f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab3604366e1ccf7ac576e2a72845e0b7f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#gab3604366e1ccf7ac576e2a72845e0b7f">UIP_FW_OK</a></td></tr>
+<tr class="memdesc:gab3604366e1ccf7ac576e2a72845e0b7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">A non-error message that indicates that something went OK. <br /></td></tr>
+<tr class="separator:gab3604366e1ccf7ac576e2a72845e0b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga01295e0a76eba8c53265da4264eee50d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga01295e0a76eba8c53265da4264eee50d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#ga01295e0a76eba8c53265da4264eee50d">UIP_FW_FORWARDED</a></td></tr>
+<tr class="memdesc:ga01295e0a76eba8c53265da4264eee50d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A non-error message that indicates that a packet was forwarded. <br /></td></tr>
+<tr class="separator:ga01295e0a76eba8c53265da4264eee50d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga29ad276632f8b0a2e41700833d40cb4c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga29ad276632f8b0a2e41700833d40cb4c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#ga29ad276632f8b0a2e41700833d40cb4c">UIP_FW_ZEROLEN</a></td></tr>
+<tr class="memdesc:ga29ad276632f8b0a2e41700833d40cb4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A non-error message that indicates that a zero-length packet transmission was attempted, and that no packet was sent. <br /></td></tr>
+<tr class="separator:ga29ad276632f8b0a2e41700833d40cb4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa98780b025dbb97d09b87c40c92d9e4c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa98780b025dbb97d09b87c40c92d9e4c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#gaa98780b025dbb97d09b87c40c92d9e4c">UIP_FW_TOOLARGE</a></td></tr>
+<tr class="memdesc:gaa98780b025dbb97d09b87c40c92d9e4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">An error message that indicates that a packet that was too large for the outbound network interface was detected. <br /></td></tr>
+<tr class="separator:gaa98780b025dbb97d09b87c40c92d9e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6d2241b2ed1042167043cf4c63ae52b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6d2241b2ed1042167043cf4c63ae52b2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#ga6d2241b2ed1042167043cf4c63ae52b2">UIP_FW_NOROUTE</a></td></tr>
+<tr class="memdesc:ga6d2241b2ed1042167043cf4c63ae52b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">An error message that indicates that no suitable interface could be found for an outbound packet. <br /></td></tr>
+<tr class="separator:ga6d2241b2ed1042167043cf4c63ae52b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5f290389f83e6c58d9e1d037bf284626"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5f290389f83e6c58d9e1d037bf284626"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#ga5f290389f83e6c58d9e1d037bf284626">UIP_FW_DROPPED</a></td></tr>
+<tr class="memdesc:ga5f290389f83e6c58d9e1d037bf284626"><td class="mdescLeft">&#160;</td><td class="mdescRight">An error message that indicates that a packet that should be forwarded or output was dropped. <br /></td></tr>
+<tr class="separator:ga5f290389f83e6c58d9e1d037bf284626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gadad3fc79bd31e62b3e56ccca4ceaa565"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#gadad3fc79bd31e62b3e56ccca4ceaa565">uip_setipid</a> (uint16_t id)</td></tr>
-<tr class="memdesc:gadad3fc79bd31e62b3e56ccca4ceaa565"><td class="mdescLeft">&#160;</td><td class="mdescRight">uIP initialization function.  <a href="a00760.html#gadad3fc79bd31e62b3e56ccca4ceaa565">More...</a><br /></td></tr>
-<tr class="separator:gadad3fc79bd31e62b3e56ccca4ceaa565"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5a380cbebc834ec7aea86f6cfff7f19e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#ga5a380cbebc834ec7aea86f6cfff7f19e">uip_add32</a> (uint8_t *op32, uint16_t op16)</td></tr>
-<tr class="memdesc:ga5a380cbebc834ec7aea86f6cfff7f19e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out a 32-bit addition.  <a href="a00760.html#ga5a380cbebc834ec7aea86f6cfff7f19e">More...</a><br /></td></tr>
-<tr class="separator:ga5a380cbebc834ec7aea86f6cfff7f19e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad9827a2bf893ba21b373eb2ea36ad688"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#gad9827a2bf893ba21b373eb2ea36ad688">uip_chksum</a> (uint16_t *data, uint16_t len)</td></tr>
-<tr class="memdesc:gad9827a2bf893ba21b373eb2ea36ad688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the Internet checksum over a buffer.  <a href="a00760.html#gad9827a2bf893ba21b373eb2ea36ad688">More...</a><br /></td></tr>
-<tr class="separator:gad9827a2bf893ba21b373eb2ea36ad688"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga707e869bd80c32239d214a8ebe560c04"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#ga707e869bd80c32239d214a8ebe560c04">uip_ipchksum</a> (void)</td></tr>
-<tr class="memdesc:ga707e869bd80c32239d214a8ebe560c04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the IP header checksum of the packet header in uip_buf.  <a href="a00760.html#ga707e869bd80c32239d214a8ebe560c04">More...</a><br /></td></tr>
-<tr class="separator:ga707e869bd80c32239d214a8ebe560c04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3ec91f3c5d75781b5ad9915828aaeba9"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#ga3ec91f3c5d75781b5ad9915828aaeba9">uip_icmp6chksum</a> (void)</td></tr>
-<tr class="memdesc:ga3ec91f3c5d75781b5ad9915828aaeba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the ICMP checksum of the packet in uip_buf.  <a href="a00760.html#ga3ec91f3c5d75781b5ad9915828aaeba9">More...</a><br /></td></tr>
-<tr class="separator:ga3ec91f3c5d75781b5ad9915828aaeba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga969ff8bccf86e1c4becc3c3fd23f93b4"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#ga969ff8bccf86e1c4becc3c3fd23f93b4">uip_tcpchksum</a> (void)</td></tr>
-<tr class="memdesc:ga969ff8bccf86e1c4becc3c3fd23f93b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the TCP checksum of the packet in uip_buf and uip_appdata.  <a href="a00760.html#ga969ff8bccf86e1c4becc3c3fd23f93b4">More...</a><br /></td></tr>
-<tr class="separator:ga969ff8bccf86e1c4becc3c3fd23f93b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac48ed5f0d27721ef62a3ed02a5ad8d2e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#gac48ed5f0d27721ef62a3ed02a5ad8d2e">uip_init</a> (void)</td></tr>
-<tr class="memdesc:gac48ed5f0d27721ef62a3ed02a5ad8d2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">uIP initialization function.  <a href="a00760.html#gac48ed5f0d27721ef62a3ed02a5ad8d2e">More...</a><br /></td></tr>
-<tr class="separator:gac48ed5f0d27721ef62a3ed02a5ad8d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae0ce3d16ecb813a6889616705f8d79c1"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="a00120.html">uip_udp_conn</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#gae0ce3d16ecb813a6889616705f8d79c1">uip_udp_new</a> (const uip_ipaddr_t *ripaddr, uint16_t rport)</td></tr>
-<tr class="memdesc:gae0ce3d16ecb813a6889616705f8d79c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up a new UDP connection.  <a href="a00760.html#gae0ce3d16ecb813a6889616705f8d79c1">More...</a><br /></td></tr>
-<tr class="separator:gae0ce3d16ecb813a6889616705f8d79c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaabeca814c253359788ec2dbd6c62f17e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#gaabeca814c253359788ec2dbd6c62f17e">uip_unlisten</a> (uint16_t port)</td></tr>
-<tr class="memdesc:gaabeca814c253359788ec2dbd6c62f17e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop listening to the specified port.  <a href="a00760.html#gaabeca814c253359788ec2dbd6c62f17e">More...</a><br /></td></tr>
-<tr class="separator:gaabeca814c253359788ec2dbd6c62f17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga50ff1ab4c8327f775eee393262ef1811"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#ga50ff1ab4c8327f775eee393262ef1811">uip_listen</a> (uint16_t port)</td></tr>
-<tr class="memdesc:ga50ff1ab4c8327f775eee393262ef1811"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start listening to the specified port.  <a href="a00760.html#ga50ff1ab4c8327f775eee393262ef1811">More...</a><br /></td></tr>
-<tr class="separator:ga50ff1ab4c8327f775eee393262ef1811"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4c90e268d83fc6cd9cd78bfa435b8140"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#ga4c90e268d83fc6cd9cd78bfa435b8140">uip_process</a> (uint8_t flag)</td></tr>
-<tr class="memdesc:ga4c90e268d83fc6cd9cd78bfa435b8140"><td class="mdescLeft">&#160;</td><td class="mdescRight">process the options within a hop by hop or destination option header  <a href="a00760.html#ga4c90e268d83fc6cd9cd78bfa435b8140">More...</a><br /></td></tr>
-<tr class="separator:ga4c90e268d83fc6cd9cd78bfa435b8140"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gada74c8133e50b38dca66dbe779395c80"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#gada74c8133e50b38dca66dbe779395c80">uip_htons</a> (uint16_t val)</td></tr>
-<tr class="memdesc:gada74c8133e50b38dca66dbe779395c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a 16-bit quantity from host byte order to network byte order.  <a href="a00760.html#gada74c8133e50b38dca66dbe779395c80">More...</a><br /></td></tr>
-<tr class="separator:gada74c8133e50b38dca66dbe779395c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga04b053a623aac7cd4195157d470661b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#ga04b053a623aac7cd4195157d470661b3">uip_send</a> (const void *data, int len)</td></tr>
-<tr class="memdesc:ga04b053a623aac7cd4195157d470661b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data on the current connection.  <a href="a00760.html#ga04b053a623aac7cd4195157d470661b3">More...</a><br /></td></tr>
-<tr class="separator:ga04b053a623aac7cd4195157d470661b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ga561b8eda32e059d4e7397f776268cc63"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#ga561b8eda32e059d4e7397f776268cc63">uip_appdata</a></td></tr>
-<tr class="memdesc:ga561b8eda32e059d4e7397f776268cc63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the application data in the packet buffer.  <a href="a00760.html#ga561b8eda32e059d4e7397f776268cc63">More...</a><br /></td></tr>
-<tr class="separator:ga561b8eda32e059d4e7397f776268cc63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga72af00d45662ba0dc2ba3781a556e25b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#ga72af00d45662ba0dc2ba3781a556e25b">uip_len</a></td></tr>
-<tr class="memdesc:ga72af00d45662ba0dc2ba3781a556e25b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The length of the packet in the uip_buf buffer.  <a href="a00760.html#ga72af00d45662ba0dc2ba3781a556e25b">More...</a><br /></td></tr>
-<tr class="separator:ga72af00d45662ba0dc2ba3781a556e25b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga788ffac72342f6172343d7f8099cbe1a"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="a00090.html">uip_conn</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#ga788ffac72342f6172343d7f8099cbe1a">uip_conn</a></td></tr>
-<tr class="memdesc:ga788ffac72342f6172343d7f8099cbe1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the current TCP connection.  <a href="a00760.html#ga788ffac72342f6172343d7f8099cbe1a">More...</a><br /></td></tr>
-<tr class="separator:ga788ffac72342f6172343d7f8099cbe1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga210f227119fc972e6222c9cb452e15a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga210f227119fc972e6222c9cb452e15a9"></a>
-struct <a class="el" href="a00120.html">uip_udp_conn</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#ga210f227119fc972e6222c9cb452e15a9">uip_udp_conn</a></td></tr>
-<tr class="memdesc:ga210f227119fc972e6222c9cb452e15a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current UDP connection. <br /></td></tr>
-<tr class="separator:ga210f227119fc972e6222c9cb452e15a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf284d80df1a8b8c17c493739cb527e5c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf284d80df1a8b8c17c493739cb527e5c"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00760.html#gaf284d80df1a8b8c17c493739cb527e5c">uip_acc32</a> [4]</td></tr>
-<tr class="memdesc:gaf284d80df1a8b8c17c493739cb527e5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-byte array used for the 32-bit sequence number calculations. <br /></td></tr>
-<tr class="separator:gaf284d80df1a8b8c17c493739cb527e5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0c90f476e0557afaee479c61d4d3eaf3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0c90f476e0557afaee479c61d4d3eaf3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#ga0c90f476e0557afaee479c61d4d3eaf3">uip_fw_init</a> (void)</td></tr>
+<tr class="memdesc:ga0c90f476e0557afaee479c61d4d3eaf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the uIP packet forwarding module. <br /></td></tr>
+<tr class="separator:ga0c90f476e0557afaee479c61d4d3eaf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaee7e646471699f3bb38298b089339bfb"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#gaee7e646471699f3bb38298b089339bfb">uip_fw_forward</a> (void)</td></tr>
+<tr class="memdesc:gaee7e646471699f3bb38298b089339bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward an IP packet in the uip_buf buffer.  <a href="a00769.html#gaee7e646471699f3bb38298b089339bfb">More...</a><br /></td></tr>
+<tr class="separator:gaee7e646471699f3bb38298b089339bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab892e0441d40434b4932c11705e7d1ab"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#gab892e0441d40434b4932c11705e7d1ab">uip_fw_output</a> (void)</td></tr>
+<tr class="memdesc:gab892e0441d40434b4932c11705e7d1ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output an IP packet on the correct network interface.  <a href="a00769.html#gab892e0441d40434b4932c11705e7d1ab">More...</a><br /></td></tr>
+<tr class="separator:gab892e0441d40434b4932c11705e7d1ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2d5cfe32c9ec743e956c4e19dcee21a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#gaa2d5cfe32c9ec743e956c4e19dcee21a">uip_fw_register</a> (struct <a class="el" href="a00105.html">uip_fw_netif</a> *netif)</td></tr>
+<tr class="memdesc:gaa2d5cfe32c9ec743e956c4e19dcee21a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a network interface with the forwarding module.  <a href="a00769.html#gaa2d5cfe32c9ec743e956c4e19dcee21a">More...</a><br /></td></tr>
+<tr class="separator:gaa2d5cfe32c9ec743e956c4e19dcee21a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga94dcf0fa8bff34949a37fbde77786f82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#ga94dcf0fa8bff34949a37fbde77786f82">uip_fw_default</a> (struct <a class="el" href="a00105.html">uip_fw_netif</a> *netif)</td></tr>
+<tr class="memdesc:ga94dcf0fa8bff34949a37fbde77786f82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a default network interface.  <a href="a00769.html#ga94dcf0fa8bff34949a37fbde77786f82">More...</a><br /></td></tr>
+<tr class="separator:ga94dcf0fa8bff34949a37fbde77786f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga35ab515cdae08d65c5d080771754f62a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga35ab515cdae08d65c5d080771754f62a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00769.html#ga35ab515cdae08d65c5d080771754f62a">uip_fw_periodic</a> (void)</td></tr>
+<tr class="memdesc:ga35ab515cdae08d65c5d080771754f62a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform periodic processing. <br /></td></tr>
+<tr class="separator:ga35ab515cdae08d65c5d080771754f62a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The uIP TCP/IP stack code. </p>
-<dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'dun'+'ke'+'ls.'+'co'+'m'; return false;">adam@<span style="display: none;">.nosp@m.</span>dunk<span style="display: none;">.nosp@m.</span>els.c<span style="display: none;">.nosp@m.</span>om</a> </dd></dl>
+<div class="textblock"><p>uIP packet forwarding header file. </p>
+<dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00302_source.html">uip.c</a>.</p>
+<p>Definition in file <a class="el" href="a00302_source.html">uip-fw.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

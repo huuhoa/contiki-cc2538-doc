@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: Stubborn unicast</title>
+<title>Contiki 3.x: examples/ipv6/native-border-router/border-router.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,30 +31,44 @@
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
     </ul>
   </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d28a4824dc47e487b107a5db32ef43c4.html">examples</a></li><li class="navelem"><a class="el" href="dir_269f28271abffc49678ed89463a1797b.html">ipv6</a></li><li class="navelem"><a class="el" href="dir_ca71a91b00d4a429d72d924fad9cb71b.html">native-border-router</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Stubborn unicast<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00754.html">The Rime communication stack</a></div></div>  </div>
+<div class="title">border-router.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>The stubborn single-hop unicast primitive (stunicast) repeatedly sends a packet to a single-hop neighbor using the unicast primitive.  
+<p><pre class="fragment">    Border router header file
+</pre>  
 <a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00264_source.html">net/ip/uip.h</a>&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+</div>
+<p><a href="a00672_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>The stubborn single-hop unicast primitive (stunicast) repeatedly sends a packet to a single-hop neighbor using the unicast primitive. </p>
-<p>The stunicast primitive sends and resends the packet until an upper layer primitive or protocol cancels the transmission. While it is possible for applications and protocols that use Rime to use the stubborn single-hop unicast primitive directly, the stunicast primitive is primarily used by the reliable single-hop unicast (runicast) primitive.</p>
-<p>Before the stunicast primitive sends a packet, it allocates a queue buffer, to which the application data and packet attributes is copied, and sets a timer. When the timer expires, the stunicast primitive copies the queue buffer to the Rime buffer and sends the packet using the unicast primitive. The stunicast primitive sets the number of retransmissions for a packet as a packet attribute on outgoing packets.</p>
-<h1><a class="anchor" id="stunicast-channels"></a>
-Channels</h1>
-<p>The stunicast module uses 1 channel. </p>
-</div><!-- contents -->
+<div class="textblock"><pre class="fragment">    Border router header file
+</pre> <dl class="section author"><dt>Author</dt><dd>Joakim Eriksson <a href="#" onclick="location.href='mai'+'lto:'+'joa'+'ki'+'me@'+'si'+'cs.'+'se'; return false;">joaki<span style="display: none;">.nosp@m.</span>me@s<span style="display: none;">.nosp@m.</span>ics.s<span style="display: none;">.nosp@m.</span>e</a> </dd></dl>
+
+<p>Definition in file <a class="el" href="a00672_source.html">border-router.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

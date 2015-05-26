@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/rime/route-discovery.h Source File</title>
+<title>Contiki 3.x: core/net/rime/rime.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,11 +48,11 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">route-discovery.h</div>  </div>
+<div class="title">rime.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00425.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2007, Swedish Institute of Computer Science.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2006, Swedish Institute of Computer Science.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
@@ -85,7 +85,7 @@
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         Header file for the Rime mesh routing protocol</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         Header file for the Rime stack</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * \author</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *         Adam Dunkels &lt;adam@sics.se&gt;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> */</span></div>
@@ -94,63 +94,106 @@
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * \addtogroup rime</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * @{</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * \defgroup routediscovery Rime route discovery protocol</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * The route-discovery module does route discovery for Rime.</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> * \section route-discovery-channels Channels</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> * The ibc module uses 2 channels; one for the flooded route request</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> * packets and one for the unicast route replies.</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#ifndef ROUTE_DISCOVERY_H_</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#define ROUTE_DISCOVERY_H_</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00445.html">net/rime/unicast.h</a>&quot;</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00411.html">net/rime/netflood.h</a>&quot;</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00467.html">sys/ctimer.h</a>&quot;</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">struct </span>route_discovery_conn;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">struct </span>route_discovery_callbacks {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  void (* new_route)(<span class="keyword">struct </span>route_discovery_conn *c, <span class="keyword">const</span> linkaddr_t *to);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  void (* timedout)(<span class="keyword">struct </span>route_discovery_conn *c);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#define ROUTE_DISCOVERY_ENTRIES 8</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">struct </span>route_discovery_conn {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keyword">struct </span>netflood_conn rreqconn;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keyword">struct </span>unicast_conn rrepconn;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keyword">struct </span>ctimer t;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  linkaddr_t last_rreq_originator;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  uint16_t last_rreq_id;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  uint16_t rreq_id;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keyword">const</span> <span class="keyword">struct </span>route_discovery_callbacks *cb;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">void</span> route_discovery_open(<span class="keyword">struct</span> route_discovery_conn *c, clock_time_t time,</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                          uint16_t channels,</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                          <span class="keyword">const</span> <span class="keyword">struct</span> route_discovery_callbacks *callbacks);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordtype">int</span> route_discovery_discover(<span class="keyword">struct</span> route_discovery_conn *c, <span class="keyword">const</span> linkaddr_t *dest,</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                             clock_time_t timeout);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#ifndef RIME_H_</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define RIME_H_</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00389.html">net/rime/announcement.h</a>&quot;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00407.html">net/rime/collect.h</a>&quot;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00409.html">net/rime/ipolite.h</a>&quot;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00411.html">net/rime/mesh.h</a>&quot;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00413.html">net/rime/multihop.h</a>&quot;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00415.html">net/rime/neighbor-discovery.h</a>&quot;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00417.html">net/rime/netflood.h</a>&quot;</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00421.html">net/rime/polite-announcement.h</a>&quot;</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00423.html">net/rime/polite.h</a>&quot;</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00385.html">net/queuebuf.h</a>&quot;</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00334.html">net/linkaddr.h</a>&quot;</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00383.html">net/packetbuf.h</a>&quot;</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00427.html">net/rime/rimestats.h</a>&quot;</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00429.html">net/rime/rmh.h</a>&quot;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00431.html">net/rime/route-discovery.h</a>&quot;</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00433.html">net/rime/route.h</a>&quot;</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00435.html">net/rime/rucb.h</a>&quot;</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00441.html">net/rime/runicast.h</a>&quot;</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00447.html">net/rime/timesynch.h</a>&quot;</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00449.html">net/rime/trickle.h</a>&quot;</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00364.html">net/mac/mac.h</a>&quot;</span><span class="comment"></span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> * \brief      Initialize Rime</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"> *             This function should be called from the system boot up</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> *             code to initialize Rime.</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00883.html#gaeb36eb1e9d4c51fae6ad6c96900b9602">rime_init</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"> * \brief      Send an incoming packet to Rime</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> *             This function should be called by the network driver to</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> *             hand over a packet to Rime for further processing. The</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"> *             packet should be placed in the packetbuf (with</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> *             packetbuf_copyfrom()) before calling this function.</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00883.html#ga4d291022f2e378389e5f62bc81fb753e">rime_input</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> route_discovery_close(<span class="keyword">struct</span> route_discovery_conn *c);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">int</span> rime_output(<span class="keyword">struct</span> channel *c);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* ROUTE_DISCOVERY_H_ */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">/** @} */</span><span class="comment"></span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="ttc" id="a00467_html"><div class="ttname"><a href="a00467.html">ctimer.h</a></div><div class="ttdoc">    Header file for the callback timer  </div></div>
-<div class="ttc" id="a00411_html"><div class="ttname"><a href="a00411.html">netflood.h</a></div><div class="ttdoc">    Header file for the best-effort network flooding (netflood)  </div></div>
-<div class="ttc" id="a00445_html"><div class="ttname"><a href="a00445.html">unicast.h</a></div><div class="ttdoc">    Header file for Rime&#39;s single-hop unicast  </div></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">struct </span>rime_sniffer {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keyword">struct </span>rime_sniffer *next;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  void (* input_callback)(void);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  void (* output_callback)(<span class="keywordtype">int</span> mac_status);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#define RIME_SNIFFER(name, input_callback, output_callback) \</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">static struct rime_sniffer name = { NULL, input_callback, output_callback }</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keywordtype">void</span> rime_sniffer_add(<span class="keyword">struct</span> rime_sniffer *s);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordtype">void</span> rime_sniffer_remove(<span class="keyword">struct</span> rime_sniffer *s);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a00069.html">network_driver</a> rime_driver;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">/* Generic Rime return values. */</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  RIME_OK,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  RIME_ERR,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  RIME_ERR_CONTENTION,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  RIME_ERR_NOACK,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* RIME_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">/** @} */</span><span class="comment"></span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">/** @} */</span></div>
+<div class="ttc" id="a00427_html"><div class="ttname"><a href="a00427.html">rimestats.h</a></div><div class="ttdoc">    Header file for Rime statistics  </div></div>
+<div class="ttc" id="a00415_html"><div class="ttname"><a href="a00415.html">neighbor-discovery.h</a></div><div class="ttdoc">    Neighbor discovery header file  </div></div>
+<div class="ttc" id="a00447_html"><div class="ttname"><a href="a00447.html">timesynch.h</a></div><div class="ttdoc">    Header file for a simple time synchronization mechanism  </div></div>
+<div class="ttc" id="a00364_html"><div class="ttname"><a href="a00364.html">mac.h</a></div><div class="ttdoc">    MAC driver header file  </div></div>
+<div class="ttc" id="a00435_html"><div class="ttname"><a href="a00435.html">rucb.h</a></div><div class="ttdoc">    Header file for the reliable unicast bulk transfer module  </div></div>
+<div class="ttc" id="a00423_html"><div class="ttname"><a href="a00423.html">polite.h</a></div><div class="ttdoc">    Header file for Polite Anonymous best effort local Broadcast (polite)  </div></div>
+<div class="ttc" id="a00421_html"><div class="ttname"><a href="a00421.html">polite-announcement.h</a></div><div class="ttdoc">    Neighbor discovery header file  </div></div>
+<div class="ttc" id="a00441_html"><div class="ttname"><a href="a00441.html">runicast.h</a></div><div class="ttdoc">    Reliable unicast header file  </div></div>
+<div class="ttc" id="a00409_html"><div class="ttname"><a href="a00409.html">ipolite.h</a></div><div class="ttdoc">    Header file for Ipolite best effort local Broadcast (ipolite)  </div></div>
+<div class="ttc" id="a00383_html"><div class="ttname"><a href="a00383.html">packetbuf.h</a></div><div class="ttdoc">    Header file for the Rime buffer (packetbuf) management  </div></div>
+<div class="ttc" id="a00429_html"><div class="ttname"><a href="a00429.html">rmh.h</a></div><div class="ttdoc">    Multihop forwarding header file  </div></div>
+<div class="ttc" id="a00417_html"><div class="ttname"><a href="a00417.html">netflood.h</a></div><div class="ttdoc">    Header file for the best-effort network flooding (netflood)  </div></div>
+<div class="ttc" id="a00334_html"><div class="ttname"><a href="a00334.html">linkaddr.h</a></div><div class="ttdoc">    Header file for the Rime address representation  </div></div>
+<div class="ttc" id="a00449_html"><div class="ttname"><a href="a00449.html">trickle.h</a></div><div class="ttdoc">    Header file for Trickle (reliable single source flooding) for Rime  </div></div>
+<div class="ttc" id="a00413_html"><div class="ttname"><a href="a00413.html">multihop.h</a></div><div class="ttdoc">    Multihop forwarding header file  </div></div>
+<div class="ttc" id="a00411_html"><div class="ttname"><a href="a00411.html">mesh.h</a></div><div class="ttdoc">    Header file for the Rime mesh routing protocol  </div></div>
+<div class="ttc" id="a00069_html"><div class="ttname"><a href="a00069.html">network_driver</a></div><div class="ttdoc">The structure of a network driver in Contiki. </div><div class="ttdef"><b>Definition:</b> <a href="a00381_source.html#l00117">netstack.h:117</a></div></div>
+<div class="ttc" id="a00433_html"><div class="ttname"><a href="a00433.html">route.h</a></div><div class="ttdoc">    Header file for the Rime route table  </div></div>
+<div class="ttc" id="a00883_html_ga4d291022f2e378389e5f62bc81fb753e"><div class="ttname"><a href="a00883.html#ga4d291022f2e378389e5f62bc81fb753e">rime_input</a></div><div class="ttdeci">void rime_input(void)</div><div class="ttdoc">Send an incoming packet to Rime. </div></div>
+<div class="ttc" id="a00431_html"><div class="ttname"><a href="a00431.html">route-discovery.h</a></div><div class="ttdoc">    Header file for the Rime mesh routing protocol  </div></div>
+<div class="ttc" id="a00389_html"><div class="ttname"><a href="a00389.html">announcement.h</a></div><div class="ttdoc">    Header file for the announcement primitive  </div></div>
+<div class="ttc" id="a00883_html_gaeb36eb1e9d4c51fae6ad6c96900b9602"><div class="ttname"><a href="a00883.html#gaeb36eb1e9d4c51fae6ad6c96900b9602">rime_init</a></div><div class="ttdeci">int rime_init(void)</div><div class="ttdoc">Initialize Rime. </div></div>
+<div class="ttc" id="a00385_html"><div class="ttname"><a href="a00385.html">queuebuf.h</a></div><div class="ttdoc">    Header file for the Rime queue buffer management  </div></div>
+<div class="ttc" id="a00407_html"><div class="ttname"><a href="a00407.html">collect.h</a></div><div class="ttdoc">    Header file for hop-by-hop reliable data collection  </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:42 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:56 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -43,7 +43,7 @@
 <div class="contents">
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
 <div class="line"></div>
-<div class="line"><a name="a0"></a><a class="code" href="a00684.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_pollhandler, <span class="stringliteral">&quot;Pollhandler example&quot;</span>);</div>
+<div class="line"><a name="a0"></a><a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_pollhandler, <span class="stringliteral">&quot;Pollhandler example&quot;</span>);</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span></div>
 <div class="line">exithandler(<span class="keywordtype">void</span>)</div>
@@ -57,24 +57,24 @@
 <div class="line">  printf(<span class="stringliteral">&quot;Process polled\n&quot;</span>);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a name="a1"></a><a class="code" href="a00701.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_pollhandler, ev, data)</div>
+<div class="line"><a name="a1"></a><a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_pollhandler, ev, data)</div>
 <div class="line">{</div>
 <div class="line">  </div>
-<div class="line">  <a name="a2"></a><a class="code" href="a00684.html#ga4159c99c908ca521cf8b9fdda4b7f64c">PROCESS_POLLHANDLER</a>(pollhandler());</div>
-<div class="line">  <a name="a3"></a><a class="code" href="a00684.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(exithandler());</div>
+<div class="line">  <a name="a2"></a><a class="code" href="a00813.html#ga4159c99c908ca521cf8b9fdda4b7f64c">PROCESS_POLLHANDLER</a>(pollhandler());</div>
+<div class="line">  <a name="a3"></a><a class="code" href="a00813.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(exithandler());</div>
 <div class="line"></div>
-<div class="line">  <a name="a4"></a><a class="code" href="a00684.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
+<div class="line">  <a name="a4"></a><a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"></div>
 <div class="line">  <span class="keywordflow">while</span>(1) {</div>
-<div class="line">    <a name="a5"></a><a class="code" href="a00684.html#ga4f9c1d291e210793e8c4444762f748ba">PROCESS_WAIT_EVENT</a>();</div>
+<div class="line">    <a name="a5"></a><a class="code" href="a00813.html#ga4f9c1d291e210793e8c4444762f748ba">PROCESS_WAIT_EVENT</a>();</div>
 <div class="line">  }</div>
 <div class="line">  </div>
-<div class="line">  <a name="a6"></a><a class="code" href="a00684.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line">  <a name="a6"></a><a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:54 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

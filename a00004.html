@@ -54,13 +54,13 @@
 <div class="line"><span class="comment">/*</span></div>
 <div class="line"><span class="comment"> * All Contiki programs must have a process, and we declare it here.</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line"><a name="a0"></a><a class="code" href="a00684.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_program_process, <span class="stringliteral">&quot;Example process&quot;</span>);</div>
+<div class="line"><a name="a0"></a><a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_program_process, <span class="stringliteral">&quot;Example process&quot;</span>);</div>
 <div class="line"></div>
 <div class="line"><span class="comment">/*</span></div>
 <div class="line"><span class="comment"> * To make the program send a packet once every second, we use an</span></div>
 <div class="line"><span class="comment"> * event timer (etimer).</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line"><span class="keyword">static</span> <span class="keyword">struct </span><a name="_a1"></a><a class="code" href="a00056.html">etimer</a> <a name="_a2"></a><a class="code" href="a00084.html">timer</a>;</div>
+<div class="line"><span class="keyword">static</span> <span class="keyword">struct </span><a name="_a1"></a><a class="code" href="a00057.html">etimer</a> <a name="_a2"></a><a class="code" href="a00085.html">timer</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="comment">/*</span></div>
@@ -68,7 +68,7 @@
 <div class="line"><span class="comment"> * occurs, and the parameters &quot;ev&quot; and &quot;data&quot; will we set to the event</span></div>
 <div class="line"><span class="comment"> * type and any data that may be passed along with the event.</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line"><a name="a3"></a><a class="code" href="a00701.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_program_process, ev, data)</div>
+<div class="line"><a name="a3"></a><a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_program_process, ev, data)</div>
 <div class="line">{</div>
 <div class="line">  <span class="comment">/*</span></div>
 <div class="line"><span class="comment">   * Declare the UDP connection. Note that this *MUST* be declared</span></div>
@@ -76,20 +76,20 @@
 <div class="line"><span class="comment">   * for this is that the process runs as a protothread, and</span></div>
 <div class="line"><span class="comment">   * protothreads do not support stack variables.</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a4"></a><a class="code" href="a00120.html">uip_udp_conn</a> *c;</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a4"></a><a class="code" href="a00121.html">uip_udp_conn</a> *c;</div>
 <div class="line">  </div>
 <div class="line">  <span class="comment">/*</span></div>
 <div class="line"><span class="comment">   * A process thread starts with PROCESS_BEGIN() and ends with</span></div>
 <div class="line"><span class="comment">   * PROCESS_END().</span></div>
 <div class="line"><span class="comment">   */</span>  </div>
-<div class="line">  <a name="a5"></a><a class="code" href="a00684.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
+<div class="line">  <a name="a5"></a><a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/*</span></div>
 <div class="line"><span class="comment">   * We create the UDP connection to port 4321. We don&#39;t want to</span></div>
 <div class="line"><span class="comment">   * attach any special data to the connection, so we pass it a NULL</span></div>
 <div class="line"><span class="comment">   * parameter.</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  c = <a name="a6"></a><a class="code" href="a00619.html#gabd0394436a6f855ec38871cacd01f8c9">udp_broadcast_new</a>(<a name="a7"></a><a class="code" href="a00625.html#ga703ee949a28cb00b5f8ee54bfe664e8d">UIP_HTONS</a>(4321), NULL);</div>
+<div class="line">  c = <a name="a6"></a><a class="code" href="a00748.html#gabd0394436a6f855ec38871cacd01f8c9">udp_broadcast_new</a>(<a name="a7"></a><a class="code" href="a00754.html#ga703ee949a28cb00b5f8ee54bfe664e8d">UIP_HTONS</a>(4321), NULL);</div>
 <div class="line">  </div>
 <div class="line">  <span class="comment">/*</span></div>
 <div class="line"><span class="comment">   * Loop for ever.</span></div>
@@ -99,8 +99,8 @@
 <div class="line">    <span class="comment">/*</span></div>
 <div class="line"><span class="comment">     * We set a timer that wakes us up once every second. </span></div>
 <div class="line"><span class="comment">     */</span></div>
-<div class="line">    <a name="a8"></a><a class="code" href="a00680.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;<a class="code" href="a00084.html">timer</a>, <a name="a9"></a><a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a>);</div>
-<div class="line">    <a name="a10"></a><a class="code" href="a00684.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(<a name="a11"></a><a class="code" href="a00680.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;<a class="code" href="a00084.html">timer</a>));</div>
+<div class="line">    <a name="a8"></a><a class="code" href="a00809.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;<a class="code" href="a00085.html">timer</a>, <a name="a9"></a><a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a>);</div>
+<div class="line">    <a name="a10"></a><a class="code" href="a00813.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(<a name="a11"></a><a class="code" href="a00809.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;<a class="code" href="a00085.html">timer</a>));</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/*</span></div>
 <div class="line"><span class="comment">     * Now, this is a the tricky bit: in order for us to send a UDP</span></div>
@@ -109,13 +109,13 @@
 <div class="line"><span class="comment">     * we&#39;ll call you&quot;.) We use the function tcpip_poll_udp() to tell</span></div>
 <div class="line"><span class="comment">     * uIP to call us, and then we wait for the uIP event to come.</span></div>
 <div class="line"><span class="comment">     */</span></div>
-<div class="line">    <a name="a12"></a><a class="code" href="a00619.html#ga98f9cca40d8c2043f405ee372a6de0d1">tcpip_poll_udp</a>(c);</div>
-<div class="line">    <a class="code" href="a00684.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(ev == <a name="a13"></a><a class="code" href="a00619.html#gaadf3c3b5770cafe3da7f8cc4dd06625c">tcpip_event</a>);</div>
+<div class="line">    <a name="a12"></a><a class="code" href="a00748.html#ga98f9cca40d8c2043f405ee372a6de0d1">tcpip_poll_udp</a>(c);</div>
+<div class="line">    <a class="code" href="a00813.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(ev == <a name="a13"></a><a class="code" href="a00748.html#gaadf3c3b5770cafe3da7f8cc4dd06625c">tcpip_event</a>);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/*</span></div>
 <div class="line"><span class="comment">     * We can now send our packet.</span></div>
 <div class="line"><span class="comment">     */</span></div>
-<div class="line">    <a name="a14"></a><a class="code" href="a00624.html#ga73635e084b87a4dd7535f579e680f268">uip_send</a>(<span class="stringliteral">&quot;Hello&quot;</span>, 5);</div>
+<div class="line">    <a name="a14"></a><a class="code" href="a00753.html#ga73635e084b87a4dd7535f579e680f268">uip_send</a>(<span class="stringliteral">&quot;Hello&quot;</span>, 5);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/*</span></div>
 <div class="line"><span class="comment">     * We&#39;re done now, so we&#39;ll just loop again.</span></div>
@@ -127,13 +127,13 @@
 <div class="line"><span class="comment">   * loop, we must put the PROCESS_END() at the end of the process, or</span></div>
 <div class="line"><span class="comment">   * else the program won&#39;t compile.</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  <a name="a15"></a><a class="code" href="a00684.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line">  <a name="a15"></a><a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:54 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

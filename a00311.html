@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/ipv6/multicast/uip-mcast6-route.h File Reference</title>
+<title>Contiki 3.x: core/net/ipv6/multicast/roll-tm.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -49,64 +49,67 @@
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">uip-mcast6-route.h File Reference<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00760.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00761.html">uIP IPv6 specific features</a> &raquo; <a class="el" href="a00644.html">IPv6 Multicast Forwarding</a></div></div>  </div>
+<div class="title">roll-tm.h File Reference<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00889.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00890.html">uIP IPv6 specific features</a> &raquo; <a class="el" href="a00773.html">IPv6 Multicast Forwarding</a> &raquo; <a class="el" href="a00771.html">ROLL Trickle Multicast</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header file for multicast routing table manipulation.  
+<p>Header file for the implementation of the ROLL-TM multicast engine.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00259_source.html">net/ip/uip.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;contiki-conf.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00318_source.html">net/ipv6/multicast/uip-mcast6-stats.h</a>&quot;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 </div>
 <p><a href="a00311_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00108.html">uip_mcast6_route</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An entry in the multicast routing table.  <a href="a00108.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00078.html">roll_tm_stats</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multicast stats extension for the ROLL TM engine.  <a href="a00078.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:gab2a6bf2497f813bfebbb4afa4caec4be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab2a6bf2497f813bfebbb4afa4caec4be"></a>
-typedef struct <a class="el" href="a00108.html">uip_mcast6_route</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00644.html#gab2a6bf2497f813bfebbb4afa4caec4be">uip_mcast6_route_t</a></td></tr>
-<tr class="memdesc:gab2a6bf2497f813bfebbb4afa4caec4be"><td class="mdescLeft">&#160;</td><td class="mdescRight">An entry in the multicast routing table. <br /></td></tr>
-<tr class="separator:gab2a6bf2497f813bfebbb4afa4caec4be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">Multicast Routing Table Manipulation</div></td></tr>
-<tr class="memitem:gae4362324282a84c0183cf6f6c03a17d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00644.html#gab2a6bf2497f813bfebbb4afa4caec4be">uip_mcast6_route_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00644.html#gae4362324282a84c0183cf6f6c03a17d7">uip_mcast6_route_lookup</a> (uip_ipaddr_t *group)</td></tr>
-<tr class="memdesc:gae4362324282a84c0183cf6f6c03a17d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lookup a multicast route.  <a href="a00644.html#gae4362324282a84c0183cf6f6c03a17d7">More...</a><br /></td></tr>
-<tr class="separator:gae4362324282a84c0183cf6f6c03a17d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabd62e65ad167478dea4800a0eabf3c29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00644.html#gab2a6bf2497f813bfebbb4afa4caec4be">uip_mcast6_route_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00644.html#gabd62e65ad167478dea4800a0eabf3c29">uip_mcast6_route_add</a> (uip_ipaddr_t *group)</td></tr>
-<tr class="memdesc:gabd62e65ad167478dea4800a0eabf3c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a multicast route.  <a href="a00644.html#gabd62e65ad167478dea4800a0eabf3c29">More...</a><br /></td></tr>
-<tr class="separator:gabd62e65ad167478dea4800a0eabf3c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaccd436a25e4a3d666438ea8fb995ec50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00644.html#gaccd436a25e4a3d666438ea8fb995ec50">uip_mcast6_route_rm</a> (<a class="el" href="a00644.html#gab2a6bf2497f813bfebbb4afa4caec4be">uip_mcast6_route_t</a> *route)</td></tr>
-<tr class="memdesc:gaccd436a25e4a3d666438ea8fb995ec50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a multicast route.  <a href="a00644.html#gaccd436a25e4a3d666438ea8fb995ec50">More...</a><br /></td></tr>
-<tr class="separator:gaccd436a25e4a3d666438ea8fb995ec50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga24b017ea0cccba325a11e211525bb11d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00644.html#ga24b017ea0cccba325a11e211525bb11d">uip_mcast6_route_count</a> (void)</td></tr>
-<tr class="memdesc:ga24b017ea0cccba325a11e211525bb11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the count of multicast routes.  <a href="a00644.html#ga24b017ea0cccba325a11e211525bb11d">More...</a><br /></td></tr>
-<tr class="separator:ga24b017ea0cccba325a11e211525bb11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4ae023cadf4e2bfd64ae30580a8f9c90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00644.html#gab2a6bf2497f813bfebbb4afa4caec4be">uip_mcast6_route_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00644.html#ga4ae023cadf4e2bfd64ae30580a8f9c90">uip_mcast6_route_list_head</a> (void)</td></tr>
-<tr class="memdesc:ga4ae023cadf4e2bfd64ae30580a8f9c90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a pointer to the start of the multicast routes list.  <a href="a00644.html#ga4ae023cadf4e2bfd64ae30580a8f9c90">More...</a><br /></td></tr>
-<tr class="separator:ga4ae023cadf4e2bfd64ae30580a8f9c90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafcc86294e2d277b9ccfe5e2745c4c9fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00644.html#gafcc86294e2d277b9ccfe5e2745c4c9fa">uip_mcast6_route_init</a> (void)</td></tr>
-<tr class="memdesc:gafcc86294e2d277b9ccfe5e2745c4c9fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multicast routing table init routine.  <a href="a00644.html#gafcc86294e2d277b9ccfe5e2745c4c9fa">More...</a><br /></td></tr>
-<tr class="separator:gafcc86294e2d277b9ccfe5e2745c4c9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga3b19a5c21cf81f5a1f95cc340f48b288"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3b19a5c21cf81f5a1f95cc340f48b288"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00771.html#ga3b19a5c21cf81f5a1f95cc340f48b288">ROLL_TM_VER</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:ga3b19a5c21cf81f5a1f95cc340f48b288"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supported Draft Version. <br /></td></tr>
+<tr class="separator:ga3b19a5c21cf81f5a1f95cc340f48b288"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3071f955b9441c4cbf3e3cd205aa491f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3071f955b9441c4cbf3e3cd205aa491f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00771.html#ga3071f955b9441c4cbf3e3cd205aa491f">ROLL_TM_ICMP_CODE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:ga3071f955b9441c4cbf3e3cd205aa491f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ROLL TM ICMPv6 code field. <br /></td></tr>
+<tr class="separator:ga3071f955b9441c4cbf3e3cd205aa491f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga96f10959abb29025e1836a2ec0850edc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga96f10959abb29025e1836a2ec0850edc"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00771.html#ga96f10959abb29025e1836a2ec0850edc">ROLL_TM_IP_HOP_LIMIT</a>&#160;&#160;&#160;0xFF</td></tr>
+<tr class="memdesc:ga96f10959abb29025e1836a2ec0850edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hop limit for ICMP messages. <br /></td></tr>
+<tr class="separator:ga96f10959abb29025e1836a2ec0850edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2d6e08e5c2e17805e4b7263140b0c9ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2d6e08e5c2e17805e4b7263140b0c9ef"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00771.html#ga2d6e08e5c2e17805e4b7263140b0c9ef">ROLL_TM_WINS</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memdesc:ga2d6e08e5c2e17805e4b7263140b0c9ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Sliding Windows In essence: How many unique sources of simultaneous multicast traffic do we want to support for our lowpan If a node is seeding two multicast streams, parametrized on different M values, then this seed will occupy two different sliding windows. <br /></td></tr>
+<tr class="separator:ga2d6e08e5c2e17805e4b7263140b0c9ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf1c76f1e5dafb5a0b7621f403bc9c52e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00771.html#gaf1c76f1e5dafb5a0b7621f403bc9c52e">ROLL_TM_BUFF_NUM</a>&#160;&#160;&#160;6</td></tr>
+<tr class="memdesc:gaf1c76f1e5dafb5a0b7621f403bc9c52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum Number of Buffered Multicast Messages This buffer is shared across all Seed IDs, therefore a new very active Seed may eventually occupy all slots.  <a href="a00771.html#gaf1c76f1e5dafb5a0b7621f403bc9c52e">More...</a><br /></td></tr>
+<tr class="separator:gaf1c76f1e5dafb5a0b7621f403bc9c52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae176cd0be410558e53c8ba5530d531f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae176cd0be410558e53c8ba5530d531f9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00771.html#gae176cd0be410558e53c8ba5530d531f9">ROLL_TM_SHORT_SEEDS</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:gae176cd0be410558e53c8ba5530d531f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use Short Seed IDs [short: 2, long: 16 (default)] It can be argued that we should (and it would be easy to) support both at the same time but the draft doesn't list this as a MUST so we opt for code/ram savings. <br /></td></tr>
+<tr class="separator:gae176cd0be410558e53c8ba5530d531f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6f2e09157a59c63adc314600be3275a0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00771.html#ga6f2e09157a59c63adc314600be3275a0">ROLL_TM_DEST_ALL_NODES</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:ga6f2e09157a59c63adc314600be3275a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destination address for our ICMPv6 advertisements.  <a href="a00771.html#ga6f2e09157a59c63adc314600be3275a0">More...</a><br /></td></tr>
+<tr class="separator:ga6f2e09157a59c63adc314600be3275a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0e5665137e64c2817ad6e9c105b0105b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00771.html#ga0e5665137e64c2817ad6e9c105b0105b">ROLL_TM_SET_M_BIT</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:ga0e5665137e64c2817ad6e9c105b0105b"><td class="mdescLeft">&#160;</td><td class="mdescRight">M param for our outgoing messages By default, we set the M bit (conservative).  <a href="a00771.html#ga0e5665137e64c2817ad6e9c105b0105b">More...</a><br /></td></tr>
+<tr class="separator:ga0e5665137e64c2817ad6e9c105b0105b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header file for multicast routing table manipulation. </p>
+<div class="textblock"><p>Header file for the implementation of the ROLL-TM multicast engine. </p>
 <dl class="section author"><dt>Author</dt><dd>George Oikonomou - <a href="#" onclick="location.href='mai'+'lto:'+'oik'+'on'+'omo'+'u@'+'use'+'rs'+'.so'+'ur'+'cef'+'or'+'ge.'+'ne'+'t'; return false;">oikon<span style="display: none;">.nosp@m.</span>omou<span style="display: none;">.nosp@m.</span>@user<span style="display: none;">.nosp@m.</span>s.so<span style="display: none;">.nosp@m.</span>urcef<span style="display: none;">.nosp@m.</span>orge<span style="display: none;">.nosp@m.</span>.net</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00311_source.html">uip-mcast6-route.h</a>.</p>
+<p>Definition in file <a class="el" href="a00311_source.html">roll-tm.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

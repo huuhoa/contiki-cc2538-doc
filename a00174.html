@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/lib/gcr.c File Reference</title>
+<title>Contiki 3.x: core/lib/crc16.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,25 +47,37 @@
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">gcr.c File Reference</div>  </div>
+<div class="title">crc16.c File Reference<div class="ingroups"><a class="el" href="a00878.html">Libraries</a> &raquo; <a class="el" href="a00731.html">Cyclic Redundancy Check 16 (CRC16) calculation</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    Implementation of GCR coding/decoding
+<p><pre class="fragment">    Implementation of the CRC16 calculcation
 </pre>  
 <a href="#details">More...</a></p>
 
 <p><a href="a00174_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga1c898c9701c991daef7514d2ad88669a"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00731.html#ga1c898c9701c991daef7514d2ad88669a">crc16_add</a> (unsigned char b, unsigned short crc)</td></tr>
+<tr class="memdesc:ga1c898c9701c991daef7514d2ad88669a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update an accumulated CRC16 checksum with one byte.  <a href="a00731.html#ga1c898c9701c991daef7514d2ad88669a">More...</a><br /></td></tr>
+<tr class="separator:ga1c898c9701c991daef7514d2ad88669a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7feada5644b9a99215dcb4fa9c5bc7c0"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00731.html#ga7feada5644b9a99215dcb4fa9c5bc7c0">crc16_data</a> (const unsigned char *data, int datalen, unsigned short acc)</td></tr>
+<tr class="memdesc:ga7feada5644b9a99215dcb4fa9c5bc7c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the CRC16 over a data area.  <a href="a00731.html#ga7feada5644b9a99215dcb4fa9c5bc7c0">More...</a><br /></td></tr>
+<tr class="separator:ga7feada5644b9a99215dcb4fa9c5bc7c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    Implementation of GCR coding/decoding
-</pre> <dl class="section author"><dt>Author</dt><dd>Joakim Eriksson <a href="#" onclick="location.href='mai'+'lto:'+'joa'+'ki'+'me@'+'si'+'cs.'+'se'; return false;">joaki<span style="display: none;">.nosp@m.</span>me@s<span style="display: none;">.nosp@m.</span>ics.s<span style="display: none;">.nosp@m.</span>e</a> </dd></dl>
+<div class="textblock"><pre class="fragment">    Implementation of the CRC16 calculcation
+</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00174_source.html">gcr.c</a>.</p>
+<p>Definition in file <a class="el" href="a00174_source.html">crc16.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

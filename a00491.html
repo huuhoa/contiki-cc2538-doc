@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/sys/subprocess.h File Reference</title>
+<title>Contiki 3.x: core/sys/pt-sem.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,25 +47,40 @@
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">subprocess.h File Reference<div class="ingroups"><a class="el" href="a00757.html">Contiki system</a> &raquo; <a class="el" href="a00688.html">Contiki subprocesses</a></div></div>  </div>
+<div class="title">pt-sem.h File Reference<div class="ingroups"><a class="el" href="a00886.html">Contiki system</a> &raquo; <a class="el" href="a00881.html">Protothreads</a> &raquo; <a class="el" href="a00814.html">Protothread semaphores</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    Subprocesses for Contiki
-</pre>  
+<p>Counting semaphores implemented on protothreads.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &quot;<a class="el" href="a00492_source.html">sys/pt.h</a>&quot;</code><br />
+</div>
 <p><a href="a00491_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:gad7089c5dc86f12019f0361d82a75b04b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00814.html#gad7089c5dc86f12019f0361d82a75b04b">PT_SEM_INIT</a>(s, c)</td></tr>
+<tr class="memdesc:gad7089c5dc86f12019f0361d82a75b04b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a semaphore.  <a href="a00814.html#gad7089c5dc86f12019f0361d82a75b04b">More...</a><br /></td></tr>
+<tr class="separator:gad7089c5dc86f12019f0361d82a75b04b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga386ff87a52a840512906f2940e229e2e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00814.html#ga386ff87a52a840512906f2940e229e2e">PT_SEM_WAIT</a>(pt, s)</td></tr>
+<tr class="memdesc:ga386ff87a52a840512906f2940e229e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for a semaphore.  <a href="a00814.html#ga386ff87a52a840512906f2940e229e2e">More...</a><br /></td></tr>
+<tr class="separator:ga386ff87a52a840512906f2940e229e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1eaaf4d9d75e24582acc6440d7085f19"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00814.html#ga1eaaf4d9d75e24582acc6440d7085f19">PT_SEM_SIGNAL</a>(pt, s)</td></tr>
+<tr class="memdesc:ga1eaaf4d9d75e24582acc6440d7085f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal a semaphore.  <a href="a00814.html#ga1eaaf4d9d75e24582acc6440d7085f19">More...</a><br /></td></tr>
+<tr class="separator:ga1eaaf4d9d75e24582acc6440d7085f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    Subprocesses for Contiki
-</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
+<div class="textblock"><p>Counting semaphores implemented on protothreads. </p>
+<dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00491_source.html">subprocess.h</a>.</p>
+<p>Definition in file <a class="el" href="a00491_source.html">pt-sem.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

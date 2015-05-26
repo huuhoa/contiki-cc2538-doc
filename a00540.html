@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/dev/vdd3-sensor.h File Reference</title>
+<title>Contiki 3.x: cpu/cc2538/dev/uart.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,31 +48,47 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">vdd3-sensor.h File Reference<div class="ingroups"><a class="el" href="a00692.html">Contiki platforms</a> &raquo; <a class="el" href="a00693.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00690.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00702.html">CC2538 Built-In Sensors</a> &raquo; <a class="el" href="a00722.html">CC2538 VDD3 Sensor</a></div></div>  </div>
+<div class="title">uart.c File Reference<div class="ingroups"><a class="el" href="a00821.html">Contiki platforms</a> &raquo; <a class="el" href="a00822.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00819.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00848.html">cc2538 UART</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header file for the CC2538 VDD3 Sensor Driver.  
+<p>Implementation of the cc2538 UART driver.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;lib/sensors.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00476_source.html">sys/energest.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00538_source.html">dev/sys-ctrl.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00523_source.html">dev/ioc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00518_source.html">dev/gpio.h</a>&quot;</code><br />
+<code>#include &quot;dev/uart.h&quot;</code><br />
+<code>#include &quot;lpm.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00559_source.html">reg.h</a>&quot;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 </div>
 <p><a href="a00540_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">VDD3 sensors</div></td></tr>
-<tr class="memitem:ga9e6a59b20c6a75ef124e89797194e413"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9e6a59b20c6a75ef124e89797194e413"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>VDD3_SENSOR</b>&#160;&#160;&#160;&quot;VDD3&quot;</td></tr>
-<tr class="separator:ga9e6a59b20c6a75ef124e89797194e413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">UART functions</div></td></tr>
+<tr class="memitem:gaf9627f140d974bf4701a44844a2176e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00848.html#gaf9627f140d974bf4701a44844a2176e6">uart_init</a> (uint8_t uart)</td></tr>
+<tr class="memdesc:gaf9627f140d974bf4701a44844a2176e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises the UART controller, configures I/O control and interrupts.  <a href="a00848.html#gaf9627f140d974bf4701a44844a2176e6">More...</a><br /></td></tr>
+<tr class="separator:gaf9627f140d974bf4701a44844a2176e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7c12d536a82d50cdcb672a2e48128723"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00848.html#ga7c12d536a82d50cdcb672a2e48128723">uart_set_input</a> (uint8_t uart, int(*input)(unsigned char c))</td></tr>
+<tr class="memdesc:ga7c12d536a82d50cdcb672a2e48128723"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a callback to be called when the UART receives a byte.  <a href="a00848.html#ga7c12d536a82d50cdcb672a2e48128723">More...</a><br /></td></tr>
+<tr class="separator:ga7c12d536a82d50cdcb672a2e48128723"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb4e007f91b4179508d33b778f074f3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00848.html#gabb4e007f91b4179508d33b778f074f3d">uart_write_byte</a> (uint8_t uart, uint8_t b)</td></tr>
+<tr class="memdesc:gabb4e007f91b4179508d33b778f074f3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a single character down the UART.  <a href="a00848.html#gabb4e007f91b4179508d33b778f074f3d">More...</a><br /></td></tr>
+<tr class="separator:gabb4e007f91b4179508d33b778f074f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header file for the CC2538 VDD3 Sensor Driver. </p>
+<div class="textblock"><p>Implementation of the cc2538 UART driver. </p>
 
-<p>Definition in file <a class="el" href="a00540_source.html">vdd3-sensor.h</a>.</p>
+<p>Definition in file <a class="el" href="a00540_source.html">uart.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

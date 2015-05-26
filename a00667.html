@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: Rime route table</title>
+<title>Contiki 3.x: examples/ipv6/multicast/root.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,25 +31,47 @@
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
     </ul>
   </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d28a4824dc47e487b107a5db32ef43c4.html">examples</a></li><li class="navelem"><a class="el" href="dir_269f28271abffc49678ed89463a1797b.html">ipv6</a></li><li class="navelem"><a class="el" href="dir_a77039f6aa307c8c390111bc81343882.html">multicast</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Rime route table<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00754.html">The Rime communication stack</a></div></div>  </div>
+<div class="title">root.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>The route module handles the route table in Rime.  
+<p><pre class="fragment">    This node is part of the RPL multicast example.</pre>  
 <a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
+<code>#include &quot;contiki-lib.h&quot;</code><br />
+<code>#include &quot;contiki-net.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00319_source.html">net/ipv6/multicast/uip-mcast6.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00255_source.html">net/ip/uip-debug.h</a>&quot;</code><br />
+<code>#include &quot;net/rpl/rpl.h&quot;</code><br />
+</div>
+<p><a href="a00667_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>The route module handles the route table in Rime. </p>
-</div><!-- contents -->
+<div class="textblock"><pre class="fragment">    This node is part of the RPL multicast example.</pre> <p>It is an RPL root and sends a multicast message periodically. For the example to work, we need one of those nodes.</p>
+<dl class="section author"><dt>Author</dt><dd>George Oikonomou - <a href="#" onclick="location.href='mai'+'lto:'+'oik'+'on'+'omo'+'u@'+'use'+'rs'+'.so'+'ur'+'cef'+'or'+'ge.'+'ne'+'t'; return false;">oikon<span style="display: none;">.nosp@m.</span>omou<span style="display: none;">.nosp@m.</span>@user<span style="display: none;">.nosp@m.</span>s.so<span style="display: none;">.nosp@m.</span>urcef<span style="display: none;">.nosp@m.</span>orge<span style="display: none;">.nosp@m.</span>.net</a> </dd></dl>
+
+<p>Definition in file <a class="el" href="a00667_source.html">root.c</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

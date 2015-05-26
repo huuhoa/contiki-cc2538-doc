@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: Single-hop reliable bulk data transfer (rudolph2)</title>
+<title>Contiki 3.x: examples/ipv6/native-border-router/border-router-cmds.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,28 +31,50 @@
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
     </ul>
   </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d28a4824dc47e487b107a5db32ef43c4.html">examples</a></li><li class="navelem"><a class="el" href="dir_269f28271abffc49678ed89463a1797b.html">ipv6</a></li><li class="navelem"><a class="el" href="dir_ca71a91b00d4a429d72d924fad9cb71b.html">native-border-router</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Single-hop reliable bulk data transfer (rudolph2)<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00754.html">The Rime communication stack</a></div></div>  </div>
+<div class="title">border-router-cmds.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>The rudolph2 module implements a single-hop reliable bulk data transfer mechanism.  
+<p><pre class="fragment">    Sets up some commands for the border router
+</pre>  
 <a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
+<code>#include &quot;cmd.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00672_source.html">border-router.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00670_source.html">border-router-cmds.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00164_source.html">dev/serial-line.h</a>&quot;</code><br />
+<code>#include &quot;net/rpl/rpl.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00267_source.html">net/ip/uiplib.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00255_source.html">net/ip/uip-debug.h</a>&quot;</code><br />
+</div>
+<p><a href="a00669_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>The rudolph2 module implements a single-hop reliable bulk data transfer mechanism. </p>
-<h1><a class="anchor" id="rudolph2-channels"></a>
-Channels</h1>
-<p>The rudolph2 module uses 2 channels; one for data packets and one for NACK and repair packets. </p>
-</div><!-- contents -->
+<div class="textblock"><pre class="fragment">    Sets up some commands for the border router
+</pre> <dl class="section author"><dt>Author</dt><dd>Niclas Finne <a href="#" onclick="location.href='mai'+'lto:'+'nfi'+'@s'+'ics'+'.s'+'e'; return false;">nfi@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a> Joakim Eriksson <a href="#" onclick="location.href='mai'+'lto:'+'joa'+'ki'+'me@'+'si'+'cs.'+'se'; return false;">joaki<span style="display: none;">.nosp@m.</span>me@s<span style="display: none;">.nosp@m.</span>ics.s<span style="display: none;">.nosp@m.</span>e</a> </dd></dl>
+
+<p>Definition in file <a class="el" href="a00669_source.html">border-router-cmds.c</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

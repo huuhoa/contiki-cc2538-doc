@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/cfs/cfs-posix-dir.c Source File</title>
+<title>Contiki 3.x: core/cfs/cfs-eeprom.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,7 +48,7 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">cfs-posix-dir.c</div>  </div>
+<div class="title">cfs-eeprom.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
@@ -85,66 +85,133 @@
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;dirent.h&gt;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00128.html">cfs/cfs.h</a>&quot;</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">struct </span>cfs_posix_dir {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  DIR *dirp;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">int</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="a00595.html#gab4df33476a46ca00caf8de9cbb3e8f05">   47</a></span>&#160;<a class="code" href="a00595.html#gab4df33476a46ca00caf8de9cbb3e8f05">cfs_opendir</a>(<span class="keyword">struct</span> cfs_dir *p, <span class="keyword">const</span> <span class="keywordtype">char</span> *n)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">struct </span>cfs_posix_dir *dir = (<span class="keyword">struct </span>cfs_posix_dir *)p;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  dir-&gt;dirp = opendir(n);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordflow">return</span> dir-&gt;dirp == NULL;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00129.html">cfs/cfs.h</a>&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00155.html">dev/eeprom.h</a>&quot;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">struct </span>filestate {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">int</span> flag;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#define FLAG_FILE_CLOSED 0</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#define FLAG_FILE_OPEN   1</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  eeprom_addr_t fileptr;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  eeprom_addr_t filesize;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">static</span> <span class="keyword">struct </span>filestate file;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#ifdef CFS_EEPROM_CONF_OFFSET</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define CFS_EEPROM_OFFSET CFS_EEPROM_CONF_OFFSET</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#define CFS_EEPROM_OFFSET 0</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">int</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="a00595.html#ga6367d2b762784fabea2ad1f533aa4bf4">   56</a></span>&#160;<a class="code" href="a00595.html#ga6367d2b762784fabea2ad1f533aa4bf4">cfs_readdir</a>(<span class="keyword">struct</span> cfs_dir *p, <span class="keyword">struct</span> cfs_dirent *e)</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="a00724.html#gadc1727a1a27a40a8483135425a42c5de">   56</a></span>&#160;<a class="code" href="a00724.html#gadc1727a1a27a40a8483135425a42c5de">cfs_open</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *n, <span class="keywordtype">int</span> f)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">struct </span>cfs_posix_dir *dir = (<span class="keyword">struct </span>cfs_posix_dir *)p;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">struct </span>dirent *res;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordflow">if</span>(dir-&gt;dirp == NULL) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  res = readdir(dir-&gt;dirp);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordflow">if</span>(res == NULL) {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  strncpy(e-&gt;name, res-&gt;d_name, <span class="keyword">sizeof</span>(e-&gt;name));</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#if defined(__APPLE2__) || defined(__CBM__)</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  e-&gt;size = res-&gt;d_blocks;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* __APPLE2__ || __CBM__ */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  e-&gt;size = 0;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __APPLE2__ || __CBM__ */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordflow">if</span>(file.flag == FLAG_FILE_CLOSED) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    file.flag = FLAG_FILE_OPEN;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span>(f &amp; <a class="code" href="a00724.html#ga00fed0156dbcbd1214203c7f2507e376">CFS_READ</a>) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      file.fileptr = 0;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span>(f &amp; <a class="code" href="a00724.html#ga798793edf50f38e3e41364f0f6f71201">CFS_WRITE</a>){</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keywordflow">if</span>(f &amp; <a class="code" href="a00724.html#ga2b402228c26a3590f1d4bf44df0b2b82">CFS_APPEND</a>) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        file.fileptr = file.filesize;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        file.fileptr = 0;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        file.filesize = 0;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  }</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="a00595.html#gaef17820cc7daaeac661e401ca7b3054b">   78</a></span>&#160;<a class="code" href="a00595.html#gaef17820cc7daaeac661e401ca7b3054b">cfs_closedir</a>(<span class="keyword">struct</span> cfs_dir *p)</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="a00724.html#gadc3991eb5ac0e1cb6fd5e162049785b4">   78</a></span>&#160;<a class="code" href="a00724.html#gadc3991eb5ac0e1cb6fd5e162049785b4">cfs_close</a>(<span class="keywordtype">int</span> f)</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keyword">struct </span>cfs_posix_dir *dir = (<span class="keyword">struct </span>cfs_posix_dir *)p;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">if</span>(dir-&gt;dirp != NULL) {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    closedir(dir-&gt;dirp);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="ttc" id="a00595_html_ga6367d2b762784fabea2ad1f533aa4bf4"><div class="ttname"><a href="a00595.html#ga6367d2b762784fabea2ad1f533aa4bf4">cfs_readdir</a></div><div class="ttdeci">int cfs_readdir(struct cfs_dir *p, struct cfs_dirent *e)</div><div class="ttdoc">Read a directory entry. </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00056">cfs-posix-dir.c:56</a></div></div>
-<div class="ttc" id="a00595_html_gab4df33476a46ca00caf8de9cbb3e8f05"><div class="ttname"><a href="a00595.html#gab4df33476a46ca00caf8de9cbb3e8f05">cfs_opendir</a></div><div class="ttdeci">int cfs_opendir(struct cfs_dir *p, const char *n)</div><div class="ttdoc">Open a directory for reading directory entries. </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00047">cfs-posix-dir.c:47</a></div></div>
-<div class="ttc" id="a00595_html_gaef17820cc7daaeac661e401ca7b3054b"><div class="ttname"><a href="a00595.html#gaef17820cc7daaeac661e401ca7b3054b">cfs_closedir</a></div><div class="ttdeci">void cfs_closedir(struct cfs_dir *p)</div><div class="ttdoc">Close a directory opened with cfs_opendir(). </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00078">cfs-posix-dir.c:78</a></div></div>
-<div class="ttc" id="a00128_html"><div class="ttname"><a href="a00128.html">cfs.h</a></div><div class="ttdoc">    CFS header file. </div></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  file.flag = FLAG_FILE_CLOSED;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="a00724.html#ga7bc4a520b99285c46ffb0f80dbe78ca1">   84</a></span>&#160;<a class="code" href="a00724.html#ga7bc4a520b99285c46ffb0f80dbe78ca1">cfs_read</a>(<span class="keywordtype">int</span> f, <span class="keywordtype">void</span> *buf, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> len)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;{</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordflow">if</span>(f == 1) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="a00728.html#ga273489bf4a99139d385b3d01ac596644">eeprom_read</a>(CFS_EEPROM_OFFSET + file.fileptr, buf, len);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    file.fileptr += len;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">return</span> len;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="a00724.html#ga0c8cd2e553c7c2cfbe2ffb0fbc874fb7">   96</a></span>&#160;<a class="code" href="a00724.html#ga0c8cd2e553c7c2cfbe2ffb0fbc874fb7">cfs_write</a>(<span class="keywordtype">int</span> f, <span class="keyword">const</span> <span class="keywordtype">void</span> *buf, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> len)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;{</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">if</span>(f == 1) {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <a class="code" href="a00728.html#gac78250ee593cc00686f8b6209b48a745">eeprom_write</a>(CFS_EEPROM_OFFSET + file.fileptr, (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)buf, len);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    file.fileptr += len;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">return</span> len;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;cfs_offset_t</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="a00724.html#ga116cdc7036a99707477b50bd496fa1c1">  108</a></span>&#160;<a class="code" href="a00724.html#ga116cdc7036a99707477b50bd496fa1c1">cfs_seek</a>(<span class="keywordtype">int</span> f, cfs_offset_t o, <span class="keywordtype">int</span> w)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;{</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keywordflow">if</span>(w == <a class="code" href="a00724.html#ga72cd7360175436b7ed26606708314dc0">CFS_SEEK_SET</a> &amp;&amp; f == 1) {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    file.fileptr = o;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">return</span> o;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="a00724.html#gacad1f14239db1a889ccf9804040e0d20">  119</a></span>&#160;<a class="code" href="a00724.html#gacad1f14239db1a889ccf9804040e0d20">cfs_remove</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name)</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;{</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;}</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="a00724.html#gab4df33476a46ca00caf8de9cbb3e8f05">  125</a></span>&#160;<a class="code" href="a00724.html#gab4df33476a46ca00caf8de9cbb3e8f05">cfs_opendir</a>(<span class="keyword">struct</span> cfs_dir *p, <span class="keyword">const</span> <span class="keywordtype">char</span> *n)</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;{</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="a00724.html#ga6367d2b762784fabea2ad1f533aa4bf4">  131</a></span>&#160;<a class="code" href="a00724.html#ga6367d2b762784fabea2ad1f533aa4bf4">cfs_readdir</a>(<span class="keyword">struct</span> cfs_dir *p, <span class="keyword">struct</span> cfs_dirent *e)</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;{</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;}</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="a00724.html#gaef17820cc7daaeac661e401ca7b3054b">  137</a></span>&#160;<a class="code" href="a00724.html#gaef17820cc7daaeac661e401ca7b3054b">cfs_closedir</a>(<span class="keyword">struct</span> cfs_dir *p)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;{</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;}</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="ttc" id="a00728_html_gac78250ee593cc00686f8b6209b48a745"><div class="ttname"><a href="a00728.html#gac78250ee593cc00686f8b6209b48a745">eeprom_write</a></div><div class="ttdeci">void eeprom_write(eeprom_addr_t addr, unsigned char *buf, int size)</div><div class="ttdoc">Write a buffer into EEPROM. </div></div>
+<div class="ttc" id="a00724_html_ga798793edf50f38e3e41364f0f6f71201"><div class="ttname"><a href="a00724.html#ga798793edf50f38e3e41364f0f6f71201">CFS_WRITE</a></div><div class="ttdeci">#define CFS_WRITE</div><div class="ttdoc">Specify that cfs_open() should open a file for writing. </div><div class="ttdef"><b>Definition:</b> <a href="a00129_source.html#l00104">cfs.h:104</a></div></div>
+<div class="ttc" id="a00724_html_gacad1f14239db1a889ccf9804040e0d20"><div class="ttname"><a href="a00724.html#gacad1f14239db1a889ccf9804040e0d20">cfs_remove</a></div><div class="ttdeci">int cfs_remove(const char *name)</div><div class="ttdoc">Remove a file. </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00119">cfs-eeprom.c:119</a></div></div>
+<div class="ttc" id="a00155_html"><div class="ttname"><a href="a00155.html">eeprom.h</a></div><div class="ttdoc">EEPROM functions. </div></div>
+<div class="ttc" id="a00724_html_ga2b402228c26a3590f1d4bf44df0b2b82"><div class="ttname"><a href="a00724.html#ga2b402228c26a3590f1d4bf44df0b2b82">CFS_APPEND</a></div><div class="ttdeci">#define CFS_APPEND</div><div class="ttdoc">Specify that cfs_open() should append written data to the file rather than overwriting it...</div><div class="ttdef"><b>Definition:</b> <a href="a00129_source.html#l00118">cfs.h:118</a></div></div>
+<div class="ttc" id="a00724_html_ga6367d2b762784fabea2ad1f533aa4bf4"><div class="ttname"><a href="a00724.html#ga6367d2b762784fabea2ad1f533aa4bf4">cfs_readdir</a></div><div class="ttdeci">int cfs_readdir(struct cfs_dir *p, struct cfs_dirent *e)</div><div class="ttdoc">Read a directory entry. </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00131">cfs-eeprom.c:131</a></div></div>
+<div class="ttc" id="a00724_html_ga0c8cd2e553c7c2cfbe2ffb0fbc874fb7"><div class="ttname"><a href="a00724.html#ga0c8cd2e553c7c2cfbe2ffb0fbc874fb7">cfs_write</a></div><div class="ttdeci">int cfs_write(int f, const void *buf, unsigned int len)</div><div class="ttdoc">Write data to an open file. </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00096">cfs-eeprom.c:96</a></div></div>
+<div class="ttc" id="a00724_html_ga116cdc7036a99707477b50bd496fa1c1"><div class="ttname"><a href="a00724.html#ga116cdc7036a99707477b50bd496fa1c1">cfs_seek</a></div><div class="ttdeci">cfs_offset_t cfs_seek(int f, cfs_offset_t o, int w)</div><div class="ttdoc">Seek to a specified position in an open file. </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00108">cfs-eeprom.c:108</a></div></div>
+<div class="ttc" id="a00129_html"><div class="ttname"><a href="a00129.html">cfs.h</a></div><div class="ttdoc">    CFS header file. </div></div>
+<div class="ttc" id="a00724_html_gaef17820cc7daaeac661e401ca7b3054b"><div class="ttname"><a href="a00724.html#gaef17820cc7daaeac661e401ca7b3054b">cfs_closedir</a></div><div class="ttdeci">void cfs_closedir(struct cfs_dir *p)</div><div class="ttdoc">Close a directory opened with cfs_opendir(). </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00137">cfs-eeprom.c:137</a></div></div>
+<div class="ttc" id="a00728_html_ga273489bf4a99139d385b3d01ac596644"><div class="ttname"><a href="a00728.html#ga273489bf4a99139d385b3d01ac596644">eeprom_read</a></div><div class="ttdeci">void eeprom_read(eeprom_addr_t addr, unsigned char *buf, int size)</div><div class="ttdoc">Read data from the EEPROM. </div></div>
+<div class="ttc" id="a00724_html_gadc3991eb5ac0e1cb6fd5e162049785b4"><div class="ttname"><a href="a00724.html#gadc3991eb5ac0e1cb6fd5e162049785b4">cfs_close</a></div><div class="ttdeci">void cfs_close(int f)</div><div class="ttdoc">Close an open file. </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00078">cfs-eeprom.c:78</a></div></div>
+<div class="ttc" id="a00724_html_gab4df33476a46ca00caf8de9cbb3e8f05"><div class="ttname"><a href="a00724.html#gab4df33476a46ca00caf8de9cbb3e8f05">cfs_opendir</a></div><div class="ttdeci">int cfs_opendir(struct cfs_dir *p, const char *n)</div><div class="ttdoc">Open a directory for reading directory entries. </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00125">cfs-eeprom.c:125</a></div></div>
+<div class="ttc" id="a00724_html_ga00fed0156dbcbd1214203c7f2507e376"><div class="ttname"><a href="a00724.html#ga00fed0156dbcbd1214203c7f2507e376">CFS_READ</a></div><div class="ttdeci">#define CFS_READ</div><div class="ttdoc">Specify that cfs_open() should open a file for reading. </div><div class="ttdef"><b>Definition:</b> <a href="a00129_source.html#l00090">cfs.h:90</a></div></div>
+<div class="ttc" id="a00724_html_ga7bc4a520b99285c46ffb0f80dbe78ca1"><div class="ttname"><a href="a00724.html#ga7bc4a520b99285c46ffb0f80dbe78ca1">cfs_read</a></div><div class="ttdeci">int cfs_read(int f, void *buf, unsigned int len)</div><div class="ttdoc">Read data from an open file. </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00084">cfs-eeprom.c:84</a></div></div>
+<div class="ttc" id="a00724_html_gadc1727a1a27a40a8483135425a42c5de"><div class="ttname"><a href="a00724.html#gadc1727a1a27a40a8483135425a42c5de">cfs_open</a></div><div class="ttdeci">int cfs_open(const char *n, int f)</div><div class="ttdoc">Open a file. </div><div class="ttdef"><b>Definition:</b> <a href="a00124_source.html#l00056">cfs-eeprom.c:56</a></div></div>
+<div class="ttc" id="a00724_html_ga72cd7360175436b7ed26606708314dc0"><div class="ttname"><a href="a00724.html#ga72cd7360175436b7ed26606708314dc0">CFS_SEEK_SET</a></div><div class="ttdeci">#define CFS_SEEK_SET</div><div class="ttdoc">Specify that cfs_seek() should compute the offset from the beginning of the file. ...</div><div class="ttdef"><b>Definition:</b> <a href="a00129_source.html#l00127">cfs.h:127</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:55 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

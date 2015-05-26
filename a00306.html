@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/ipv6/multicast/roll-tm.h File Reference</title>
+<title>Contiki 3.x: core/net/ipv4/uip-over-mesh.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,73 +43,32 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_2254bc981389a9495bd721183ae93a8d.html">ipv6</a></li><li class="navelem"><a class="el" href="dir_30f027f9ee303e3cf4f79ee531cc4eae.html">multicast</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_cb9dafae043fe896da67b2494a9403c5.html">ipv4</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">roll-tm.h File Reference<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00760.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00761.html">uIP IPv6 specific features</a> &raquo; <a class="el" href="a00644.html">IPv6 Multicast Forwarding</a> &raquo; <a class="el" href="a00642.html">ROLL Trickle Multicast</a></div></div>  </div>
+<div class="title">uip-over-mesh.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header file for the implementation of the ROLL-TM multicast engine.  
+<p><pre class="fragment">    Header file for tunnelling uIP over Rime mesh
+</pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00587_source.html">contiki-conf.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00313_source.html">net/ipv6/multicast/uip-mcast6-stats.h</a>&quot;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00264_source.html">net/ip/uip.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00302_source.html">net/ipv4/uip-fw.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00425_source.html">net/rime/rime.h</a>&quot;</code><br />
 </div>
 <p><a href="a00306_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00077.html">roll_tm_stats</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multicast stats extension for the ROLL TM engine.  <a href="a00077.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ga3b19a5c21cf81f5a1f95cc340f48b288"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3b19a5c21cf81f5a1f95cc340f48b288"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00642.html#ga3b19a5c21cf81f5a1f95cc340f48b288">ROLL_TM_VER</a>&#160;&#160;&#160;1</td></tr>
-<tr class="memdesc:ga3b19a5c21cf81f5a1f95cc340f48b288"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supported Draft Version. <br /></td></tr>
-<tr class="separator:ga3b19a5c21cf81f5a1f95cc340f48b288"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3071f955b9441c4cbf3e3cd205aa491f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3071f955b9441c4cbf3e3cd205aa491f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00642.html#ga3071f955b9441c4cbf3e3cd205aa491f">ROLL_TM_ICMP_CODE</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:ga3071f955b9441c4cbf3e3cd205aa491f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ROLL TM ICMPv6 code field. <br /></td></tr>
-<tr class="separator:ga3071f955b9441c4cbf3e3cd205aa491f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga96f10959abb29025e1836a2ec0850edc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga96f10959abb29025e1836a2ec0850edc"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00642.html#ga96f10959abb29025e1836a2ec0850edc">ROLL_TM_IP_HOP_LIMIT</a>&#160;&#160;&#160;0xFF</td></tr>
-<tr class="memdesc:ga96f10959abb29025e1836a2ec0850edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hop limit for ICMP messages. <br /></td></tr>
-<tr class="separator:ga96f10959abb29025e1836a2ec0850edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2d6e08e5c2e17805e4b7263140b0c9ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2d6e08e5c2e17805e4b7263140b0c9ef"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00642.html#ga2d6e08e5c2e17805e4b7263140b0c9ef">ROLL_TM_WINS</a>&#160;&#160;&#160;2</td></tr>
-<tr class="memdesc:ga2d6e08e5c2e17805e4b7263140b0c9ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Sliding Windows In essence: How many unique sources of simultaneous multicast traffic do we want to support for our lowpan If a node is seeding two multicast streams, parametrized on different M values, then this seed will occupy two different sliding windows. <br /></td></tr>
-<tr class="separator:ga2d6e08e5c2e17805e4b7263140b0c9ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf1c76f1e5dafb5a0b7621f403bc9c52e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00642.html#gaf1c76f1e5dafb5a0b7621f403bc9c52e">ROLL_TM_BUFF_NUM</a>&#160;&#160;&#160;6</td></tr>
-<tr class="memdesc:gaf1c76f1e5dafb5a0b7621f403bc9c52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum Number of Buffered Multicast Messages This buffer is shared across all Seed IDs, therefore a new very active Seed may eventually occupy all slots.  <a href="a00642.html#gaf1c76f1e5dafb5a0b7621f403bc9c52e">More...</a><br /></td></tr>
-<tr class="separator:gaf1c76f1e5dafb5a0b7621f403bc9c52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae176cd0be410558e53c8ba5530d531f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae176cd0be410558e53c8ba5530d531f9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00642.html#gae176cd0be410558e53c8ba5530d531f9">ROLL_TM_SHORT_SEEDS</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:gae176cd0be410558e53c8ba5530d531f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use Short Seed IDs [short: 2, long: 16 (default)] It can be argued that we should (and it would be easy to) support both at the same time but the draft doesn't list this as a MUST so we opt for code/ram savings. <br /></td></tr>
-<tr class="separator:gae176cd0be410558e53c8ba5530d531f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6f2e09157a59c63adc314600be3275a0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00642.html#ga6f2e09157a59c63adc314600be3275a0">ROLL_TM_DEST_ALL_NODES</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:ga6f2e09157a59c63adc314600be3275a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destination address for our ICMPv6 advertisements.  <a href="a00642.html#ga6f2e09157a59c63adc314600be3275a0">More...</a><br /></td></tr>
-<tr class="separator:ga6f2e09157a59c63adc314600be3275a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0e5665137e64c2817ad6e9c105b0105b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00642.html#ga0e5665137e64c2817ad6e9c105b0105b">ROLL_TM_SET_M_BIT</a>&#160;&#160;&#160;1</td></tr>
-<tr class="memdesc:ga0e5665137e64c2817ad6e9c105b0105b"><td class="mdescLeft">&#160;</td><td class="mdescRight">M param for our outgoing messages By default, we set the M bit (conservative).  <a href="a00642.html#ga0e5665137e64c2817ad6e9c105b0105b">More...</a><br /></td></tr>
-<tr class="separator:ga0e5665137e64c2817ad6e9c105b0105b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header file for the implementation of the ROLL-TM multicast engine. </p>
-<dl class="section author"><dt>Author</dt><dd>George Oikonomou - <a href="#" onclick="location.href='mai'+'lto:'+'oik'+'on'+'omo'+'u@'+'use'+'rs'+'.so'+'ur'+'cef'+'or'+'ge.'+'ne'+'t'; return false;">oikon<span style="display: none;">.nosp@m.</span>omou<span style="display: none;">.nosp@m.</span>@user<span style="display: none;">.nosp@m.</span>s.so<span style="display: none;">.nosp@m.</span>urcef<span style="display: none;">.nosp@m.</span>orge<span style="display: none;">.nosp@m.</span>.net</a> </dd></dl>
+<div class="textblock"><pre class="fragment">    Header file for tunnelling uIP over Rime mesh
+</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00306_source.html">roll-tm.h</a>.</p>
+<p>Definition in file <a class="el" href="a00306_source.html">uip-over-mesh.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

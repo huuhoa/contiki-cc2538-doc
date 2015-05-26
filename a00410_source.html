@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/rime/netflood.c Source File</title>
+<title>Contiki 3.x: core/net/rime/mesh.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,11 +48,11 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">netflood.c</div>  </div>
+<div class="title">mesh.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00410.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2006, Swedish Institute of Computer Science.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2007, Swedish Institute of Computer Science.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
@@ -85,176 +85,199 @@
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         Best-effort network flooding (netflood)</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         A mesh routing protocol</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * \author</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *         Adam Dunkels &lt;adam@sics.se&gt;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * \addtogroup rimenetflood</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * \addtogroup rimemesh</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * @{</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00411.html">net/rime/netflood.h</a>&quot;</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define HOPS_MAX 16</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">struct </span>netflood_hdr {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  uint16_t originator_seqno;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  linkaddr_t originator;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  uint16_t hops;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define DEBUG 0</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#if DEBUG</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#define PRINTF(...) printf(__VA_ARGS__)</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#define PRINTF(...)</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">static</span> <span class="keywordtype">int</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;send(<span class="keyword">struct</span> netflood_conn *c)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  PRINTF(<span class="stringliteral">&quot;%d.%d: netflood send to ipolite\n&quot;</span>,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;         <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1]);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a00657.html#ga324dab71e11002f7bf81c9d2b8bb23a6">ipolite_send</a>(&amp;c-&gt;c, c-&gt;queue_time, 4);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;recv_from_ipolite(<span class="keyword">struct</span> <a class="code" href="a00064.html">ipolite_conn</a> *ipolite, <span class="keyword">const</span> linkaddr_t *from)</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keyword">struct </span>netflood_conn *c = (<span class="keyword">struct </span>netflood_conn *)ipolite;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keyword">struct </span>netflood_hdr hdr;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  uint8_t hops;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keyword">struct </span>queuebuf *queuebuf;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  memcpy(&amp;hdr, <a class="code" href="a00613.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>(), <span class="keyword">sizeof</span>(<span class="keyword">struct</span> netflood_hdr));</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  hops = hdr.hops;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="comment">/* Remember packet if we need to forward it. */</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  queuebuf = queuebuf_new_from_packetbuf();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <a class="code" href="a00613.html#gad7d9d402f591a560b5502bc6c8bcbd20">packetbuf_hdrreduce</a>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> netflood_hdr));</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keywordflow">if</span>(c-&gt;u-&gt;recv != NULL) {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">if</span>(!(<a class="code" href="a00612.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(&amp;hdr.originator, &amp;c-&gt;last_originator) &amp;&amp;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;         hdr.originator_seqno &lt;= c-&gt;last_originator_seqno)) {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keywordflow">if</span>(c-&gt;u-&gt;recv(c, from, &amp;hdr.originator, hdr.originator_seqno,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    hops)) {</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">if</span>(queuebuf != NULL) {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;          queuebuf_to_packetbuf(queuebuf);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;          queuebuf_free(queuebuf);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;          queuebuf = NULL;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;          memcpy(&amp;hdr, <a class="code" href="a00613.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>(), <span class="keyword">sizeof</span>(<span class="keyword">struct</span> netflood_hdr));</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;          </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;          <span class="comment">/* Rebroadcast received packet. */</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;          <span class="keywordflow">if</span>(hops &lt; HOPS_MAX) {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            PRINTF(<span class="stringliteral">&quot;%d.%d: netflood rebroadcasting %d.%d/%d (%d.%d/%d) hops %d\n&quot;</span>,</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                   <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                   hdr.originator.u8[0], hdr.originator.u8[1],</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                   hdr.originator_seqno,</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                   c-&gt;last_originator.u8[0], c-&gt;last_originator.u8[1],</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                   c-&gt;last_originator_seqno,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                  hops);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            hdr.hops++;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            memcpy(<a class="code" href="a00613.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>(), &amp;hdr, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> netflood_hdr));</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            send(c);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <a class="code" href="a00612.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;c-&gt;last_originator, &amp;hdr.originator);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            c-&gt;last_originator_seqno = hdr.originator_seqno;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;          }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  }</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keywordflow">if</span>(queuebuf != NULL) {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    queuebuf_free(queuebuf);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  }</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;sent(<span class="keyword">struct</span> <a class="code" href="a00064.html">ipolite_conn</a> *ipolite)</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;{</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keyword">struct </span>netflood_conn *c = (<span class="keyword">struct </span>netflood_conn *)ipolite;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keywordflow">if</span>(c-&gt;u-&gt;sent != NULL) {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    c-&gt;u-&gt;sent(c);</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  }</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;dropped(<span class="keyword">struct</span> <a class="code" href="a00064.html">ipolite_conn</a> *ipolite)</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;{</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  <span class="keyword">struct </span>netflood_conn *c = (<span class="keyword">struct </span>netflood_conn *)ipolite;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  <span class="keywordflow">if</span>(c-&gt;u-&gt;dropped != NULL) {</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    c-&gt;u-&gt;dropped(c);</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  }</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;}</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a00063.html">ipolite_callbacks</a> netflood = {recv_from_ipolite, <a class="code" href="a00063.html#acdc286e3b61d6fc5ae9e12305e22ee3e">sent</a>, <a class="code" href="a00063.html#a451da035e23308292f284d6408cd52b8">dropped</a>};</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;netflood_open(<span class="keyword">struct</span> netflood_conn *c, clock_time_t queue_time,</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        uint16_t channel, <span class="keyword">const</span> <span class="keyword">struct</span> netflood_callbacks *u)</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;{</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <a class="code" href="a00657.html#ga9cc579e948fc9f2942f9eb2e59ae3e69">ipolite_open</a>(&amp;c-&gt;c, channel, 1, &amp;netflood);</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  c-&gt;u = u;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  c-&gt;queue_time = queue_time;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;netflood_close(<span class="keyword">struct</span> netflood_conn *c)</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;{</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <a class="code" href="a00657.html#ga5228d501f70a88c7807cbd3c202dc47d">ipolite_close</a>(&amp;c-&gt;c);</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;}</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keywordtype">int</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;netflood_send(<span class="keyword">struct</span> netflood_conn *c, uint8_t seqno)</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;{</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="a00613.html#gacffe7341cbfe90034e829ea70111203a">packetbuf_hdralloc</a>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> netflood_hdr))) {</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keyword">struct </span>netflood_hdr *hdr = <a class="code" href="a00613.html#ga67c213a97ab9bdadddd90db1df0a3058">packetbuf_hdrptr</a>();</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <a class="code" href="a00612.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;hdr-&gt;originator, &amp;<a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <a class="code" href="a00612.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;c-&gt;last_originator, &amp;hdr-&gt;originator);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    c-&gt;last_originator_seqno = hdr-&gt;originator_seqno = seqno;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    hdr-&gt;hops = 0;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    PRINTF(<span class="stringliteral">&quot;%d.%d: netflood sending &#39;%s&#39;\n&quot;</span>,</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;           <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;           (<span class="keywordtype">char</span> *)<a class="code" href="a00613.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>());</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00657.html#ga324dab71e11002f7bf81c9d2b8bb23a6">ipolite_send</a>(&amp;c-&gt;c, 0, 4);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  }</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;}</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;netflood_cancel(<span class="keyword">struct</span> netflood_conn *c)</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;{</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  <a class="code" href="a00657.html#ga4ff6c8d8372f8b0da3b960b7c331dd22">ipolite_cancel</a>(&amp;c-&gt;c);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;}</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="ttc" id="a00613_html_ga29a6f3f230b55e6bc2f017879c27113a"><div class="ttname"><a href="a00613.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a></div><div class="ttdeci">void * packetbuf_dataptr(void)</div><div class="ttdoc">Get a pointer to the data in the packetbuf. </div><div class="ttdef"><b>Definition:</b> <a href="a00376_source.html#l00204">packetbuf.c:204</a></div></div>
-<div class="ttc" id="a00657_html_ga5228d501f70a88c7807cbd3c202dc47d"><div class="ttname"><a href="a00657.html#ga5228d501f70a88c7807cbd3c202dc47d">ipolite_close</a></div><div class="ttdeci">void ipolite_close(struct ipolite_conn *c)</div><div class="ttdoc">Close an ipolite connection. </div><div class="ttdef"><b>Definition:</b> <a href="a00402_source.html#l00126">ipolite.c:126</a></div></div>
-<div class="ttc" id="a00063_html_a451da035e23308292f284d6408cd52b8"><div class="ttname"><a href="a00063.html#a451da035e23308292f284d6408cd52b8">ipolite_callbacks::dropped</a></div><div class="ttdeci">void(* dropped)(struct ipolite_conn *c)</div><div class="ttdoc">Called when a packet is dropped because a packet was heard from a neighbor. </div><div class="ttdef"><b>Definition:</b> <a href="a00403_source.html#l00128">ipolite.h:128</a></div></div>
-<div class="ttc" id="a00064_html"><div class="ttname"><a href="a00064.html">ipolite_conn</a></div><div class="ttdoc">An opaque structure with no user-visible elements that holds the state of an ipolite connection...</div><div class="ttdef"><b>Definition:</b> <a href="a00403_source.html#l00135">ipolite.h:135</a></div></div>
-<div class="ttc" id="a00657_html_ga324dab71e11002f7bf81c9d2b8bb23a6"><div class="ttname"><a href="a00657.html#ga324dab71e11002f7bf81c9d2b8bb23a6">ipolite_send</a></div><div class="ttdeci">int ipolite_send(struct ipolite_conn *c, clock_time_t interval, uint8_t hdrsize)</div><div class="ttdoc">Send a packet on an ipolite connection. </div><div class="ttdef"><b>Definition:</b> <a href="a00402_source.html#l00137">ipolite.c:137</a></div></div>
-<div class="ttc" id="a00612_html_ga03585f3e07ec49ec11cb4bbd17f3cf0e"><div class="ttname"><a href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a></div><div class="ttdeci">linkaddr_t linkaddr_node_addr</div><div class="ttdoc">The Rime address of the node. </div><div class="ttdef"><b>Definition:</b> <a href="a00328_source.html#l00048">linkaddr.c:48</a></div></div>
-<div class="ttc" id="a00063_html"><div class="ttname"><a href="a00063.html">ipolite_callbacks</a></div><div class="ttdoc">A structure with callback functions for an ipolite connection. </div><div class="ttdef"><b>Definition:</b> <a href="a00403_source.html#l00113">ipolite.h:113</a></div></div>
-<div class="ttc" id="a00613_html_gad7d9d402f591a560b5502bc6c8bcbd20"><div class="ttname"><a href="a00613.html#gad7d9d402f591a560b5502bc6c8bcbd20">packetbuf_hdrreduce</a></div><div class="ttdeci">int packetbuf_hdrreduce(int size)</div><div class="ttdoc">Reduce the header in the packetbuf, for incoming packets. </div><div class="ttdef"><b>Definition:</b> <a href="a00376_source.html#l00185">packetbuf.c:185</a></div></div>
-<div class="ttc" id="a00657_html_ga9cc579e948fc9f2942f9eb2e59ae3e69"><div class="ttname"><a href="a00657.html#ga9cc579e948fc9f2942f9eb2e59ae3e69">ipolite_open</a></div><div class="ttdeci">void ipolite_open(struct ipolite_conn *c, uint16_t channel, uint8_t dups, const struct ipolite_callbacks *cb)</div><div class="ttdoc">Open an ipolite connection. </div><div class="ttdef"><b>Definition:</b> <a href="a00402_source.html#l00116">ipolite.c:116</a></div></div>
-<div class="ttc" id="a00063_html_acdc286e3b61d6fc5ae9e12305e22ee3e"><div class="ttname"><a href="a00063.html#acdc286e3b61d6fc5ae9e12305e22ee3e">ipolite_callbacks::sent</a></div><div class="ttdeci">void(* sent)(struct ipolite_conn *c)</div><div class="ttdoc">Called when a packet is sent on the connection. </div><div class="ttdef"><b>Definition:</b> <a href="a00403_source.html#l00122">ipolite.h:122</a></div></div>
-<div class="ttc" id="a00411_html"><div class="ttname"><a href="a00411.html">netflood.h</a></div><div class="ttdoc">    Header file for the best-effort network flooding (netflood)  </div></div>
-<div class="ttc" id="a00657_html_ga4ff6c8d8372f8b0da3b960b7c331dd22"><div class="ttname"><a href="a00657.html#ga4ff6c8d8372f8b0da3b960b7c331dd22">ipolite_cancel</a></div><div class="ttdeci">void ipolite_cancel(struct ipolite_conn *c)</div><div class="ttdoc">Cancel a pending packet. </div><div class="ttdef"><b>Definition:</b> <a href="a00402_source.html#l00174">ipolite.c:174</a></div></div>
-<div class="ttc" id="a00612_html_ga61b6a33229787905999787d55047aa80"><div class="ttname"><a href="a00612.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a></div><div class="ttdeci">void linkaddr_copy(linkaddr_t *dest, const linkaddr_t *src)</div><div class="ttdoc">Copy a Rime address. </div><div class="ttdef"><b>Definition:</b> <a href="a00328_source.html#l00060">linkaddr.c:60</a></div></div>
-<div class="ttc" id="a00612_html_gaaf0cefa6d20d20da33dfaf5098e7d16d"><div class="ttname"><a href="a00612.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a></div><div class="ttdeci">int linkaddr_cmp(const linkaddr_t *addr1, const linkaddr_t *addr2)</div><div class="ttdoc">Compare two Rime addresses. </div><div class="ttdef"><b>Definition:</b> <a href="a00328_source.html#l00066">linkaddr.c:66</a></div></div>
-<div class="ttc" id="a00613_html_ga67c213a97ab9bdadddd90db1df0a3058"><div class="ttname"><a href="a00613.html#ga67c213a97ab9bdadddd90db1df0a3058">packetbuf_hdrptr</a></div><div class="ttdeci">void * packetbuf_hdrptr(void)</div><div class="ttdoc">Get a pointer to the header in the packetbuf, for outbound packets. </div><div class="ttdef"><b>Definition:</b> <a href="a00376_source.html#l00210">packetbuf.c:210</a></div></div>
-<div class="ttc" id="a00613_html_gacffe7341cbfe90034e829ea70111203a"><div class="ttname"><a href="a00613.html#gacffe7341cbfe90034e829ea70111203a">packetbuf_hdralloc</a></div><div class="ttdeci">int packetbuf_hdralloc(int size)</div><div class="ttdoc">Extend the header of the packetbuf, for outbound packets. </div><div class="ttdef"><b>Definition:</b> <a href="a00376_source.html#l00169">packetbuf.c:169</a></div></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00425.html">net/rime/rime.h</a>&quot;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00433.html">net/rime/route.h</a>&quot;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00411.html">net/rime/mesh.h</a>&quot;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span> <span class="comment">/* For offsetof */</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#define PACKET_TIMEOUT (CLOCK_SECOND * 10)</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#define DEBUG 0</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#if DEBUG</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define PRINTF(...) printf(__VA_ARGS__)</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#define PRINTF(...)</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;data_packet_received(<span class="keyword">struct</span> multihop_conn *multihop,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                     <span class="keyword">const</span> linkaddr_t *from,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                     <span class="keyword">const</span> linkaddr_t *prevhop, uint8_t hops)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keyword">struct </span>mesh_conn *c = (<span class="keyword">struct </span>mesh_conn *)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    ((<span class="keywordtype">char</span> *)multihop - offsetof(<span class="keyword">struct</span> mesh_conn, multihop));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keyword">struct </span>route_entry *rt;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="comment">/* Refresh the route when we hear a packet from a neighbor. */</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  rt = route_lookup(from);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordflow">if</span>(rt != NULL) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    route_refresh(rt);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordflow">if</span>(c-&gt;cb-&gt;recv) {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    c-&gt;cb-&gt;recv(c, from, hops);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">static</span> linkaddr_t *</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;data_packet_forward(<span class="keyword">struct</span> multihop_conn *multihop,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    <span class="keyword">const</span> linkaddr_t *originator,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    <span class="keyword">const</span> linkaddr_t *dest,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    <span class="keyword">const</span> linkaddr_t *prevhop, uint8_t hops)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keyword">struct </span>route_entry *rt;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keyword">struct </span>mesh_conn *c = (<span class="keyword">struct </span>mesh_conn *)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    ((<span class="keywordtype">char</span> *)multihop - offsetof(<span class="keyword">struct</span> mesh_conn, multihop));</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  rt = route_lookup(dest);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordflow">if</span>(rt == NULL) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">if</span>(c-&gt;queued_data != NULL) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      queuebuf_free(c-&gt;queued_data);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    PRINTF(<span class="stringliteral">&quot;data_packet_forward: queueing data, sending rreq\n&quot;</span>);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    c-&gt;queued_data = queuebuf_new_from_packetbuf();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="a00741.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;c-&gt;queued_data_dest, dest);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    route_discovery_discover(&amp;c-&gt;route_discovery_conn, dest, PACKET_TIMEOUT);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    route_refresh(rt);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keywordflow">return</span> &amp;rt-&gt;nexthop;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;found_route(<span class="keyword">struct</span> route_discovery_conn *rdc, <span class="keyword">const</span> linkaddr_t *dest)</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keyword">struct </span>route_entry *rt;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <span class="keyword">struct </span>mesh_conn *c = (<span class="keyword">struct </span>mesh_conn *)</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    ((<span class="keywordtype">char</span> *)rdc - offsetof(<span class="keyword">struct</span> mesh_conn, route_discovery_conn));</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  PRINTF(<span class="stringliteral">&quot;found_route\n&quot;</span>);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="keywordflow">if</span>(c-&gt;queued_data != NULL &amp;&amp;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;     <a class="code" href="a00741.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(dest, &amp;c-&gt;queued_data_dest)) {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    queuebuf_to_packetbuf(c-&gt;queued_data);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    queuebuf_free(c-&gt;queued_data);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    c-&gt;queued_data = NULL;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    rt = route_lookup(dest);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">if</span>(rt != NULL) {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;      multihop_resend(&amp;c-&gt;multihop, &amp;rt-&gt;nexthop);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;      <span class="keywordflow">if</span>(c-&gt;cb-&gt;sent != NULL) {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        c-&gt;cb-&gt;sent(c);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;      }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      <span class="keywordflow">if</span>(c-&gt;cb-&gt;timedout != NULL) {</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        c-&gt;cb-&gt;timedout(c);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;      }</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;route_timed_out(<span class="keyword">struct</span> route_discovery_conn *rdc)</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;{</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <span class="keyword">struct </span>mesh_conn *c = (<span class="keyword">struct </span>mesh_conn *)</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    ((<span class="keywordtype">char</span> *)rdc - offsetof(<span class="keyword">struct</span> mesh_conn, route_discovery_conn));</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <span class="keywordflow">if</span>(c-&gt;queued_data != NULL) {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    queuebuf_free(c-&gt;queued_data);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    c-&gt;queued_data = NULL;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  }</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordflow">if</span>(c-&gt;cb-&gt;timedout) {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    c-&gt;cb-&gt;timedout(c);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;}</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span>multihop_callbacks data_callbacks = { data_packet_received,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                                    data_packet_forward };</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span>route_discovery_callbacks route_discovery_callbacks =</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  { found_route, route_timed_out };</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="a00787.html#ga7ea1b1abfbffd7c247f0c36c899b7821">  164</a></span>&#160;<a class="code" href="a00787.html#ga7ea1b1abfbffd7c247f0c36c899b7821">mesh_open</a>(<span class="keyword">struct</span> mesh_conn *c, uint16_t channels,</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;          <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="a00068.html">mesh_callbacks</a> *callbacks)</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;{</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  route_init();</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  multihop_open(&amp;c-&gt;multihop, channels, &amp;data_callbacks);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  route_discovery_open(&amp;c-&gt;route_discovery_conn,</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                       <a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 2,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                       channels + 1,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                       &amp;route_discovery_callbacks);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  c-&gt;cb = callbacks;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;}</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="a00787.html#ga6021451025ce564ad3c50edba5fc8378">  177</a></span>&#160;<a class="code" href="a00787.html#ga6021451025ce564ad3c50edba5fc8378">mesh_close</a>(<span class="keyword">struct</span> mesh_conn *c)</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;{</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  multihop_close(&amp;c-&gt;multihop);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  route_discovery_close(&amp;c-&gt;route_discovery_conn);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;}</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="a00787.html#gaf6375ab8decff5933290fd423351ea3f">  184</a></span>&#160;<a class="code" href="a00787.html#gaf6375ab8decff5933290fd423351ea3f">mesh_send</a>(<span class="keyword">struct</span> mesh_conn *c, <span class="keyword">const</span> linkaddr_t *to)</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;{</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="keywordtype">int</span> could_send;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  PRINTF(<span class="stringliteral">&quot;%d.%d: mesh_send to %d.%d\n&quot;</span>,</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;         <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;         to-&gt;u8[0], to-&gt;u8[1]);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  could_send = multihop_send(&amp;c-&gt;multihop, to);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="keywordflow">if</span>(!could_send) {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    PRINTF(<span class="stringliteral">&quot;mesh_send: could not send\n&quot;</span>);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  }</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="keywordflow">if</span>(c-&gt;cb-&gt;sent != NULL) {</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    c-&gt;cb-&gt;sent(c);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  }</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;}</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="a00787.html#ga09255d69c85b44e30bd551b4f057fb29">  205</a></span>&#160;<a class="code" href="a00787.html#ga09255d69c85b44e30bd551b4f057fb29">mesh_ready</a>(<span class="keyword">struct</span> mesh_conn *c)</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;{</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <span class="keywordflow">return</span> (c-&gt;queued_data == NULL);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;}</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">/** @} */</span></div>
+<div class="ttc" id="a00068_html"><div class="ttname"><a href="a00068.html">mesh_callbacks</a></div><div class="ttdoc">Mesh callbacks. </div><div class="ttdef"><b>Definition:</b> <a href="a00411_source.html#l00073">mesh.h:73</a></div></div>
+<div class="ttc" id="a00787_html_gaf6375ab8decff5933290fd423351ea3f"><div class="ttname"><a href="a00787.html#gaf6375ab8decff5933290fd423351ea3f">mesh_send</a></div><div class="ttdeci">int mesh_send(struct mesh_conn *c, const linkaddr_t *to)</div><div class="ttdoc">Send a mesh packet. </div><div class="ttdef"><b>Definition:</b> <a href="a00410_source.html#l00184">mesh.c:184</a></div></div>
+<div class="ttc" id="a00741_html_gaaf0cefa6d20d20da33dfaf5098e7d16d"><div class="ttname"><a href="a00741.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a></div><div class="ttdeci">int linkaddr_cmp(const linkaddr_t *addr1, const linkaddr_t *addr2)</div><div class="ttdoc">Compare two Rime addresses. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00066">linkaddr.c:66</a></div></div>
+<div class="ttc" id="a00787_html_ga09255d69c85b44e30bd551b4f057fb29"><div class="ttname"><a href="a00787.html#ga09255d69c85b44e30bd551b4f057fb29">mesh_ready</a></div><div class="ttdeci">int mesh_ready(struct mesh_conn *c)</div><div class="ttdoc">Test if mesh is ready to send a packet (or packet is queued) </div><div class="ttdef"><b>Definition:</b> <a href="a00410_source.html#l00205">mesh.c:205</a></div></div>
+<div class="ttc" id="a00741_html_ga03585f3e07ec49ec11cb4bbd17f3cf0e"><div class="ttname"><a href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a></div><div class="ttdeci">linkaddr_t linkaddr_node_addr</div><div class="ttdoc">The Rime address of the node. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00048">linkaddr.c:48</a></div></div>
+<div class="ttc" id="a00806_html_gae3ced0551b26c9b99cb45a86f34d100a"><div class="ttname"><a href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a></div><div class="ttdeci">#define CLOCK_SECOND</div><div class="ttdoc">A second, measured in system clock time. </div><div class="ttdef"><b>Definition:</b> <a href="a00469_source.html#l00082">clock.h:82</a></div></div>
+<div class="ttc" id="a00787_html_ga7ea1b1abfbffd7c247f0c36c899b7821"><div class="ttname"><a href="a00787.html#ga7ea1b1abfbffd7c247f0c36c899b7821">mesh_open</a></div><div class="ttdeci">void mesh_open(struct mesh_conn *c, uint16_t channels, const struct mesh_callbacks *callbacks)</div><div class="ttdoc">Open a mesh connection. </div><div class="ttdef"><b>Definition:</b> <a href="a00410_source.html#l00164">mesh.c:164</a></div></div>
+<div class="ttc" id="a00425_html"><div class="ttname"><a href="a00425.html">rime.h</a></div><div class="ttdoc">    Header file for the Rime stack  </div></div>
+<div class="ttc" id="a00787_html_ga6021451025ce564ad3c50edba5fc8378"><div class="ttname"><a href="a00787.html#ga6021451025ce564ad3c50edba5fc8378">mesh_close</a></div><div class="ttdeci">void mesh_close(struct mesh_conn *c)</div><div class="ttdoc">Close an mesh connection. </div><div class="ttdef"><b>Definition:</b> <a href="a00410_source.html#l00177">mesh.c:177</a></div></div>
+<div class="ttc" id="a00411_html"><div class="ttname"><a href="a00411.html">mesh.h</a></div><div class="ttdoc">    Header file for the Rime mesh routing protocol  </div></div>
+<div class="ttc" id="a00433_html"><div class="ttname"><a href="a00433.html">route.h</a></div><div class="ttdoc">    Header file for the Rime route table  </div></div>
+<div class="ttc" id="a00741_html_ga61b6a33229787905999787d55047aa80"><div class="ttname"><a href="a00741.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a></div><div class="ttdeci">void linkaddr_copy(linkaddr_t *dest, const linkaddr_t *src)</div><div class="ttdoc">Copy a Rime address. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00060">linkaddr.c:60</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:42 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:56 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

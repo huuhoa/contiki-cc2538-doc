@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/rime/abc.h Source File</title>
+<title>Contiki 3.x: core/net/netstack.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,16 +43,16 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_d8f62425b4539ec461573762fd5afde9.html">rime</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">abc.h</div>  </div>
+<div class="title">netstack.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00381.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2006, Swedish Institute of Computer Science.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2010, Swedish Institute of Computer Science.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
@@ -81,132 +81,128 @@
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * This file is part of the Contiki operating system.</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         Header file for the Rime module Anonymous BroadCast (abc)</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * \author</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *         Adam Dunkels &lt;adam@sics.se&gt;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * \addtogroup rime</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * \defgroup rimeabc Anonymous best-effort local area broadcast</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * The abc module sends packets to all local area neighbors. The abc</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * module adds no headers to outgoing packets.</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> * \section abc-channels Channels</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> * The abc module uses 1 channel.</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#ifndef ABC_H_</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#define ABC_H_</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00377.html">net/packetbuf.h</a>&quot;</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00395.html">net/rime/channel.h</a>&quot;</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">struct </span>abc_conn;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#define ABC_ATTRIBUTES</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> * \brief     Callback structure for abc</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a00043.html">   72</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00043.html">abc_callbacks</a> {<span class="comment"></span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">  /** Called when a packet has been received by the abc module. */</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="a00043.html#ad94ba41c52b0b2bc4105e659cbc9356f">   74</a></span>&#160;  void (* <a class="code" href="a00043.html#ad94ba41c52b0b2bc4105e659cbc9356f">recv</a>)(<span class="keyword">struct </span>abc_conn *ptr);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  void (* sent)(<span class="keyword">struct </span>abc_conn *ptr, <span class="keywordtype">int</span> status, <span class="keywordtype">int</span> num_tx);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * $Id: netstack.h,v 1.6 2010/10/03 20:37:32 adamdunkels Exp $</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * \file</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> *         Include file for the Contiki low-layer network stack (NETSTACK)</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * \author</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> *         Adam Dunkels &lt;adam@sics.se&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#ifndef NETSTACK_H</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#define NETSTACK_H</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;contiki-conf.h&quot;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifndef NETSTACK_NETWORK</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#ifdef NETSTACK_CONF_NETWORK</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#define NETSTACK_NETWORK NETSTACK_CONF_NETWORK</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* NETSTACK_CONF_NETWORK */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#define NETSTACK_NETWORK rime_driver</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_CONF_NETWORK */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_NETWORK */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#ifndef NETSTACK_LLSEC</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#ifdef NETSTACK_CONF_LLSEC</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#define NETSTACK_LLSEC NETSTACK_CONF_LLSEC</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* NETSTACK_CONF_LLSEC */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#define NETSTACK_LLSEC nullsec_driver</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_CONF_LLSEC */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_LLSEC */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#ifndef NETSTACK_MAC</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#ifdef NETSTACK_CONF_MAC</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#define NETSTACK_MAC NETSTACK_CONF_MAC</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* NETSTACK_CONF_MAC */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#define NETSTACK_MAC     nullmac_driver</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_CONF_MAC */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_MAC */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#ifndef NETSTACK_RDC</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#ifdef NETSTACK_CONF_RDC</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#define NETSTACK_RDC NETSTACK_CONF_RDC</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* NETSTACK_CONF_RDC */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#define NETSTACK_RDC     nullrdc_driver</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_CONF_RDC */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_RDC */</span><span class="preprocessor"></span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">struct </span>abc_conn {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keyword">struct </span>channel channel;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a00043.html">abc_callbacks</a> *u;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> * \brief      Set up an anonymous best-effort broadcast connection</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> * \param c    A pointer to a struct abc_conn</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> * \param channel The channel on which the connection will operate</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> * \param u    A struct abc_callbacks with function pointers to functions that will be called when a packet has been received</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> *             This function sets up an abc connection on the</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"> *             specified channel. The caller must have allocated the</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"> *             memory for the struct abc_conn, usually by declaring it</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> *             as a static variable.</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"> *             The struct abc_callbacks pointer must point to a structure</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"> *             containing a pointer to a function that will be called</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"> *             when a packet arrives on the channel.</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00650.html#ga21c7c1d5c95ff42e668f0a67201e6409">abc_open</a>(<span class="keyword">struct</span> abc_conn *c, uint16_t channel,</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;               <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="a00043.html">abc_callbacks</a> *u);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"> * \brief      Close an abc connection</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"> * \param c    A pointer to a struct abc_conn</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"> *             This function closes an abc connection that has</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment"> *             previously been opened with abc_open().</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"> *             This function typically is called as an exit handler.</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00650.html#gae58a4dc5ca87c98f73a301fd6886d49e">abc_close</a>(<span class="keyword">struct</span> abc_conn *c);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#ifndef NETSTACK_RDC_CHANNEL_CHECK_RATE</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#ifdef NETSTACK_CONF_RDC_CHANNEL_CHECK_RATE</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#define NETSTACK_RDC_CHANNEL_CHECK_RATE NETSTACK_CONF_RDC_CHANNEL_CHECK_RATE</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* NETSTACK_CONF_RDC_CHANNEL_CHECK_RATE */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#define NETSTACK_RDC_CHANNEL_CHECK_RATE 8</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_CONF_RDC_CHANNEL_CHECK_RATE */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_RDC_CHANNEL_CHECK_RATE */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#if (NETSTACK_RDC_CHANNEL_CHECK_RATE &amp; (NETSTACK_RDC_CHANNEL_CHECK_RATE - 1)) != 0</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#error NETSTACK_RDC_CONF_CHANNEL_CHECK_RATE must be a power of two (i.e., 1, 2, 4, 8, 16, 32, 64, ...).</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#error Change NETSTACK_RDC_CONF_CHANNEL_CHECK_RATE in contiki-conf.h, project-conf.h or in your Makefile.</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#ifndef NETSTACK_RADIO</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#ifdef NETSTACK_CONF_RADIO</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#define NETSTACK_RADIO NETSTACK_CONF_RADIO</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* NETSTACK_CONF_RADIO */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#define NETSTACK_RADIO   nullradio_driver</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_CONF_RADIO */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_RADIO */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#ifndef NETSTACK_FRAMER</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#ifdef NETSTACK_CONF_FRAMER</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#define NETSTACK_FRAMER NETSTACK_CONF_FRAMER</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* NETSTACK_CONF_FRAMER */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#define NETSTACK_FRAMER   framer_nullmac</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_CONF_FRAMER */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_FRAMER */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00339.html">net/llsec/llsec.h</a>&quot;</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00364.html">net/mac/mac.h</a>&quot;</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00373.html">net/mac/rdc.h</a>&quot;</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00360.html">net/mac/framer.h</a>&quot;</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00161.html">dev/radio.h</a>&quot;</span></div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment"> * \brief      Send an anonymous best-effort broadcast packet</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"> * \param c    The abc connection on which the packet should be sent</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"> * \retval     Non-zero if the packet could be sent, zero otherwise</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"> *             This function sends an anonymous best-effort broadcast</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"> *             packet. The packet must be present in the packetbuf</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"> *             before this function is called.</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment"> *             The parameter c must point to an abc connection that</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"> *             must have previously been set up with abc_open().</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00650.html#ga912124d2ddd680d1abdd1758b230c12d">abc_send</a>(<span class="keyword">struct</span> abc_conn *c);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment"> * \brief      Internal Rime function: Pass a packet to the abc layer</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment"> *             This function is used internally by Rime to pass</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment"> *             packets to the abc layer. Should never be called</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment"> *             directly.</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00650.html#ga85cd089da8d127e6fbba0e90386f3107">abc_input</a>(<span class="keyword">struct</span> channel *channel);</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keywordtype">void</span> abc_sent(<span class="keyword">struct</span> channel *channel, <span class="keywordtype">int</span> status, <span class="keywordtype">int</span> num_tx);</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* ABC_H_ */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">/** @} */</span><span class="comment"></span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="ttc" id="a00043_html_ad94ba41c52b0b2bc4105e659cbc9356f"><div class="ttname"><a href="a00043.html#ad94ba41c52b0b2bc4105e659cbc9356f">abc_callbacks::recv</a></div><div class="ttdeci">void(* recv)(struct abc_conn *ptr)</div><div class="ttdoc">Called when a packet has been received by the abc module. </div><div class="ttdef"><b>Definition:</b> <a href="a00381_source.html#l00074">abc.h:74</a></div></div>
-<div class="ttc" id="a00650_html_gae58a4dc5ca87c98f73a301fd6886d49e"><div class="ttname"><a href="a00650.html#gae58a4dc5ca87c98f73a301fd6886d49e">abc_close</a></div><div class="ttdeci">void abc_close(struct abc_conn *c)</div><div class="ttdoc">Close an abc connection. </div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00073">abc.c:73</a></div></div>
-<div class="ttc" id="a00043_html"><div class="ttname"><a href="a00043.html">abc_callbacks</a></div><div class="ttdoc">Callback structure for abc. </div><div class="ttdef"><b>Definition:</b> <a href="a00381_source.html#l00072">abc.h:72</a></div></div>
-<div class="ttc" id="a00395_html"><div class="ttname"><a href="a00395.html">channel.h</a></div><div class="ttdoc">    Header file for Rime&#39;s channel abstraction  </div></div>
-<div class="ttc" id="a00650_html_ga21c7c1d5c95ff42e668f0a67201e6409"><div class="ttname"><a href="a00650.html#ga21c7c1d5c95ff42e668f0a67201e6409">abc_open</a></div><div class="ttdeci">void abc_open(struct abc_conn *c, uint16_t channelno, const struct abc_callbacks *callbacks)</div><div class="ttdoc">Set up an anonymous best-effort broadcast connection. </div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00064">abc.c:64</a></div></div>
-<div class="ttc" id="a00377_html"><div class="ttname"><a href="a00377.html">packetbuf.h</a></div><div class="ttdoc">    Header file for the Rime buffer (packetbuf) management  </div></div>
-<div class="ttc" id="a00650_html_ga912124d2ddd680d1abdd1758b230c12d"><div class="ttname"><a href="a00650.html#ga912124d2ddd680d1abdd1758b230c12d">abc_send</a></div><div class="ttdeci">int abc_send(struct abc_conn *c)</div><div class="ttdoc">Send an anonymous best-effort broadcast packet. </div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00079">abc.c:79</a></div></div>
-<div class="ttc" id="a00650_html_ga85cd089da8d127e6fbba0e90386f3107"><div class="ttname"><a href="a00650.html#ga85cd089da8d127e6fbba0e90386f3107">abc_input</a></div><div class="ttdeci">void abc_input(struct channel *channel)</div><div class="ttdoc">Internal Rime function: Pass a packet to the abc layer. </div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00088">abc.c:88</a></div></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment"> * The structure of a network driver in Contiki.</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="a00069.html">  117</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00069.html">network_driver</a> {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="keywordtype">char</span> *name;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">  /** Initialize the network driver */</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="a00069.html#af1528d41c178519fdc135214827262fd">  121</a></span>&#160;  void (* <a class="code" href="a00069.html#af1528d41c178519fdc135214827262fd">init</a>)(void);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">  /** Callback for getting notified of incoming packet. */</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="a00069.html#ab731b9526416dfdc094f45df8363030c">  124</a></span>&#160;  void (* <a class="code" href="a00069.html#ab731b9526416dfdc094f45df8363030c">input</a>)(void);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;};</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a00069.html">network_driver</a> NETSTACK_NETWORK;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a00066.html">llsec_driver</a>   NETSTACK_LLSEC;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a00076.html">rdc_driver</a>     NETSTACK_RDC;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a00067.html">mac_driver</a>     NETSTACK_MAC;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a00075.html">radio_driver</a>   NETSTACK_RADIO;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">struct </span>framer         NETSTACK_FRAMER;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="keywordtype">void</span> netstack_init(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* NETSTACK_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="a00339_html"><div class="ttname"><a href="a00339.html">llsec.h</a></div><div class="ttdoc">    Link layer security header file. </div></div>
+<div class="ttc" id="a00076_html"><div class="ttname"><a href="a00076.html">rdc_driver</a></div><div class="ttdoc">The structure of a RDC (radio duty cycling) driver in Contiki. </div><div class="ttdef"><b>Definition:</b> <a href="a00373_source.html#l00067">rdc.h:67</a></div></div>
+<div class="ttc" id="a00364_html"><div class="ttname"><a href="a00364.html">mac.h</a></div><div class="ttdoc">    MAC driver header file  </div></div>
+<div class="ttc" id="a00069_html_ab731b9526416dfdc094f45df8363030c"><div class="ttname"><a href="a00069.html#ab731b9526416dfdc094f45df8363030c">network_driver::input</a></div><div class="ttdeci">void(* input)(void)</div><div class="ttdoc">Callback for getting notified of incoming packet. </div><div class="ttdef"><b>Definition:</b> <a href="a00381_source.html#l00124">netstack.h:124</a></div></div>
+<div class="ttc" id="a00067_html"><div class="ttname"><a href="a00067.html">mac_driver</a></div><div class="ttdoc">The structure of a MAC protocol driver in Contiki. </div><div class="ttdef"><b>Definition:</b> <a href="a00364_source.html#l00054">mac.h:54</a></div></div>
+<div class="ttc" id="a00075_html"><div class="ttname"><a href="a00075.html">radio_driver</a></div><div class="ttdoc">The structure of a device driver for a radio in Contiki. </div><div class="ttdef"><b>Definition:</b> <a href="a00161_source.html#l00225">radio.h:225</a></div></div>
+<div class="ttc" id="a00161_html"><div class="ttname"><a href="a00161.html">radio.h</a></div><div class="ttdoc">    Header file for the radio API  </div></div>
+<div class="ttc" id="a00066_html"><div class="ttname"><a href="a00066.html">llsec_driver</a></div><div class="ttdoc">The structure of a link layer security driver. </div><div class="ttdef"><b>Definition:</b> <a href="a00339_source.html#l00068">llsec.h:68</a></div></div>
+<div class="ttc" id="a00069_html_af1528d41c178519fdc135214827262fd"><div class="ttname"><a href="a00069.html#af1528d41c178519fdc135214827262fd">network_driver::init</a></div><div class="ttdeci">void(* init)(void)</div><div class="ttdoc">Initialize the network driver. </div><div class="ttdef"><b>Definition:</b> <a href="a00381_source.html#l00121">netstack.h:121</a></div></div>
+<div class="ttc" id="a00069_html"><div class="ttname"><a href="a00069.html">network_driver</a></div><div class="ttdoc">The structure of a network driver in Contiki. </div><div class="ttdef"><b>Definition:</b> <a href="a00381_source.html#l00117">netstack.h:117</a></div></div>
+<div class="ttc" id="a00360_html"><div class="ttname"><a href="a00360.html">framer.h</a></div><div class="ttdoc">    A MAC framer is responsible for constructing and parsing     the header in MAC frames...</div></div>
+<div class="ttc" id="a00373_html"><div class="ttname"><a href="a00373.html">rdc.h</a></div><div class="ttdoc">    RDC driver header file  </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:42 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:56 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

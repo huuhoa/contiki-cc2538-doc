@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/mac/contikimac/contikimac.c File Reference</title>
+<title>Contiki 3.x: core/net/llsec/noncoresec/noncoresec.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,44 +43,30 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_82c80f12558e8d0ec97ce31b5626cec9.html">mac</a></li><li class="navelem"><a class="el" href="dir_b611dd3d9d13645cf9d9a0ccfd8d8262.html">contikimac</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_fad108bfa9b279bd5b48aa3dbd368b4b.html">llsec</a></li><li class="navelem"><a class="el" href="dir_07a175f70038c45824609e5c26359575.html">noncoresec</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">contikimac.c File Reference</div>  </div>
+<div class="title">noncoresec.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    Implementation of the ContikiMAC power-saving radio duty cycling protocol
+<p><pre class="fragment">    802.15.4 security implementation, which uses a network-wide key
 </pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00587_source.html">contiki-conf.h</a>&quot;</code><br />
-<code>#include &quot;dev/leds.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00159_source.html">dev/radio.h</a>&quot;</code><br />
-<code>#include &quot;dev/watchdog.h&quot;</code><br />
-<code>#include &quot;lib/random.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00357_source.html">net/mac/mac-sequence.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00343_source.html">net/mac/contikimac/contikimac.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00375_source.html">net/netstack.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00419_source.html">net/rime/rime.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00465_source.html">sys/compower.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00486_source.html">sys/pt.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00488_source.html">sys/rtimer.h</a>&quot;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00367_source.html">net/mac/phase.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00339_source.html">net/llsec/llsec.h</a>&quot;</code><br />
 </div>
 <p><a href="a00342_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    Implementation of the ContikiMAC power-saving radio duty cycling protocol
-</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> Niclas Finne <a href="#" onclick="location.href='mai'+'lto:'+'nfi'+'@s'+'ics'+'.s'+'e'; return false;">nfi@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a> Joakim Eriksson <a href="#" onclick="location.href='mai'+'lto:'+'joa'+'ki'+'me@'+'si'+'cs.'+'se'; return false;">joaki<span style="display: none;">.nosp@m.</span>me@s<span style="display: none;">.nosp@m.</span>ics.s<span style="display: none;">.nosp@m.</span>e</a> </dd></dl>
+<div class="textblock"><pre class="fragment">    802.15.4 security implementation, which uses a network-wide key
+</pre> <dl class="section author"><dt>Author</dt><dd>Konrad Krentz <a href="#" onclick="location.href='mai'+'lto:'+'kon'+'ra'+'d.k'+'re'+'ntz'+'@g'+'mai'+'l.'+'com'; return false;">konra<span style="display: none;">.nosp@m.</span>d.kr<span style="display: none;">.nosp@m.</span>entz@<span style="display: none;">.nosp@m.</span>gmai<span style="display: none;">.nosp@m.</span>l.com</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00342_source.html">contikimac.c</a>.</p>
+<p>Definition in file <a class="el" href="a00342_source.html">noncoresec.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

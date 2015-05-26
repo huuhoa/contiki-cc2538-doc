@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/lib/me.c File Reference</title>
+<title>Contiki 3.x: core/lib/list.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -50,41 +50,65 @@
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">me.c File Reference<div class="ingroups"><a class="el" href="a00749.html">Libraries</a> &raquo; <a class="el" href="a00604.html">Table-driven Manchester encoding and decoding</a></div></div>  </div>
+<div class="title">list.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the table-driven Manchester encoding and decoding.  
+<p>Linked list library implementation.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;me_tabs.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00181_source.html">lib/list.h</a>&quot;</code><br />
 </div>
 <p><a href="a00180_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga72548e4a7b5ab863881a226601684a5f"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00604.html#ga72548e4a7b5ab863881a226601684a5f">me_encode</a> (unsigned char c)</td></tr>
-<tr class="memdesc:ga72548e4a7b5ab863881a226601684a5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manchester encode an 8-bit byte.  <a href="a00604.html#ga72548e4a7b5ab863881a226601684a5f">More...</a><br /></td></tr>
-<tr class="separator:ga72548e4a7b5ab863881a226601684a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2ba94b4f5cb665f0a50989a97dab40d9"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00604.html#ga2ba94b4f5cb665f0a50989a97dab40d9">me_decode16</a> (unsigned short m)</td></tr>
-<tr class="memdesc:ga2ba94b4f5cb665f0a50989a97dab40d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decode a Manchester encoded 16-bit word.  <a href="a00604.html#ga2ba94b4f5cb665f0a50989a97dab40d9">More...</a><br /></td></tr>
-<tr class="separator:ga2ba94b4f5cb665f0a50989a97dab40d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0f2e13136808a58db639c0dc56a1d64a"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00604.html#ga0f2e13136808a58db639c0dc56a1d64a">me_decode8</a> (unsigned char m)</td></tr>
-<tr class="memdesc:ga0f2e13136808a58db639c0dc56a1d64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decode a Manchester encoded 8-bit byte.  <a href="a00604.html#ga0f2e13136808a58db639c0dc56a1d64a">More...</a><br /></td></tr>
-<tr class="separator:ga0f2e13136808a58db639c0dc56a1d64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga270f4332b76bf56b924ac5dcbcecb4af"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga270f4332b76bf56b924ac5dcbcecb4af"></a>
-unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00604.html#ga270f4332b76bf56b924ac5dcbcecb4af">me_valid</a> (unsigned char m)</td></tr>
-<tr class="memdesc:ga270f4332b76bf56b924ac5dcbcecb4af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an encoded byte is valid. <br /></td></tr>
-<tr class="separator:ga270f4332b76bf56b924ac5dcbcecb4af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga10fe9694aceedc8308cc543b9b95d9c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#ga10fe9694aceedc8308cc543b9b95d9c9">list_init</a> (<a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> list)</td></tr>
+<tr class="memdesc:ga10fe9694aceedc8308cc543b9b95d9c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a list.  <a href="a00732.html#ga10fe9694aceedc8308cc543b9b95d9c9">More...</a><br /></td></tr>
+<tr class="separator:ga10fe9694aceedc8308cc543b9b95d9c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacc0723982dcfcc54cfa6ba932ee63051"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#gacc0723982dcfcc54cfa6ba932ee63051">list_head</a> (<a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> list)</td></tr>
+<tr class="memdesc:gacc0723982dcfcc54cfa6ba932ee63051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to the first element of a list.  <a href="a00732.html#gacc0723982dcfcc54cfa6ba932ee63051">More...</a><br /></td></tr>
+<tr class="separator:gacc0723982dcfcc54cfa6ba932ee63051"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga89eaee4d473383726c7899f70d244cfe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#ga89eaee4d473383726c7899f70d244cfe">list_copy</a> (<a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> dest, <a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> src)</td></tr>
+<tr class="memdesc:ga89eaee4d473383726c7899f70d244cfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Duplicate a list.  <a href="a00732.html#ga89eaee4d473383726c7899f70d244cfe">More...</a><br /></td></tr>
+<tr class="separator:ga89eaee4d473383726c7899f70d244cfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4e96242bd922c2c7116b2e5a5ca7011b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#ga4e96242bd922c2c7116b2e5a5ca7011b">list_tail</a> (<a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> list)</td></tr>
+<tr class="memdesc:ga4e96242bd922c2c7116b2e5a5ca7011b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the tail of a list.  <a href="a00732.html#ga4e96242bd922c2c7116b2e5a5ca7011b">More...</a><br /></td></tr>
+<tr class="separator:ga4e96242bd922c2c7116b2e5a5ca7011b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga775c0dfc08dca991297df7b419b7be43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#ga775c0dfc08dca991297df7b419b7be43">list_add</a> (<a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> list, void *item)</td></tr>
+<tr class="memdesc:ga775c0dfc08dca991297df7b419b7be43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an item at the end of a list.  <a href="a00732.html#ga775c0dfc08dca991297df7b419b7be43">More...</a><br /></td></tr>
+<tr class="separator:ga775c0dfc08dca991297df7b419b7be43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaa39517a2e9ec81c34e4740d43ea7150"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaaa39517a2e9ec81c34e4740d43ea7150"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#gaaa39517a2e9ec81c34e4740d43ea7150">list_push</a> (<a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> list, void *item)</td></tr>
+<tr class="memdesc:gaaa39517a2e9ec81c34e4740d43ea7150"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an item to the start of the list. <br /></td></tr>
+<tr class="separator:gaaa39517a2e9ec81c34e4740d43ea7150"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga34e6b487c378343356299f048f8011ad"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#ga34e6b487c378343356299f048f8011ad">list_chop</a> (<a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> list)</td></tr>
+<tr class="memdesc:ga34e6b487c378343356299f048f8011ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the last object on the list.  <a href="a00732.html#ga34e6b487c378343356299f048f8011ad">More...</a><br /></td></tr>
+<tr class="separator:ga34e6b487c378343356299f048f8011ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga846aef3d9db78d0755e6bb39e7da485e"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#ga846aef3d9db78d0755e6bb39e7da485e">list_pop</a> (<a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> list)</td></tr>
+<tr class="memdesc:ga846aef3d9db78d0755e6bb39e7da485e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the first object on a list.  <a href="a00732.html#ga846aef3d9db78d0755e6bb39e7da485e">More...</a><br /></td></tr>
+<tr class="separator:ga846aef3d9db78d0755e6bb39e7da485e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3eb717d9997a980e937e2ea8b0c07677"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#ga3eb717d9997a980e937e2ea8b0c07677">list_remove</a> (<a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> list, void *item)</td></tr>
+<tr class="memdesc:ga3eb717d9997a980e937e2ea8b0c07677"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a specific element from a list.  <a href="a00732.html#ga3eb717d9997a980e937e2ea8b0c07677">More...</a><br /></td></tr>
+<tr class="separator:ga3eb717d9997a980e937e2ea8b0c07677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga96f2c18e2a603b297e3c1cae6198dcca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#ga96f2c18e2a603b297e3c1cae6198dcca">list_length</a> (<a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> list)</td></tr>
+<tr class="memdesc:ga96f2c18e2a603b297e3c1cae6198dcca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the length of a list.  <a href="a00732.html#ga96f2c18e2a603b297e3c1cae6198dcca">More...</a><br /></td></tr>
+<tr class="separator:ga96f2c18e2a603b297e3c1cae6198dcca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad7302f5e5b808b595535c034f2a41474"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#gad7302f5e5b808b595535c034f2a41474">list_insert</a> (<a class="el" href="a00732.html#ga9c248916bae1f0b13732686786be7108">list_t</a> list, void *previtem, void *newitem)</td></tr>
+<tr class="memdesc:gad7302f5e5b808b595535c034f2a41474"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert an item after a specified item on the list.  <a href="a00732.html#gad7302f5e5b808b595535c034f2a41474">More...</a><br /></td></tr>
+<tr class="separator:gad7302f5e5b808b595535c034f2a41474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae9c13698f6fd8620561f0d1124ec8cdf"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00732.html#gae9c13698f6fd8620561f0d1124ec8cdf">list_item_next</a> (void *item)</td></tr>
+<tr class="memdesc:gae9c13698f6fd8620561f0d1124ec8cdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the next item following this item.  <a href="a00732.html#gae9c13698f6fd8620561f0d1124ec8cdf">More...</a><br /></td></tr>
+<tr class="separator:gae9c13698f6fd8620561f0d1124ec8cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the table-driven Manchester encoding and decoding. </p>
+<div class="textblock"><p>Linked list library implementation. </p>
 <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00180_source.html">me.c</a>.</p>
+<p>Definition in file <a class="el" href="a00180_source.html">list.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

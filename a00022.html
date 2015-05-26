@@ -114,9 +114,9 @@
 <div class="line"><span class="comment"> */</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00419.html">net/rime/rime.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00179.html">lib/list.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00185.html">lib/memb.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00425.html">net/rime/rime.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00181.html">lib/list.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00187.html">lib/memb.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;lib/random.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;dev/button-sensor.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;dev/leds.h&quot;</span></div>
@@ -134,10 +134,10 @@
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#define NEIGHBOR_TIMEOUT 60 * CLOCK_SECOND</span></div>
 <div class="line"><span class="preprocessor">#define MAX_NEIGHBORS 16</span></div>
-<div class="line"><a name="a0"></a><a class="code" href="a00603.html#ga1e61a00c396ab8bd4141f54772e310ce">LIST</a>(neighbor_table);</div>
-<div class="line"><a name="a1"></a><a class="code" href="a00605.html#gaf31774d02a69fd3f1c2b282454438cba">MEMB</a>(neighbor_mem, <span class="keyword">struct</span> example_neighbor, MAX_NEIGHBORS);</div>
+<div class="line"><a name="a0"></a><a class="code" href="a00732.html#ga1e61a00c396ab8bd4141f54772e310ce">LIST</a>(neighbor_table);</div>
+<div class="line"><a name="a1"></a><a class="code" href="a00734.html#gaf31774d02a69fd3f1c2b282454438cba">MEMB</a>(neighbor_mem, <span class="keyword">struct</span> example_neighbor, MAX_NEIGHBORS);</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a2"></a><a class="code" href="a00684.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_multihop_process, <span class="stringliteral">&quot;multihop example&quot;</span>);</div>
+<div class="line"><a name="a2"></a><a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_multihop_process, <span class="stringliteral">&quot;multihop example&quot;</span>);</div>
 <div class="line">AUTOSTART_PROCESSES(&amp;example_multihop_process);</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="comment">/*</span></div>
@@ -150,8 +150,8 @@
 <div class="line">{</div>
 <div class="line">  <span class="keyword">struct </span>example_neighbor *e = n;</div>
 <div class="line"></div>
-<div class="line">  <a name="a3"></a><a class="code" href="a00603.html#ga3eb717d9997a980e937e2ea8b0c07677">list_remove</a>(neighbor_table, e);</div>
-<div class="line">  <a name="a4"></a><a class="code" href="a00605.html#ga513698da82ec79ec7115ffa0d80df77d">memb_free</a>(&amp;neighbor_mem, e);</div>
+<div class="line">  <a name="a3"></a><a class="code" href="a00732.html#ga3eb717d9997a980e937e2ea8b0c07677">list_remove</a>(neighbor_table, e);</div>
+<div class="line">  <a name="a4"></a><a class="code" href="a00734.html#ga513698da82ec79ec7115ffa0d80df77d">memb_free</a>(&amp;neighbor_mem, e);</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="comment">/*</span></div>
@@ -173,10 +173,10 @@
 <div class="line"></div>
 <div class="line">  <span class="comment">/* We received an announcement from a neighbor so we need to update</span></div>
 <div class="line"><span class="comment">     the neighbor list, or add a new entry to the table. */</span></div>
-<div class="line">  <span class="keywordflow">for</span>(e = <a name="a6"></a><a class="code" href="a00603.html#gacc0723982dcfcc54cfa6ba932ee63051">list_head</a>(neighbor_table); e != NULL; e = e-&gt;next) {</div>
-<div class="line">    <span class="keywordflow">if</span>(<a name="a7"></a><a class="code" href="a00612.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(from, &amp;e-&gt;addr)) {</div>
+<div class="line">  <span class="keywordflow">for</span>(e = <a name="a6"></a><a class="code" href="a00732.html#gacc0723982dcfcc54cfa6ba932ee63051">list_head</a>(neighbor_table); e != NULL; e = e-&gt;next) {</div>
+<div class="line">    <span class="keywordflow">if</span>(<a name="a7"></a><a class="code" href="a00741.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(from, &amp;e-&gt;addr)) {</div>
 <div class="line">      <span class="comment">/* Our neighbor was found, so we update the timeout. */</span></div>
-<div class="line">      <a name="a8"></a><a class="code" href="a00679.html#ga27fd17da97a91042bfb1adf1991cc545">ctimer_set</a>(&amp;e-&gt;ctimer, NEIGHBOR_TIMEOUT, remove_neighbor, e);</div>
+<div class="line">      <a name="a8"></a><a class="code" href="a00808.html#ga27fd17da97a91042bfb1adf1991cc545">ctimer_set</a>(&amp;e-&gt;ctimer, NEIGHBOR_TIMEOUT, remove_neighbor, e);</div>
 <div class="line">      <span class="keywordflow">return</span>;</div>
 <div class="line">    }</div>
 <div class="line">  }</div>
@@ -184,11 +184,11 @@
 <div class="line">  <span class="comment">/* The neighbor was not found in the list, so we add a new entry by</span></div>
 <div class="line"><span class="comment">     allocating memory from the neighbor_mem pool, fill in the</span></div>
 <div class="line"><span class="comment">     necessary fields, and add it to the list. */</span></div>
-<div class="line">  e = <a name="a9"></a><a class="code" href="a00605.html#ga9eb12536c921ee25d3886ed9640fe6fe">memb_alloc</a>(&amp;neighbor_mem);</div>
+<div class="line">  e = <a name="a9"></a><a class="code" href="a00734.html#ga9eb12536c921ee25d3886ed9640fe6fe">memb_alloc</a>(&amp;neighbor_mem);</div>
 <div class="line">  <span class="keywordflow">if</span>(e != NULL) {</div>
-<div class="line">    <a name="a10"></a><a class="code" href="a00612.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;e-&gt;addr, from);</div>
-<div class="line">    <a name="a11"></a><a class="code" href="a00603.html#ga775c0dfc08dca991297df7b419b7be43">list_add</a>(neighbor_table, e);</div>
-<div class="line">    <a class="code" href="a00679.html#ga27fd17da97a91042bfb1adf1991cc545">ctimer_set</a>(&amp;e-&gt;ctimer, NEIGHBOR_TIMEOUT, remove_neighbor, e);</div>
+<div class="line">    <a name="a10"></a><a class="code" href="a00741.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;e-&gt;addr, from);</div>
+<div class="line">    <a name="a11"></a><a class="code" href="a00732.html#ga775c0dfc08dca991297df7b419b7be43">list_add</a>(neighbor_table, e);</div>
+<div class="line">    <a class="code" href="a00808.html#ga27fd17da97a91042bfb1adf1991cc545">ctimer_set</a>(&amp;e-&gt;ctimer, NEIGHBOR_TIMEOUT, remove_neighbor, e);</div>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="a00045.html">announcement</a> example_announcement;</div>
@@ -201,7 +201,7 @@
 <div class="line">     <span class="keyword">const</span> linkaddr_t *prevhop,</div>
 <div class="line">     uint8_t hops)</div>
 <div class="line">{</div>
-<div class="line">  printf(<span class="stringliteral">&quot;multihop message received &#39;%s&#39;\n&quot;</span>, (<span class="keywordtype">char</span> *)<a name="a12"></a><a class="code" href="a00613.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>());</div>
+<div class="line">  printf(<span class="stringliteral">&quot;multihop message received &#39;%s&#39;\n&quot;</span>, (<span class="keywordtype">char</span> *)<a name="a12"></a><a class="code" href="a00742.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>());</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*</span></div>
 <div class="line"><span class="comment"> * This function is called to forward a packet. The function picks a</span></div>
@@ -219,50 +219,50 @@
 <div class="line">  <span class="keywordtype">int</span> num, i;</div>
 <div class="line">  <span class="keyword">struct </span>example_neighbor *n;</div>
 <div class="line"></div>
-<div class="line">  <span class="keywordflow">if</span>(<a name="a13"></a><a class="code" href="a00603.html#ga96f2c18e2a603b297e3c1cae6198dcca">list_length</a>(neighbor_table) &gt; 0) {</div>
-<div class="line">    num = <a name="a14"></a><a class="code" href="a00711.html#ga3b38526f57c5311c58c1440e18f3cebe">random_rand</a>() % <a class="code" href="a00603.html#ga96f2c18e2a603b297e3c1cae6198dcca">list_length</a>(neighbor_table);</div>
+<div class="line">  <span class="keywordflow">if</span>(<a name="a13"></a><a class="code" href="a00732.html#ga96f2c18e2a603b297e3c1cae6198dcca">list_length</a>(neighbor_table) &gt; 0) {</div>
+<div class="line">    num = <a name="a14"></a><a class="code" href="a00840.html#ga3b38526f57c5311c58c1440e18f3cebe">random_rand</a>() % <a class="code" href="a00732.html#ga96f2c18e2a603b297e3c1cae6198dcca">list_length</a>(neighbor_table);</div>
 <div class="line">    i = 0;</div>
-<div class="line">    <span class="keywordflow">for</span>(n = <a class="code" href="a00603.html#gacc0723982dcfcc54cfa6ba932ee63051">list_head</a>(neighbor_table); n != NULL &amp;&amp; i != num; n = n-&gt;next) {</div>
+<div class="line">    <span class="keywordflow">for</span>(n = <a class="code" href="a00732.html#gacc0723982dcfcc54cfa6ba932ee63051">list_head</a>(neighbor_table); n != NULL &amp;&amp; i != num; n = n-&gt;next) {</div>
 <div class="line">      ++i;</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">if</span>(n != NULL) {</div>
 <div class="line">      printf(<span class="stringliteral">&quot;%d.%d: Forwarding packet to %d.%d (%d in list), hops %d\n&quot;</span>,</div>
-<div class="line">             <a name="a15"></a><a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
+<div class="line">             <a name="a15"></a><a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
 <div class="line">             n-&gt;addr.u8[0], n-&gt;addr.u8[1], num,</div>
 <div class="line">             packetbuf_attr(PACKETBUF_ATTR_HOPS));</div>
 <div class="line">      <span class="keywordflow">return</span> &amp;n-&gt;addr;</div>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">  printf(<span class="stringliteral">&quot;%d.%d: did not find a neighbor to foward to\n&quot;</span>,</div>
-<div class="line">         <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1]);</div>
+<div class="line">         <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1]);</div>
 <div class="line">  <span class="keywordflow">return</span> NULL;</div>
 <div class="line">}</div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span>multihop_callbacks multihop_call = {recv, forward};</div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">struct </span>multihop_conn multihop;</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a16"></a><a class="code" href="a00701.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_multihop_process, ev, data)</div>
+<div class="line"><a name="a16"></a><a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_multihop_process, ev, data)</div>
 <div class="line">{</div>
-<div class="line">  <a name="a17"></a><a class="code" href="a00684.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(multihop_close(&amp;multihop);)</div>
+<div class="line">  <a name="a17"></a><a class="code" href="a00813.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(multihop_close(&amp;multihop);)</div>
 <div class="line">    </div>
-<div class="line">  <a name="a18"></a><a class="code" href="a00684.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
+<div class="line">  <a name="a18"></a><a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/* Initialize the memory for the neighbor table entries. */</span></div>
-<div class="line">  <a name="a19"></a><a class="code" href="a00605.html#gab8f8dad927b501d8b4ed4340d1bcf4fb">memb_init</a>(&amp;neighbor_mem);</div>
+<div class="line">  <a name="a19"></a><a class="code" href="a00734.html#gab8f8dad927b501d8b4ed4340d1bcf4fb">memb_init</a>(&amp;neighbor_mem);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/* Initialize the list used for the neighbor table. */</span></div>
-<div class="line">  <a name="a20"></a><a class="code" href="a00603.html#ga10fe9694aceedc8308cc543b9b95d9c9">list_init</a>(neighbor_table);</div>
+<div class="line">  <a name="a20"></a><a class="code" href="a00732.html#ga10fe9694aceedc8308cc543b9b95d9c9">list_init</a>(neighbor_table);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/* Open a multihop connection on Rime channel CHANNEL. */</span></div>
 <div class="line">  multihop_open(&amp;multihop, CHANNEL, &amp;multihop_call);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/* Register an announcement with the same announcement ID as the</span></div>
 <div class="line"><span class="comment">     Rime channel we use to open the multihop connection above. */</span></div>
-<div class="line">  <a name="a21"></a><a class="code" href="a00651.html#ga7c4524fbd47cc0eb7bd18d411f3938fb">announcement_register</a>(&amp;example_announcement,</div>
+<div class="line">  <a name="a21"></a><a class="code" href="a00780.html#ga7c4524fbd47cc0eb7bd18d411f3938fb">announcement_register</a>(&amp;example_announcement,</div>
 <div class="line">                        CHANNEL,</div>
 <div class="line">                        received_announcement);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/* Set a dummy value to start sending out announcments. */</span></div>
-<div class="line">  <a name="a22"></a><a class="code" href="a00651.html#ga4c9831ba8d14d4bfafa1e51cc5fb61c9">announcement_set_value</a>(&amp;example_announcement, 0);</div>
+<div class="line">  <a name="a22"></a><a class="code" href="a00780.html#ga4c9831ba8d14d4bfafa1e51cc5fb61c9">announcement_set_value</a>(&amp;example_announcement, 0);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/* Activate the button sensor. We use the button to drive traffic -</span></div>
 <div class="line"><span class="comment">     when the button is pressed, a packet is sent. */</span></div>
@@ -273,11 +273,11 @@
 <div class="line">    linkaddr_t to;</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Wait until we get a sensor event with the button sensor as data. */</span></div>
-<div class="line">    <a name="a23"></a><a class="code" href="a00684.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(ev == sensors_event &amp;&amp;</div>
+<div class="line">    <a name="a23"></a><a class="code" href="a00813.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(ev == sensors_event &amp;&amp;</div>
 <div class="line">                             data == &amp;button_sensor);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Copy the &quot;Hello&quot; to the packet buffer. */</span></div>
-<div class="line">    <a name="a24"></a><a class="code" href="a00613.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(<span class="stringliteral">&quot;Hello&quot;</span>, 6);</div>
+<div class="line">    <a name="a24"></a><a class="code" href="a00742.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(<span class="stringliteral">&quot;Hello&quot;</span>, 6);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Set the Rime address of the final receiver of the packet to</span></div>
 <div class="line"><span class="comment">       1.0. This is a value that happens to work nicely in a Cooja</span></div>
@@ -291,13 +291,13 @@
 <div class="line"></div>
 <div class="line">  }</div>
 <div class="line"></div>
-<div class="line">  <a name="a25"></a><a class="code" href="a00684.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line">  <a name="a25"></a><a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:54 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

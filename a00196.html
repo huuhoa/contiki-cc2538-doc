@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/lib/ringbuf.h File Reference</title>
+<title>Contiki 3.x: cpu/cc253x/dev/random.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,58 +43,45 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_f8fc1035965dbcf3e6094016d717607e.html">lib</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_c433b04169c945a1c7f0848f853d4379.html">cpu</a></li><li class="navelem"><a class="el" href="dir_31fa0b6b73ed390ac28c1d610edf54b7.html">cc253x</a></li><li class="navelem"><a class="el" href="dir_8580ba7cc21cf25c83efbf32f6bf5340.html">dev</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">ringbuf.h File Reference</div>  </div>
+<div class="title">random.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    Header file for the ring buffer library
-</pre>  
+<p><pre class="fragment">    Random number generator routines exploiting the cc2530 hardware
+    capabilities.</pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00587_source.html">contiki-conf.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00577_source.html">cc253x.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00592_source.html">sfr-bits.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00579_source.html">dev/cc2530-rf.h</a>&quot;</code><br />
 </div>
 <p><a href="a00196_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00076.html">ringbuf</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure that holds the state of a ring buffer.  <a href="a00076.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga5e40b0459813787a4e67fceb0aab5fd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00607.html#ga5e40b0459813787a4e67fceb0aab5fd6">ringbuf_init</a> (struct <a class="el" href="a00076.html">ringbuf</a> *r, uint8_t *a, uint8_t size_power_of_two)</td></tr>
-<tr class="memdesc:ga5e40b0459813787a4e67fceb0aab5fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a ring buffer.  <a href="a00607.html#ga5e40b0459813787a4e67fceb0aab5fd6">More...</a><br /></td></tr>
-<tr class="separator:ga5e40b0459813787a4e67fceb0aab5fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2a370b54ed5d194e188a94e505b48eeb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00607.html#ga2a370b54ed5d194e188a94e505b48eeb">ringbuf_put</a> (struct <a class="el" href="a00076.html">ringbuf</a> *r, uint8_t c)</td></tr>
-<tr class="memdesc:ga2a370b54ed5d194e188a94e505b48eeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert a byte into the ring buffer.  <a href="a00607.html#ga2a370b54ed5d194e188a94e505b48eeb">More...</a><br /></td></tr>
-<tr class="separator:ga2a370b54ed5d194e188a94e505b48eeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2972cc12c40c75e5c883e831ff8c14ab"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00607.html#ga2972cc12c40c75e5c883e831ff8c14ab">ringbuf_get</a> (struct <a class="el" href="a00076.html">ringbuf</a> *r)</td></tr>
-<tr class="memdesc:ga2972cc12c40c75e5c883e831ff8c14ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a byte from the ring buffer.  <a href="a00607.html#ga2972cc12c40c75e5c883e831ff8c14ab">More...</a><br /></td></tr>
-<tr class="separator:ga2972cc12c40c75e5c883e831ff8c14ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0c16200911b10f8137499825b5803b8d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00607.html#ga0c16200911b10f8137499825b5803b8d">ringbuf_size</a> (struct <a class="el" href="a00076.html">ringbuf</a> *r)</td></tr>
-<tr class="memdesc:ga0c16200911b10f8137499825b5803b8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of a ring buffer.  <a href="a00607.html#ga0c16200911b10f8137499825b5803b8d">More...</a><br /></td></tr>
-<tr class="separator:ga0c16200911b10f8137499825b5803b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8b3f31407ae7e5a98f9cedcb6f5bd82b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00607.html#ga8b3f31407ae7e5a98f9cedcb6f5bd82b">ringbuf_elements</a> (struct <a class="el" href="a00076.html">ringbuf</a> *r)</td></tr>
-<tr class="memdesc:ga8b3f31407ae7e5a98f9cedcb6f5bd82b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of elements currently in the ring buffer.  <a href="a00607.html#ga8b3f31407ae7e5a98f9cedcb6f5bd82b">More...</a><br /></td></tr>
-<tr class="separator:ga8b3f31407ae7e5a98f9cedcb6f5bd82b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3b38526f57c5311c58c1440e18f3cebe"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00840.html#ga3b38526f57c5311c58c1440e18f3cebe">random_rand</a> (void)</td></tr>
+<tr class="memdesc:ga3b38526f57c5311c58c1440e18f3cebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a new random number using the cc253x RNG.  <a href="a00840.html#ga3b38526f57c5311c58c1440e18f3cebe">More...</a><br /></td></tr>
+<tr class="separator:ga3b38526f57c5311c58c1440e18f3cebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1450c78dbb54fb9f7ae681908eace9d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00840.html#ga1450c78dbb54fb9f7ae681908eace9d5">random_init</a> (unsigned short seed)</td></tr>
+<tr class="memdesc:ga1450c78dbb54fb9f7ae681908eace9d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Seed the cc253x random number generator.  <a href="a00840.html#ga1450c78dbb54fb9f7ae681908eace9d5">More...</a><br /></td></tr>
+<tr class="separator:ga1450c78dbb54fb9f7ae681908eace9d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    Header file for the ring buffer library
-</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
+<div class="textblock"><pre class="fragment">    Random number generator routines exploiting the cc2530 hardware
+    capabilities.</pre> <p>This file overrides <a class="el" href="a00194_source.html">core/lib/random.c</a>.</p>
+<dl class="section author"><dt>Author</dt><dd>George Oikonomou - <a href="#" onclick="location.href='mai'+'lto:'+'oik'+'on'+'omo'+'u@'+'use'+'rs'+'.so'+'ur'+'cef'+'or'+'ge.'+'ne'+'t'; return false;">oikon<span style="display: none;">.nosp@m.</span>omou<span style="display: none;">.nosp@m.</span>@user<span style="display: none;">.nosp@m.</span>s.so<span style="display: none;">.nosp@m.</span>urcef<span style="display: none;">.nosp@m.</span>orge<span style="display: none;">.nosp@m.</span>.net</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00196_source.html">ringbuf.h</a>.</p>
+<p>Definition in file <a class="el" href="a00196_source.html">random.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

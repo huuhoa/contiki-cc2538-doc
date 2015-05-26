@@ -81,8 +81,8 @@
 <div class="line"><span class="comment"> */</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00419.html">net/rime/rime.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00405.html">net/rime/mesh.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00425.html">net/rime/rime.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00411.html">net/rime/mesh.h</a>&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;dev/button-sensor.h&quot;</span></div>
 <div class="line"></div>
@@ -95,7 +95,7 @@
 <div class="line"></div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">struct </span>mesh_conn mesh;</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a0"></a><a class="code" href="a00684.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_mesh_process, <span class="stringliteral">&quot;Mesh example&quot;</span>);</div>
+<div class="line"><a name="a0"></a><a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_mesh_process, <span class="stringliteral">&quot;Mesh example&quot;</span>);</div>
 <div class="line">AUTOSTART_PROCESSES(&amp;example_mesh_process);</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span></div>
@@ -115,20 +115,20 @@
 <div class="line">{</div>
 <div class="line">  printf(<span class="stringliteral">&quot;Data received from %d.%d: %.*s (%d)\n&quot;</span>,</div>
 <div class="line">         from-&gt;u8[0], from-&gt;u8[1],</div>
-<div class="line">         <a name="a1"></a><a class="code" href="a00613.html#ga4a1157b882c15f5ea05d64f81d37115d">packetbuf_datalen</a>(), (<span class="keywordtype">char</span> *)<a name="a2"></a><a class="code" href="a00613.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>(), <a class="code" href="a00613.html#ga4a1157b882c15f5ea05d64f81d37115d">packetbuf_datalen</a>());</div>
+<div class="line">         <a name="a1"></a><a class="code" href="a00742.html#ga4a1157b882c15f5ea05d64f81d37115d">packetbuf_datalen</a>(), (<span class="keywordtype">char</span> *)<a name="a2"></a><a class="code" href="a00742.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>(), <a class="code" href="a00742.html#ga4a1157b882c15f5ea05d64f81d37115d">packetbuf_datalen</a>());</div>
 <div class="line"></div>
-<div class="line">  <a name="a3"></a><a class="code" href="a00613.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(MESSAGE, strlen(MESSAGE));</div>
-<div class="line">  <a name="a4"></a><a class="code" href="a00658.html#gaf6375ab8decff5933290fd423351ea3f">mesh_send</a>(&amp;mesh, from);</div>
+<div class="line">  <a name="a3"></a><a class="code" href="a00742.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(MESSAGE, strlen(MESSAGE));</div>
+<div class="line">  <a name="a4"></a><a class="code" href="a00787.html#gaf6375ab8decff5933290fd423351ea3f">mesh_send</a>(&amp;mesh, from);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><span class="keyword">const</span> <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a5"></a><a class="code" href="a00067.html">mesh_callbacks</a> callbacks = {<a name="a6"></a><a class="code" href="a00067.html#a864b49c230249d7b6d240ce2c154f62d">recv</a>, <a name="a7"></a><a class="code" href="a00067.html#a940842457c70de0387a2f10ac5547fe0">sent</a>, <a name="a8"></a><a class="code" href="a00067.html#a8616d30ed8eb52409b49f7144e6ae185">timedout</a>};</div>
+<div class="line"><span class="keyword">const</span> <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a5"></a><a class="code" href="a00068.html">mesh_callbacks</a> callbacks = {<a name="a6"></a><a class="code" href="a00068.html#a864b49c230249d7b6d240ce2c154f62d">recv</a>, <a name="a7"></a><a class="code" href="a00068.html#a940842457c70de0387a2f10ac5547fe0">sent</a>, <a name="a8"></a><a class="code" href="a00068.html#a8616d30ed8eb52409b49f7144e6ae185">timedout</a>};</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a9"></a><a class="code" href="a00701.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_mesh_process, ev, data)</div>
+<div class="line"><a name="a9"></a><a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_mesh_process, ev, data)</div>
 <div class="line">{</div>
-<div class="line">  <a name="a10"></a><a class="code" href="a00684.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(<a name="a11"></a><a class="code" href="a00658.html#ga6021451025ce564ad3c50edba5fc8378">mesh_close</a>(&amp;mesh);)</div>
-<div class="line">  <a name="a12"></a><a class="code" href="a00684.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
+<div class="line">  <a name="a10"></a><a class="code" href="a00813.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(<a name="a11"></a><a class="code" href="a00787.html#ga6021451025ce564ad3c50edba5fc8378">mesh_close</a>(&amp;mesh);)</div>
+<div class="line">  <a name="a12"></a><a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"></div>
-<div class="line">  <a name="a13"></a><a class="code" href="a00658.html#ga7ea1b1abfbffd7c247f0c36c899b7821">mesh_open</a>(&amp;mesh, 132, &amp;callbacks);</div>
+<div class="line">  <a name="a13"></a><a class="code" href="a00787.html#ga7ea1b1abfbffd7c247f0c36c899b7821">mesh_open</a>(&amp;mesh, 132, &amp;callbacks);</div>
 <div class="line"></div>
 <div class="line">  SENSORS_ACTIVATE(button_sensor);</div>
 <div class="line"></div>
@@ -136,24 +136,24 @@
 <div class="line">    linkaddr_t addr;</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Wait for button click before sending the first message. */</span></div>
-<div class="line">    <a name="a14"></a><a class="code" href="a00684.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(ev == sensors_event &amp;&amp; data == &amp;button_sensor);</div>
+<div class="line">    <a name="a14"></a><a class="code" href="a00813.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(ev == sensors_event &amp;&amp; data == &amp;button_sensor);</div>
 <div class="line"></div>
 <div class="line">    printf(<span class="stringliteral">&quot;Button clicked\n&quot;</span>);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Send a message to node number 1. */</span></div>
 <div class="line">    </div>
-<div class="line">    <a class="code" href="a00613.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(MESSAGE, strlen(MESSAGE));</div>
+<div class="line">    <a class="code" href="a00742.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(MESSAGE, strlen(MESSAGE));</div>
 <div class="line">    addr.u8[0] = 1;</div>
 <div class="line">    addr.u8[1] = 0;</div>
-<div class="line">    <a class="code" href="a00658.html#gaf6375ab8decff5933290fd423351ea3f">mesh_send</a>(&amp;mesh, &amp;addr);</div>
+<div class="line">    <a class="code" href="a00787.html#gaf6375ab8decff5933290fd423351ea3f">mesh_send</a>(&amp;mesh, &amp;addr);</div>
 <div class="line">  }</div>
-<div class="line">  <a name="a15"></a><a class="code" href="a00684.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line">  <a name="a15"></a><a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:54 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

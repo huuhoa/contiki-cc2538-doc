@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/ipv4/uip_arp.h File Reference</title>
+<title>Contiki 3.x: core/net/ipv4/uip-neighbor.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,58 +47,26 @@
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">uip_arp.h File Reference</div>  </div>
+<div class="title">uip-neighbor.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Macros and definitions for the ARP module.  
+<p><pre class="fragment">    Header file for database of link-local neighbors, used by
+    IPv6 code and to be used by future ARP code.</pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00259_source.html">net/ip/uip.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00264_source.html">net/ip/uip.h</a>&quot;</code><br />
 </div>
 <p><a href="a00304_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00103.html">uip_eth_hdr</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Ethernet header.  <a href="a00103.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ga30e827f33eacff55ecb4d8fb5a11d5d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00621.html#ga30e827f33eacff55ecb4d8fb5a11d5d1">uip_setethaddr</a>(eaddr)</td></tr>
-<tr class="memdesc:ga30e827f33eacff55ecb4d8fb5a11d5d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifiy the Ethernet MAC address.  <a href="a00621.html#ga30e827f33eacff55ecb4d8fb5a11d5d1">More...</a><br /></td></tr>
-<tr class="separator:ga30e827f33eacff55ecb4d8fb5a11d5d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga2d9d28afa353f662b9bb5234fc419f72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2d9d28afa353f662b9bb5234fc419f72"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00641.html#ga2d9d28afa353f662b9bb5234fc419f72">uip_arp_init</a> (void)</td></tr>
-<tr class="memdesc:ga2d9d28afa353f662b9bb5234fc419f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the ARP module. <br /></td></tr>
-<tr class="separator:ga2d9d28afa353f662b9bb5234fc419f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga902c4a360134096224bc2655f623aa5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00641.html#ga902c4a360134096224bc2655f623aa5f">uip_arp_arpin</a> (void)</td></tr>
-<tr class="memdesc:ga902c4a360134096224bc2655f623aa5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ARP processing for incoming IP packets.  <a href="a00641.html#ga902c4a360134096224bc2655f623aa5f">More...</a><br /></td></tr>
-<tr class="separator:ga902c4a360134096224bc2655f623aa5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga54b27e45df15e10a0eb1a3e3a91417d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00641.html#ga54b27e45df15e10a0eb1a3e3a91417d2">uip_arp_out</a> (void)</td></tr>
-<tr class="memdesc:ga54b27e45df15e10a0eb1a3e3a91417d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepend Ethernet header to an outbound IP packet and see if we need to send out an ARP request.  <a href="a00641.html#ga54b27e45df15e10a0eb1a3e3a91417d2">More...</a><br /></td></tr>
-<tr class="separator:ga54b27e45df15e10a0eb1a3e3a91417d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga058a8e6025f67b021862281f1911fcef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00641.html#ga058a8e6025f67b021862281f1911fcef">uip_arp_timer</a> (void)</td></tr>
-<tr class="memdesc:ga058a8e6025f67b021862281f1911fcef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodic ARP processing function.  <a href="a00641.html#ga058a8e6025f67b021862281f1911fcef">More...</a><br /></td></tr>
-<tr class="separator:ga058a8e6025f67b021862281f1911fcef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Macros and definitions for the ARP module. </p>
-<dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'dun'+'ke'+'ls.'+'co'+'m'; return false;">adam@<span style="display: none;">.nosp@m.</span>dunk<span style="display: none;">.nosp@m.</span>els.c<span style="display: none;">.nosp@m.</span>om</a> </dd></dl>
+<div class="textblock"><pre class="fragment">    Header file for database of link-local neighbors, used by
+    IPv6 code and to be used by future ARP code.</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00304_source.html">uip_arp.h</a>.</p>
+<p>Definition in file <a class="el" href="a00304_source.html">uip-neighbor.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

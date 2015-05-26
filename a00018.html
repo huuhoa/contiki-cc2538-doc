@@ -82,19 +82,19 @@
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;lib/random.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00419.html">net/rime/rime.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00401.html">net/rime/collect.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00425.html">net/rime/rime.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00407.html">net/rime/collect.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;dev/leds.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;dev/button-sensor.h&quot;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00375.html">net/netstack.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00381.html">net/netstack.h</a>&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">struct </span>collect_conn tc;</div>
 <div class="line"></div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a0"></a><a class="code" href="a00684.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_collect_process, <span class="stringliteral">&quot;Test collect process&quot;</span>);</div>
+<div class="line"><a name="a0"></a><a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_collect_process, <span class="stringliteral">&quot;Test collect process&quot;</span>);</div>
 <div class="line">AUTOSTART_PROCESSES(&amp;example_collect_process);</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span></div>
@@ -103,73 +103,73 @@
 <div class="line">  printf(<span class="stringliteral">&quot;Sink got message from %d.%d, seqno %d, hops %d: len %d &#39;%s&#39;\n&quot;</span>,</div>
 <div class="line">         originator-&gt;u8[0], originator-&gt;u8[1],</div>
 <div class="line">         seqno, hops,</div>
-<div class="line">         <a name="a1"></a><a class="code" href="a00613.html#ga4a1157b882c15f5ea05d64f81d37115d">packetbuf_datalen</a>(),</div>
-<div class="line">         (<span class="keywordtype">char</span> *)<a name="a2"></a><a class="code" href="a00613.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>());</div>
+<div class="line">         <a name="a1"></a><a class="code" href="a00742.html#ga4a1157b882c15f5ea05d64f81d37115d">packetbuf_datalen</a>(),</div>
+<div class="line">         (<span class="keywordtype">char</span> *)<a name="a2"></a><a class="code" href="a00742.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>());</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span>collect_callbacks callbacks = { recv };</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a3"></a><a class="code" href="a00701.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_collect_process, ev, data)</div>
+<div class="line"><a name="a3"></a><a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_collect_process, ev, data)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a4"></a><a class="code" href="a00056.html">etimer</a> periodic;</div>
-<div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="a00056.html">etimer</a> et;</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a4"></a><a class="code" href="a00057.html">etimer</a> periodic;</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="a00057.html">etimer</a> et;</div>
 <div class="line">  </div>
-<div class="line">  <a name="a5"></a><a class="code" href="a00684.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
+<div class="line">  <a name="a5"></a><a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"></div>
 <div class="line">  collect_open(&amp;tc, 130, COLLECT_ROUTER, &amp;callbacks);</div>
 <div class="line"></div>
-<div class="line">  <span class="keywordflow">if</span>(<a name="a6"></a><a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0] == 1 &amp;&amp;</div>
-<div class="line">     <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1] == 0) {</div>
+<div class="line">  <span class="keywordflow">if</span>(<a name="a6"></a><a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0] == 1 &amp;&amp;</div>
+<div class="line">     <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1] == 0) {</div>
 <div class="line">        printf(<span class="stringliteral">&quot;I am sink\n&quot;</span>);</div>
 <div class="line">        collect_set_sink(&amp;tc, 1);</div>
 <div class="line">  }</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/* Allow some time for the network to settle. */</span></div>
-<div class="line">  <a name="a7"></a><a class="code" href="a00680.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;et, 120 * <a name="a8"></a><a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a>);</div>
-<div class="line">  <a name="a9"></a><a class="code" href="a00684.html#ga203e74a64e870015d3c2aa456c1ad5d9">PROCESS_WAIT_UNTIL</a>(<a name="a10"></a><a class="code" href="a00680.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;et));</div>
+<div class="line">  <a name="a7"></a><a class="code" href="a00809.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;et, 120 * <a name="a8"></a><a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a>);</div>
+<div class="line">  <a name="a9"></a><a class="code" href="a00813.html#ga203e74a64e870015d3c2aa456c1ad5d9">PROCESS_WAIT_UNTIL</a>(<a name="a10"></a><a class="code" href="a00809.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;et));</div>
 <div class="line"></div>
 <div class="line">  <span class="keywordflow">while</span>(1) {</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Send a packet every 30 seconds. */</span></div>
-<div class="line">    <span class="keywordflow">if</span>(<a class="code" href="a00680.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;periodic)) {</div>
-<div class="line">      <a class="code" href="a00680.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;periodic, <a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 30);</div>
-<div class="line">      <a class="code" href="a00680.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;et, <a name="a11"></a><a class="code" href="a00711.html#ga3b38526f57c5311c58c1440e18f3cebe">random_rand</a>() % (<a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 30));</div>
+<div class="line">    <span class="keywordflow">if</span>(<a class="code" href="a00809.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;periodic)) {</div>
+<div class="line">      <a class="code" href="a00809.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;periodic, <a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 30);</div>
+<div class="line">      <a class="code" href="a00809.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;et, <a name="a11"></a><a class="code" href="a00840.html#ga3b38526f57c5311c58c1440e18f3cebe">random_rand</a>() % (<a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 30));</div>
 <div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    <a name="a12"></a><a class="code" href="a00684.html#ga4f9c1d291e210793e8c4444762f748ba">PROCESS_WAIT_EVENT</a>();</div>
+<div class="line">    <a name="a12"></a><a class="code" href="a00813.html#ga4f9c1d291e210793e8c4444762f748ba">PROCESS_WAIT_EVENT</a>();</div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line">    <span class="keywordflow">if</span>(<a class="code" href="a00680.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;et)) {</div>
+<div class="line">    <span class="keywordflow">if</span>(<a class="code" href="a00809.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;et)) {</div>
 <div class="line">      <span class="keyword">static</span> linkaddr_t oldparent;</div>
 <div class="line">      <span class="keyword">const</span> linkaddr_t *parent;</div>
 <div class="line"></div>
 <div class="line">      printf(<span class="stringliteral">&quot;Sending\n&quot;</span>);</div>
-<div class="line">      <a name="a13"></a><a class="code" href="a00613.html#gaa540c9abf0db13d27881b616f7794824">packetbuf_clear</a>();</div>
-<div class="line">      <a name="a14"></a><a class="code" href="a00613.html#ga236b0d557fe119c39796432484c94b26">packetbuf_set_datalen</a>(sprintf(<a class="code" href="a00613.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>(),</div>
+<div class="line">      <a name="a13"></a><a class="code" href="a00742.html#gaa540c9abf0db13d27881b616f7794824">packetbuf_clear</a>();</div>
+<div class="line">      <a name="a14"></a><a class="code" href="a00742.html#ga236b0d557fe119c39796432484c94b26">packetbuf_set_datalen</a>(sprintf(<a class="code" href="a00742.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>(),</div>
 <div class="line">                                  <span class="stringliteral">&quot;%s&quot;</span>, <span class="stringliteral">&quot;Hello&quot;</span>) + 1);</div>
 <div class="line">      collect_send(&amp;tc, 15);</div>
 <div class="line"></div>
 <div class="line">      parent = collect_parent(&amp;tc);</div>
-<div class="line">      <span class="keywordflow">if</span>(!<a name="a15"></a><a class="code" href="a00612.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(parent, &amp;oldparent)) {</div>
-<div class="line">        <span class="keywordflow">if</span>(!<a class="code" href="a00612.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(&amp;oldparent, &amp;<a name="a16"></a><a class="code" href="a00612.html#gaa8829a95f1d11a93a3ff75c8f5b2bffd">linkaddr_null</a>)) {</div>
+<div class="line">      <span class="keywordflow">if</span>(!<a name="a15"></a><a class="code" href="a00741.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(parent, &amp;oldparent)) {</div>
+<div class="line">        <span class="keywordflow">if</span>(!<a class="code" href="a00741.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(&amp;oldparent, &amp;<a name="a16"></a><a class="code" href="a00741.html#gaa8829a95f1d11a93a3ff75c8f5b2bffd">linkaddr_null</a>)) {</div>
 <div class="line">          printf(<span class="stringliteral">&quot;#L %d 0\n&quot;</span>, oldparent.u8[0]);</div>
 <div class="line">        }</div>
-<div class="line">        <span class="keywordflow">if</span>(!<a class="code" href="a00612.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(parent, &amp;<a class="code" href="a00612.html#gaa8829a95f1d11a93a3ff75c8f5b2bffd">linkaddr_null</a>)) {</div>
+<div class="line">        <span class="keywordflow">if</span>(!<a class="code" href="a00741.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(parent, &amp;<a class="code" href="a00741.html#gaa8829a95f1d11a93a3ff75c8f5b2bffd">linkaddr_null</a>)) {</div>
 <div class="line">          printf(<span class="stringliteral">&quot;#L %d 1\n&quot;</span>, parent-&gt;u8[0]);</div>
 <div class="line">        }</div>
-<div class="line">        <a name="a17"></a><a class="code" href="a00612.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;oldparent, parent);</div>
+<div class="line">        <a name="a17"></a><a class="code" href="a00741.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;oldparent, parent);</div>
 <div class="line">      }</div>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line">  }</div>
 <div class="line"></div>
-<div class="line">  <a name="a18"></a><a class="code" href="a00684.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line">  <a name="a18"></a><a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:54 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

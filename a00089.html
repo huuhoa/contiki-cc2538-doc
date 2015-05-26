@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: uip_buf_t Union Reference</title>
+<title>Contiki 3.x: uip_802154_shortaddr Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,35 +45,22 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">uip_buf_t Union Reference<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00760.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00623.html">uIP device driver functions</a></div></div>  </div>
+<div class="title">uip_802154_shortaddr Struct Reference<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00889.html">The uIP TCP/IP stack</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>The uIP packet buffer.  
+<p>16 bit 802.15.4 address  
  <a href="a00089.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00259_source.html">core/net/ip/uip.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00264_source.html">core/net/ip/uip.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The uIP packet buffer. </p>
-<p>The uip_aligned_buf array is used to hold incoming and outgoing packets. The device driver should place incoming data into this buffer. When sending data, the device driver should read the link level headers and the TCP/IP headers from this buffer. The size of the link level headers is configured by the UIP_LLH_LEN define.</p>
-<dl class="section note"><dt>Note</dt><dd>The application data need not be placed in this buffer, so the device driver must read it from the place pointed to by the uip_appdata pointer as illustrated by the following example: <div class="fragment"><div class="line"><span class="keywordtype">void</span></div>
-<div class="line">devicedriver_send(<span class="keywordtype">void</span>)</div>
-<div class="line">{</div>
-<div class="line">hwsend(&amp;<a class="code" href="a00623.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[0], <a class="code" href="a00630.html#gae6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>);</div>
-<div class="line"><span class="keywordflow">if</span>(<a class="code" href="a00626.html#ga96b8904e098e8f1f896379732f1996be">uip_len</a> &lt;= <a class="code" href="a00630.html#gae6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + UIP_TCPIP_HLEN) {</div>
-<div class="line">hwsend(&amp;<a class="code" href="a00623.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[<a class="code" href="a00630.html#gae6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>], <a class="code" href="a00626.html#ga96b8904e098e8f1f896379732f1996be">uip_len</a> - UIP_LLH_LEN);</div>
-<div class="line">} <span class="keywordflow">else</span> {</div>
-<div class="line">hwsend(&amp;<a class="code" href="a00623.html#gacd4537a3bf8a16f8f9af3660caf5040a">uip_buf</a>[<a class="code" href="a00630.html#gae6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>], UIP_TCPIP_HLEN);</div>
-<div class="line">hwsend(<a class="code" href="a00760.html#gad5848369ab5b02f2fb02d8390ccbaf79">uip_appdata</a>, <a class="code" href="a00626.html#ga96b8904e098e8f1f896379732f1996be">uip_len</a> - UIP_TCPIP_HLEN - <a class="code" href="a00630.html#gae6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>);</div>
-<div class="line">}</div>
-<div class="line">}</div>
-</div><!-- fragment --> </dd></dl>
+<div class="textblock"><p>16 bit 802.15.4 address </p>
 
-<p>Definition at line <a class="el" href="a00259_source.html#l00518">518</a> of file <a class="el" href="a00259_source.html">uip.h</a>.</p>
+<p>Definition at line <a class="el" href="a00264_source.html#l00121">121</a> of file <a class="el" href="a00264_source.html">uip.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:59 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

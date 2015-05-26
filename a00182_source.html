@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/lib/me_tabs.c Source File</title>
+<title>Contiki 3.x: core/lib/me.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,10 +48,10 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">me_tabs.c</div>  </div>
+<div class="title">me.c</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="a00182.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2005, Swedish Institute of Computer Science</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * All rights reserved. </span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
@@ -82,100 +82,99 @@
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * This file is part of the Contiki operating system.</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> me_encode_tab[256] = {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;0x5555, 0x5556, 0x5559, 0x555a, 0x5565, 0x5566, 0x5569, 0x556a, 0x5595, </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;0x5596, 0x5599, 0x559a, 0x55a5, 0x55a6, 0x55a9, 0x55aa, 0x5655, 0x5656, </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;0x5659, 0x565a, 0x5665, 0x5666, 0x5669, 0x566a, 0x5695, 0x5696, 0x5699, </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;0x569a, 0x56a5, 0x56a6, 0x56a9, 0x56aa, 0x5955, 0x5956, 0x5959, 0x595a, </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;0x5965, 0x5966, 0x5969, 0x596a, 0x5995, 0x5996, 0x5999, 0x599a, 0x59a5, </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;0x59a6, 0x59a9, 0x59aa, 0x5a55, 0x5a56, 0x5a59, 0x5a5a, 0x5a65, 0x5a66, </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;0x5a69, 0x5a6a, 0x5a95, 0x5a96, 0x5a99, 0x5a9a, 0x5aa5, 0x5aa6, 0x5aa9, </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;0x5aaa, 0x6555, 0x6556, 0x6559, 0x655a, 0x6565, 0x6566, 0x6569, 0x656a, </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;0x6595, 0x6596, 0x6599, 0x659a, 0x65a5, 0x65a6, 0x65a9, 0x65aa, 0x6655, </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;0x6656, 0x6659, 0x665a, 0x6665, 0x6666, 0x6669, 0x666a, 0x6695, 0x6696, </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;0x6699, 0x669a, 0x66a5, 0x66a6, 0x66a9, 0x66aa, 0x6955, 0x6956, 0x6959, </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;0x695a, 0x6965, 0x6966, 0x6969, 0x696a, 0x6995, 0x6996, 0x6999, 0x699a, </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;0x69a5, 0x69a6, 0x69a9, 0x69aa, 0x6a55, 0x6a56, 0x6a59, 0x6a5a, 0x6a65, </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;0x6a66, 0x6a69, 0x6a6a, 0x6a95, 0x6a96, 0x6a99, 0x6a9a, 0x6aa5, 0x6aa6, </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;0x6aa9, 0x6aaa, 0x9555, 0x9556, 0x9559, 0x955a, 0x9565, 0x9566, 0x9569, </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;0x956a, 0x9595, 0x9596, 0x9599, 0x959a, 0x95a5, 0x95a6, 0x95a9, 0x95aa, </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;0x9655, 0x9656, 0x9659, 0x965a, 0x9665, 0x9666, 0x9669, 0x966a, 0x9695, </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;0x9696, 0x9699, 0x969a, 0x96a5, 0x96a6, 0x96a9, 0x96aa, 0x9955, 0x9956, </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;0x9959, 0x995a, 0x9965, 0x9966, 0x9969, 0x996a, 0x9995, 0x9996, 0x9999, </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;0x999a, 0x99a5, 0x99a6, 0x99a9, 0x99aa, 0x9a55, 0x9a56, 0x9a59, 0x9a5a, </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;0x9a65, 0x9a66, 0x9a69, 0x9a6a, 0x9a95, 0x9a96, 0x9a99, 0x9a9a, 0x9aa5, </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;0x9aa6, 0x9aa9, 0x9aaa, 0xa555, 0xa556, 0xa559, 0xa55a, 0xa565, 0xa566, </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;0xa569, 0xa56a, 0xa595, 0xa596, 0xa599, 0xa59a, 0xa5a5, 0xa5a6, 0xa5a9, </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;0xa5aa, 0xa655, 0xa656, 0xa659, 0xa65a, 0xa665, 0xa666, 0xa669, 0xa66a, </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;0xa695, 0xa696, 0xa699, 0xa69a, 0xa6a5, 0xa6a6, 0xa6a9, 0xa6aa, 0xa955, </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;0xa956, 0xa959, 0xa95a, 0xa965, 0xa966, 0xa969, 0xa96a, 0xa995, 0xa996, </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;0xa999, 0xa99a, 0xa9a5, 0xa9a6, 0xa9a9, 0xa9aa, 0xaa55, 0xaa56, 0xaa59, </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;0xaa5a, 0xaa65, 0xaa66, 0xaa69, 0xaa6a, 0xaa95, 0xaa96, 0xaa99, 0xaa9a, </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;0xaaa5, 0xaaa6, 0xaaa9, 0xaaaa, };</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> me_decode_tab[256] = {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;0x0, 0x0, 0x1, 0x1, 0x0, 0x0, 0x1, 0x1, 0x2, </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;0x2, 0x3, 0x3, 0x2, 0x2, 0x3, 0x3, 0x0, 0x0, </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;0x1, 0x1, 0x0, 0x0, 0x1, 0x1, 0x2, 0x2, 0x3, </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;0x3, 0x2, 0x2, 0x3, 0x3, 0x4, 0x4, 0x5, 0x5, </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;0x4, 0x4, 0x5, 0x5, 0x6, 0x6, 0x7, 0x7, 0x6, </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;0x6, 0x7, 0x7, 0x4, 0x4, 0x5, 0x5, 0x4, 0x4, </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;0x5, 0x5, 0x6, 0x6, 0x7, 0x7, 0x6, 0x6, 0x7, </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;0x7, 0x0, 0x0, 0x1, 0x1, 0x0, 0x0, 0x1, 0x1, </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;0x2, 0x2, 0x3, 0x3, 0x2, 0x2, 0x3, 0x3, 0x0, </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;0x0, 0x1, 0x1, 0x0, 0x0, 0x1, 0x1, 0x2, 0x2, </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;0x3, 0x3, 0x2, 0x2, 0x3, 0x3, 0x4, 0x4, 0x5, </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;0x5, 0x4, 0x4, 0x5, 0x5, 0x6, 0x6, 0x7, 0x7, </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;0x6, 0x6, 0x7, 0x7, 0x4, 0x4, 0x5, 0x5, 0x4, </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;0x4, 0x5, 0x5, 0x6, 0x6, 0x7, 0x7, 0x6, 0x6, </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;0x7, 0x7, 0x8, 0x8, 0x9, 0x9, 0x8, 0x8, 0x9, </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;0x9, 0xa, 0xa, 0xb, 0xb, 0xa, 0xa, 0xb, 0xb, </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;0x8, 0x8, 0x9, 0x9, 0x8, 0x8, 0x9, 0x9, 0xa, </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;0xa, 0xb, 0xb, 0xa, 0xa, 0xb, 0xb, 0xc, 0xc, </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;0xd, 0xd, 0xc, 0xc, 0xd, 0xd, 0xe, 0xe, 0xf, </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;0xf, 0xe, 0xe, 0xf, 0xf, 0xc, 0xc, 0xd, 0xd, </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;0xc, 0xc, 0xd, 0xd, 0xe, 0xe, 0xf, 0xf, 0xe, </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;0xe, 0xf, 0xf, 0x8, 0x8, 0x9, 0x9, 0x8, 0x8, </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;0x9, 0x9, 0xa, 0xa, 0xb, 0xb, 0xa, 0xa, 0xb, </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;0xb, 0x8, 0x8, 0x9, 0x9, 0x8, 0x8, 0x9, 0x9, </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;0xa, 0xa, 0xb, 0xb, 0xa, 0xa, 0xb, 0xb, 0xc, </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;0xc, 0xd, 0xd, 0xc, 0xc, 0xd, 0xd, 0xe, 0xe, </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;0xf, 0xf, 0xe, 0xe, 0xf, 0xf, 0xc, 0xc, 0xd, </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;0xd, 0xc, 0xc, 0xd, 0xd, 0xe, 0xe, 0xf, 0xf, </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;0xe, 0xe, 0xf, 0xf, };</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> me_valid_tab[256] = {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;0x0, 0x0, 0x0, 0x0, 0x1, 0x1, 0x0, 0x0, 0x1, </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;0x0, 0x0, 0x1, 0x1, 0x0, 0x0, 0x1, 0x1, 0x0, </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x1, 0x0, 0x0, </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;0x1, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;0x0, 0x0, 0x0, 0x1, 0x1, 0x0, 0x0, 0x1, 0x1, </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;0x0, 0x0, 0x0, 0x0, };</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/** \addtogroup me</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * @{ */</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * \file</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * Implementation of the table-driven Manchester encoding and decoding.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * \author</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> * Adam Dunkels &lt;adam@sics.se&gt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;me_tabs.h&quot;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * Manchester encode an 8-bit byte.</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * This function Manchester encodes an 8-bit byte into a 16-bit</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * word. The function me_decode() does the inverse operation.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> * \param c The byte to be encoded</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> * \retval The encoded word.</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="a00733.html#ga72548e4a7b5ab863881a226601684a5f">   58</a></span>&#160;<a class="code" href="a00733.html#ga72548e4a7b5ab863881a226601684a5f">me_encode</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> c)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordflow">return</span> me_encode_tab[c];</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"> * Decode a Manchester encoded 16-bit word.</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> * This function decodes a Manchester encoded 16-bit word into a 8-bit</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> * byte. The function does not check for parity errors in the encoded</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> * byte.</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"> * \param m The 16-bit Manchester encoded word</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> * \return The decoded 8-bit byte</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="a00733.html#ga2ba94b4f5cb665f0a50989a97dab40d9">   75</a></span>&#160;<a class="code" href="a00733.html#ga2ba94b4f5cb665f0a50989a97dab40d9">me_decode16</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> m)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> m1, m2, c;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  m1 = m &gt;&gt; 8;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  m2 = m &amp; 0xff;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  c = (me_decode_tab[m1] &lt;&lt; 4) |</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    me_decode_tab[m2];</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">return</span> c;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"> * Decode a Manchester encoded 8-bit byte.</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"> * This function decodes a Manchester encoded 8-bit byte into 4</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"> * decoded bits.. The function does not check for parity errors in the</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> * encoded byte.</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"> * \param m The 8-bit Manchester encoded byte</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"> * \return The decoded 4 bits</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="a00733.html#ga0f2e13136808a58db639c0dc56a1d64a">   99</a></span>&#160;<a class="code" href="a00733.html#ga0f2e13136808a58db639c0dc56a1d64a">me_decode8</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> m)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;{</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">return</span>  me_decode_tab[m];</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"> * Check if an encoded byte is valid.</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="a00733.html#ga270f4332b76bf56b924ac5dcbcecb4af">  109</a></span>&#160;<a class="code" href="a00733.html#ga270f4332b76bf56b924ac5dcbcecb4af">me_valid</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> m)</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;{</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keywordflow">return</span> me_valid_tab[m];</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">/** @} */</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="ttc" id="a00733_html_ga0f2e13136808a58db639c0dc56a1d64a"><div class="ttname"><a href="a00733.html#ga0f2e13136808a58db639c0dc56a1d64a">me_decode8</a></div><div class="ttdeci">unsigned char me_decode8(unsigned char m)</div><div class="ttdoc">Decode a Manchester encoded 8-bit byte. </div><div class="ttdef"><b>Definition:</b> <a href="a00182_source.html#l00099">me.c:99</a></div></div>
+<div class="ttc" id="a00733_html_ga2ba94b4f5cb665f0a50989a97dab40d9"><div class="ttname"><a href="a00733.html#ga2ba94b4f5cb665f0a50989a97dab40d9">me_decode16</a></div><div class="ttdeci">unsigned char me_decode16(unsigned short m)</div><div class="ttdoc">Decode a Manchester encoded 16-bit word. </div><div class="ttdef"><b>Definition:</b> <a href="a00182_source.html#l00075">me.c:75</a></div></div>
+<div class="ttc" id="a00733_html_ga72548e4a7b5ab863881a226601684a5f"><div class="ttname"><a href="a00733.html#ga72548e4a7b5ab863881a226601684a5f">me_encode</a></div><div class="ttdeci">unsigned short me_encode(unsigned char c)</div><div class="ttdoc">Manchester encode an 8-bit byte. </div><div class="ttdef"><b>Definition:</b> <a href="a00182_source.html#l00058">me.c:58</a></div></div>
+<div class="ttc" id="a00733_html_ga270f4332b76bf56b924ac5dcbcecb4af"><div class="ttname"><a href="a00733.html#ga270f4332b76bf56b924ac5dcbcecb4af">me_valid</a></div><div class="ttdeci">unsigned char me_valid(unsigned char m)</div><div class="ttdoc">Check if an encoded byte is valid. </div><div class="ttdef"><b>Definition:</b> <a href="a00182_source.html#l00109">me.c:109</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:55 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

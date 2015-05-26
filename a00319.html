@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/ipv6/uip-ds6-route.c File Reference</title>
+<title>Contiki 3.x: core/net/ipv6/multicast/uip-mcast6.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,79 +43,50 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_2254bc981389a9495bd721183ae93a8d.html">ipv6</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_2254bc981389a9495bd721183ae93a8d.html">ipv6</a></li><li class="navelem"><a class="el" href="dir_30f027f9ee303e3cf4f79ee531cc4eae.html">multicast</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">uip-ds6-route.c File Reference<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00760.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00761.html">uIP IPv6 specific features</a></div></div>  </div>
+<div class="title">uip-mcast6.h File Reference<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00889.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00890.html">uIP IPv6 specific features</a> &raquo; <a class="el" href="a00773.html">IPv6 Multicast Forwarding</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Routing table manipulation.  
+<p>This header file contains configuration directives for uIPv6 multicast support.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00322_source.html">net/ipv6/uip-ds6.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00259_source.html">net/ip/uip.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00179_source.html">lib/list.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00185_source.html">lib/memb.h</a>&quot;</code><br />
-<code>#include &quot;net/nbr-table.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;contiki-conf.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00314_source.html">net/ipv6/multicast/uip-mcast6-engines.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00316_source.html">net/ipv6/multicast/uip-mcast6-route.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00313_source.html">net/ipv6/multicast/smrf.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00311_source.html">net/ipv6/multicast/roll-tm.h</a>&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00250_source.html">net/ip/uip-debug.h</a>&quot;</code><br />
 </div>
 <p><a href="a00319_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">Routing Table basic routines</div></td></tr>
-<tr class="memitem:gaf76ec0e9d77e3449995f569d3b9793a3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf76ec0e9d77e3449995f569d3b9793a3"></a>
-uip_ipaddr_t *&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_route_nexthop</b> (<a class="el" href="a00761.html#ga606bc837378f0d367991617f64812ae3">uip_ds6_route_t</a> *route)</td></tr>
-<tr class="separator:gaf76ec0e9d77e3449995f569d3b9793a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadbdf0bb3a9ebf04edab87299092cc672"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadbdf0bb3a9ebf04edab87299092cc672"></a>
-<a class="el" href="a00761.html#ga606bc837378f0d367991617f64812ae3">uip_ds6_route_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_route_head</b> (void)</td></tr>
-<tr class="separator:gadbdf0bb3a9ebf04edab87299092cc672"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga53153cc2b3165b443819483e1fe76a28"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga53153cc2b3165b443819483e1fe76a28"></a>
-<a class="el" href="a00761.html#ga606bc837378f0d367991617f64812ae3">uip_ds6_route_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_route_next</b> (<a class="el" href="a00761.html#ga606bc837378f0d367991617f64812ae3">uip_ds6_route_t</a> *r)</td></tr>
-<tr class="separator:ga53153cc2b3165b443819483e1fe76a28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6ef3b8214d42d762a2431eb353f39583"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga6ef3b8214d42d762a2431eb353f39583"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_route_num_routes</b> (void)</td></tr>
-<tr class="separator:ga6ef3b8214d42d762a2431eb353f39583"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafa430f687ebfd64569bced77a5e9ad60"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gafa430f687ebfd64569bced77a5e9ad60"></a>
-<a class="el" href="a00761.html#ga606bc837378f0d367991617f64812ae3">uip_ds6_route_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_route_lookup</b> (uip_ipaddr_t *addr)</td></tr>
-<tr class="separator:gafa430f687ebfd64569bced77a5e9ad60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad0ecd3c5de2403a315f99641b75d080e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gad0ecd3c5de2403a315f99641b75d080e"></a>
-<a class="el" href="a00761.html#ga606bc837378f0d367991617f64812ae3">uip_ds6_route_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_route_add</b> (uip_ipaddr_t *ipaddr, uint8_t length, uip_ipaddr_t *nexthop)</td></tr>
-<tr class="separator:gad0ecd3c5de2403a315f99641b75d080e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf7f8db9553bd2f09f6ceb50297a00ac1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf7f8db9553bd2f09f6ceb50297a00ac1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_route_rm</b> (<a class="el" href="a00761.html#ga606bc837378f0d367991617f64812ae3">uip_ds6_route_t</a> *route)</td></tr>
-<tr class="separator:gaf7f8db9553bd2f09f6ceb50297a00ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa4e6763706b36c07108fb0492cc36994"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa4e6763706b36c07108fb0492cc36994"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_route_rm_by_nexthop</b> (uip_ipaddr_t *nexthop)</td></tr>
-<tr class="separator:gaa4e6763706b36c07108fb0492cc36994"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Default router list basic routines</div></td></tr>
-<tr class="memitem:ga9e6a00e971cd3230e410522e8c60c95a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9e6a00e971cd3230e410522e8c60c95a"></a>
-<a class="el" href="a00761.html#ga9ce37670039e811363a4bb5e354bc0c6">uip_ds6_defrt_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_defrt_add</b> (uip_ipaddr_t *ipaddr, unsigned long interval)</td></tr>
-<tr class="separator:ga9e6a00e971cd3230e410522e8c60c95a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7416a31b8e6de586a98ba6428b42e56c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7416a31b8e6de586a98ba6428b42e56c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_defrt_rm</b> (<a class="el" href="a00761.html#ga9ce37670039e811363a4bb5e354bc0c6">uip_ds6_defrt_t</a> *defrt)</td></tr>
-<tr class="separator:ga7416a31b8e6de586a98ba6428b42e56c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1ec276a7a46b1461e228147009aeb77d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga1ec276a7a46b1461e228147009aeb77d"></a>
-<a class="el" href="a00761.html#ga9ce37670039e811363a4bb5e354bc0c6">uip_ds6_defrt_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_defrt_lookup</b> (uip_ipaddr_t *ipaddr)</td></tr>
-<tr class="separator:ga1ec276a7a46b1461e228147009aeb77d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabd65d2f891993725fcc892a8f0d30f47"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gabd65d2f891993725fcc892a8f0d30f47"></a>
-uip_ipaddr_t *&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_defrt_choose</b> (void)</td></tr>
-<tr class="separator:gabd65d2f891993725fcc892a8f0d30f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaae956c099a1aa52075fc9461204dfee8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaae956c099a1aa52075fc9461204dfee8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>uip_ds6_defrt_periodic</b> (void)</td></tr>
-<tr class="separator:gaae956c099a1aa52075fc9461204dfee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00108.html">uip_mcast6_driver</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The data structure used to represent a multicast engine.  <a href="a00108.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga809ec8adbbd2ff2a34d432b0141817a3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00773.html#ga809ec8adbbd2ff2a34d432b0141817a3">uip_mcast6_get_address_scope</a>(a)&#160;&#160;&#160;((a)-&gt;u8[1] &amp; 0x0F)</td></tr>
+<tr class="memdesc:ga809ec8adbbd2ff2a34d432b0141817a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a multicast address' scope.  <a href="a00773.html#ga809ec8adbbd2ff2a34d432b0141817a3">More...</a><br /></td></tr>
+<tr class="separator:ga809ec8adbbd2ff2a34d432b0141817a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Routing table manipulation. </p>
+<div class="textblock"><p>This header file contains configuration directives for uIPv6 multicast support. </p>
+<dl class="section author"><dt>Author</dt><dd>George Oikonomou - <a href="#" onclick="location.href='mai'+'lto:'+'oik'+'on'+'omo'+'u@'+'use'+'rs'+'.so'+'ur'+'cef'+'or'+'ge.'+'ne'+'t'; return false;">oikon<span style="display: none;">.nosp@m.</span>omou<span style="display: none;">.nosp@m.</span>@user<span style="display: none;">.nosp@m.</span>s.so<span style="display: none;">.nosp@m.</span>urcef<span style="display: none;">.nosp@m.</span>orge<span style="display: none;">.nosp@m.</span>.net</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00319_source.html">uip-ds6-route.c</a>.</p>
+<p>Definition in file <a class="el" href="a00319_source.html">uip-mcast6.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

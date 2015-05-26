@@ -81,9 +81,9 @@
 <div class="line"><span class="comment"> */</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00419.html">net/rime/rime.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00425.html">net/rime/rime.h</a>&quot;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00383.html">net/rime/announcement.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00389.html">net/rime/announcement.h</a>&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"></div>
@@ -92,7 +92,7 @@
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a0"></a><a class="code" href="a00684.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_announcement_process, <span class="stringliteral">&quot;Example announcement process&quot;</span>);</div>
+<div class="line"><a name="a0"></a><a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_announcement_process, <span class="stringliteral">&quot;Example announcement process&quot;</span>);</div>
 <div class="line">AUTOSTART_PROCESSES(&amp;example_announcement_process);</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span></div>
@@ -100,7 +100,7 @@
 <div class="line">                      uint16_t <span class="keywordtype">id</span>, uint16_t value)</div>
 <div class="line">{</div>
 <div class="line">  <span class="comment">/* We set our own announced value to one plus that of our neighbor. */</span></div>
-<div class="line">  <a name="a2"></a><a class="code" href="a00651.html#ga4c9831ba8d14d4bfafa1e51cc5fb61c9">announcement_set_value</a>(a, value + 1);</div>
+<div class="line">  <a name="a2"></a><a class="code" href="a00780.html#ga4c9831ba8d14d4bfafa1e51cc5fb61c9">announcement_set_value</a>(a, value + 1);</div>
 <div class="line"></div>
 <div class="line">  printf(<span class="stringliteral">&quot;Got announcement from %d.%d, id %d, value %d, our new value is %d\n&quot;</span>,</div>
 <div class="line">         from-&gt;u8[0], from-&gt;u8[1], <span class="keywordtype">id</span>, value, value + 1);</div>
@@ -116,39 +116,39 @@
 <div class="line">}</div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="a00045.html">announcement</a> example_announcement;</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a3"></a><a class="code" href="a00701.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_announcement_process, ev, data)</div>
+<div class="line"><a name="a3"></a><a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_announcement_process, ev, data)</div>
 <div class="line">{</div>
-<div class="line">  <a name="a4"></a><a class="code" href="a00684.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(<a name="a5"></a><a class="code" href="a00651.html#ga61d9362111bf99c969b8d74b9ceb3eca">announcement_remove</a>(&amp;example_announcement);)</div>
+<div class="line">  <a name="a4"></a><a class="code" href="a00813.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(<a name="a5"></a><a class="code" href="a00780.html#ga61d9362111bf99c969b8d74b9ceb3eca">announcement_remove</a>(&amp;example_announcement);)</div>
 <div class="line">    </div>
-<div class="line">  <a name="a6"></a><a class="code" href="a00684.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
+<div class="line">  <a name="a6"></a><a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/* Register an announcement with ID 128. We provide the</span></div>
 <div class="line"><span class="comment">     &#39;received_announcement&#39; function pointer so that this function</span></div>
 <div class="line"><span class="comment">     will be called when a announcements from neighbors are heard. */</span></div>
 <div class="line"></div>
-<div class="line">  <a name="a7"></a><a class="code" href="a00651.html#ga7c4524fbd47cc0eb7bd18d411f3938fb">announcement_register</a>(&amp;example_announcement,</div>
+<div class="line">  <a name="a7"></a><a class="code" href="a00780.html#ga7c4524fbd47cc0eb7bd18d411f3938fb">announcement_register</a>(&amp;example_announcement,</div>
 <div class="line">                        128,</div>
 <div class="line">                        received_announcement);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">/* Set the lowest eight bytes of the Rime address as the value. */</span></div>
-<div class="line">  <a class="code" href="a00651.html#ga4c9831ba8d14d4bfafa1e51cc5fb61c9">announcement_set_value</a>(&amp;example_announcement, <a name="a8"></a><a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0]);</div>
+<div class="line">  <a class="code" href="a00780.html#ga4c9831ba8d14d4bfafa1e51cc5fb61c9">announcement_set_value</a>(&amp;example_announcement, <a name="a8"></a><a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0]);</div>
 <div class="line"></div>
 <div class="line">  <span class="keywordflow">while</span>(1) {</div>
-<div class="line">    <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a9"></a><a class="code" href="a00056.html">etimer</a> et;</div>
+<div class="line">    <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a9"></a><a class="code" href="a00057.html">etimer</a> et;</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Listen for announcements every ten seconds. */</span></div>
-<div class="line">    <a name="a10"></a><a class="code" href="a00680.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;et, <a name="a11"></a><a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 10);</div>
-<div class="line">    <a name="a12"></a><a class="code" href="a00684.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(<a name="a13"></a><a class="code" href="a00680.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;et));</div>
-<div class="line">    <a name="a14"></a><a class="code" href="a00651.html#ga6d0a8884c75aa84837c13a6a44322bb6">announcement_listen</a>(1);</div>
+<div class="line">    <a name="a10"></a><a class="code" href="a00809.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;et, <a name="a11"></a><a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 10);</div>
+<div class="line">    <a name="a12"></a><a class="code" href="a00813.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(<a name="a13"></a><a class="code" href="a00809.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;et));</div>
+<div class="line">    <a name="a14"></a><a class="code" href="a00780.html#ga6d0a8884c75aa84837c13a6a44322bb6">announcement_listen</a>(1);</div>
 <div class="line">  }</div>
 <div class="line"></div>
-<div class="line">  <a name="a15"></a><a class="code" href="a00684.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line">  <a name="a15"></a><a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:54 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

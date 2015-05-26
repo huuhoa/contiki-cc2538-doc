@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/rpl/rpl-icmp6.c File Reference</title>
+<title>Contiki 3.x: core/net/rime/unicast.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,38 +43,30 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_9205d7a945a6c58bd5b8f887f828cbdd.html">rpl</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_d8f62425b4539ec461573762fd5afde9.html">rime</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">rpl-icmp6.c File Reference</div>  </div>
+<div class="title">unicast.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    ICMP6 I/O for RPL control messages.</pre>  
+<p><pre class="fragment">    Header file for Rime's single-hop unicast
+</pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00246_source.html">net/ip/tcpip.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00259_source.html">net/ip/uip.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00322_source.html">net/ipv6/uip-ds6.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00326_source.html">net/ipv6/uip-nd6.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00324_source.html">net/ipv6/uip-icmp6.h</a>&quot;</code><br />
-<code>#include &quot;net/rpl/rpl-private.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00377_source.html">net/packetbuf.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00314_source.html">net/ipv6/multicast/uip-mcast6.h</a>&quot;</code><br />
-<code>#include &lt;limits.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00250_source.html">net/ip/uip-debug.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00393_source.html">net/rime/broadcast.h</a>&quot;</code><br />
 </div>
 <p><a href="a00451_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    ICMP6 I/O for RPL control messages.</pre> <dl class="section author"><dt>Author</dt><dd>Joakim Eriksson <a href="#" onclick="location.href='mai'+'lto:'+'joa'+'ki'+'me@'+'si'+'cs.'+'se'; return false;">joaki<span style="display: none;">.nosp@m.</span>me@s<span style="display: none;">.nosp@m.</span>ics.s<span style="display: none;">.nosp@m.</span>e</a>, Nicolas Tsiftes <a href="#" onclick="location.href='mai'+'lto:'+'nvt'+'@s'+'ics'+'.s'+'e'; return false;">nvt@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a> Contributors: Niclas Finne <a href="#" onclick="location.href='mai'+'lto:'+'nfi'+'@s'+'ics'+'.s'+'e'; return false;">nfi@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a>, Joel Hoglund <a href="#" onclick="location.href='mai'+'lto:'+'joe'+'l@'+'sic'+'s.'+'se'; return false;">joel@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a>, Mathieu Pouillot <a href="#" onclick="location.href='mai'+'lto:'+'m.p'+'ou'+'ill'+'ot'+'@wa'+'tt'+'eco'+'.c'+'om'; return false;">m.pou<span style="display: none;">.nosp@m.</span>illo<span style="display: none;">.nosp@m.</span>t@wat<span style="display: none;">.nosp@m.</span>teco<span style="display: none;">.nosp@m.</span>.com</a> George Oikonomou <a href="#" onclick="location.href='mai'+'lto:'+'oik'+'on'+'omo'+'u@'+'use'+'rs'+'.so'+'ur'+'cef'+'or'+'ge.'+'ne'+'t'; return false;">oikon<span style="display: none;">.nosp@m.</span>omou<span style="display: none;">.nosp@m.</span>@user<span style="display: none;">.nosp@m.</span>s.so<span style="display: none;">.nosp@m.</span>urcef<span style="display: none;">.nosp@m.</span>orge<span style="display: none;">.nosp@m.</span>.net</a> (multicast) </dd></dl>
+<div class="textblock"><pre class="fragment">    Header file for Rime's single-hop unicast
+</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00451_source.html">rpl-icmp6.c</a>.</p>
+<p>Definition in file <a class="el" href="a00451_source.html">unicast.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/mac/frame802154.c File Reference</title>
+<title>Contiki 3.x: core/net/mac/contikimac/contikimac.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,50 +43,32 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_82c80f12558e8d0ec97ce31b5626cec9.html">mac</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_82c80f12558e8d0ec97ce31b5626cec9.html">mac</a></li><li class="navelem"><a class="el" href="dir_b611dd3d9d13645cf9d9a0ccfd8d8262.html">contikimac</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">frame802154.c File Reference</div>  </div>
+<div class="title">contikimac.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>802.15.4 frame creation and parsing functions  
+<p><pre class="fragment">    Header file for the ContikiMAC radio duty cycling protocol
+</pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00462_source.html">sys/cc.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00349_source.html">net/mac/frame802154.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00335_source.html">net/llsec/llsec802154.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00329_source.html">net/linkaddr.h</a>&quot;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00494_source.html">sys/rtimer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00373_source.html">net/mac/rdc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00161_source.html">dev/radio.h</a>&quot;</code><br />
 </div>
 <p><a href="a00348_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">FCF element values definitions</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>These are some definitions of values used in the FCF.</p>
-<p>See the 802.15.4 spec for details. </p>
-</div></td></tr>
-<tr class="memitem:gae20f166ad9f0d225415ed29e9ac23ef0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00649.html#gae20f166ad9f0d225415ed29e9ac23ef0">frame802154_hdrlen</a> (<a class="el" href="a00060.html">frame802154_t</a> *p)</td></tr>
-<tr class="memdesc:gae20f166ad9f0d225415ed29e9ac23ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the length of the frame header.  <a href="a00649.html#gae20f166ad9f0d225415ed29e9ac23ef0">More...</a><br /></td></tr>
-<tr class="separator:gae20f166ad9f0d225415ed29e9ac23ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7a25406cef651e256c2bea2ec54ca78f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00649.html#ga7a25406cef651e256c2bea2ec54ca78f">frame802154_create</a> (<a class="el" href="a00060.html">frame802154_t</a> *p, uint8_t *buf)</td></tr>
-<tr class="memdesc:ga7a25406cef651e256c2bea2ec54ca78f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a frame for transmission over the air.  <a href="a00649.html#ga7a25406cef651e256c2bea2ec54ca78f">More...</a><br /></td></tr>
-<tr class="separator:ga7a25406cef651e256c2bea2ec54ca78f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5b7efca07639b62467fdab439d2ae6b9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00649.html#ga5b7efca07639b62467fdab439d2ae6b9">frame802154_parse</a> (uint8_t *data, int len, <a class="el" href="a00060.html">frame802154_t</a> *pf)</td></tr>
-<tr class="memdesc:ga5b7efca07639b62467fdab439d2ae6b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses an input frame.  <a href="a00649.html#ga5b7efca07639b62467fdab439d2ae6b9">More...</a><br /></td></tr>
-<tr class="separator:ga5b7efca07639b62467fdab439d2ae6b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>802.15.4 frame creation and parsing functions </p>
-<p>This file converts to and from a structure to a packed 802.15.4 frame. </p>
+<div class="textblock"><pre class="fragment">    Header file for the ContikiMAC radio duty cycling protocol
+</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00348_source.html">frame802154.c</a>.</p>
+<p>Definition in file <a class="el" href="a00348_source.html">contikimac.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

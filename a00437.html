@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/rime/stbroadcast.h File Reference</title>
+<title>Contiki 3.x: core/net/rime/rudolph1.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,53 +47,28 @@
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">stbroadcast.h File Reference</div>  </div>
+<div class="title">rudolph1.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    Header file for the Rime module Stubborn Anonymous BroadCast (stbroadcast)
+<p><pre class="fragment">    Header file for the multi-hop reliable bulk data transfer mechanism
 </pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00467_source.html">sys/ctimer.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00387_source.html">net/rime/broadcast.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00379_source.html">net/queuebuf.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00449_source.html">net/rime/trickle.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00409_source.html">net/rime/ipolite.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00473_source.html">sys/ctimer.h</a>&quot;</code><br />
 </div>
 <p><a href="a00437_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00082.html">stbroadcast_conn</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A stbroadcast connection.  <a href="a00082.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga5e664483972ac30a905ff5a9705f4fbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00671.html#ga5e664483972ac30a905ff5a9705f4fbe">stbroadcast_open</a> (struct <a class="el" href="a00082.html">stbroadcast_conn</a> *c, uint16_t channel, const struct stbroadcast_callbacks *u)</td></tr>
-<tr class="memdesc:ga5e664483972ac30a905ff5a9705f4fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up a stbroadcast connection.  <a href="a00671.html#ga5e664483972ac30a905ff5a9705f4fbe">More...</a><br /></td></tr>
-<tr class="separator:ga5e664483972ac30a905ff5a9705f4fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga42af8ffbb43c703de5c2c63bc01e47b8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00671.html#ga42af8ffbb43c703de5c2c63bc01e47b8">stbroadcast_send_stubborn</a> (struct <a class="el" href="a00082.html">stbroadcast_conn</a> *c, clock_time_t t)</td></tr>
-<tr class="memdesc:ga42af8ffbb43c703de5c2c63bc01e47b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a stubborn message.  <a href="a00671.html#ga42af8ffbb43c703de5c2c63bc01e47b8">More...</a><br /></td></tr>
-<tr class="separator:ga42af8ffbb43c703de5c2c63bc01e47b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga32fe12e6008e7c3726e22df674e1a655"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00671.html#ga32fe12e6008e7c3726e22df674e1a655">stbroadcast_cancel</a> (struct <a class="el" href="a00082.html">stbroadcast_conn</a> *c)</td></tr>
-<tr class="memdesc:ga32fe12e6008e7c3726e22df674e1a655"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel the current stubborn message.  <a href="a00671.html#ga32fe12e6008e7c3726e22df674e1a655">More...</a><br /></td></tr>
-<tr class="separator:ga32fe12e6008e7c3726e22df674e1a655"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadaeb0423d49bb5660d19e422146a8f43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00671.html#gadaeb0423d49bb5660d19e422146a8f43">stbroadcast_set_timer</a> (struct <a class="el" href="a00082.html">stbroadcast_conn</a> *c, clock_time_t t)</td></tr>
-<tr class="memdesc:gadaeb0423d49bb5660d19e422146a8f43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the retransmission time of the current stubborn message.  <a href="a00671.html#gadaeb0423d49bb5660d19e422146a8f43">More...</a><br /></td></tr>
-<tr class="separator:gadaeb0423d49bb5660d19e422146a8f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    Header file for the Rime module Stubborn Anonymous BroadCast (stbroadcast)
+<div class="textblock"><pre class="fragment">    Header file for the multi-hop reliable bulk data transfer mechanism
 </pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00437_source.html">stbroadcast.h</a>.</p>
+<p>Definition in file <a class="el" href="a00437_source.html">rudolph1.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/mac/cxmac/cxmac.h File Reference</title>
+<title>Contiki 3.x: core/net/mac/contikimac/contikimac.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,32 +43,44 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_82c80f12558e8d0ec97ce31b5626cec9.html">mac</a></li><li class="navelem"><a class="el" href="dir_75d6a6241877ac0964e6075c18c1f39a.html">cxmac</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_397e3e282a3f6c72eba45d18c4a175d7.html">net</a></li><li class="navelem"><a class="el" href="dir_82c80f12558e8d0ec97ce31b5626cec9.html">mac</a></li><li class="navelem"><a class="el" href="dir_b611dd3d9d13645cf9d9a0ccfd8d8262.html">contikimac</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">cxmac.h File Reference</div>  </div>
+<div class="title">contikimac.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    A simple power saving MAC protocol based on X-MAC [SenSys 2006]
+<p><pre class="fragment">    Implementation of the ContikiMAC power-saving radio duty cycling protocol
 </pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00488_source.html">sys/rtimer.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00368_source.html">net/mac/rdc.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00159_source.html">dev/radio.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;contiki-conf.h&quot;</code><br />
+<code>#include &quot;dev/leds.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00161_source.html">dev/radio.h</a>&quot;</code><br />
+<code>#include &quot;dev/watchdog.h&quot;</code><br />
+<code>#include &quot;lib/random.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00362_source.html">net/mac/mac-sequence.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00348_source.html">net/mac/contikimac/contikimac.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00381_source.html">net/netstack.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00425_source.html">net/rime/rime.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00471_source.html">sys/compower.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00492_source.html">sys/pt.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00494_source.html">sys/rtimer.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00372_source.html">net/mac/phase.h</a>&quot;</code><br />
 </div>
 <p><a href="a00347_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    A simple power saving MAC protocol based on X-MAC [SenSys 2006]
-</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
+<div class="textblock"><pre class="fragment">    Implementation of the ContikiMAC power-saving radio duty cycling protocol
+</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> Niclas Finne <a href="#" onclick="location.href='mai'+'lto:'+'nfi'+'@s'+'ics'+'.s'+'e'; return false;">nfi@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a> Joakim Eriksson <a href="#" onclick="location.href='mai'+'lto:'+'joa'+'ki'+'me@'+'si'+'cs.'+'se'; return false;">joaki<span style="display: none;">.nosp@m.</span>me@s<span style="display: none;">.nosp@m.</span>ics.s<span style="display: none;">.nosp@m.</span>e</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00347_source.html">cxmac.h</a>.</p>
+<p>Definition in file <a class="el" href="a00347_source.html">contikimac.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

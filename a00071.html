@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: polite_callbacks Struct Reference</title>
+<title>Contiki 3.x: packetqueue_item Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -44,42 +44,24 @@
   </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">polite_callbacks Struct Reference<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00754.html">The Rime communication stack</a> &raquo; <a class="el" href="a00664.html">Polite anonymous best effort local broadcast</a></div></div>  </div>
+<div class="title">packetqueue_item Struct Reference<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00883.html">The Rime communication stack</a> &raquo; <a class="el" href="a00791.html">Packet queue</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A structure with callback functions for a polite connection.  
+<p>Representation of an item in a packet queue.  
  <a href="a00071.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00417_source.html">core/net/rime/polite.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:afe70b0fbd608d8b1f5f9af669aa5574f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe70b0fbd608d8b1f5f9af669aa5574f"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00071.html#afe70b0fbd608d8b1f5f9af669aa5574f">recv</a> )(struct <a class="el" href="a00072.html">polite_conn</a> *c)</td></tr>
-<tr class="memdesc:afe70b0fbd608d8b1f5f9af669aa5574f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a packet is received on the connection. <br /></td></tr>
-<tr class="separator:afe70b0fbd608d8b1f5f9af669aa5574f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a998822ddcc58016a2ec8c994ff500c98"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a998822ddcc58016a2ec8c994ff500c98"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00071.html#a998822ddcc58016a2ec8c994ff500c98">sent</a> )(struct <a class="el" href="a00072.html">polite_conn</a> *c)</td></tr>
-<tr class="memdesc:a998822ddcc58016a2ec8c994ff500c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a packet is sent on the connection. <br /></td></tr>
-<tr class="separator:a998822ddcc58016a2ec8c994ff500c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad778e35eb62526f210ff170dbe82f15"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aad778e35eb62526f210ff170dbe82f15"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00071.html#aad778e35eb62526f210ff170dbe82f15">dropped</a> )(struct <a class="el" href="a00072.html">polite_conn</a> *c)</td></tr>
-<tr class="memdesc:aad778e35eb62526f210ff170dbe82f15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a packet is dropped because a packet was heard from a neighbor. <br /></td></tr>
-<tr class="separator:aad778e35eb62526f210ff170dbe82f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
+<p><code>#include &lt;<a class="el" href="a00419_source.html">core/net/rime/packetqueue.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A structure with callback functions for a polite connection. </p>
-<p>This structure holds a list of callback functions used a a polite connection. The functions are called when events occur on the connection. </p>
+<div class="textblock"><p>Representation of an item in a packet queue. </p>
+<p>This structure holds the state of a packet queue. It is an opaque structure with no user-visible elements. The function <a class="el" href="a00791.html#gadb29484602502348c810bd636ea8751b" title="Access the queuebuf in a packet queue item. ">packetqueue_queuebuf()</a> is used to extract a "queubuf" from the item. The function <a class="el" href="a00791.html#gaf4d1ecfa52fc89c8d790a168a6a1d50e" title="Access the user-defined pointer in a packet queue item. ">packetqueue_ptr()</a> is used to extract the opaque pointer that was registered with the <a class="el" href="a00791.html#gae1883dbe27c3735de4bf1a3c8fca63ea" title="Enqueue a packetbuf on a packet queue. ">packetqueue_enqueue_packetbuf()</a> function. </p>
 
-<p>Definition at line <a class="el" href="a00417_source.html#l00112">112</a> of file <a class="el" href="a00417_source.html">polite.h</a>.</p>
+<p>Definition at line <a class="el" href="a00419_source.html#l00086">86</a> of file <a class="el" href="a00419_source.html">packetqueue.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:59 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

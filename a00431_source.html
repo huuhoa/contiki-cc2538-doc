@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/rime/rudolph1.h Source File</title>
+<title>Contiki 3.x: core/net/rime/route-discovery.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,7 +48,7 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">rudolph1.h</div>  </div>
+<div class="title">route-discovery.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00431.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
@@ -85,7 +85,7 @@
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         Header file for the multi-hop reliable bulk data transfer mechanism</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         Header file for the Rime mesh routing protocol</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * \author</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *         Adam Dunkels &lt;adam@sics.se&gt;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> */</span></div>
@@ -96,70 +96,61 @@
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * \defgroup rudolph1 Multi-hop reliable bulk data transfer (rudolph1)</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * \defgroup routediscovery Rime route discovery protocol</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * @{</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * The rudolph1 module implements a multi-hop reliable bulk data</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * transfer mechanism.</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> * \section rudolph1-channels Channels</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> * The rudolph1 module uses 2 channels; one for data transmissions and</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> * one for NACKs and repair packets.</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#ifndef RUDOLPH1_H_</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#define RUDOLPH1_H_</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00443.html">net/rime/trickle.h</a>&quot;</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00403.html">net/rime/ipolite.h</a>&quot;</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00467.html">sys/ctimer.h</a>&quot;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * The route-discovery module does route discovery for Rime.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> * \section route-discovery-channels Channels</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> * The ibc module uses 2 channels; one for the flooded route request</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> * packets and one for the unicast route replies.</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#ifndef ROUTE_DISCOVERY_H_</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#define ROUTE_DISCOVERY_H_</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00451.html">net/rime/unicast.h</a>&quot;</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00417.html">net/rime/netflood.h</a>&quot;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00473.html">sys/ctimer.h</a>&quot;</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">struct </span>route_discovery_conn;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">struct </span>rudolph1_conn;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">enum</span> {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  RUDOLPH1_FLAG_NONE,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  RUDOLPH1_FLAG_NEWFILE,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  RUDOLPH1_FLAG_LASTCHUNK,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">struct </span>rudolph1_callbacks {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  void (* write_chunk)(<span class="keyword">struct </span>rudolph1_conn *c, <span class="keywordtype">int</span> offset, <span class="keywordtype">int</span> flag,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                       uint8_t *data, <span class="keywordtype">int</span> len);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  int (* read_chunk)(<span class="keyword">struct </span>rudolph1_conn *c, <span class="keywordtype">int</span> offset, uint8_t *to,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                     <span class="keywordtype">int</span> maxsize);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">struct </span>rudolph1_conn {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keyword">struct </span>trickle_conn trickle;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keyword">struct </span><a class="code" href="a00064.html">ipolite_conn</a> ipolite;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keyword">const</span> <span class="keyword">struct </span>rudolph1_callbacks *cb;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keyword">struct </span>ctimer t;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  clock_time_t send_interval;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  uint16_t chunk, highest_chunk_heard;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  uint8_t version;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">/*  uint8_t trickle_interval;*/</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  uint8_t nacks;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;};</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keywordtype">void</span> rudolph1_open(<span class="keyword">struct</span> rudolph1_conn *c, uint16_t channel,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                   <span class="keyword">const</span> <span class="keyword">struct</span> rudolph1_callbacks *cb);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">void</span> rudolph1_close(<span class="keyword">struct</span> rudolph1_conn *c);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">void</span> rudolph1_send(<span class="keyword">struct</span> rudolph1_conn *c, clock_time_t send_interval);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">void</span> rudolph1_stop(<span class="keyword">struct</span> rudolph1_conn *c);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* RUDOLPH1_H_ */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">/** @} */</span><span class="comment"></span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="ttc" id="a00403_html"><div class="ttname"><a href="a00403.html">ipolite.h</a></div><div class="ttdoc">    Header file for Ipolite best effort local Broadcast (ipolite)  </div></div>
-<div class="ttc" id="a00064_html"><div class="ttname"><a href="a00064.html">ipolite_conn</a></div><div class="ttdoc">An opaque structure with no user-visible elements that holds the state of an ipolite connection...</div><div class="ttdef"><b>Definition:</b> <a href="a00403_source.html#l00135">ipolite.h:135</a></div></div>
-<div class="ttc" id="a00467_html"><div class="ttname"><a href="a00467.html">ctimer.h</a></div><div class="ttdoc">    Header file for the callback timer  </div></div>
-<div class="ttc" id="a00443_html"><div class="ttname"><a href="a00443.html">trickle.h</a></div><div class="ttdoc">    Header file for Trickle (reliable single source flooding) for Rime  </div></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">struct </span>route_discovery_callbacks {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  void (* new_route)(<span class="keyword">struct </span>route_discovery_conn *c, <span class="keyword">const</span> linkaddr_t *to);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  void (* timedout)(<span class="keyword">struct </span>route_discovery_conn *c);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#define ROUTE_DISCOVERY_ENTRIES 8</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">struct </span>route_discovery_conn {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keyword">struct </span>netflood_conn rreqconn;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keyword">struct </span>unicast_conn rrepconn;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keyword">struct </span>ctimer t;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  linkaddr_t last_rreq_originator;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  uint16_t last_rreq_id;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  uint16_t rreq_id;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keyword">const</span> <span class="keyword">struct </span>route_discovery_callbacks *cb;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">void</span> route_discovery_open(<span class="keyword">struct</span> route_discovery_conn *c, clock_time_t time,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                          uint16_t channels,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                          <span class="keyword">const</span> <span class="keyword">struct</span> route_discovery_callbacks *callbacks);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordtype">int</span> route_discovery_discover(<span class="keyword">struct</span> route_discovery_conn *c, <span class="keyword">const</span> linkaddr_t *dest,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                             clock_time_t timeout);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> route_discovery_close(<span class="keyword">struct</span> route_discovery_conn *c);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* ROUTE_DISCOVERY_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">/** @} */</span><span class="comment"></span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">/** @} */</span></div>
+<div class="ttc" id="a00417_html"><div class="ttname"><a href="a00417.html">netflood.h</a></div><div class="ttdoc">    Header file for the best-effort network flooding (netflood)  </div></div>
+<div class="ttc" id="a00451_html"><div class="ttname"><a href="a00451.html">unicast.h</a></div><div class="ttdoc">    Header file for Rime&#39;s single-hop unicast  </div></div>
+<div class="ttc" id="a00473_html"><div class="ttname"><a href="a00473.html">ctimer.h</a></div><div class="ttdoc">    Header file for the callback timer  </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:42 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:56 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

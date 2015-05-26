@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/lib/aes-128.h Source File</title>
+<title>Contiki 3.x: core/dev/xmem.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,16 +43,16 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_f8fc1035965dbcf3e6094016d717607e.html">lib</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_b9ec082fb806d91aeb916719fc9bf485.html">dev</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">aes-128.h</div>  </div>
+<div class="title">xmem.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00169.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2013, Hasso-Plattner-Institut.</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2006, Swedish Institute of Computer Science</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
@@ -79,69 +79,24 @@
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> * SUCH DAMAGE.</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * This file is part of the Contiki operating system.</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         AES-128.</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * \author</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *         Konrad Krentz &lt;konrad.krentz@gmail.com&gt;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifndef XMEM_H</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define XMEM_H</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> xmem_init(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">int</span> xmem_pread(<span class="keywordtype">void</span> *buf, <span class="keywordtype">int</span> nbytes, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> offset);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">int</span> xmem_pwrite(<span class="keyword">const</span> <span class="keywordtype">void</span> *buf, <span class="keywordtype">int</span> nbytes, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> offset);</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#ifndef AES_H_</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#define AES_H_</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#define AES_128_BLOCK_SIZE 16</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define AES_128_KEY_LENGTH 16</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#ifdef AES_128_CONF</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define AES_128            AES_128_CONF</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#else </span><span class="comment">/* AES_128_CONF */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#define AES_128            aes_128_driver</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* AES_128_CONF */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> * Structure of AES drivers.</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="a00044.html">   57</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00044.html">aes_128_driver</a> {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment"></span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">  /**</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">   * \brief Sets the current key.</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a00044.html#a9304c6d9d6fe03727c751f4b7f7f11ce">   62</a></span>&#160;  void (* <a class="code" href="a00044.html#a9304c6d9d6fe03727c751f4b7f7f11ce">set_key</a>)(uint8_t *key);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="comment"></span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">  /**</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">   * \brief Encrypts.</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="a00044.html#ab0f7439b53a4d819a50754b60c47cee9">   67</a></span>&#160;  void (* <a class="code" href="a00044.html#ab0f7439b53a4d819a50754b60c47cee9">encrypt</a>)(uint8_t *plaintext_and_result);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> * \brief Pads the plaintext with zeroes before calling AES_128.encrypt</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00169.html#aaf06f325766216e2c24ea4ce2d69bc38">aes_128_padded_encrypt</a>(uint8_t *plaintext_and_result, uint8_t plaintext_len);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> * \brief Pads the key with zeroes before calling AES_128.set_key</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00169.html#af3d3a1d98476d18eb897330340517233">aes_128_set_padded_key</a>(uint8_t *key, uint8_t key_len);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a00044.html">aes_128_driver</a> AES_128;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* AES_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="a00044_html"><div class="ttname"><a href="a00044.html">aes_128_driver</a></div><div class="ttdoc">Structure of AES drivers. </div><div class="ttdef"><b>Definition:</b> <a href="a00169_source.html#l00057">aes-128.h:57</a></div></div>
-<div class="ttc" id="a00044_html_a9304c6d9d6fe03727c751f4b7f7f11ce"><div class="ttname"><a href="a00044.html#a9304c6d9d6fe03727c751f4b7f7f11ce">aes_128_driver::set_key</a></div><div class="ttdeci">void(* set_key)(uint8_t *key)</div><div class="ttdoc">Sets the current key. </div><div class="ttdef"><b>Definition:</b> <a href="a00169_source.html#l00062">aes-128.h:62</a></div></div>
-<div class="ttc" id="a00169_html_aaf06f325766216e2c24ea4ce2d69bc38"><div class="ttname"><a href="a00169.html#aaf06f325766216e2c24ea4ce2d69bc38">aes_128_padded_encrypt</a></div><div class="ttdeci">void aes_128_padded_encrypt(uint8_t *plaintext_and_result, uint8_t plaintext_len)</div><div class="ttdoc">Pads the plaintext with zeroes before calling AES_128.encrypt. </div><div class="ttdef"><b>Definition:</b> <a href="a00168_source.html#l00174">aes-128.c:174</a></div></div>
-<div class="ttc" id="a00044_html_ab0f7439b53a4d819a50754b60c47cee9"><div class="ttname"><a href="a00044.html#ab0f7439b53a4d819a50754b60c47cee9">aes_128_driver::encrypt</a></div><div class="ttdeci">void(* encrypt)(uint8_t *plaintext_and_result)</div><div class="ttdoc">Encrypts. </div><div class="ttdef"><b>Definition:</b> <a href="a00169_source.html#l00067">aes-128.h:67</a></div></div>
-<div class="ttc" id="a00169_html_af3d3a1d98476d18eb897330340517233"><div class="ttname"><a href="a00169.html#af3d3a1d98476d18eb897330340517233">aes_128_set_padded_key</a></div><div class="ttdeci">void aes_128_set_padded_key(uint8_t *key, uint8_t key_len)</div><div class="ttdoc">Pads the key with zeroes before calling AES_128.set_key. </div><div class="ttdef"><b>Definition:</b> <a href="a00168_source.html#l00185">aes-128.c:185</a></div></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">int</span> xmem_erase(<span class="keywordtype">long</span> nbytes, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> offset);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* XMEM_H */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:55 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

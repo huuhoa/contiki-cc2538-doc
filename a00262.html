@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/ip/uiplib.h File Reference</title>
+<title>Contiki 3.x: core/net/ip/uip-udp-packet.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,34 +47,27 @@
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">uiplib.h File Reference</div>  </div>
+<div class="title">uip-udp-packet.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Various uIP library functions.  
+<p><pre class="fragment">    Module for sending UDP packets through uIP.</pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00259_source.html">net/ip/uip.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;contiki-conf.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00263_source.html">net/ip/uip-udp-packet.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00319_source.html">net/ipv6/multicast/uip-mcast6.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 </div>
 <p><a href="a00262_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ga11a563340c9004aa33696751d910c221"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00625.html#ga11a563340c9004aa33696751d910c221">uiplib_ipaddrconv</a>&#160;&#160;&#160;uiplib_ip6addrconv</td></tr>
-<tr class="memdesc:ga11a563340c9004aa33696751d910c221"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a textual representation of an IP address to a numerical representation.  <a href="a00625.html#ga11a563340c9004aa33696751d910c221">More...</a><br /></td></tr>
-<tr class="separator:ga11a563340c9004aa33696751d910c221"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Various uIP library functions. </p>
-<dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
+<div class="textblock"><pre class="fragment">    Module for sending UDP packets through uIP.</pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00262_source.html">uiplib.h</a>.</p>
+<p>Definition in file <a class="el" href="a00262_source.html">uip-udp-packet.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

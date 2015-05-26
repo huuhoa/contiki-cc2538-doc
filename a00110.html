@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: uip_nd6_na Struct Reference</title>
+<title>Contiki 3.x: uip_mcast6_stats Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -44,24 +44,62 @@
   </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">uip_nd6_na Struct Reference<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00760.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00761.html">uIP IPv6 specific features</a></div></div>  </div>
+<div class="title">uip_mcast6_stats Struct Reference<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00889.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00890.html">uIP IPv6 specific features</a> &raquo; <a class="el" href="a00773.html">IPv6 Multicast Forwarding</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A neighbor advertisement constant part.  
+<p>A data structure used to maintain multicast stats.  
  <a href="a00110.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00326_source.html">core/net/ipv6/uip-nd6.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00318_source.html">core/net/ipv6/multicast/uip-mcast6-stats.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a814328b62b22e6a18bf4b1b776479587"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a814328b62b22e6a18bf4b1b776479587"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00110.html#a814328b62b22e6a18bf4b1b776479587">mcast_in_unique</a></td></tr>
+<tr class="memdesc:a814328b62b22e6a18bf4b1b776479587"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count of unique datagrams received. <br /></td></tr>
+<tr class="separator:a814328b62b22e6a18bf4b1b776479587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6befbc94e0d317ffe34b4ef6a0e6c471"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6befbc94e0d317ffe34b4ef6a0e6c471"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00110.html#a6befbc94e0d317ffe34b4ef6a0e6c471">mcast_in_all</a></td></tr>
+<tr class="memdesc:a6befbc94e0d317ffe34b4ef6a0e6c471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count of all datagrams received. <br /></td></tr>
+<tr class="separator:a6befbc94e0d317ffe34b4ef6a0e6c471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a566ea31d745389337a173687eb412baf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a566ea31d745389337a173687eb412baf"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00110.html#a566ea31d745389337a173687eb412baf">mcast_in_ours</a></td></tr>
+<tr class="memdesc:a566ea31d745389337a173687eb412baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count of datagrams received for a group that we have joined. <br /></td></tr>
+<tr class="separator:a566ea31d745389337a173687eb412baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88ab3f41f37ac8b37d93236dd6275934"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a88ab3f41f37ac8b37d93236dd6275934"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00110.html#a88ab3f41f37ac8b37d93236dd6275934">mcast_fwd</a></td></tr>
+<tr class="memdesc:a88ab3f41f37ac8b37d93236dd6275934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count of datagrams forwarded by us but we are not the seed. <br /></td></tr>
+<tr class="separator:a88ab3f41f37ac8b37d93236dd6275934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd3843fd98079c690110845332ec9ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7fd3843fd98079c690110845332ec9ee"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00110.html#a7fd3843fd98079c690110845332ec9ee">mcast_out</a></td></tr>
+<tr class="memdesc:a7fd3843fd98079c690110845332ec9ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count of multicast datagrams originated by us. <br /></td></tr>
+<tr class="separator:a7fd3843fd98079c690110845332ec9ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0217426f742fdc82d85cc6cbe993488e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0217426f742fdc82d85cc6cbe993488e"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00110.html#a0217426f742fdc82d85cc6cbe993488e">mcast_bad</a></td></tr>
+<tr class="memdesc:a0217426f742fdc82d85cc6cbe993488e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count of malformed multicast datagrams seen by us. <br /></td></tr>
+<tr class="separator:a0217426f742fdc82d85cc6cbe993488e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46425e20db932fec3c41dc6911bf3b14"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a46425e20db932fec3c41dc6911bf3b14"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00110.html#a46425e20db932fec3c41dc6911bf3b14">mcast_dropped</a></td></tr>
+<tr class="memdesc:a46425e20db932fec3c41dc6911bf3b14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count of multicast datagrams correclty formed but dropped by us. <br /></td></tr>
+<tr class="separator:a46425e20db932fec3c41dc6911bf3b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a61f6babbe261c8abdbe674eb242e82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a61f6babbe261c8abdbe674eb242e82"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00110.html#a1a61f6babbe261c8abdbe674eb242e82">engine_stats</a></td></tr>
+<tr class="memdesc:a1a61f6babbe261c8abdbe674eb242e82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque pointer to an engine's additional stats. <br /></td></tr>
+<tr class="separator:a1a61f6babbe261c8abdbe674eb242e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A neighbor advertisement constant part. </p>
-<p>Possible option is: TLLAO </p>
+<div class="textblock"><p>A data structure used to maintain multicast stats. </p>
+<p>Each engine can extend this structure via the engine_stats field </p>
 
-<p>Definition at line <a class="el" href="a00326_source.html#l00243">243</a> of file <a class="el" href="a00326_source.html">uip-nd6.h</a>.</p>
+<p>Definition at line <a class="el" href="a00318_source.html#l00068">68</a> of file <a class="el" href="a00318_source.html">uip-mcast6-stats.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:59 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

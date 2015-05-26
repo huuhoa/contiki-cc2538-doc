@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/slip-arch.c File Reference</title>
+<title>Contiki 3.x: cpu/cc2538/dev/watchdog.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,44 +43,54 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_c433b04169c945a1c7f0848f853d4379.html">cpu</a></li><li class="navelem"><a class="el" href="dir_7a001c762ad797b9c41c11fadba7b7c6.html">cc2538</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_c433b04169c945a1c7f0848f853d4379.html">cpu</a></li><li class="navelem"><a class="el" href="dir_7a001c762ad797b9c41c11fadba7b7c6.html">cc2538</a></li><li class="navelem"><a class="el" href="dir_70b4e30ef8a68f9433888c03f92b7ecf.html">dev</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">slip-arch.c File Reference<div class="ingroups"><a class="el" href="a00692.html">Contiki platforms</a> &raquo; <a class="el" href="a00693.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00690.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00695.html">cc2538 Character I/O</a></div></div>  </div>
+<div class="title">watchdog.c File Reference<div class="ingroups"><a class="el" href="a00821.html">Contiki platforms</a> &raquo; <a class="el" href="a00822.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00819.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00852.html">cc2538 watchdog timer driver</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Arch-specific SLIP functions for the cc2538.  
+<p>Implementation of the cc2538 watchdog driver.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00587_source.html">contiki-conf.h</a>&quot;</code><br />
-<code>#include &quot;dev/slip.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00534_source.html">dev/uart.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00556_source.html">usb/usb-serial.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00559_source.html">reg.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00503_source.html">cpu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00533_source.html">dev/smwdthrosc.h</a>&quot;</code><br />
 </div>
 <p><a href="a00550_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga0bdfcf5778cecf50bf206d976438e8d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00695.html#ga0bdfcf5778cecf50bf206d976438e8d9">slip_arch_writeb</a> (unsigned char c)</td></tr>
-<tr class="memdesc:ga0bdfcf5778cecf50bf206d976438e8d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte over SLIP.  <a href="a00695.html#ga0bdfcf5778cecf50bf206d976438e8d9">More...</a><br /></td></tr>
-<tr class="separator:ga0bdfcf5778cecf50bf206d976438e8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9968f75d6fd206d47a813fdda9b687bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00695.html#ga9968f75d6fd206d47a813fdda9b687bc">slip_arch_init</a> (unsigned long ubr)</td></tr>
-<tr class="memdesc:ga9968f75d6fd206d47a813fdda9b687bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the arch-specific SLIP driver.  <a href="a00695.html#ga9968f75d6fd206d47a813fdda9b687bc">More...</a><br /></td></tr>
-<tr class="separator:ga9968f75d6fd206d47a813fdda9b687bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad3e3f89e8fb1ad9489dc281c05335f5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00852.html#gad3e3f89e8fb1ad9489dc281c05335f5f">watchdog_init</a> (void)</td></tr>
+<tr class="memdesc:gad3e3f89e8fb1ad9489dc281c05335f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisation function for the WDT.  <a href="a00852.html#gad3e3f89e8fb1ad9489dc281c05335f5f">More...</a><br /></td></tr>
+<tr class="separator:gad3e3f89e8fb1ad9489dc281c05335f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9eeb628cdc696984c5fe147b8237483b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9eeb628cdc696984c5fe147b8237483b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00852.html#ga9eeb628cdc696984c5fe147b8237483b">watchdog_start</a> (void)</td></tr>
+<tr class="memdesc:ga9eeb628cdc696984c5fe147b8237483b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the WDT in watchdog mode if enabled by user configuration, maximum interval. <br /></td></tr>
+<tr class="separator:ga9eeb628cdc696984c5fe147b8237483b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaccad26fa5b82a39e7f552662fbb6ef6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00852.html#gaccad26fa5b82a39e7f552662fbb6ef6f">watchdog_periodic</a> (void)</td></tr>
+<tr class="memdesc:gaccad26fa5b82a39e7f552662fbb6ef6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the WDT clear sequence.  <a href="a00852.html#gaccad26fa5b82a39e7f552662fbb6ef6f">More...</a><br /></td></tr>
+<tr class="separator:gaccad26fa5b82a39e7f552662fbb6ef6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga284d9a9542a5fa2c84bf4a70bfbc80aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00852.html#ga284d9a9542a5fa2c84bf4a70bfbc80aa">watchdog_stop</a> (void)</td></tr>
+<tr class="memdesc:ga284d9a9542a5fa2c84bf4a70bfbc80aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">In watchdog mode, the WDT can not be stopped.  <a href="a00852.html#ga284d9a9542a5fa2c84bf4a70bfbc80aa">More...</a><br /></td></tr>
+<tr class="separator:ga284d9a9542a5fa2c84bf4a70bfbc80aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0d8773d4a0cc24f654f0ad6e64cb7d4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00852.html#ga0d8773d4a0cc24f654f0ad6e64cb7d4a">watchdog_reboot</a> (void)</td></tr>
+<tr class="memdesc:ga0d8773d4a0cc24f654f0ad6e64cb7d4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps control until the WDT throws a reset signal.  <a href="a00852.html#ga0d8773d4a0cc24f654f0ad6e64cb7d4a">More...</a><br /></td></tr>
+<tr class="separator:ga0d8773d4a0cc24f654f0ad6e64cb7d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Arch-specific SLIP functions for the cc2538. </p>
-<p>SLIP can be configured to operate over UART or over USB-Serial, depending on the value of SLIP_ARCH_CONF_USB </p>
+<div class="textblock"><p>Implementation of the cc2538 watchdog driver. </p>
+<p>The peripheral runs in watchdog mode. </p>
 
-<p>Definition in file <a class="el" href="a00550_source.html">slip-arch.c</a>.</p>
+<p>Definition in file <a class="el" href="a00550_source.html">watchdog.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

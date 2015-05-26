@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: examples/cc2538dk/cc2538-demo.c File Reference</title>
+<title>Contiki 3.x: cpu/cc253x/dev/cc2530-rf.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,42 +43,39 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d28a4824dc47e487b107a5db32ef43c4.html">examples</a></li><li class="navelem"><a class="el" href="dir_9cce5a00cd4126330295f6df3035ea0e.html">cc2538dk</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_c433b04169c945a1c7f0848f853d4379.html">cpu</a></li><li class="navelem"><a class="el" href="dir_31fa0b6b73ed390ac28c1d610edf54b7.html">cc253x</a></li><li class="navelem"><a class="el" href="dir_8580ba7cc21cf25c83efbf32f6bf5340.html">dev</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">cc2538-demo.c File Reference<div class="ingroups"><a class="el" href="a00692.html">Contiki platforms</a> &raquo; <a class="el" href="a00693.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00724.html">cc2538 Example Projects</a> &raquo; <a class="el" href="a00725.html">cc2538dk Demo Project</a></div></div>  </div>
+<div class="title">cc2530-rf.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Example demonstrating the cc2538dk platform.  
+<p><pre class="fragment">    Implementation of the cc2530 RF driver</pre>  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00496_source.html">cpu.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00472_source.html">sys/etimer.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00488_source.html">sys/rtimer.h</a>&quot;</code><br />
-<code>#include &quot;dev/leds.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00534_source.html">dev/uart.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00505_source.html">dev/cc2538-sensors.h</a>&quot;</code><br />
-<code>#include &quot;dev/button-sensor.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00590_source.html">dev/als-sensor.h</a>&quot;</code><br />
-<code>#include &quot;dev/watchdog.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00162_source.html">dev/serial-line.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00531_source.html">dev/sys-ctrl.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00387_source.html">net/rime/broadcast.h</a>&quot;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00161_source.html">dev/radio.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00579_source.html">dev/cc2530-rf.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00577_source.html">cc253x.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00592_source.html">sfr-bits.h</a>&quot;</code><br />
+<code>#include &quot;sys/clock.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00494_source.html">sys/rtimer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00383_source.html">net/packetbuf.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00427_source.html">net/rime/rimestats.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00334_source.html">net/linkaddr.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00381_source.html">net/netstack.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 </div>
 <p><a href="a00578_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Example demonstrating the cc2538dk platform. </p>
+<div class="textblock"><pre class="fragment">    Implementation of the cc2530 RF driver</pre> <dl class="section author"><dt>Author</dt><dd>George Oikonomou - <a href="#" onclick="location.href='mai'+'lto:'+'oik'+'on'+'omo'+'u@'+'use'+'rs'+'.so'+'ur'+'cef'+'or'+'ge.'+'ne'+'t'; return false;">oikon<span style="display: none;">.nosp@m.</span>omou<span style="display: none;">.nosp@m.</span>@user<span style="display: none;">.nosp@m.</span>s.so<span style="display: none;">.nosp@m.</span>urcef<span style="display: none;">.nosp@m.</span>orge<span style="display: none;">.nosp@m.</span>.net</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00578_source.html">cc2538-demo.c</a>.</p>
+<p>Definition in file <a class="el" href="a00578_source.html">cc2530-rf.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

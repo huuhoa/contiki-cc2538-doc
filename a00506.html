@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/dev/cc2538-temp-sensor.c File Reference</title>
+<title>Contiki 3.x: cpu/cc2538/debug-uart.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,32 +43,29 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_c433b04169c945a1c7f0848f853d4379.html">cpu</a></li><li class="navelem"><a class="el" href="dir_7a001c762ad797b9c41c11fadba7b7c6.html">cc2538</a></li><li class="navelem"><a class="el" href="dir_70b4e30ef8a68f9433888c03f92b7ecf.html">dev</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_c433b04169c945a1c7f0848f853d4379.html">cpu</a></li><li class="navelem"><a class="el" href="dir_7a001c762ad797b9c41c11fadba7b7c6.html">cc2538</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">cc2538-temp-sensor.c File Reference<div class="ingroups"><a class="el" href="a00692.html">Contiki platforms</a> &raquo; <a class="el" href="a00693.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00690.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00702.html">CC2538 Built-In Sensors</a> &raquo; <a class="el" href="a00703.html">CC2538 on-chip temperature Sensor</a></div></div>  </div>
+<div class="title">debug-uart.h File Reference<div class="ingroups"><a class="el" href="a00821.html">Contiki platforms</a> &raquo; <a class="el" href="a00822.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00819.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00824.html">cc2538 Character I/O</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Driver for the CC2538 On-Chip temperature sensor.  
+<p>This file is here because DBG I/O expects it to be.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
-<code>#include &quot;lib/sensors.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00501_source.html">dev/adc.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00505_source.html">dev/cc2538-sensors.h</a>&quot;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00505_source.html">dbg.h</a>&quot;</code><br />
 </div>
 <p><a href="a00506_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Driver for the CC2538 On-Chip temperature sensor. </p>
+<div class="textblock"><p>This file is here because DBG I/O expects it to be. </p>
+<p>It just includes our own <a class="el" href="a00505.html" title="Header file for the cc2538 Debug I/O module. ">dbg.h</a> which has a non-misleading name and which also adheres to Contiki's naming convention </p>
 
-<p>Definition in file <a class="el" href="a00506_source.html">cc2538-temp-sensor.c</a>.</p>
+<p>Definition in file <a class="el" href="a00506_source.html">debug-uart.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

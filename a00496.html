@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/cpu.h File Reference</title>
+<title>Contiki 3.x: core/sys/stimer.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,52 +43,60 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_c433b04169c945a1c7f0848f853d4379.html">cpu</a></li><li class="navelem"><a class="el" href="dir_7a001c762ad797b9c41c11fadba7b7c6.html">cc2538</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_3442c9320093d68a374887e630e7f580.html">sys</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">cpu.h File Reference<div class="ingroups"><a class="el" href="a00692.html">Contiki platforms</a> &raquo; <a class="el" href="a00693.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00690.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00694.html">cc2538 CPU</a></div></div>  </div>
+<div class="title">stimer.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header file with prototypes for interrupt control on the cc2538 Cortex-M3 micro.  
+<p>Second timer library header file.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &quot;sys/clock.h&quot;</code><br />
+</div>
 <p><a href="a00496_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ga4dec939236270af7daf98e0c7d7a081a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4dec939236270af7daf98e0c7d7a081a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00694.html#ga4dec939236270af7daf98e0c7d7a081a">INTERRUPTS_ENABLE</a>()&#160;&#160;&#160;<a class="el" href="a00694.html#gaca24f73fbfe6555994f8757f14850953">cpu_cpsie</a>()</td></tr>
-<tr class="memdesc:ga4dec939236270af7daf98e0c7d7a081a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables all CPU interrupts. <br /></td></tr>
-<tr class="separator:ga4dec939236270af7daf98e0c7d7a081a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga27985ec9aa0a42ef61af6bc122ac9eeb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00694.html#ga27985ec9aa0a42ef61af6bc122ac9eeb">INTERRUPTS_DISABLE</a>()&#160;&#160;&#160;<a class="el" href="a00694.html#ga4933b505b0b9a11ab8cf4e00b508c5ad">cpu_cpsid</a>()</td></tr>
-<tr class="memdesc:ga27985ec9aa0a42ef61af6bc122ac9eeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables all CPU interrupts.  <a href="a00694.html#ga27985ec9aa0a42ef61af6bc122ac9eeb">More...</a><br /></td></tr>
-<tr class="separator:ga27985ec9aa0a42ef61af6bc122ac9eeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00084.html">stimer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A timer.  <a href="a00084.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga4933b505b0b9a11ab8cf4e00b508c5ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4933b505b0b9a11ab8cf4e00b508c5ad"></a>
-unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00694.html#ga4933b505b0b9a11ab8cf4e00b508c5ad">cpu_cpsid</a> (void)</td></tr>
-<tr class="memdesc:ga4933b505b0b9a11ab8cf4e00b508c5ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables all CPU interrupts. <br /></td></tr>
-<tr class="separator:ga4933b505b0b9a11ab8cf4e00b508c5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaca24f73fbfe6555994f8757f14850953"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaca24f73fbfe6555994f8757f14850953"></a>
-unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00694.html#gaca24f73fbfe6555994f8757f14850953">cpu_cpsie</a> (void)</td></tr>
-<tr class="memdesc:gaca24f73fbfe6555994f8757f14850953"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables all CPU interrupts. <br /></td></tr>
-<tr class="separator:gaca24f73fbfe6555994f8757f14850953"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf3c0a430dffa43c6888d078313741078"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00816.html#gaf3c0a430dffa43c6888d078313741078">stimer_set</a> (struct <a class="el" href="a00084.html">stimer</a> *t, unsigned long interval)</td></tr>
+<tr class="memdesc:gaf3c0a430dffa43c6888d078313741078"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a timer.  <a href="a00816.html#gaf3c0a430dffa43c6888d078313741078">More...</a><br /></td></tr>
+<tr class="separator:gaf3c0a430dffa43c6888d078313741078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga40679869afd4b4ca572dcd72110ec23b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00816.html#ga40679869afd4b4ca572dcd72110ec23b">stimer_reset</a> (struct <a class="el" href="a00084.html">stimer</a> *t)</td></tr>
+<tr class="memdesc:ga40679869afd4b4ca572dcd72110ec23b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the timer with the same interval.  <a href="a00816.html#ga40679869afd4b4ca572dcd72110ec23b">More...</a><br /></td></tr>
+<tr class="separator:ga40679869afd4b4ca572dcd72110ec23b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga56f64c60390c8970cae72e352c99d17c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00816.html#ga56f64c60390c8970cae72e352c99d17c">stimer_restart</a> (struct <a class="el" href="a00084.html">stimer</a> *t)</td></tr>
+<tr class="memdesc:ga56f64c60390c8970cae72e352c99d17c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restart the timer from the current point in time.  <a href="a00816.html#ga56f64c60390c8970cae72e352c99d17c">More...</a><br /></td></tr>
+<tr class="separator:ga56f64c60390c8970cae72e352c99d17c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae1582aef7f907c078b21962dfcf229f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00816.html#gae1582aef7f907c078b21962dfcf229f3">stimer_expired</a> (struct <a class="el" href="a00084.html">stimer</a> *t)</td></tr>
+<tr class="memdesc:gae1582aef7f907c078b21962dfcf229f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a timer has expired.  <a href="a00816.html#gae1582aef7f907c078b21962dfcf229f3">More...</a><br /></td></tr>
+<tr class="separator:gae1582aef7f907c078b21962dfcf229f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga61bdde12f51a3669559d24b391d2b087"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00816.html#ga61bdde12f51a3669559d24b391d2b087">stimer_remaining</a> (struct <a class="el" href="a00084.html">stimer</a> *t)</td></tr>
+<tr class="memdesc:ga61bdde12f51a3669559d24b391d2b087"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time until the timer expires.  <a href="a00816.html#ga61bdde12f51a3669559d24b391d2b087">More...</a><br /></td></tr>
+<tr class="separator:ga61bdde12f51a3669559d24b391d2b087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac02d00c199e0f1c1ccf5b1fba64da6b1"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00816.html#gac02d00c199e0f1c1ccf5b1fba64da6b1">stimer_elapsed</a> (struct <a class="el" href="a00084.html">stimer</a> *t)</td></tr>
+<tr class="memdesc:gac02d00c199e0f1c1ccf5b1fba64da6b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time elapsed since the timer started.  <a href="a00816.html#gac02d00c199e0f1c1ccf5b1fba64da6b1">More...</a><br /></td></tr>
+<tr class="separator:gac02d00c199e0f1c1ccf5b1fba64da6b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header file with prototypes for interrupt control on the cc2538 Cortex-M3 micro. </p>
+<div class="textblock"><p>Second timer library header file. </p>
+<dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a>, Nicolas Tsiftes <a href="#" onclick="location.href='mai'+'lto:'+'nvt'+'@s'+'ics'+'.s'+'e'; return false;">nvt@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00496_source.html">cpu.h</a>.</p>
+<p>Definition in file <a class="el" href="a00496_source.html">stimer.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

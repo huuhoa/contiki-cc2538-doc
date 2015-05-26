@@ -47,14 +47,14 @@
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">ctk_window Struct Reference<div class="ingroups"><a class="el" href="a00596.html">CTK graphical user interface</a> &raquo; <a class="el" href="a00037.html">CTK device driver functions</a></div></div>  </div>
+<div class="title">ctk_window Struct Reference<div class="ingroups"><a class="el" href="a00725.html">CTK graphical user interface</a> &raquo; <a class="el" href="a00037.html">CTK device driver functions</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Representation of a CTK window.  
  <a href="a00054.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00147_source.html">core/ctk/ctk.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00148_source.html">core/ctk/ctk.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
@@ -96,7 +96,7 @@ Data Fields</h2></td></tr>
 <div class="textblock"><p>Representation of a CTK window. </p>
 <p>For the CTK, each window is repessented by a <a class="el" href="a00054.html" title="Representation of a CTK window. ">ctk_window</a> structure. All open windows are kept on a doubly linked list, linked by the next and prev fields in the <a class="el" href="a00054.html" title="Representation of a CTK window. ">ctk_window</a> struct. The window structure holds all widgets that is contained in the window as well as a pointer to the currently selected widget. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00506">506</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00506">506</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a class="anchor" id="ad5cf5ddb025397eb66da6753ce8492a4"></a>
 <div class="memitem">
@@ -111,9 +111,9 @@ Data Fields</h2></td></tr>
 <p>The list of widgets that can be selected by the user. </p>
 <p>Buttons, hyperlinks, text entry fields, etc., are placed on this list. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00558">558</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00558">558</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 
-<p>Referenced by <a class="el" href="a00146_source.html#l00485">ctk_window_clear()</a>.</p>
+<p>Referenced by <a class="el" href="a00147_source.html#l00485">ctk_window_clear()</a>.</p>
 
 </div>
 </div>
@@ -129,7 +129,7 @@ Data Fields</h2></td></tr>
 
 <p>The desktop on which this window is open. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00512">512</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00512">512</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 
 </div>
 </div>
@@ -145,9 +145,9 @@ Data Fields</h2></td></tr>
 
 <p>A pointer to the widget on the active list that is currently selected, or NULL if no widget is selected. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00562">562</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00562">562</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 
-<p>Referenced by <a class="el" href="a00134_source.html#l00239">ctk_draw_widget()</a>, and <a class="el" href="a00146_source.html#l00485">ctk_window_clear()</a>.</p>
+<p>Referenced by <a class="el" href="a00135_source.html#l00239">ctk_draw_widget()</a>, and <a class="el" href="a00147_source.html#l00485">ctk_window_clear()</a>.</p>
 
 </div>
 </div>
@@ -163,9 +163,9 @@ Data Fields</h2></td></tr>
 
 <p>The height of the window, excluding window borders. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00549">549</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00549">549</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 
-<p>Referenced by <a class="el" href="a00134_source.html#l00265">ctk_draw_clear_window()</a>, <a class="el" href="a00134_source.html#l00239">ctk_draw_widget()</a>, and <a class="el" href="a00134_source.html#l00327">ctk_draw_window()</a>.</p>
+<p>Referenced by <a class="el" href="a00135_source.html#l00265">ctk_draw_clear_window()</a>, <a class="el" href="a00135_source.html#l00239">ctk_draw_widget()</a>, and <a class="el" href="a00135_source.html#l00327">ctk_draw_window()</a>.</p>
 
 </div>
 </div>
@@ -182,9 +182,9 @@ Data Fields</h2></td></tr>
 <p>The list if widgets that cannot be selected by the user. </p>
 <p>Labels and separator widgets are placed on this list. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00554">554</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00554">554</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 
-<p>Referenced by <a class="el" href="a00146_source.html#l00485">ctk_window_clear()</a>.</p>
+<p>Referenced by <a class="el" href="a00147_source.html#l00485">ctk_window_clear()</a>.</p>
 
 </div>
 </div>
@@ -200,9 +200,9 @@ Data Fields</h2></td></tr>
 
 <p>The next window in the doubly linked list of open windows. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00507">507</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00507">507</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 
-<p>Referenced by <a class="el" href="a00146_source.html#l00400">ctk_window_close()</a>, and <a class="el" href="a00146_source.html#l00347">ctk_window_open()</a>.</p>
+<p>Referenced by <a class="el" href="a00147_source.html#l00400">ctk_window_close()</a>, and <a class="el" href="a00147_source.html#l00347">ctk_window_open()</a>.</p>
 
 </div>
 </div>
@@ -219,7 +219,7 @@ Data Fields</h2></td></tr>
 <p>The process that owns the window. </p>
 <p>This process will be the receiver of all CTK signals that pertain to this window. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00515">515</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00515">515</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 
 </div>
 </div>
@@ -235,9 +235,9 @@ Data Fields</h2></td></tr>
 
 <p>The previous window in the doubly linked list of open windows. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00507">507</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00507">507</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 
-<p>Referenced by <a class="el" href="a00146_source.html#l00400">ctk_window_close()</a>, and <a class="el" href="a00146_source.html#l00347">ctk_window_open()</a>.</p>
+<p>Referenced by <a class="el" href="a00147_source.html#l00400">ctk_window_close()</a>, and <a class="el" href="a00147_source.html#l00347">ctk_window_open()</a>.</p>
 
 </div>
 </div>
@@ -254,9 +254,9 @@ Data Fields</h2></td></tr>
 <p>The title of the window. </p>
 <p>Used for constructing the "Dekstop" menu. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00520">520</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00520">520</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 
-<p>Referenced by <a class="el" href="a00146_source.html#l00775">ctk_menu_new()</a>.</p>
+<p>Referenced by <a class="el" href="a00147_source.html#l00775">ctk_menu_new()</a>.</p>
 
 </div>
 </div>
@@ -272,9 +272,9 @@ Data Fields</h2></td></tr>
 
 <p>The length of the title, cached for speed reasons. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00522">522</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00522">522</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 
-<p>Referenced by <a class="el" href="a00134_source.html#l00327">ctk_draw_window()</a>.</p>
+<p>Referenced by <a class="el" href="a00135_source.html#l00327">ctk_draw_window()</a>.</p>
 
 </div>
 </div>
@@ -290,16 +290,16 @@ Data Fields</h2></td></tr>
 
 <p>The width of the window, excluding window borders. </p>
 
-<p>Definition at line <a class="el" href="a00147_source.html#l00549">549</a> of file <a class="el" href="a00147_source.html">ctk.h</a>.</p>
+<p>Definition at line <a class="el" href="a00148_source.html#l00549">549</a> of file <a class="el" href="a00148_source.html">ctk.h</a>.</p>
 
-<p>Referenced by <a class="el" href="a00134_source.html#l00265">ctk_draw_clear_window()</a>, <a class="el" href="a00134_source.html#l00239">ctk_draw_widget()</a>, <a class="el" href="a00134_source.html#l00327">ctk_draw_window()</a>, <a class="el" href="a00146_source.html#l00400">ctk_window_close()</a>, and <a class="el" href="a00146_source.html#l00347">ctk_window_open()</a>.</p>
+<p>Referenced by <a class="el" href="a00135_source.html#l00265">ctk_draw_clear_window()</a>, <a class="el" href="a00135_source.html#l00239">ctk_draw_widget()</a>, <a class="el" href="a00135_source.html#l00327">ctk_draw_window()</a>, <a class="el" href="a00147_source.html#l00400">ctk_window_close()</a>, and <a class="el" href="a00147_source.html#l00347">ctk_window_open()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:59 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/dev/sys-ctrl.c File Reference</title>
+<title>Contiki 3.x: cpu/cc2538/dev/rfcore.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,49 +48,27 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">sys-ctrl.c File Reference<div class="ingroups"><a class="el" href="a00692.html">Contiki platforms</a> &raquo; <a class="el" href="a00693.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00690.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00718.html">cc2538 System Control (SysCtrl)</a></div></div>  </div>
+<div class="title">rfcore.h File Reference<div class="ingroups"><a class="el" href="a00821.html">Contiki platforms</a> &raquo; <a class="el" href="a00822.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00819.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00841.html">cc2538 RF Core</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the cc2538 System Control driver.  
+<p>Top-level header file for cc2538 RF Core registers.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00547_source.html">reg.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00496_source.html">cpu.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00531_source.html">dev/sys-ctrl.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00511_source.html">dev/gpio.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00516_source.html">dev/ioc.h</a>&quot;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00527_source.html">dev/rfcore-ffsm.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00529_source.html">dev/rfcore-xreg.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00528_source.html">dev/rfcore-sfr.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00509_source.html">dev/ana-regs.h</a>&quot;</code><br />
 </div>
 <p><a href="a00530_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">SysCtrl functions</div></td></tr>
-<tr class="memitem:gac44761d750db169f2d1448dd6d7db47d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00718.html#gac44761d750db169f2d1448dd6d7db47d">sys_ctrl_init</a> ()</td></tr>
-<tr class="memdesc:gac44761d750db169f2d1448dd6d7db47d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises the System Control Driver.  <a href="a00718.html#gac44761d750db169f2d1448dd6d7db47d">More...</a><br /></td></tr>
-<tr class="separator:gac44761d750db169f2d1448dd6d7db47d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab2f20389ef8df2e46172b4d1dc25458a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab2f20389ef8df2e46172b4d1dc25458a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00718.html#gab2f20389ef8df2e46172b4d1dc25458a">sys_ctrl_reset</a> ()</td></tr>
-<tr class="memdesc:gab2f20389ef8df2e46172b4d1dc25458a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a warm reset through the SYS_CTRL_PWRDBG register. <br /></td></tr>
-<tr class="separator:gab2f20389ef8df2e46172b4d1dc25458a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga791977c48f1cab2f429b3486a0b650a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga791977c48f1cab2f429b3486a0b650a9"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00718.html#ga791977c48f1cab2f429b3486a0b650a9">sys_ctrl_get_sys_clock</a> ()</td></tr>
-<tr class="memdesc:ga791977c48f1cab2f429b3486a0b650a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the actual system clock in Hz. <br /></td></tr>
-<tr class="separator:ga791977c48f1cab2f429b3486a0b650a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac14d7e24b9093c1f838d800b703a597d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac14d7e24b9093c1f838d800b703a597d"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00718.html#gac14d7e24b9093c1f838d800b703a597d">sys_ctrl_get_io_clock</a> ()</td></tr>
-<tr class="memdesc:gac14d7e24b9093c1f838d800b703a597d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the actual io clock in Hz. <br /></td></tr>
-<tr class="separator:gac14d7e24b9093c1f838d800b703a597d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the cc2538 System Control driver. </p>
+<div class="textblock"><p>Top-level header file for cc2538 RF Core registers. </p>
+<p>Includes the files where the actual declarations reside </p>
 
-<p>Definition in file <a class="el" href="a00530_source.html">sys-ctrl.c</a>.</p>
+<p>Definition in file <a class="el" href="a00530_source.html">rfcore.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

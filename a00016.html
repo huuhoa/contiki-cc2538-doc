@@ -81,7 +81,7 @@
 <div class="line"><span class="comment"> */</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00419.html">net/rime/rime.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00425.html">net/rime/rime.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;random.h&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;dev/button-sensor.h&quot;</span></div>
@@ -90,47 +90,47 @@
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a0"></a><a class="code" href="a00684.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_broadcast_process, <span class="stringliteral">&quot;Broadcast example&quot;</span>);</div>
+<div class="line"><a name="a0"></a><a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_broadcast_process, <span class="stringliteral">&quot;Broadcast example&quot;</span>);</div>
 <div class="line">AUTOSTART_PROCESSES(&amp;example_broadcast_process);</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span></div>
 <div class="line">broadcast_recv(<span class="keyword">struct</span> broadcast_conn *c, <span class="keyword">const</span> linkaddr_t *from)</div>
 <div class="line">{</div>
 <div class="line">  printf(<span class="stringliteral">&quot;broadcast message received from %d.%d: &#39;%s&#39;\n&quot;</span>,</div>
-<div class="line">         from-&gt;u8[0], from-&gt;u8[1], (<span class="keywordtype">char</span> *)<a name="a1"></a><a class="code" href="a00613.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>());</div>
+<div class="line">         from-&gt;u8[0], from-&gt;u8[1], (<span class="keywordtype">char</span> *)<a name="a1"></a><a class="code" href="a00742.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>());</div>
 <div class="line">}</div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span><a name="_a2"></a><a class="code" href="a00046.html">broadcast_callbacks</a> broadcast_call = {broadcast_recv};</div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">struct </span>broadcast_conn broadcast;</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a3"></a><a class="code" href="a00701.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_broadcast_process, ev, data)</div>
+<div class="line"><a name="a3"></a><a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_broadcast_process, ev, data)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a4"></a><a class="code" href="a00056.html">etimer</a> et;</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">struct </span><a name="_a4"></a><a class="code" href="a00057.html">etimer</a> et;</div>
 <div class="line"></div>
-<div class="line">  <a name="a5"></a><a class="code" href="a00684.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(<a name="a6"></a><a class="code" href="a00653.html#ga2e06271613b156af6df16bb2a17dc5d7">broadcast_close</a>(&amp;broadcast);)</div>
+<div class="line">  <a name="a5"></a><a class="code" href="a00813.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(<a name="a6"></a><a class="code" href="a00782.html#ga2e06271613b156af6df16bb2a17dc5d7">broadcast_close</a>(&amp;broadcast);)</div>
 <div class="line"></div>
-<div class="line">  <a name="a7"></a><a class="code" href="a00684.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
+<div class="line">  <a name="a7"></a><a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"></div>
-<div class="line">  <a name="a8"></a><a class="code" href="a00653.html#ga2af5067d9d5fcd3bbd97a6a20fdfcc88">broadcast_open</a>(&amp;broadcast, 129, &amp;broadcast_call);</div>
+<div class="line">  <a name="a8"></a><a class="code" href="a00782.html#ga2af5067d9d5fcd3bbd97a6a20fdfcc88">broadcast_open</a>(&amp;broadcast, 129, &amp;broadcast_call);</div>
 <div class="line"></div>
 <div class="line">  <span class="keywordflow">while</span>(1) {</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Delay 2-4 seconds */</span></div>
-<div class="line">    <a name="a9"></a><a class="code" href="a00680.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;et, <a name="a10"></a><a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 4 + <a name="a11"></a><a class="code" href="a00711.html#ga3b38526f57c5311c58c1440e18f3cebe">random_rand</a>() % (<a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 4));</div>
+<div class="line">    <a name="a9"></a><a class="code" href="a00809.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a>(&amp;et, <a name="a10"></a><a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 4 + <a name="a11"></a><a class="code" href="a00840.html#ga3b38526f57c5311c58c1440e18f3cebe">random_rand</a>() % (<a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 4));</div>
 <div class="line"></div>
-<div class="line">    <a name="a12"></a><a class="code" href="a00684.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(<a name="a13"></a><a class="code" href="a00680.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;et));</div>
+<div class="line">    <a name="a12"></a><a class="code" href="a00813.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(<a name="a13"></a><a class="code" href="a00809.html#gada74975ee3bc980472df748b373d8636">etimer_expired</a>(&amp;et));</div>
 <div class="line"></div>
-<div class="line">    <a name="a14"></a><a class="code" href="a00613.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(<span class="stringliteral">&quot;Hello&quot;</span>, 6);</div>
-<div class="line">    <a name="a15"></a><a class="code" href="a00653.html#gae9a01d835e02ef7185ab54fe30f4f86d">broadcast_send</a>(&amp;broadcast);</div>
+<div class="line">    <a name="a14"></a><a class="code" href="a00742.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(<span class="stringliteral">&quot;Hello&quot;</span>, 6);</div>
+<div class="line">    <a name="a15"></a><a class="code" href="a00782.html#gae9a01d835e02ef7185ab54fe30f4f86d">broadcast_send</a>(&amp;broadcast);</div>
 <div class="line">    printf(<span class="stringliteral">&quot;broadcast message sent\n&quot;</span>);</div>
 <div class="line">  }</div>
 <div class="line"></div>
-<div class="line">  <a name="a16"></a><a class="code" href="a00684.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line">  <a name="a16"></a><a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:54 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/mac/framer.h File Reference</title>
+<title>Contiki 3.x: core/net/mac/framer-802154.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,24 +48,30 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">framer.h File Reference</div>  </div>
+<div class="title">framer-802154.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    A MAC framer is responsible for constructing and parsing
-    the header in MAC frames.</pre>  
+<p><pre class="fragment">    MAC framer for IEEE 802.15.4
+</pre>  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &quot;<a class="el" href="a00356_source.html">net/mac/framer-802154.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00354_source.html">net/mac/frame802154.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00340_source.html">net/llsec/llsec802154.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00383_source.html">net/packetbuf.h</a>&quot;</code><br />
+<code>#include &quot;lib/random.h&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+</div>
 <p><a href="a00355_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    A MAC framer is responsible for constructing and parsing
-    the header in MAC frames.</pre> <p>At least the sender and receiver are required to be encoded in the MAC frame headers. </p><dl class="section author"><dt>Author</dt><dd>Niclas Finne <a href="#" onclick="location.href='mai'+'lto:'+'nfi'+'@s'+'ics'+'.s'+'e'; return false;">nfi@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a> Joakim Eriksson <a href="#" onclick="location.href='mai'+'lto:'+'joa'+'ki'+'me@'+'si'+'cs.'+'se'; return false;">joaki<span style="display: none;">.nosp@m.</span>me@s<span style="display: none;">.nosp@m.</span>ics.s<span style="display: none;">.nosp@m.</span>e</a> </dd></dl>
+<div class="textblock"><pre class="fragment">    MAC framer for IEEE 802.15.4
+</pre> <dl class="section author"><dt>Author</dt><dd>Niclas Finne <a href="#" onclick="location.href='mai'+'lto:'+'nfi'+'@s'+'ics'+'.s'+'e'; return false;">nfi@s<span style="display: none;">.nosp@m.</span>ics.<span style="display: none;">.nosp@m.</span>se</a> Joakim Eriksson <a href="#" onclick="location.href='mai'+'lto:'+'joa'+'ki'+'me@'+'si'+'cs.'+'se'; return false;">joaki<span style="display: none;">.nosp@m.</span>me@s<span style="display: none;">.nosp@m.</span>ics.s<span style="display: none;">.nosp@m.</span>e</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00355_source.html">framer.h</a>.</p>
+<p>Definition in file <a class="el" href="a00355_source.html">framer-802154.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

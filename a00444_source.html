@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/rime/unicast.c Source File</title>
+<title>Contiki 3.x: core/net/rime/stunicast.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,7 +48,7 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">unicast.c</div>  </div>
+<div class="title">stunicast.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00444.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
@@ -85,107 +85,159 @@
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         Single-hop unicast</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         Stubborn unicast</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * \author</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *         Adam Dunkels &lt;adam@sics.se&gt;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * \addtogroup rimeuc</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * \addtogroup rimestunicast</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * @{</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00419.html">net/rime/rime.h</a>&quot;</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00445.html">net/rime/unicast.h</a>&quot;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00445.html">net/rime/stunicast.h</a>&quot;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00425.html">net/rime/rime.h</a>&quot;</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span>packetbuf_attrlist attributes[] =</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    UNICAST_ATTRIBUTES</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    PACKETBUF_ATTR_LAST</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  };</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#define DEBUG 0</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#if DEBUG</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#define PRINTF(...) printf(__VA_ARGS__)</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#define PRINTF(...)</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;recv_from_broadcast(<span class="keyword">struct</span> broadcast_conn *broadcast, <span class="keyword">const</span> linkaddr_t *from)</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keyword">struct </span>unicast_conn *c = (<span class="keyword">struct </span>unicast_conn *)broadcast;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  PRINTF(<span class="stringliteral">&quot;%d.%d: uc: recv_from_broadcast, receiver %d.%d\n&quot;</span>,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;         <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;         packetbuf_addr(PACKETBUF_ADDR_RECEIVER)-&gt;u8[0],</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;         packetbuf_addr(PACKETBUF_ADDR_RECEIVER)-&gt;u8[1]);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="a00612.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a>(packetbuf_addr(PACKETBUF_ADDR_RECEIVER), &amp;<a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>)) {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span>(c-&gt;u-&gt;recv) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      c-&gt;u-&gt;recv(c, from);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;sent_by_broadcast(<span class="keyword">struct</span> broadcast_conn *broadcast, <span class="keywordtype">int</span> status, <span class="keywordtype">int</span> num_tx)</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keyword">struct </span>unicast_conn *c = (<span class="keyword">struct </span>unicast_conn *)broadcast;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  PRINTF(<span class="stringliteral">&quot;%d.%d: uc: sent_by_broadcast, receiver %d.%d\n&quot;</span>,</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;         <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;         packetbuf_addr(PACKETBUF_ADDR_RECEIVER)-&gt;u8[0],</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;         packetbuf_addr(PACKETBUF_ADDR_RECEIVER)-&gt;u8[1]);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordflow">if</span>(c-&gt;u-&gt;sent) {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    c-&gt;u-&gt;sent(c, status, num_tx);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a00046.html">broadcast_callbacks</a> uc = {recv_from_broadcast,</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                                              sent_by_broadcast};</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;unicast_open(<span class="keyword">struct</span> unicast_conn *c, uint16_t channel,</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;             <span class="keyword">const</span> <span class="keyword">struct</span> unicast_callbacks *u)</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;{</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <a class="code" href="a00653.html#ga2af5067d9d5fcd3bbd97a6a20fdfcc88">broadcast_open</a>(&amp;c-&gt;c, channel, &amp;uc);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  c-&gt;u = u;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  channel_set_attributes(channel, attributes);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define DEBUG 0</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#if DEBUG</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#define PRINTF(...) printf(__VA_ARGS__)</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#define PRINTF(...)</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;recv_from_uc(<span class="keyword">struct</span> unicast_conn *uc, <span class="keyword">const</span> linkaddr_t *from)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keyword">register</span> <span class="keyword">struct </span>stunicast_conn *c = (<span class="keyword">struct </span>stunicast_conn *)uc;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  PRINTF(<span class="stringliteral">&quot;%d.%d: stunicast: recv_from_uc from %d.%d\n&quot;</span>,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;         <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0],<a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        from-&gt;u8[0], from-&gt;u8[1]);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordflow">if</span>(c-&gt;u-&gt;recv != NULL) {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    c-&gt;u-&gt;recv(c, from);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;sent_by_uc(<span class="keyword">struct</span> unicast_conn *uc, <span class="keywordtype">int</span> status, <span class="keywordtype">int</span> num_tx)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keyword">register</span> <span class="keyword">struct </span>stunicast_conn *c = (<span class="keyword">struct </span>stunicast_conn *)uc;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  PRINTF(<span class="stringliteral">&quot;%d.%d: stunicast: recv_from_uc from %d.%d\n&quot;</span>,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;         <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0],<a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;         packetbuf_addr(PACKETBUF_ADDR_SENDER)-&gt;u8[0],</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;         packetbuf_addr(PACKETBUF_ADDR_SENDER)-&gt;u8[1]);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordflow">if</span>(c-&gt;u-&gt;sent != NULL) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    c-&gt;u-&gt;sent(c, status, num_tx);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span>unicast_callbacks stunicast = {recv_from_uc,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                                                   sent_by_uc};</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;stunicast_open(<span class="keyword">struct</span> stunicast_conn *c, uint16_t channel,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;          <span class="keyword">const</span> <span class="keyword">struct</span> stunicast_callbacks *u)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  unicast_open(&amp;c-&gt;c, channel, &amp;stunicast);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  c-&gt;u = u;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;stunicast_close(<span class="keyword">struct</span> stunicast_conn *c)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  unicast_close(&amp;c-&gt;c);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  stunicast_cancel(c);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;linkaddr_t *</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;stunicast_receiver(<span class="keyword">struct</span> stunicast_conn *c)</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordflow">return</span> &amp;c-&gt;receiver;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;unicast_close(<span class="keyword">struct</span> unicast_conn *c)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;send(<span class="keywordtype">void</span> *ptr)</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;{</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <a class="code" href="a00653.html#ga2e06271613b156af6df16bb2a17dc5d7">broadcast_close</a>(&amp;c-&gt;c);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keywordtype">int</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;unicast_send(<span class="keyword">struct</span> unicast_conn *c, <span class="keyword">const</span> linkaddr_t *receiver)</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  PRINTF(<span class="stringliteral">&quot;%d.%d: unicast_send to %d.%d\n&quot;</span>,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;         <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0],<a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;         receiver-&gt;u8[0], receiver-&gt;u8[1]);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  packetbuf_set_addr(PACKETBUF_ADDR_RECEIVER, receiver);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a00653.html#gae9a01d835e02ef7185ab54fe30f4f86d">broadcast_send</a>(&amp;c-&gt;c);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="ttc" id="a00653_html_ga2e06271613b156af6df16bb2a17dc5d7"><div class="ttname"><a href="a00653.html#ga2e06271613b156af6df16bb2a17dc5d7">broadcast_close</a></div><div class="ttdeci">void broadcast_close(struct broadcast_conn *c)</div><div class="ttdoc">Close a broadcast connection. </div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00105">broadcast.c:105</a></div></div>
-<div class="ttc" id="a00612_html_ga03585f3e07ec49ec11cb4bbd17f3cf0e"><div class="ttname"><a href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a></div><div class="ttdeci">linkaddr_t linkaddr_node_addr</div><div class="ttdoc">The Rime address of the node. </div><div class="ttdef"><b>Definition:</b> <a href="a00328_source.html#l00048">linkaddr.c:48</a></div></div>
-<div class="ttc" id="a00046_html"><div class="ttname"><a href="a00046.html">broadcast_callbacks</a></div><div class="ttdoc">Callback structure for broadcast. </div><div class="ttdef"><b>Definition:</b> <a href="a00387_source.html#l00080">broadcast.h:80</a></div></div>
-<div class="ttc" id="a00653_html_ga2af5067d9d5fcd3bbd97a6a20fdfcc88"><div class="ttname"><a href="a00653.html#ga2af5067d9d5fcd3bbd97a6a20fdfcc88">broadcast_open</a></div><div class="ttdeci">void broadcast_open(struct broadcast_conn *c, uint16_t channel, const struct broadcast_callbacks *u)</div><div class="ttdoc">Set up an identified best-effort broadcast connection. </div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00096">broadcast.c:96</a></div></div>
-<div class="ttc" id="a00612_html_gaaf0cefa6d20d20da33dfaf5098e7d16d"><div class="ttname"><a href="a00612.html#gaaf0cefa6d20d20da33dfaf5098e7d16d">linkaddr_cmp</a></div><div class="ttdeci">int linkaddr_cmp(const linkaddr_t *addr1, const linkaddr_t *addr2)</div><div class="ttdoc">Compare two Rime addresses. </div><div class="ttdef"><b>Definition:</b> <a href="a00328_source.html#l00066">linkaddr.c:66</a></div></div>
-<div class="ttc" id="a00445_html"><div class="ttname"><a href="a00445.html">unicast.h</a></div><div class="ttdoc">    Header file for Rime&#39;s single-hop unicast  </div></div>
-<div class="ttc" id="a00653_html_gae9a01d835e02ef7185ab54fe30f4f86d"><div class="ttname"><a href="a00653.html#gae9a01d835e02ef7185ab54fe30f4f86d">broadcast_send</a></div><div class="ttdeci">int broadcast_send(struct broadcast_conn *c)</div><div class="ttdoc">Send an identified best-effort broadcast packet. </div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00111">broadcast.c:111</a></div></div>
-<div class="ttc" id="a00419_html"><div class="ttname"><a href="a00419.html">rime.h</a></div><div class="ttdoc">    Header file for the Rime stack  </div></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keyword">struct </span>stunicast_conn *c = ptr;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  PRINTF(<span class="stringliteral">&quot;%d.%d: stunicast: resend to %d.%d\n&quot;</span>,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;         <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0],<a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;         c-&gt;receiver.u8[0], c-&gt;receiver.u8[1]);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;         <span class="keywordflow">if</span>(c-&gt;buf) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        queuebuf_to_packetbuf(c-&gt;buf);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        unicast_send(&amp;c-&gt;c, &amp;c-&gt;receiver);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        stunicast_set_timer(c, <a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a>);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="comment">/*  if(c-&gt;u-&gt;sent != NULL) {</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">    c-&gt;u-&gt;sent(c);</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">    }*/</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;stunicast_set_timer(<span class="keyword">struct</span> stunicast_conn *c, clock_time_t t)</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;{</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <a class="code" href="a00808.html#ga27fd17da97a91042bfb1adf1991cc545">ctimer_set</a>(&amp;c-&gt;t, t, send, c);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;stunicast_send_stubborn(<span class="keyword">struct</span> stunicast_conn *c, <span class="keyword">const</span> linkaddr_t *receiver,</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                  clock_time_t rxmittime)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;{</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keywordflow">if</span>(c-&gt;buf != NULL) {</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    queuebuf_free(c-&gt;buf);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  }</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  c-&gt;buf = queuebuf_new_from_packetbuf();</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  <span class="keywordflow">if</span>(c-&gt;buf == NULL) {</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  }</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <a class="code" href="a00741.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a>(&amp;c-&gt;receiver, receiver);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  <a class="code" href="a00808.html#ga27fd17da97a91042bfb1adf1991cc545">ctimer_set</a>(&amp;c-&gt;t, rxmittime, send, c);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  PRINTF(<span class="stringliteral">&quot;%d.%d: stunicast_send_stubborn to %d.%d\n&quot;</span>,</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;         <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0],<a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;         c-&gt;receiver.u8[0],c-&gt;receiver.u8[1]);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  unicast_send(&amp;c-&gt;c, &amp;c-&gt;receiver);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="comment">/*  if(c-&gt;u-&gt;sent != NULL) {</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">    c-&gt;u-&gt;sent(c);</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">    }*/</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;stunicast_send(<span class="keyword">struct</span> stunicast_conn *c, <span class="keyword">const</span> linkaddr_t *receiver)</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;{</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  PRINTF(<span class="stringliteral">&quot;%d.%d: stunicast_send to %d.%d\n&quot;</span>,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;         <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;         receiver-&gt;u8[0], receiver-&gt;u8[1]);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="keywordflow">return</span> unicast_send(&amp;c-&gt;c, receiver);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;stunicast_cancel(<span class="keyword">struct</span> stunicast_conn *c)</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;{</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <a class="code" href="a00808.html#ga18f970561c46fe308991fcf8002838b4">ctimer_stop</a>(&amp;c-&gt;t);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keywordflow">if</span>(c-&gt;buf != NULL) {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    queuebuf_free(c-&gt;buf);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    c-&gt;buf = NULL;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;}</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">/** @} */</span></div>
+<div class="ttc" id="a00808_html_ga18f970561c46fe308991fcf8002838b4"><div class="ttname"><a href="a00808.html#ga18f970561c46fe308991fcf8002838b4">ctimer_stop</a></div><div class="ttdeci">void ctimer_stop(struct ctimer *c)</div><div class="ttdoc">Stop a pending callback timer. </div><div class="ttdef"><b>Definition:</b> <a href="a00472_source.html#l00142">ctimer.c:142</a></div></div>
+<div class="ttc" id="a00741_html_ga03585f3e07ec49ec11cb4bbd17f3cf0e"><div class="ttname"><a href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a></div><div class="ttdeci">linkaddr_t linkaddr_node_addr</div><div class="ttdoc">The Rime address of the node. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00048">linkaddr.c:48</a></div></div>
+<div class="ttc" id="a00806_html_gae3ced0551b26c9b99cb45a86f34d100a"><div class="ttname"><a href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a></div><div class="ttdeci">#define CLOCK_SECOND</div><div class="ttdoc">A second, measured in system clock time. </div><div class="ttdef"><b>Definition:</b> <a href="a00469_source.html#l00082">clock.h:82</a></div></div>
+<div class="ttc" id="a00425_html"><div class="ttname"><a href="a00425.html">rime.h</a></div><div class="ttdoc">    Header file for the Rime stack  </div></div>
+<div class="ttc" id="a00808_html_ga27fd17da97a91042bfb1adf1991cc545"><div class="ttname"><a href="a00808.html#ga27fd17da97a91042bfb1adf1991cc545">ctimer_set</a></div><div class="ttdeci">void ctimer_set(struct ctimer *c, clock_time_t t, void(*f)(void *), void *ptr)</div><div class="ttdoc">Set a callback timer. </div><div class="ttdef"><b>Definition:</b> <a href="a00472_source.html#l00099">ctimer.c:99</a></div></div>
+<div class="ttc" id="a00445_html"><div class="ttname"><a href="a00445.html">stunicast.h</a></div><div class="ttdoc">    Stubborn unicast header file  </div></div>
+<div class="ttc" id="a00741_html_ga61b6a33229787905999787d55047aa80"><div class="ttname"><a href="a00741.html#ga61b6a33229787905999787d55047aa80">linkaddr_copy</a></div><div class="ttdeci">void linkaddr_copy(linkaddr_t *dest, const linkaddr_t *src)</div><div class="ttdoc">Copy a Rime address. </div><div class="ttdef"><b>Definition:</b> <a href="a00333_source.html#l00060">linkaddr.c:60</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:42 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:56 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

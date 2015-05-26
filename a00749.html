@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: Libraries</title>
+<title>Contiki 3.x: uIP TCP throughput booster hack</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -38,40 +38,62 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#groups">Modules</a>  </div>
+<a href="#files">Files</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Libraries</div>  </div>
+<div class="title">uIP TCP throughput booster hack<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00889.html">The uIP TCP/IP stack</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The basic uIP TCP implementation only allows each TCP connection to have a single TCP segment in flight at any given time.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
-Modules</h2></td></tr>
-<tr class="memitem:a00602"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00602.html">Cyclic Redundancy Check 16 (CRC16) calculation</a></td></tr>
-<tr class="memdesc:a00602"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Cyclic Redundancy Check 16 is a hash function that produces a checksum that is used to detect errors in transmissions. <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
+Files</h2></td></tr>
+<tr class="memitem:a00261"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00261.html">uip-split.h</a></td></tr>
+<tr class="memdesc:a00261"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module for splitting outbound TCP segments in two to avoid the delayed ACK throughput degradation. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00603"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00603.html">Linked list library</a></td></tr>
-<tr class="memdesc:a00603"><td class="mdescLeft">&#160;</td><td class="mdescRight">The linked list library provides a set of functions for manipulating linked lists. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00604"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00604.html">Table-driven Manchester encoding and decoding</a></td></tr>
-<tr class="memdesc:a00604"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manchester encoding is a bit encoding scheme which translates each bit into two bits: the original bit and the inverted bit. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00607"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00607.html">Ring buffer library</a></td></tr>
-<tr class="memdesc:a00607"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ring buffer library implements ring (circular) buffer where bytes can be read and written independently. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00608"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00608.html">Settings Manager</a></td></tr>
-<tr class="memdesc:a00608"><td class="mdescLeft">&#160;</td><td class="mdescRight">The settings manager is an EEPROM-based key-value store. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00609"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00609.html">Trickle timers</a></td></tr>
-<tr class="memdesc:a00609"><td class="mdescLeft">&#160;</td><td class="mdescRight">This library implements timers which behave in accordance with RFC 6206 "The Trickle Algorithm" (<a href="http://tools.ietf.org/html/rfc6206">http://tools.ietf.org/html/rfc6206</a>) <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00750"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00750.html">Memory functions</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:gab4b17aaf20d630f30919b19937b966a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00749.html#gab4b17aaf20d630f30919b19937b966a3">uip_split_output</a> (void)</td></tr>
+<tr class="memdesc:gab4b17aaf20d630f30919b19937b966a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle outgoing packets.  <a href="#gab4b17aaf20d630f30919b19937b966a3">More...</a><br /></td></tr>
+<tr class="separator:gab4b17aaf20d630f30919b19937b966a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>The basic uIP TCP implementation only allows each TCP connection to have a single TCP segment in flight at any given time. </p>
+<p>Because of the delayed ACK algorithm employed by most TCP receivers, uIP's limit on the amount of in-flight TCP segments seriously reduces the maximum achievable throughput for sending data from uIP.</p>
+<p>The uip-split module is a hack which tries to remedy this situation. By splitting maximum sized outgoing TCP segments into two, the delayed ACK algorithm is not invoked at TCP receivers. This improves the throughput when sending data from uIP by orders of magnitude.</p>
+<p>The uip-split module uses the uip-fw module (uIP IP packet forwarding) for sending packets. Therefore, the uip-fw module must be set up with the appropriate network interfaces for this module to work. </p>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="gab4b17aaf20d630f30919b19937b966a3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void uip_split_output </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Handle outgoing packets. </p>
+<p>This function inspects an outgoing packet in the uip_buf buffer and sends it out using the <a class="el" href="a00769.html#gab892e0441d40434b4932c11705e7d1ab" title="Output an IP packet on the correct network interface. ">uip_fw_output()</a> function. If the packet is a full-sized TCP segment it will be split into two segments and transmitted separately. This function should be called instead of the actual device driver output function, or the <a class="el" href="a00769.html#gab892e0441d40434b4932c11705e7d1ab" title="Output an IP packet on the correct network interface. ">uip_fw_output()</a> function.</p>
+<p>The headers of the outgoing packet is assumed to be in the uip_buf buffer and the payload is assumed to be wherever uip_appdata points. The length of the outgoing packet is assumed to be in the uip_len variable. </p>
+
+<p>Definition at line <a class="el" href="a00260_source.html#l00054">54</a> of file <a class="el" href="a00260_source.html">uip-split.c</a>.</p>
+
+<p>References <a class="el" href="a00249_source.html#l00540">tcpip_ipv6_output()</a>, <a class="el" href="a00249_source.html#l00115">tcpip_output()</a>, <a class="el" href="a00307_source.html#l00173">uip_acc32</a>, <a class="el" href="a00307_source.html#l00233">uip_add32()</a>, <a class="el" href="a00307_source.html#l00124">uip_appdata</a>, <a class="el" href="a00307_source.html#l00302">uip_ipchksum()</a>, <a class="el" href="a00307_source.html#l00136">uip_len</a>, and <a class="el" href="a00307_source.html#l00348">uip_tcpchksum()</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

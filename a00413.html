@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/rime/packetqueue.h File Reference</title>
+<title>Contiki 3.x: core/net/rime/multihop.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,75 +47,27 @@
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">packetqueue.h File Reference</div>  </div>
+<div class="title">multihop.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    Header file for the packetqueue module
+<p><pre class="fragment">    Multihop forwarding header file
 </pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00179_source.html">lib/list.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00185_source.html">lib/memb.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00467_source.html">sys/ctimer.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00377_source.html">net/packetbuf.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00379_source.html">net/queuebuf.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00451_source.html">net/rime/unicast.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00334_source.html">net/linkaddr.h</a>&quot;</code><br />
 </div>
 <p><a href="a00413_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00069.html">packetqueue</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representation of a packet queue.  <a href="a00069.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00070.html">packetqueue_item</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representation of an item in a packet queue.  <a href="a00070.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:gab869ba2b1ca582a6161a61c0e3d4cf18"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00662.html#gab869ba2b1ca582a6161a61c0e3d4cf18">PACKETQUEUE</a>(name, size)</td></tr>
-<tr class="memdesc:gab869ba2b1ca582a6161a61c0e3d4cf18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a packet queue.  <a href="a00662.html#gab869ba2b1ca582a6161a61c0e3d4cf18">More...</a><br /></td></tr>
-<tr class="separator:gab869ba2b1ca582a6161a61c0e3d4cf18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">Packet queue functions.</div></td></tr>
-<tr class="memitem:ga5692fe398121b591ba6192a6a9edc329"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00662.html#ga5692fe398121b591ba6192a6a9edc329">packetqueue_init</a> (struct <a class="el" href="a00069.html">packetqueue</a> *q)</td></tr>
-<tr class="memdesc:ga5692fe398121b591ba6192a6a9edc329"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a packet queue.  <a href="a00662.html#ga5692fe398121b591ba6192a6a9edc329">More...</a><br /></td></tr>
-<tr class="separator:ga5692fe398121b591ba6192a6a9edc329"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae1883dbe27c3735de4bf1a3c8fca63ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00662.html#gae1883dbe27c3735de4bf1a3c8fca63ea">packetqueue_enqueue_packetbuf</a> (struct <a class="el" href="a00069.html">packetqueue</a> *q, clock_time_t lifetime, void *ptr)</td></tr>
-<tr class="memdesc:gae1883dbe27c3735de4bf1a3c8fca63ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueue a packetbuf on a packet queue.  <a href="a00662.html#gae1883dbe27c3735de4bf1a3c8fca63ea">More...</a><br /></td></tr>
-<tr class="separator:gae1883dbe27c3735de4bf1a3c8fca63ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9db9f50e35aef77296deff90dc2cec94"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="a00070.html">packetqueue_item</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00662.html#ga9db9f50e35aef77296deff90dc2cec94">packetqueue_first</a> (struct <a class="el" href="a00069.html">packetqueue</a> *q)</td></tr>
-<tr class="memdesc:ga9db9f50e35aef77296deff90dc2cec94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access the first item on the packet buffer.  <a href="a00662.html#ga9db9f50e35aef77296deff90dc2cec94">More...</a><br /></td></tr>
-<tr class="separator:ga9db9f50e35aef77296deff90dc2cec94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga96a5ef55cbe07d93683355d1094ee9eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00662.html#ga96a5ef55cbe07d93683355d1094ee9eb">packetqueue_dequeue</a> (struct <a class="el" href="a00069.html">packetqueue</a> *q)</td></tr>
-<tr class="memdesc:ga96a5ef55cbe07d93683355d1094ee9eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the first item on the packet buffer.  <a href="a00662.html#ga96a5ef55cbe07d93683355d1094ee9eb">More...</a><br /></td></tr>
-<tr class="separator:ga96a5ef55cbe07d93683355d1094ee9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga97c4a5974dcadf5a55b95703d448bb4a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00662.html#ga97c4a5974dcadf5a55b95703d448bb4a">packetqueue_len</a> (struct <a class="el" href="a00069.html">packetqueue</a> *q)</td></tr>
-<tr class="memdesc:ga97c4a5974dcadf5a55b95703d448bb4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the length of the packet queue.  <a href="a00662.html#ga97c4a5974dcadf5a55b95703d448bb4a">More...</a><br /></td></tr>
-<tr class="separator:ga97c4a5974dcadf5a55b95703d448bb4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Packet queue item functions</div></td></tr>
-<tr class="memitem:gadb29484602502348c810bd636ea8751b"><td class="memItemLeft" align="right" valign="top">struct queuebuf *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00662.html#gadb29484602502348c810bd636ea8751b">packetqueue_queuebuf</a> (struct <a class="el" href="a00070.html">packetqueue_item</a> *i)</td></tr>
-<tr class="memdesc:gadb29484602502348c810bd636ea8751b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access the queuebuf in a packet queue item.  <a href="a00662.html#gadb29484602502348c810bd636ea8751b">More...</a><br /></td></tr>
-<tr class="separator:gadb29484602502348c810bd636ea8751b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf4d1ecfa52fc89c8d790a168a6a1d50e"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00662.html#gaf4d1ecfa52fc89c8d790a168a6a1d50e">packetqueue_ptr</a> (struct <a class="el" href="a00070.html">packetqueue_item</a> *i)</td></tr>
-<tr class="memdesc:gaf4d1ecfa52fc89c8d790a168a6a1d50e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access the user-defined pointer in a packet queue item.  <a href="a00662.html#gaf4d1ecfa52fc89c8d790a168a6a1d50e">More...</a><br /></td></tr>
-<tr class="separator:gaf4d1ecfa52fc89c8d790a168a6a1d50e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    Header file for the packetqueue module
+<div class="textblock"><pre class="fragment">    Multihop forwarding header file
 </pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00413_source.html">packetqueue.h</a>.</p>
+<p>Definition in file <a class="el" href="a00413_source.html">multihop.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

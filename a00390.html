@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: core/net/rime/chameleon-raw.c File Reference</title>
+<title>Contiki 3.x: core/net/rime/broadcast-announcement.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,27 +48,32 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">chameleon-raw.c File Reference</div>  </div>
+<div class="title">broadcast-announcement.c File Reference<div class="ingroups"><a class="el" href="a00880.html">Communication stacks</a> &raquo; <a class="el" href="a00883.html">The Rime communication stack</a> &raquo; <a class="el" href="a00781.html">Broadcast announcement</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><pre class="fragment">    A Chameleon module that produces non-optimized headers
+<p><pre class="fragment">    An example announcement back-end, based on the broadcast primitive
 </pre>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00393_source.html">net/rime/chameleon.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00419_source.html">net/rime/rime.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00425_source.html">net/rime/rime.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00389_source.html">net/rime/announcement.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00393_source.html">net/rime/broadcast.h</a>&quot;</code><br />
+<code>#include &quot;lib/random.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00181_source.html">lib/list.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
 </div>
 <p><a href="a00390_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">    A Chameleon module that produces non-optimized headers
+<div class="textblock"><pre class="fragment">    An example announcement back-end, based on the broadcast primitive
 </pre> <dl class="section author"><dt>Author</dt><dd>Adam Dunkels <a href="#" onclick="location.href='mai'+'lto:'+'ada'+'m@'+'sic'+'s.'+'se'; return false;">adam@<span style="display: none;">.nosp@m.</span>sics<span style="display: none;">.nosp@m.</span>.se</a> </dd></dl>
 
-<p>Definition in file <a class="el" href="a00390_source.html">chameleon-raw.c</a>.</p>
+<p>Definition in file <a class="el" href="a00390_source.html">broadcast-announcement.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:57 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

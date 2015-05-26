@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: roll_tm_stats Struct Reference</title>
+<title>Contiki 3.x: ringbuf Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -44,41 +44,24 @@
   </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">roll_tm_stats Struct Reference<div class="ingroups"><a class="el" href="a00751.html">Communication stacks</a> &raquo; <a class="el" href="a00760.html">The uIP TCP/IP stack</a> &raquo; <a class="el" href="a00761.html">uIP IPv6 specific features</a> &raquo; <a class="el" href="a00644.html">IPv6 Multicast Forwarding</a> &raquo; <a class="el" href="a00642.html">ROLL Trickle Multicast</a></div></div>  </div>
+<div class="title">ringbuf Struct Reference<div class="ingroups"><a class="el" href="a00878.html">Libraries</a> &raquo; <a class="el" href="a00736.html">Ring buffer library</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Multicast stats extension for the ROLL TM engine.  
+<p>Structure that holds the state of a ring buffer.  
  <a href="a00077.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00306_source.html">core/net/ipv6/multicast/roll-tm.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:a07ddc255be141da29a31f444c4dec0db"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a07ddc255be141da29a31f444c4dec0db"></a>
-UIP_MCAST6_STATS_DATATYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00077.html#a07ddc255be141da29a31f444c4dec0db">icmp_in</a></td></tr>
-<tr class="memdesc:a07ddc255be141da29a31f444c4dec0db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of received ICMP datagrams. <br /></td></tr>
-<tr class="separator:a07ddc255be141da29a31f444c4dec0db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26679485a3491d4b59bcfec6de7e3c7e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26679485a3491d4b59bcfec6de7e3c7e"></a>
-UIP_MCAST6_STATS_DATATYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00077.html#a26679485a3491d4b59bcfec6de7e3c7e">icmp_out</a></td></tr>
-<tr class="memdesc:a26679485a3491d4b59bcfec6de7e3c7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of ICMP datagrams sent. <br /></td></tr>
-<tr class="separator:a26679485a3491d4b59bcfec6de7e3c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c19afaca07b2f0680ae01609b59ee3f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c19afaca07b2f0680ae01609b59ee3f"></a>
-UIP_MCAST6_STATS_DATATYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00077.html#a6c19afaca07b2f0680ae01609b59ee3f">icmp_bad</a></td></tr>
-<tr class="memdesc:a6c19afaca07b2f0680ae01609b59ee3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of malformed ICMP datagrams seen by us. <br /></td></tr>
-<tr class="separator:a6c19afaca07b2f0680ae01609b59ee3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
+<p><code>#include &lt;<a class="el" href="a00199_source.html">core/lib/ringbuf.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Multicast stats extension for the ROLL TM engine. </p>
+<div class="textblock"><p>Structure that holds the state of a ring buffer. </p>
+<p>This structure holds the state of a ring buffer. The actual buffer needs to be defined separately. This struct is an opaque structure with no user-visible elements. </p>
 
-<p>Definition at line <a class="el" href="a00306_source.html#l00230">230</a> of file <a class="el" href="a00306_source.html">roll-tm.h</a>.</p>
+<p>Definition at line <a class="el" href="a00199_source.html#l00068">68</a> of file <a class="el" href="a00199_source.html">ringbuf.h</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:59 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

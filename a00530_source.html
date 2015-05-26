@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/dev/sys-ctrl.c Source File</title>
+<title>Contiki 3.x: cpu/cc2538/dev/rfcore.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,7 +48,7 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">sys-ctrl.c</div>  </div>
+<div class="title">rfcore.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00530.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
@@ -82,113 +82,40 @@
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * OF THE POSSIBILITY OF SUCH DAMAGE.</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> */</span><span class="comment"></span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * \addtogroup cc2538-sys-ctrl</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * \addtogroup cc2538</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * @{</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * Implementation of the cc2538 System Control driver</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00547.html">reg.h</a>&quot;</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00496.html">cpu.h</a>&quot;</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00531.html">dev/sys-ctrl.h</a>&quot;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00511.html">dev/gpio.h</a>&quot;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00516.html">dev/ioc.h</a>&quot;</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * \defgroup cc2538-rfcore cc2538 RF Core</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * Declarations of RF Core registers. Includes SFR, XREG and FFSM</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * @{</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> * \file</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * Top-level header file for cc2538 RF Core registers. Includes the files</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * where the actual declarations reside</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#ifndef RFCORE_H_</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#define RFCORE_H_</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#if SYS_CTRL_OSC32K_USE_XTAL</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#define SYS_CTRL_OSCS   0</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#define SYS_CTRL_OSCS   SYS_CTRL_CLOCK_CTRL_OSC32K</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="a00718.html#gac44761d750db169f2d1448dd6d7db47d">   54</a></span>&#160;<a class="code" href="a00718.html#gac44761d750db169f2d1448dd6d7db47d">sys_ctrl_init</a>()</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  uint32_t val;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#if SYS_CTRL_OSC32K_USE_XTAL</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="comment">/* Set the XOSC32K_Q pads to analog for crystal */</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <a class="code" href="a00705.html#ga5b9aecd5c39213a46e5748d892db6898">GPIO_SOFTWARE_CONTROL</a>(<a class="code" href="a00705.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a>(<a class="code" href="a00705.html#ga2f3ad4bbcc9d88569c5be05b4f61dc86">GPIO_D_NUM</a>), <a class="code" href="a00705.html#ga284c58b2f63f601826cfcd46eaea929b">GPIO_PIN_MASK</a>(6));</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <a class="code" href="a00705.html#ga91971c4449841d538fa14506810bfc81">GPIO_SET_INPUT</a>(<a class="code" href="a00705.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a>(<a class="code" href="a00705.html#ga2f3ad4bbcc9d88569c5be05b4f61dc86">GPIO_D_NUM</a>), <a class="code" href="a00705.html#ga284c58b2f63f601826cfcd46eaea929b">GPIO_PIN_MASK</a>(6));</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="a00708.html#ga61e1874d2c1bb16ecc219cf034c68502">ioc_set_over</a>(<a class="code" href="a00705.html#ga2f3ad4bbcc9d88569c5be05b4f61dc86">GPIO_D_NUM</a>, 6, <a class="code" href="a00708.html#gaccf7f7a082b3a41f81931b9d94a1a157">IOC_OVERRIDE_ANA</a>);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <a class="code" href="a00705.html#ga5b9aecd5c39213a46e5748d892db6898">GPIO_SOFTWARE_CONTROL</a>(<a class="code" href="a00705.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a>(<a class="code" href="a00705.html#ga2f3ad4bbcc9d88569c5be05b4f61dc86">GPIO_D_NUM</a>), <a class="code" href="a00705.html#ga284c58b2f63f601826cfcd46eaea929b">GPIO_PIN_MASK</a>(7));</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="a00705.html#ga91971c4449841d538fa14506810bfc81">GPIO_SET_INPUT</a>(<a class="code" href="a00705.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a>(<a class="code" href="a00705.html#ga2f3ad4bbcc9d88569c5be05b4f61dc86">GPIO_D_NUM</a>), <a class="code" href="a00705.html#ga284c58b2f63f601826cfcd46eaea929b">GPIO_PIN_MASK</a>(7));</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="a00708.html#ga61e1874d2c1bb16ecc219cf034c68502">ioc_set_over</a>(<a class="code" href="a00705.html#ga2f3ad4bbcc9d88569c5be05b4f61dc86">GPIO_D_NUM</a>, 7, <a class="code" href="a00708.html#gaccf7f7a082b3a41f81931b9d94a1a157">IOC_OVERRIDE_ANA</a>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="comment">/*</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">   * Desired Clock Ctrl configuration:</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">   * 32KHz source: RC or crystal, according to SYS_CTRL_OSC32K_USE_XTAL</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">   * System Clock: 32 MHz</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">   * Power Down Unused</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">   * I/O Div: according to SYS_CTRL_IO_DIV</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">   * Sys Div: according to SYS_CTRL_SYS_DIV</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">   * Rest: Don&#39;t care</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  val = SYS_CTRL_OSCS | SYS_CTRL_CLOCK_CTRL_OSC_PD</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    | SYS_CTRL_IO_DIV | SYS_CTRL_SYS_DIV;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  REG(<a class="code" href="a00718.html#gaec7e803249f9701e6ea5bc825ab1cb20">SYS_CTRL_CLOCK_CTRL</a>) = val;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">while</span>((REG(<a class="code" href="a00718.html#gabc09c8601139a2dbad037e04ae72d660">SYS_CTRL_CLOCK_STA</a>) </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        &amp; (SYS_CTRL_CLOCK_STA_OSC32K | SYS_CTRL_CLOCK_STA_OSC)) </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        != SYS_CTRL_OSCS);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#if SYS_CTRL_OSC32K_USE_XTAL</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="comment">/* Wait for the 32-kHz crystal oscillator to stabilize */</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordflow">while</span>(REG(<a class="code" href="a00718.html#gabc09c8601139a2dbad037e04ae72d660">SYS_CTRL_CLOCK_STA</a>) &amp; SYS_CTRL_CLOCK_STA_SYNC_32K);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keywordflow">while</span>(!(REG(<a class="code" href="a00718.html#gabc09c8601139a2dbad037e04ae72d660">SYS_CTRL_CLOCK_STA</a>) &amp; SYS_CTRL_CLOCK_STA_SYNC_32K));</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="a00718.html#gab2f20389ef8df2e46172b4d1dc25458a">   94</a></span>&#160;<a class="code" href="a00718.html#gab2f20389ef8df2e46172b4d1dc25458a">sys_ctrl_reset</a>()</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;{</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  REG(<a class="code" href="a00718.html#ga7b004cdff4297e0f137caa26824e9c79">SYS_CTRL_PWRDBG</a>) = SYS_CTRL_PWRDBG_FORCE_WARM_RESET;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;uint32_t</div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="a00718.html#ga791977c48f1cab2f429b3486a0b650a9">  100</a></span>&#160;<a class="code" href="a00718.html#ga791977c48f1cab2f429b3486a0b650a9">sys_ctrl_get_sys_clock</a>(<span class="keywordtype">void</span>)</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;{</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordflow">return</span> SYS_CTRL_32MHZ &gt;&gt; (REG(<a class="code" href="a00718.html#gabc09c8601139a2dbad037e04ae72d660">SYS_CTRL_CLOCK_STA</a>) &amp;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                            SYS_CTRL_CLOCK_STA_SYS_DIV);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;uint32_t</div>
-<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="a00718.html#gac14d7e24b9093c1f838d800b703a597d">  107</a></span>&#160;<a class="code" href="a00718.html#gac14d7e24b9093c1f838d800b703a597d">sys_ctrl_get_io_clock</a>(<span class="keywordtype">void</span>)</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="keywordflow">return</span> SYS_CTRL_32MHZ &gt;&gt; ((REG(<a class="code" href="a00718.html#gabc09c8601139a2dbad037e04ae72d660">SYS_CTRL_CLOCK_STA</a>) &amp;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                             SYS_CTRL_CLOCK_STA_IO_DIV) &gt;&gt; 8);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}<span class="comment"></span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"> * @}</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment"> * @}</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment"> */</span></div>
-<div class="ttc" id="a00708_html_gaccf7f7a082b3a41f81931b9d94a1a157"><div class="ttname"><a href="a00708.html#gaccf7f7a082b3a41f81931b9d94a1a157">IOC_OVERRIDE_ANA</a></div><div class="ttdeci">#define IOC_OVERRIDE_ANA</div><div class="ttdoc">Analog Enable. </div><div class="ttdef"><b>Definition:</b> <a href="a00516_source.html#l00225">ioc.h:225</a></div></div>
-<div class="ttc" id="a00718_html_gab2f20389ef8df2e46172b4d1dc25458a"><div class="ttname"><a href="a00718.html#gab2f20389ef8df2e46172b4d1dc25458a">sys_ctrl_reset</a></div><div class="ttdeci">void sys_ctrl_reset()</div><div class="ttdoc">Generates a warm reset through the SYS_CTRL_PWRDBG register. </div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00094">sys-ctrl.c:94</a></div></div>
-<div class="ttc" id="a00718_html_gac44761d750db169f2d1448dd6d7db47d"><div class="ttname"><a href="a00718.html#gac44761d750db169f2d1448dd6d7db47d">sys_ctrl_init</a></div><div class="ttdeci">void sys_ctrl_init()</div><div class="ttdoc">Initialises the System Control Driver. </div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00054">sys-ctrl.c:54</a></div></div>
-<div class="ttc" id="a00718_html_ga7b004cdff4297e0f137caa26824e9c79"><div class="ttname"><a href="a00718.html#ga7b004cdff4297e0f137caa26824e9c79">SYS_CTRL_PWRDBG</a></div><div class="ttdeci">#define SYS_CTRL_PWRDBG</div><div class="ttdoc">Power debug register. </div><div class="ttdef"><b>Definition:</b> <a href="a00531_source.html#l00089">sys-ctrl.h:89</a></div></div>
-<div class="ttc" id="a00718_html_gac14d7e24b9093c1f838d800b703a597d"><div class="ttname"><a href="a00718.html#gac14d7e24b9093c1f838d800b703a597d">sys_ctrl_get_io_clock</a></div><div class="ttdeci">uint32_t sys_ctrl_get_io_clock(void)</div><div class="ttdoc">Returns the actual io clock in Hz. </div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00107">sys-ctrl.c:107</a></div></div>
-<div class="ttc" id="a00547_html"><div class="ttname"><a href="a00547.html">reg.h</a></div><div class="ttdoc">Header file with register manipulation macro definitions. </div></div>
-<div class="ttc" id="a00718_html_gaec7e803249f9701e6ea5bc825ab1cb20"><div class="ttname"><a href="a00718.html#gaec7e803249f9701e6ea5bc825ab1cb20">SYS_CTRL_CLOCK_CTRL</a></div><div class="ttdeci">#define SYS_CTRL_CLOCK_CTRL</div><div class="ttdoc">Clock control register. </div><div class="ttdef"><b>Definition:</b> <a href="a00531_source.html#l00065">sys-ctrl.h:65</a></div></div>
-<div class="ttc" id="a00718_html_gabc09c8601139a2dbad037e04ae72d660"><div class="ttname"><a href="a00718.html#gabc09c8601139a2dbad037e04ae72d660">SYS_CTRL_CLOCK_STA</a></div><div class="ttdeci">#define SYS_CTRL_CLOCK_STA</div><div class="ttdoc">Clock status register. </div><div class="ttdef"><b>Definition:</b> <a href="a00531_source.html#l00066">sys-ctrl.h:66</a></div></div>
-<div class="ttc" id="a00496_html"><div class="ttname"><a href="a00496.html">cpu.h</a></div><div class="ttdoc">Header file with prototypes for interrupt control on the cc2538 Cortex-M3 micro. </div></div>
-<div class="ttc" id="a00705_html_ga5b9aecd5c39213a46e5748d892db6898"><div class="ttname"><a href="a00705.html#ga5b9aecd5c39213a46e5748d892db6898">GPIO_SOFTWARE_CONTROL</a></div><div class="ttdeci">#define GPIO_SOFTWARE_CONTROL(PORT_BASE, PIN_MASK)</div><div class="ttdoc">Configure the pin to be software controlled with PIN_MASK of port with PORT_BASE. ...</div><div class="ttdef"><b>Definition:</b> <a href="a00511_source.html#l00259">gpio.h:259</a></div></div>
-<div class="ttc" id="a00708_html_ga61e1874d2c1bb16ecc219cf034c68502"><div class="ttname"><a href="a00708.html#ga61e1874d2c1bb16ecc219cf034c68502">ioc_set_over</a></div><div class="ttdeci">void ioc_set_over(uint8_t port, uint8_t pin, uint8_t over)</div><div class="ttdoc">Set Port:Pin override function. </div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00054">ioc.c:54</a></div></div>
-<div class="ttc" id="a00718_html_ga791977c48f1cab2f429b3486a0b650a9"><div class="ttname"><a href="a00718.html#ga791977c48f1cab2f429b3486a0b650a9">sys_ctrl_get_sys_clock</a></div><div class="ttdeci">uint32_t sys_ctrl_get_sys_clock(void)</div><div class="ttdoc">Returns the actual system clock in Hz. </div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00100">sys-ctrl.c:100</a></div></div>
-<div class="ttc" id="a00705_html_ga91971c4449841d538fa14506810bfc81"><div class="ttname"><a href="a00705.html#ga91971c4449841d538fa14506810bfc81">GPIO_SET_INPUT</a></div><div class="ttdeci">#define GPIO_SET_INPUT(PORT_BASE, PIN_MASK)</div><div class="ttdoc">Set pins with PIN_MASK of port with PORT_BASE to input. </div><div class="ttdef"><b>Definition:</b> <a href="a00511_source.html#l00093">gpio.h:93</a></div></div>
-<div class="ttc" id="a00705_html_ga684b5fe1b034e081bcae368743dd5c04"><div class="ttname"><a href="a00705.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a></div><div class="ttdeci">#define GPIO_PORT_TO_BASE(PORT)</div><div class="ttdoc">Converts a port number to the port base address. </div><div class="ttdef"><b>Definition:</b> <a href="a00511_source.html#l00329">gpio.h:329</a></div></div>
-<div class="ttc" id="a00705_html_ga2f3ad4bbcc9d88569c5be05b4f61dc86"><div class="ttname"><a href="a00705.html#ga2f3ad4bbcc9d88569c5be05b4f61dc86">GPIO_D_NUM</a></div><div class="ttdeci">#define GPIO_D_NUM</div><div class="ttdoc">GPIO_D: 3. </div><div class="ttdef"><b>Definition:</b> <a href="a00511_source.html#l00082">gpio.h:82</a></div></div>
-<div class="ttc" id="a00511_html"><div class="ttname"><a href="a00511.html">gpio.h</a></div><div class="ttdoc">Header file with register and macro declarations for the cc2538 GPIO module. </div></div>
-<div class="ttc" id="a00531_html"><div class="ttname"><a href="a00531.html">sys-ctrl.h</a></div><div class="ttdoc">Header file for the cc2538 System Control driver. </div></div>
-<div class="ttc" id="a00516_html"><div class="ttname"><a href="a00516.html">ioc.h</a></div><div class="ttdoc">Header file with declarations for the I/O Control module. </div></div>
-<div class="ttc" id="a00705_html_ga284c58b2f63f601826cfcd46eaea929b"><div class="ttname"><a href="a00705.html#ga284c58b2f63f601826cfcd46eaea929b">GPIO_PIN_MASK</a></div><div class="ttdeci">#define GPIO_PIN_MASK(PIN)</div><div class="ttdoc">Converts a pin number to a pin mask. </div><div class="ttdef"><b>Definition:</b> <a href="a00511_source.html#l00321">gpio.h:321</a></div></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00527.html">dev/rfcore-ffsm.h</a>&quot;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00529.html">dev/rfcore-xreg.h</a>&quot;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00528.html">dev/rfcore-sfr.h</a>&quot;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00509.html">dev/ana-regs.h</a>&quot;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* RFCORE_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> * @}</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> * @}</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> */</span></div>
+<div class="ttc" id="a00527_html"><div class="ttname"><a href="a00527.html">rfcore-ffsm.h</a></div><div class="ttdoc">Header with declarations of the RF Core FFSM registers. </div></div>
+<div class="ttc" id="a00509_html"><div class="ttname"><a href="a00509.html">ana-regs.h</a></div><div class="ttdoc">Header with declarations of ANA_REGS module registers. </div></div>
+<div class="ttc" id="a00529_html"><div class="ttname"><a href="a00529.html">rfcore-xreg.h</a></div><div class="ttdoc">Header with declarations of the RF Core XREGs. </div></div>
+<div class="ttc" id="a00528_html"><div class="ttname"><a href="a00528.html">rfcore-sfr.h</a></div><div class="ttdoc">Header with declarations of the RF Core SFR registers. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:42 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:56 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

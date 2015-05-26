@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/usb/usb-arch.c File Reference</title>
+<title>Contiki 3.x: cpu/cc2538/lpm.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -43,43 +43,39 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_c433b04169c945a1c7f0848f853d4379.html">cpu</a></li><li class="navelem"><a class="el" href="dir_7a001c762ad797b9c41c11fadba7b7c6.html">cc2538</a></li><li class="navelem"><a class="el" href="dir_2af0e8d5fe18fcc4047494424581b094.html">usb</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_c433b04169c945a1c7f0848f853d4379.html">cpu</a></li><li class="navelem"><a class="el" href="dir_7a001c762ad797b9c41c11fadba7b7c6.html">cc2538</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">usb-arch.c File Reference<div class="ingroups"><a class="el" href="a00692.html">Contiki platforms</a> &raquo; <a class="el" href="a00693.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00690.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00721.html">cc2538 USB controller</a></div></div>  </div>
+<div class="title">lpm.c File Reference<div class="ingroups"><a class="el" href="a00821.html">Contiki platforms</a> &raquo; <a class="el" href="a00822.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00819.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00826.html">cc2538 Low Power Modes</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Arch-specific routines for the cc2538 USB controller.  
+<p>Implementation of low power modes ofr the cc2538.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00470_source.html">energest.h</a>&quot;</code><br />
-<code>#include &quot;usb-arch.h&quot;</code><br />
-<code>#include &quot;usb-api.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00538_source.html">dev/usb-regs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00519_source.html">dev/nvic.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00511_source.html">dev/gpio.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00516_source.html">dev/ioc.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00537_source.html">dev/udma.h</a>&quot;</code><br />
-<code>#include &quot;sys/clock.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00545_source.html">lpm.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00547_source.html">reg.h</a>&quot;</code><br />
-<code>#include &quot;dev/watchdog.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;contiki-conf.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00476_source.html">sys/energest.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00488_source.html">sys/process.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00538_source.html">dev/sys-ctrl.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00532_source.html">dev/scb.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00529_source.html">dev/rfcore-xreg.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00562_source.html">rtimer-arch.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00555_source.html">lpm.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00559_source.html">reg.h</a>&quot;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 </div>
 <p><a href="a00554_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Arch-specific routines for the cc2538 USB controller. </p>
-<p>Heavily based on the cc2530 driver written by Philippe Retornaz </p>
+<div class="textblock"><p>Implementation of low power modes ofr the cc2538. </p>
 
-<p>Definition in file <a class="el" href="a00554_source.html">usb-arch.c</a>.</p>
+<p>Definition in file <a class="el" href="a00554_source.html">lpm.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

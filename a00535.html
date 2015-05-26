@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/dev/uart1.h File Reference</title>
+<title>Contiki 3.x: cpu/cc2538/dev/spi.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,24 +48,51 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">uart1.h File Reference<div class="ingroups"><a class="el" href="a00692.html">Contiki platforms</a> &raquo; <a class="el" href="a00693.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00690.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00719.html">cc2538 UART</a></div></div>  </div>
+<div class="title">spi.c File Reference<div class="ingroups"><a class="el" href="a00821.html">Contiki platforms</a> &raquo; <a class="el" href="a00822.html">TI cc2538-powered platforms</a> &raquo; <a class="el" href="a00819.html">The TI cc2538 System-on-Chip</a> &raquo; <a class="el" href="a00846.html">cc2538 Synchronous Serial Interface</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This file really only exists because some examples rely on it.  
+<p>Implementation of the cc2538 SPI peripheral driver.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00534_source.html">dev/uart.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;contiki.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00559_source.html">reg.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00566_source.html">spi-arch.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00523_source.html">dev/ioc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00538_source.html">dev/sys-ctrl.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00167_source.html">dev/spi.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00536_source.html">dev/ssi.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00518_source.html">dev/gpio.h</a>&quot;</code><br />
 </div>
 <p><a href="a00535_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Arch-specific SPI functions</div></td></tr>
+<tr class="memitem:gaa920955a33ab8bd62aa86fa45175282c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00846.html#gaa920955a33ab8bd62aa86fa45175282c">spix_init</a> (uint8_t spi)</td></tr>
+<tr class="memdesc:gaa920955a33ab8bd62aa86fa45175282c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the SPI bus for the instance given.  <a href="a00846.html#gaa920955a33ab8bd62aa86fa45175282c">More...</a><br /></td></tr>
+<tr class="separator:gaa920955a33ab8bd62aa86fa45175282c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9b79bdd4901e896f21786c0212151838"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9b79bdd4901e896f21786c0212151838"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00846.html#ga9b79bdd4901e896f21786c0212151838">spix_enable</a> (uint8_t spi)</td></tr>
+<tr class="memdesc:ga9b79bdd4901e896f21786c0212151838"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the SPI peripheral for the instance given. <br /></td></tr>
+<tr class="separator:ga9b79bdd4901e896f21786c0212151838"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadda257108cdd000ff4603e10f18d4141"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00846.html#gadda257108cdd000ff4603e10f18d4141">spix_disable</a> (uint8_t spi)</td></tr>
+<tr class="memdesc:gadda257108cdd000ff4603e10f18d4141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the SPI peripheral for the instance given.  <a href="a00846.html#gadda257108cdd000ff4603e10f18d4141">More...</a><br /></td></tr>
+<tr class="separator:gadda257108cdd000ff4603e10f18d4141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2149a1821f47fc7fca0dec0446e5db25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00846.html#ga2149a1821f47fc7fca0dec0446e5db25">spix_set_mode</a> (uint8_t spi, uint32_t frame_format, uint32_t clock_polarity, uint32_t clock_phase, uint32_t data_size)</td></tr>
+<tr class="memdesc:ga2149a1821f47fc7fca0dec0446e5db25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the SPI data and clock polarity and the data size for the instance given.  <a href="a00846.html#ga2149a1821f47fc7fca0dec0446e5db25">More...</a><br /></td></tr>
+<tr class="separator:ga2149a1821f47fc7fca0dec0446e5db25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab631f1f205372354848d339a421934fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00846.html#gab631f1f205372354848d339a421934fe">spix_cs_init</a> (uint8_t port, uint8_t pin)</td></tr>
+<tr class="memdesc:gab631f1f205372354848d339a421934fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure a GPIO to be the chip select pin.  <a href="a00846.html#gab631f1f205372354848d339a421934fe">More...</a><br /></td></tr>
+<tr class="separator:gab631f1f205372354848d339a421934fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file really only exists because some examples rely on it. </p>
-<p>For instance, some examples do uart1_set_input(f). We re-write this to uart_set_input </p>
+<div class="textblock"><p>Implementation of the cc2538 SPI peripheral driver. </p>
 
-<p>Definition in file <a class="el" href="a00535_source.html">uart1.h</a>.</p>
+<p>Definition in file <a class="el" href="a00535_source.html">spi.c</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:43 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:58 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

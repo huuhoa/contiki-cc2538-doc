@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: dsc Struct Reference</title>
+<title>Contiki 3.x: dma_config Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -44,74 +44,23 @@
   </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">dsc Struct Reference<div class="ingroups"><a class="el" href="a00757.html">Contiki system</a> &raquo; <a class="el" href="a00042.html">The Contiki program loader</a></div></div>  </div>
+<div class="title">dma_config Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>The DSC program description structure.  
+<p>DMA configuration structure.  
  <a href="a00055.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00468_source.html">core/sys/dsc.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:a1db1b1650a4b112e52bf28a6ffa6f040"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1db1b1650a4b112e52bf28a6ffa6f040"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00055.html#a1db1b1650a4b112e52bf28a6ffa6f040">description</a></td></tr>
-<tr class="memdesc:a1db1b1650a4b112e52bf28a6ffa6f040"><td class="mdescLeft">&#160;</td><td class="mdescRight">A text string containing a one-line description of the program. <br /></td></tr>
-<tr class="separator:a1db1b1650a4b112e52bf28a6ffa6f040"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0fdd6680d7ada65e230d1c288650128"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00055.html#ad0fdd6680d7ada65e230d1c288650128">prgname</a></td></tr>
-<tr class="memdesc:ad0fdd6680d7ada65e230d1c288650128"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the program on disk.  <a href="#ad0fdd6680d7ada65e230d1c288650128">More...</a><br /></td></tr>
-<tr class="separator:ad0fdd6680d7ada65e230d1c288650128"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae255cb38e7d148d5b4c3a651eb93578e"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00055.html#ae255cb38e7d148d5b4c3a651eb93578e">loadaddr</a></td></tr>
-<tr class="memdesc:ae255cb38e7d148d5b4c3a651eb93578e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The loading address of the DSC.  <a href="#ae255cb38e7d148d5b4c3a651eb93578e">More...</a><br /></td></tr>
-<tr class="separator:ae255cb38e7d148d5b4c3a651eb93578e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
+<p><code>#include &lt;<a class="el" href="a00582_source.html">cpu/cc253x/dev/dma.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The DSC program description structure. </p>
-<p>The DSC structure is used for describing a Contiki program. It includes a short textual description of the program, either the name of the program on disk, or a pointer to the init() function, and an icon for the program. </p>
+<div class="textblock"><p>DMA configuration structure. </p>
 
-<p>Definition at line <a class="el" href="a00468_source.html#l00075">75</a> of file <a class="el" href="a00468_source.html">dsc.h</a>.</p>
-</div><h2 class="groupheader">Field Documentation</h2>
-<a class="anchor" id="ae255cb38e7d148d5b4c3a651eb93578e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void* dsc::loadaddr</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The loading address of the DSC. </p>
-<p>Used by the <a class="el" href="a00042.html#gaea5b57e2eba5e46d289f12988c1942e0" title="Unload a program from memory. ">LOADER_UNLOAD()</a> function when deallocating the memory allocated for the DSC when loading it. </p>
-
-<p>Definition at line <a class="el" href="a00468_source.html#l00091">91</a> of file <a class="el" href="a00468_source.html">dsc.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad0fdd6680d7ada65e230d1c288650128"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char* dsc::prgname</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The name of the program on disk. </p>
-
-<p>Definition at line <a class="el" href="a00468_source.html#l00080">80</a> of file <a class="el" href="a00468_source.html">dsc.h</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Definition at line <a class="el" href="a00582_source.html#l00103">103</a> of file <a class="el" href="a00582_source.html">dma.h</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:44 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:59 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

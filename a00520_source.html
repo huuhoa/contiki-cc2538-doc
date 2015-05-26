@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Contiki 3.x: cpu/cc2538/dev/rfcore-ffsm.h Source File</title>
+<title>Contiki 3.x: cpu/cc2538/dev/i2c.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,11 +48,11 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">rfcore-ffsm.h</div>  </div>
+<div class="title">i2c.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00520.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2012, Texas Instruments Incorporated - http://www.ti.com/</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (c) 2015, Mehdi Migault</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
@@ -82,105 +82,254 @@
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * OF THE POSSIBILITY OF SUCH DAMAGE.</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> */</span><span class="comment"></span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * \addtogroup cc2538-rfcore</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * \addtogroup cc2538-i2c cc2538 I2C Control</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * @{</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * \file</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * Header with declarations of the RF Core FFSM registers.</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifndef RFCORE_FFSM_H_</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#define RFCORE_FFSM_H_</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/** \name RFCORE_FFSM register offsets</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="a00712.html#gae6d9f21b530afc737850344ac90359f6">   44</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCRESMASK0     0x40088580 </span><span class="comment">/**&lt; Src addr matching result */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a00712.html#gae9ada8d56f23316ad544eee4e98f718a">   45</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCRESMASK1     0x40088584 </span><span class="comment">/**&lt; Src addr matching result */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00712.html#ga0dc8f6742f4e90a155a1d310ed6323e3">   46</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCRESMASK2     0x40088588 </span><span class="comment">/**&lt; Src addr matching result */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="a00712.html#ga6187372f763e739b82af436fe74c4cbd">   47</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCRESINDEX     0x4008858C </span><span class="comment">/**&lt; Src addr matching result */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a00712.html#ga88b3a2120c54cab0e525162d6db49342">   48</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCEXTPENDEN0   0x40088590 </span><span class="comment">/**&lt; Src addr matching control */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="a00712.html#gaa45b7874212ae416d7f4b8213008c4c2">   49</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCEXTPENDEN1   0x40088594 </span><span class="comment">/**&lt; Src addr matching control */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="a00712.html#ga10eea7053ccde8b1dd1cb5e646a30e1e">   50</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCEXTPENDEN2   0x40088598 </span><span class="comment">/**&lt; Src addr matching control */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="a00712.html#ga2f1d431346c21961e8b7472cd4347149">   51</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCSHORTPENDEN0 0x4008859C </span><span class="comment">/**&lt; Src addr matching control */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="a00712.html#gadecd8a612b69cf166b3fcf7b131b14e5">   52</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCSHORTPENDEN1 0x400885A0 </span><span class="comment">/**&lt; Src addr matching control */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="a00712.html#ga7f115276124678123618454fee32fca4">   53</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCSHORTPENDEN2 0x400885A4 </span><span class="comment">/**&lt; Src addr matching control */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="a00712.html#ga737923cafe8c3d374e3ee01bfdf57f26">   54</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR0       0x400885A8 </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="a00712.html#ga11f8c7315ab2035371e30a0214af115c">   55</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR1       0x400885AC </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="a00712.html#ga4388fb0aef8ff6742d371b5fa879ff71">   56</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR2       0x400885B0 </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="a00712.html#ga8ad5a7db6b555955dcdd8f075770d3f1">   57</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR3       0x400885B4 </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="a00712.html#ga17c60f9eca7ff19bd5457a566b5eef7d">   58</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR4       0x400885B8 </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="a00712.html#ga6e721bc00d2f0e02774598fe4b9db74c">   59</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR5       0x400885BC </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="a00712.html#ga921ce2bd9e0ae3e16c1f7dc6fc2ccc9d">   60</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR6       0x400885C0 </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="a00712.html#ga614b6b7cf0ac8b066501150454703017">   61</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR7       0x400885C4 </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a00712.html#ga02476d7a783c06b23c87e4f0370d24cd">   62</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_PAN_ID0         0x400885C8 </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="a00712.html#gaa55da6cdb07ef47041669c199f23d3f2">   63</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_PAN_ID1         0x400885CC </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="a00712.html#gacf2a0f8720d6f52f92fedb3c65b9247d">   64</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SHORT_ADDR0     0x400885D0 </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="a00712.html#gab3668cb0963850e1e598ecb50974e0ad">   65</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SHORT_ADDR1     0x400885D4 </span><span class="comment">/**&lt; Local address information */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/** \name RFCORE_FFSM_SRCRESMASK[0:2] register bit masks</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="a00712.html#ga4c7d716afc52e53a6b7a977145dbb013">   71</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCRESMASK0_SRCRESMASK0 0x000000FF </span><span class="comment">/**&lt; Ext addr match */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a00712.html#ga607df7e00ba52cb10596d33b3cbcbcc3">   72</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCRESMASK1_SRCRESMASK1 0x000000FF </span><span class="comment">/**&lt; Short addr match */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="a00712.html#ga556e893728abb8082dcb192d74adf0df">   73</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCRESMASK2_SRCRESMASK2 0x000000FF </span><span class="comment">/**&lt; 24-bit mask */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">/** \name RFCORE_FFSM_SRCRESINDEX register bit masks</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="a00712.html#ga612b727283c64851b80e6c9695c5dfff">   79</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCRESINDEX_SRCRESINDEX 0x000000FF </span><span class="comment">/**&lt; LS Entry bit index */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">/** \name RFCORE_FFSM_SRCEXTPENDEN[0:2] register bit masks</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="a00712.html#ga6dcecb64cf5af737d293691f6a1702ee">   85</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCEXTPENDEN0_SRCEXTPENDEN0 0x000000FF </span><span class="comment">/**&lt; 8 LSBs */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="a00712.html#gae78608b64a04c3c1dcf9d2020b032a17">   86</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCEXTPENDEN1_SRCEXTPENDEN1 0x000000FF </span><span class="comment">/**&lt; 8 middle bits */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="a00712.html#gab5f64399b0a22f26f361ccd9dd0667ac">   87</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCEXTPENDEN2_SRCEXTPENDEN2 0x000000FF </span><span class="comment">/**&lt; 8 MSBs */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">/** \name RFCORE_FFSM_SRCSHORTPENDEN[0:2] register bit masks</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="a00712.html#ga36681301c3fb040a4ba59cbb9a3ff9ee">   93</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCSHORTPENDEN0_SRCSHORTPENDEN0 0x000000FF </span><span class="comment">/**&lt; 8 LSBs */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="a00712.html#gaa3761ae657c94c6c8852584d7fe2d4d3">   94</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCSHORTPENDEN1_SRCSHORTPENDEN1 0x000000FF </span><span class="comment">/**&lt; 8 middle */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="a00712.html#ga82c8407866c5c9a4a024c3ec8322a375">   95</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SRCSHORTPENDEN2_SRCSHORTPENDEN2 0x000000FF </span><span class="comment">/**&lt; 8 MSBs */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">/** \name RFCORE_FFSM_EXT_ADDR[0:7] register bit masks</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="a00712.html#gacfd1cf7bb04fcf38d0541c0aead324b4">  101</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR0_EXT_ADDR0 0x000000FF </span><span class="comment">/**&lt; EXT_ADDR[7:0] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="a00712.html#ga62af73004e54e82467905d94218ef978">  102</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR1_EXT_ADDR1 0x000000FF </span><span class="comment">/**&lt; EXT_ADDR[15:8] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="a00712.html#ga38f80520b6e75db135f4610f792ed944">  103</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR2_EXT_ADDR2 0x000000FF </span><span class="comment">/**&lt; EXT_ADDR[23:16] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="a00712.html#ga3f593ba96c3274adbe61eb1f447a457f">  104</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR3_EXT_ADDR3 0x000000FF </span><span class="comment">/**&lt; EXT_ADDR[31:24] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="a00712.html#ga6311b0c47d9fa4bc660207b9ccc20b2d">  105</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR4_EXT_ADDR4 0x000000FF </span><span class="comment">/**&lt; EXT_ADDR[39:32] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="a00712.html#ga5317728beb42847011fbf658218b4ab0">  106</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR5_EXT_ADDR5 0x000000FF </span><span class="comment">/**&lt; EXT_ADDR[47:40] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="a00712.html#ga5690384913bb459a102f1b41c584b64c">  107</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR6_EXT_ADDR6 0x000000FF </span><span class="comment">/**&lt; EXT_ADDR[55:48] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="a00712.html#gad0c7c79c03e9810037c2ce73d8b8e9f1">  108</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_EXT_ADDR7_EXT_ADDR7 0x000000FF </span><span class="comment">/**&lt; EXT_ADDR[63:56] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">/** \name RFCORE_FFSM_PAN_ID[0:1] register bit masks</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="a00712.html#ga52fbc5fe74ce638b5bec370c7d411d1d">  114</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_PAN_ID0_PAN_ID0 0x000000FF </span><span class="comment">/**&lt; PAN_ID[7:0] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="a00712.html#gad89aebe4c3baffce26b8f95034f2129e">  115</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_PAN_ID1_PAN_ID1 0x000000FF </span><span class="comment">/**&lt; PAN_ID[15:8] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">/** \name RFCORE_FFSM_SHORT_ADDR[0:1] register bit masks</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"> * @{</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="a00712.html#ga920f2a9d0c46d71fc8d17c060d064b4d">  121</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SHORT_ADDR0_SHORT_ADDR0 0x000000FF </span><span class="comment">/**&lt; SHORT_ADDR[7:0] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="a00712.html#gabb3010509f336993cc8e97925f75a82a">  122</a></span>&#160;<span class="preprocessor">#define RFCORE_FFSM_SHORT_ADDR1_SHORT_ADDR1 0x000000FF </span><span class="comment">/**&lt; SHORT_ADDR[15:8] */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">/** @} */</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* RFCORE_FFSM_H_ */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">/** @} */</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * Implementation file of the I2C Control module</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * \author</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * Mehdi Migault</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00521.html">i2c.h</a>&quot;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;clock.h&quot;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00538.html">sys-ctrl.h</a>&quot;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="a00836.html#ga6c631b9da7a7739f8b1d59a743149837">   49</a></span>&#160;<a class="code" href="a00836.html#ga6c631b9da7a7739f8b1d59a743149837">i2c_init</a>(uint8_t port_sda, uint8_t pin_sda, uint8_t port_scl, uint8_t pin_scl,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;         uint32_t bus_speed)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="comment">/* Enable I2C clock in different modes */</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  REG(<a class="code" href="a00847.html#ga7899c85ff26a7e293e35edfd34f6171f">SYS_CTRL_RCGCI2C</a>) |= 1; <span class="comment">/* Run mode */</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="comment">/* Reset I2C peripheral */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  REG(<a class="code" href="a00847.html#ga19b9a3d6a4e8188ad70e8c09a1c1222f">SYS_CTRL_SRI2C</a>) |= 1; <span class="comment">/* Reset position */</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">/* Delay for a little bit */</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <a class="code" href="a00806.html#gac0603df16193735b2cf4b70d54133356">clock_delay_usec</a>(50);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  REG(<a class="code" href="a00847.html#ga19b9a3d6a4e8188ad70e8c09a1c1222f">SYS_CTRL_SRI2C</a>) &amp;= ~1;  <span class="comment">/* Normal position */</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="comment">/* Set pins in input */</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="a00834.html#ga91971c4449841d538fa14506810bfc81">GPIO_SET_INPUT</a>(<a class="code" href="a00834.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a>(port_sda), <a class="code" href="a00834.html#ga284c58b2f63f601826cfcd46eaea929b">GPIO_PIN_MASK</a>(pin_sda));</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="a00834.html#ga91971c4449841d538fa14506810bfc81">GPIO_SET_INPUT</a>(<a class="code" href="a00834.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a>(port_scl), <a class="code" href="a00834.html#ga284c58b2f63f601826cfcd46eaea929b">GPIO_PIN_MASK</a>(pin_scl));</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="comment">/* Set peripheral control for the pins */</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <a class="code" href="a00834.html#ga3510bfba81c113bcabdd3934e983e603">GPIO_PERIPHERAL_CONTROL</a>(<a class="code" href="a00834.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a>(port_sda), <a class="code" href="a00834.html#ga284c58b2f63f601826cfcd46eaea929b">GPIO_PIN_MASK</a>(pin_sda));</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="a00834.html#ga3510bfba81c113bcabdd3934e983e603">GPIO_PERIPHERAL_CONTROL</a>(<a class="code" href="a00834.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a>(port_scl), <a class="code" href="a00834.html#ga284c58b2f63f601826cfcd46eaea929b">GPIO_PIN_MASK</a>(pin_scl));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="comment">/* Set the pad to no drive type */</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="a00837.html#ga61e1874d2c1bb16ecc219cf034c68502">ioc_set_over</a>(port_sda, pin_sda, <a class="code" href="a00837.html#gad459fda88da579746e716736ccafc90b">IOC_OVERRIDE_DIS</a>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <a class="code" href="a00837.html#ga61e1874d2c1bb16ecc219cf034c68502">ioc_set_over</a>(port_scl, pin_scl, <a class="code" href="a00837.html#gad459fda88da579746e716736ccafc90b">IOC_OVERRIDE_DIS</a>);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">/* Set pins as peripheral inputs */</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  REG(<a class="code" href="a00837.html#ga1ec18c680a8ca142af67e0c4ac0ae471">IOC_I2CMSSDA</a>) = <a class="code" href="a00837.html#ga23e949e29c625980dac7765bb149e8ed">ioc_input_sel</a>(port_sda, pin_sda);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  REG(<a class="code" href="a00837.html#ga3f32dd9702a2b9d976d1986797e3f95d">IOC_I2CMSSCL</a>) = <a class="code" href="a00837.html#ga23e949e29c625980dac7765bb149e8ed">ioc_input_sel</a>(port_scl, pin_scl);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="comment">/* Set pins as peripheral outputs */</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <a class="code" href="a00837.html#ga37f6bf61b293f7c57198394a3e86aaa6">ioc_set_sel</a>(port_sda, pin_sda, IOC_PXX_SEL_I2C_CMSSDA);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <a class="code" href="a00837.html#ga37f6bf61b293f7c57198394a3e86aaa6">ioc_set_sel</a>(port_scl, pin_scl, IOC_PXX_SEL_I2C_CMSSCL);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="comment">/* Enable the I2C master module */</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <a class="code" href="a00836.html#ga8905fed5bf17d35c3b754d8673de4601">i2c_master_enable</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="comment">/* t the master clock frequency */</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <a class="code" href="a00836.html#ga1ef8c84ec0709bb56fbfd8a780dcf6f8">i2c_set_frequency</a>(bus_speed);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="a00836.html#ga8905fed5bf17d35c3b754d8673de4601">   91</a></span>&#160;<a class="code" href="a00836.html#ga8905fed5bf17d35c3b754d8673de4601">i2c_master_enable</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  REG(I2CM_CR) |= 0x10; <span class="comment">/* Set MFE bit */</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="a00836.html#ga9bbe734c9bc70f3b39b47afe8906508e">   97</a></span>&#160;<a class="code" href="a00836.html#ga9bbe734c9bc70f3b39b47afe8906508e">i2c_master_disable</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  REG(I2CM_CR) &amp;= ~0x10;  <span class="comment">/* Reset MFE bit */</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="a00836.html#ga1ef8c84ec0709bb56fbfd8a780dcf6f8">  103</a></span>&#160;<a class="code" href="a00836.html#ga1ef8c84ec0709bb56fbfd8a780dcf6f8">i2c_set_frequency</a>(uint32_t freq)</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;{</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="comment">/* Peripheral clock setting, using the system clock */</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  REG(I2CM_TPR) = ((SYS_CTRL_SYS_CLOCK + (2 * 10 * freq) - 1) /</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                   (2 * 10 * freq)) - 1;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="a00836.html#gaaf25040ed9ee24c2819725fb0e23b3ff">  111</a></span>&#160;<a class="code" href="a00836.html#gaaf25040ed9ee24c2819725fb0e23b3ff">i2c_master_set_slave_address</a>(uint8_t slave_addr, uint8_t access_mode)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;{</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordflow">if</span>(access_mode) {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    REG(I2CM_SA) = ((slave_addr &lt;&lt; 1) | 1);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    REG(I2CM_SA) = (slave_addr &lt;&lt; 1);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="a00836.html#ga43bc6a955ccd383b5aa712698737d2c3">  121</a></span>&#160;<a class="code" href="a00836.html#ga43bc6a955ccd383b5aa712698737d2c3">i2c_master_data_put</a>(uint8_t data)</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;{</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  REG(I2CM_DR) = data;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;uint8_t</div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="a00836.html#ga4b5e8f1e37f975627c4ef48438b6902e">  127</a></span>&#160;<a class="code" href="a00836.html#ga4b5e8f1e37f975627c4ef48438b6902e">i2c_master_data_get</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;{</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keywordflow">return</span> REG(I2CM_DR);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="a00836.html#ga92ad7e79beb203ecf80bba65cf8e494f">  133</a></span>&#160;<a class="code" href="a00836.html#ga92ad7e79beb203ecf80bba65cf8e494f">i2c_master_command</a>(uint8_t cmd)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;{</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  REG(I2CM_CTRL) = cmd;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <span class="comment">/* Here we need a delay, otherwise the I2C module keep the receiver mode */</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  <a class="code" href="a00806.html#gac0603df16193735b2cf4b70d54133356">clock_delay_usec</a>(1);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;}</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;uint8_t</div>
+<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="a00836.html#ga4dcffce4873c851f363dcc13f77254ec">  141</a></span>&#160;<a class="code" href="a00836.html#ga4dcffce4873c851f363dcc13f77254ec">i2c_master_busy</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;{</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  <span class="keywordflow">return</span> REG(I2CM_STAT) &amp; I2CM_STAT_BUSY;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;}</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;uint8_t</div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="a00836.html#ga9ed6a3830d78f41b8547ad468bdf2695">  147</a></span>&#160;<a class="code" href="a00836.html#ga9ed6a3830d78f41b8547ad468bdf2695">i2c_master_error</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;{</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  uint8_t temp = REG(I2CM_STAT);  <span class="comment">/* Get all status */</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="keywordflow">if</span>(temp &amp; I2CM_STAT_BUSY) {   <span class="comment">/* No valid if BUSY bit is set */</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">return</span> I2C_MASTER_ERR_NONE;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(temp &amp; (I2CM_STAT_ERROR | I2CM_STAT_ARBLST)) {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">return</span> temp;  <span class="comment">/* Compare later */</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  }</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <span class="keywordflow">return</span> I2C_MASTER_ERR_NONE;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;}</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;uint8_t</div>
+<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="a00836.html#gaf613fd47fc51605a118b0cfb3dded6e4">  159</a></span>&#160;<a class="code" href="a00836.html#gaf613fd47fc51605a118b0cfb3dded6e4">i2c_single_send</a>(uint8_t slave_addr, uint8_t data)</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;{</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <a class="code" href="a00836.html#gaaf25040ed9ee24c2819725fb0e23b3ff">i2c_master_set_slave_address</a>(slave_addr, I2C_SEND);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <a class="code" href="a00836.html#ga43bc6a955ccd383b5aa712698737d2c3">i2c_master_data_put</a>(data);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <a class="code" href="a00836.html#ga92ad7e79beb203ecf80bba65cf8e494f">i2c_master_command</a>(I2C_MASTER_CMD_SINGLE_SEND);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="keywordflow">while</span>(<a class="code" href="a00836.html#ga4dcffce4873c851f363dcc13f77254ec">i2c_master_busy</a>());</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="comment">/* Return the STAT register of I2C module if error occured, I2C_MASTER_ERR_NONE otherwise */</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a00836.html#ga9ed6a3830d78f41b8547ad468bdf2695">i2c_master_error</a>();</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;}</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;uint8_t</div>
+<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="a00836.html#ga314927b5a0ce39c06b96fde39a19b180">  172</a></span>&#160;<a class="code" href="a00836.html#ga314927b5a0ce39c06b96fde39a19b180">i2c_single_receive</a>(uint8_t slave_addr, uint8_t *data)</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;{</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  uint32_t temp;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <a class="code" href="a00836.html#gaaf25040ed9ee24c2819725fb0e23b3ff">i2c_master_set_slave_address</a>(slave_addr, I2C_RECEIVE);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <a class="code" href="a00836.html#ga92ad7e79beb203ecf80bba65cf8e494f">i2c_master_command</a>(I2C_MASTER_CMD_SINGLE_RECEIVE);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="keywordflow">while</span>(<a class="code" href="a00836.html#ga4dcffce4873c851f363dcc13f77254ec">i2c_master_busy</a>());</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  temp = <a class="code" href="a00836.html#ga9ed6a3830d78f41b8547ad468bdf2695">i2c_master_error</a>();</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  <span class="keywordflow">if</span>(temp == I2C_MASTER_ERR_NONE) {</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    *data = <a class="code" href="a00836.html#ga4b5e8f1e37f975627c4ef48438b6902e">i2c_master_data_get</a>();</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  }</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="keywordflow">return</span> temp;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;}</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;uint8_t</div>
+<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="a00836.html#ga138bce2782c2c5b8e8c78f67ba2f6720">  188</a></span>&#160;<a class="code" href="a00836.html#ga138bce2782c2c5b8e8c78f67ba2f6720">i2c_burst_send</a>(uint8_t slave_addr, uint8_t *data, uint8_t len)</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;{</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  uint8_t sent;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  <span class="keywordflow">if</span>((len == 0) || (data == NULL)) {</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordflow">return</span> I2CM_STAT_INVALID;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  }</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="keywordflow">if</span>(len == 1) {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00836.html#gaf613fd47fc51605a118b0cfb3dded6e4">i2c_single_send</a>(slave_addr, data[0]);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  }</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <a class="code" href="a00836.html#gaaf25040ed9ee24c2819725fb0e23b3ff">i2c_master_set_slave_address</a>(slave_addr, I2C_SEND);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <a class="code" href="a00836.html#ga43bc6a955ccd383b5aa712698737d2c3">i2c_master_data_put</a>(data[0]);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <a class="code" href="a00836.html#ga92ad7e79beb203ecf80bba65cf8e494f">i2c_master_command</a>(I2C_MASTER_CMD_BURST_SEND_START);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="keywordflow">while</span>(<a class="code" href="a00836.html#ga4dcffce4873c851f363dcc13f77254ec">i2c_master_busy</a>());</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="a00836.html#ga9ed6a3830d78f41b8547ad468bdf2695">i2c_master_error</a>() == I2C_MASTER_ERR_NONE) {</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">for</span>(sent = 1; sent &lt;= (len - 2); sent++) {</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;      <a class="code" href="a00836.html#ga43bc6a955ccd383b5aa712698737d2c3">i2c_master_data_put</a>(data[sent]);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;      <a class="code" href="a00836.html#ga92ad7e79beb203ecf80bba65cf8e494f">i2c_master_command</a>(I2C_MASTER_CMD_BURST_SEND_CONT);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;      <span class="keywordflow">while</span>(<a class="code" href="a00836.html#ga4dcffce4873c851f363dcc13f77254ec">i2c_master_busy</a>());</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    }</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="comment">/* This should be the last byte, stop sending */</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <a class="code" href="a00836.html#ga43bc6a955ccd383b5aa712698737d2c3">i2c_master_data_put</a>(data[len - 1]);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <a class="code" href="a00836.html#ga92ad7e79beb203ecf80bba65cf8e494f">i2c_master_command</a>(I2C_MASTER_CMD_BURST_SEND_FINISH);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">while</span>(<a class="code" href="a00836.html#ga4dcffce4873c851f363dcc13f77254ec">i2c_master_busy</a>());</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  }</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="comment">/* Return the STAT register of I2C module if error occurred, I2C_MASTER_ERR_NONE otherwise */</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a00836.html#ga9ed6a3830d78f41b8547ad468bdf2695">i2c_master_error</a>();</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;}</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;uint8_t</div>
+<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="a00836.html#gaf2b4f0be19585151636dfa8a199e0a29">  218</a></span>&#160;<a class="code" href="a00836.html#gaf2b4f0be19585151636dfa8a199e0a29">i2c_burst_receive</a>(uint8_t slave_addr, uint8_t *data, uint8_t len)</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;{</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  uint8_t recv = 0;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <span class="keywordflow">if</span>((len == 0) || data == NULL) {</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordflow">return</span> I2CM_STAT_INVALID;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  }</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  <span class="keywordflow">if</span>(len == 1) {</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00836.html#ga314927b5a0ce39c06b96fde39a19b180">i2c_single_receive</a>(slave_addr, &amp;data[0]);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  }</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <a class="code" href="a00836.html#gaaf25040ed9ee24c2819725fb0e23b3ff">i2c_master_set_slave_address</a>(slave_addr, I2C_RECEIVE);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <a class="code" href="a00836.html#ga92ad7e79beb203ecf80bba65cf8e494f">i2c_master_command</a>(I2C_MASTER_CMD_BURST_RECEIVE_START);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  <span class="keywordflow">while</span>(<a class="code" href="a00836.html#ga4dcffce4873c851f363dcc13f77254ec">i2c_master_busy</a>());</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="a00836.html#ga9ed6a3830d78f41b8547ad468bdf2695">i2c_master_error</a>() == I2C_MASTER_ERR_NONE) {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    data[0] = <a class="code" href="a00836.html#ga4b5e8f1e37f975627c4ef48438b6902e">i2c_master_data_get</a>();</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="comment">/* If we got 2 or more bytes pending to be received, keep going*/</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordflow">for</span>(recv = 1; recv &lt;= (len - 2); recv++) {</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;      <a class="code" href="a00836.html#ga92ad7e79beb203ecf80bba65cf8e494f">i2c_master_command</a>(I2C_MASTER_CMD_BURST_RECEIVE_CONT);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;      <span class="keywordflow">while</span>(<a class="code" href="a00836.html#ga4dcffce4873c851f363dcc13f77254ec">i2c_master_busy</a>());</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;      data[recv] = <a class="code" href="a00836.html#ga4b5e8f1e37f975627c4ef48438b6902e">i2c_master_data_get</a>();</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    }</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="comment">/* This should be the last byte, stop receiving */</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <a class="code" href="a00836.html#ga92ad7e79beb203ecf80bba65cf8e494f">i2c_master_command</a>(I2C_MASTER_CMD_BURST_RECEIVE_FINISH);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordflow">while</span>(<a class="code" href="a00836.html#ga4dcffce4873c851f363dcc13f77254ec">i2c_master_busy</a>());</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    data[len - 1] = <a class="code" href="a00836.html#ga4b5e8f1e37f975627c4ef48438b6902e">i2c_master_data_get</a>();</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a00836.html#ga9ed6a3830d78f41b8547ad468bdf2695">i2c_master_error</a>();</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">/** @} */</span></div>
+<div class="ttc" id="a00847_html_ga19b9a3d6a4e8188ad70e8c09a1c1222f"><div class="ttname"><a href="a00847.html#ga19b9a3d6a4e8188ad70e8c09a1c1222f">SYS_CTRL_SRI2C</a></div><div class="ttdeci">#define SYS_CTRL_SRI2C</div><div class="ttdoc">I2C clocks - reset control. </div><div class="ttdef"><b>Definition:</b> <a href="a00538_source.html#l00082">sys-ctrl.h:82</a></div></div>
+<div class="ttc" id="a00837_html_ga1ec18c680a8ca142af67e0c4ac0ae471"><div class="ttname"><a href="a00837.html#ga1ec18c680a8ca142af67e0c4ac0ae471">IOC_I2CMSSDA</a></div><div class="ttdeci">#define IOC_I2CMSSDA</div><div class="ttdoc">I2C SDA. </div><div class="ttdef"><b>Definition:</b> <a href="a00523_source.html#l00136">ioc.h:136</a></div></div>
+<div class="ttc" id="a00834_html_ga684b5fe1b034e081bcae368743dd5c04"><div class="ttname"><a href="a00834.html#ga684b5fe1b034e081bcae368743dd5c04">GPIO_PORT_TO_BASE</a></div><div class="ttdeci">#define GPIO_PORT_TO_BASE(PORT)</div><div class="ttdoc">Converts a port number to the port base address. </div><div class="ttdef"><b>Definition:</b> <a href="a00518_source.html#l00329">gpio.h:329</a></div></div>
+<div class="ttc" id="a00836_html_ga6c631b9da7a7739f8b1d59a743149837"><div class="ttname"><a href="a00836.html#ga6c631b9da7a7739f8b1d59a743149837">i2c_init</a></div><div class="ttdeci">void i2c_init(uint8_t port_sda, uint8_t pin_sda, uint8_t port_scl, uint8_t pin_scl, uint32_t bus_speed)</div><div class="ttdoc">Initialize the I2C peripheral and pins. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00049">i2c.c:49</a></div></div>
+<div class="ttc" id="a00836_html_gaf613fd47fc51605a118b0cfb3dded6e4"><div class="ttname"><a href="a00836.html#gaf613fd47fc51605a118b0cfb3dded6e4">i2c_single_send</a></div><div class="ttdeci">uint8_t i2c_single_send(uint8_t slave_addr, uint8_t data)</div><div class="ttdoc">Perform all operations to send a byte to a slave. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00159">i2c.c:159</a></div></div>
+<div class="ttc" id="a00837_html_ga3f32dd9702a2b9d976d1986797e3f95d"><div class="ttname"><a href="a00837.html#ga3f32dd9702a2b9d976d1986797e3f95d">IOC_I2CMSSCL</a></div><div class="ttdeci">#define IOC_I2CMSSCL</div><div class="ttdoc">I2C SCL. </div><div class="ttdef"><b>Definition:</b> <a href="a00523_source.html#l00137">ioc.h:137</a></div></div>
+<div class="ttc" id="a00834_html_ga3510bfba81c113bcabdd3934e983e603"><div class="ttname"><a href="a00834.html#ga3510bfba81c113bcabdd3934e983e603">GPIO_PERIPHERAL_CONTROL</a></div><div class="ttdeci">#define GPIO_PERIPHERAL_CONTROL(PORT_BASE, PIN_MASK)</div><div class="ttdoc">Configure the pin to be under peripheral control with PIN_MASK of port with PORT_BASE. </div><div class="ttdef"><b>Definition:</b> <a href="a00518_source.html#l00251">gpio.h:251</a></div></div>
+<div class="ttc" id="a00521_html"><div class="ttname"><a href="a00521.html">i2c.h</a></div><div class="ttdoc">Header file with declarations for the I2C Control module. </div></div>
+<div class="ttc" id="a00836_html_ga138bce2782c2c5b8e8c78f67ba2f6720"><div class="ttname"><a href="a00836.html#ga138bce2782c2c5b8e8c78f67ba2f6720">i2c_burst_send</a></div><div class="ttdeci">uint8_t i2c_burst_send(uint8_t slave_addr, uint8_t *data, uint8_t len)</div><div class="ttdoc">Perform all operations to send multiple bytes to a slave. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00188">i2c.c:188</a></div></div>
+<div class="ttc" id="a00834_html_ga284c58b2f63f601826cfcd46eaea929b"><div class="ttname"><a href="a00834.html#ga284c58b2f63f601826cfcd46eaea929b">GPIO_PIN_MASK</a></div><div class="ttdeci">#define GPIO_PIN_MASK(PIN)</div><div class="ttdoc">Converts a pin number to a pin mask. </div><div class="ttdef"><b>Definition:</b> <a href="a00518_source.html#l00321">gpio.h:321</a></div></div>
+<div class="ttc" id="a00836_html_gaf2b4f0be19585151636dfa8a199e0a29"><div class="ttname"><a href="a00836.html#gaf2b4f0be19585151636dfa8a199e0a29">i2c_burst_receive</a></div><div class="ttdeci">uint8_t i2c_burst_receive(uint8_t slave_addr, uint8_t *data, uint8_t len)</div><div class="ttdoc">Perform all operations to receive multiple bytes from a slave. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00218">i2c.c:218</a></div></div>
+<div class="ttc" id="a00806_html_gac0603df16193735b2cf4b70d54133356"><div class="ttname"><a href="a00806.html#gac0603df16193735b2cf4b70d54133356">clock_delay_usec</a></div><div class="ttdeci">void clock_delay_usec(uint16_t dt)</div><div class="ttdoc">Delay a given number of microseconds. </div><div class="ttdef"><b>Definition:</b> <a href="a00500_source.html#l00156">clock.c:156</a></div></div>
+<div class="ttc" id="a00837_html_ga61e1874d2c1bb16ecc219cf034c68502"><div class="ttname"><a href="a00837.html#ga61e1874d2c1bb16ecc219cf034c68502">ioc_set_over</a></div><div class="ttdeci">void ioc_set_over(uint8_t port, uint8_t pin, uint8_t over)</div><div class="ttdoc">Set Port:Pin override function. </div><div class="ttdef"><b>Definition:</b> <a href="a00522_source.html#l00054">ioc.c:54</a></div></div>
+<div class="ttc" id="a00836_html_ga9ed6a3830d78f41b8547ad468bdf2695"><div class="ttname"><a href="a00836.html#ga9ed6a3830d78f41b8547ad468bdf2695">i2c_master_error</a></div><div class="ttdeci">uint8_t i2c_master_error(void)</div><div class="ttdoc">Return the status register if error occurred during last communication. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00147">i2c.c:147</a></div></div>
+<div class="ttc" id="a00836_html_ga1ef8c84ec0709bb56fbfd8a780dcf6f8"><div class="ttname"><a href="a00836.html#ga1ef8c84ec0709bb56fbfd8a780dcf6f8">i2c_set_frequency</a></div><div class="ttdeci">void i2c_set_frequency(uint32_t freq)</div><div class="ttdoc">Initialize I2C peripheral clock with given frequency. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00103">i2c.c:103</a></div></div>
+<div class="ttc" id="a00538_html"><div class="ttname"><a href="a00538.html">sys-ctrl.h</a></div><div class="ttdoc">Header file for the cc2538 System Control driver. </div></div>
+<div class="ttc" id="a00834_html_ga91971c4449841d538fa14506810bfc81"><div class="ttname"><a href="a00834.html#ga91971c4449841d538fa14506810bfc81">GPIO_SET_INPUT</a></div><div class="ttdeci">#define GPIO_SET_INPUT(PORT_BASE, PIN_MASK)</div><div class="ttdoc">Set pins with PIN_MASK of port with PORT_BASE to input. </div><div class="ttdef"><b>Definition:</b> <a href="a00518_source.html#l00093">gpio.h:93</a></div></div>
+<div class="ttc" id="a00836_html_ga4b5e8f1e37f975627c4ef48438b6902e"><div class="ttname"><a href="a00836.html#ga4b5e8f1e37f975627c4ef48438b6902e">i2c_master_data_get</a></div><div class="ttdeci">uint8_t i2c_master_data_get(void)</div><div class="ttdoc">Return received data from I2C. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00127">i2c.c:127</a></div></div>
+<div class="ttc" id="a00837_html_ga37f6bf61b293f7c57198394a3e86aaa6"><div class="ttname"><a href="a00837.html#ga37f6bf61b293f7c57198394a3e86aaa6">ioc_set_sel</a></div><div class="ttdeci">void ioc_set_sel(uint8_t port, uint8_t pin, uint8_t sel)</div><div class="ttdoc">Function select for Port:Pin. </div><div class="ttdef"><b>Definition:</b> <a href="a00522_source.html#l00060">ioc.c:60</a></div></div>
+<div class="ttc" id="a00837_html_ga23e949e29c625980dac7765bb149e8ed"><div class="ttname"><a href="a00837.html#ga23e949e29c625980dac7765bb149e8ed">ioc_input_sel</a></div><div class="ttdeci">#define ioc_input_sel(port, pin)</div><div class="ttdoc">Generates an IOC_INPUT_SEL_PXn value from a port/pin number. </div><div class="ttdef"><b>Definition:</b> <a href="a00523_source.html#l00270">ioc.h:270</a></div></div>
+<div class="ttc" id="a00836_html_ga92ad7e79beb203ecf80bba65cf8e494f"><div class="ttname"><a href="a00836.html#ga92ad7e79beb203ecf80bba65cf8e494f">i2c_master_command</a></div><div class="ttdeci">void i2c_master_command(uint8_t cmd)</div><div class="ttdoc">Control the state of the master module for send and receive operations. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00133">i2c.c:133</a></div></div>
+<div class="ttc" id="a00847_html_ga7899c85ff26a7e293e35edfd34f6171f"><div class="ttname"><a href="a00847.html#ga7899c85ff26a7e293e35edfd34f6171f">SYS_CTRL_RCGCI2C</a></div><div class="ttdeci">#define SYS_CTRL_RCGCI2C</div><div class="ttdoc">I2C clocks - active mode. </div><div class="ttdef"><b>Definition:</b> <a href="a00538_source.html#l00079">sys-ctrl.h:79</a></div></div>
+<div class="ttc" id="a00836_html_ga43bc6a955ccd383b5aa712698737d2c3"><div class="ttname"><a href="a00836.html#ga43bc6a955ccd383b5aa712698737d2c3">i2c_master_data_put</a></div><div class="ttdeci">void i2c_master_data_put(uint8_t data)</div><div class="ttdoc">Prepare data to be transmitted. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00121">i2c.c:121</a></div></div>
+<div class="ttc" id="a00837_html_gad459fda88da579746e716736ccafc90b"><div class="ttname"><a href="a00837.html#gad459fda88da579746e716736ccafc90b">IOC_OVERRIDE_DIS</a></div><div class="ttdeci">#define IOC_OVERRIDE_DIS</div><div class="ttdoc">Override Disabled. </div><div class="ttdef"><b>Definition:</b> <a href="a00523_source.html#l00226">ioc.h:226</a></div></div>
+<div class="ttc" id="a00836_html_ga9bbe734c9bc70f3b39b47afe8906508e"><div class="ttname"><a href="a00836.html#ga9bbe734c9bc70f3b39b47afe8906508e">i2c_master_disable</a></div><div class="ttdeci">void i2c_master_disable(void)</div><div class="ttdoc">Disable master I2C module. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00097">i2c.c:97</a></div></div>
+<div class="ttc" id="a00836_html_gaaf25040ed9ee24c2819725fb0e23b3ff"><div class="ttname"><a href="a00836.html#gaaf25040ed9ee24c2819725fb0e23b3ff">i2c_master_set_slave_address</a></div><div class="ttdeci">void i2c_master_set_slave_address(uint8_t slave_addr, uint8_t access_mode)</div><div class="ttdoc">Set the address of slave and access mode for the next I2C communication. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00111">i2c.c:111</a></div></div>
+<div class="ttc" id="a00836_html_ga8905fed5bf17d35c3b754d8673de4601"><div class="ttname"><a href="a00836.html#ga8905fed5bf17d35c3b754d8673de4601">i2c_master_enable</a></div><div class="ttdeci">void i2c_master_enable(void)</div><div class="ttdoc">Enable master I2C module. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00091">i2c.c:91</a></div></div>
+<div class="ttc" id="a00836_html_ga4dcffce4873c851f363dcc13f77254ec"><div class="ttname"><a href="a00836.html#ga4dcffce4873c851f363dcc13f77254ec">i2c_master_busy</a></div><div class="ttdeci">uint8_t i2c_master_busy(void)</div><div class="ttdoc">Return the busy state of I2C module. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00141">i2c.c:141</a></div></div>
+<div class="ttc" id="a00836_html_ga314927b5a0ce39c06b96fde39a19b180"><div class="ttname"><a href="a00836.html#ga314927b5a0ce39c06b96fde39a19b180">i2c_single_receive</a></div><div class="ttdeci">uint8_t i2c_single_receive(uint8_t slave_addr, uint8_t *data)</div><div class="ttdoc">Perform all operations to receive a byte from a slave. </div><div class="ttdef"><b>Definition:</b> <a href="a00520_source.html#l00172">i2c.c:172</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:42 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:56 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

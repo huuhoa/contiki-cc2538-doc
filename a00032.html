@@ -81,7 +81,7 @@
 <div class="line"><span class="comment"> */</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;contiki.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00443.html">net/rime/trickle.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="a00449.html">net/rime/trickle.h</a>&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;dev/button-sensor.h&quot;</span></div>
 <div class="line"></div>
@@ -89,42 +89,42 @@
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a0"></a><a class="code" href="a00684.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_trickle_process, <span class="stringliteral">&quot;Trickle example&quot;</span>);</div>
+<div class="line"><a name="a0"></a><a class="code" href="a00813.html#ga27e9b6fc13f0438e37a198f69b38b4cf">PROCESS</a>(example_trickle_process, <span class="stringliteral">&quot;Trickle example&quot;</span>);</div>
 <div class="line">AUTOSTART_PROCESSES(&amp;example_trickle_process);</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span></div>
 <div class="line">trickle_recv(<span class="keyword">struct</span> trickle_conn *c)</div>
 <div class="line">{</div>
 <div class="line">  printf(<span class="stringliteral">&quot;%d.%d: trickle message received &#39;%s&#39;\n&quot;</span>,</div>
-<div class="line">         <a name="a1"></a><a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00612.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
-<div class="line">         (<span class="keywordtype">char</span> *)<a name="a2"></a><a class="code" href="a00613.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>());</div>
+<div class="line">         <a name="a1"></a><a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[0], <a class="code" href="a00741.html#ga03585f3e07ec49ec11cb4bbd17f3cf0e">linkaddr_node_addr</a>.u8[1],</div>
+<div class="line">         (<span class="keywordtype">char</span> *)<a name="a2"></a><a class="code" href="a00742.html#ga29a6f3f230b55e6bc2f017879c27113a">packetbuf_dataptr</a>());</div>
 <div class="line">}</div>
 <div class="line"><span class="keyword">const</span> <span class="keyword">static</span> <span class="keyword">struct </span>trickle_callbacks trickle_call = {trickle_recv};</div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">struct </span>trickle_conn trickle;</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="a3"></a><a class="code" href="a00701.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_trickle_process, ev, data)</div>
+<div class="line"><a name="a3"></a><a class="code" href="a00830.html#gad9ac47af91b8dc72c6a711aaec9690a0">PROCESS_THREAD</a>(example_trickle_process, ev, data)</div>
 <div class="line">{</div>
-<div class="line">  <a name="a4"></a><a class="code" href="a00684.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(trickle_close(&amp;trickle);)</div>
-<div class="line">  <a name="a5"></a><a class="code" href="a00684.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
+<div class="line">  <a name="a4"></a><a class="code" href="a00813.html#ga3dee46e19ad8848b86d9d06321b75c0e">PROCESS_EXITHANDLER</a>(trickle_close(&amp;trickle);)</div>
+<div class="line">  <a name="a5"></a><a class="code" href="a00813.html#ga8efc62947f2ca2c870f52896e0dc1a81">PROCESS_BEGIN</a>();</div>
 <div class="line"></div>
-<div class="line">  trickle_open(&amp;trickle, <a name="a6"></a><a class="code" href="a00677.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a>, 145, &amp;trickle_call);</div>
+<div class="line">  trickle_open(&amp;trickle, <a name="a6"></a><a class="code" href="a00806.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a>, 145, &amp;trickle_call);</div>
 <div class="line">  SENSORS_ACTIVATE(button_sensor);</div>
 <div class="line"></div>
 <div class="line">  <span class="keywordflow">while</span>(1) {</div>
-<div class="line">    <a name="a7"></a><a class="code" href="a00684.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(ev == sensors_event &amp;&amp;</div>
+<div class="line">    <a name="a7"></a><a class="code" href="a00813.html#ga996168a0f904c0e28e3f6ed18dddd129">PROCESS_WAIT_EVENT_UNTIL</a>(ev == sensors_event &amp;&amp;</div>
 <div class="line">                             data == &amp;button_sensor);</div>
 <div class="line"></div>
-<div class="line">    <a name="a8"></a><a class="code" href="a00613.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(<span class="stringliteral">&quot;Hello, world&quot;</span>, 13);</div>
+<div class="line">    <a name="a8"></a><a class="code" href="a00742.html#ga5fd9cb98f800733b6d9381bce81cd224">packetbuf_copyfrom</a>(<span class="stringliteral">&quot;Hello, world&quot;</span>, 13);</div>
 <div class="line">    trickle_send(&amp;trickle);</div>
 <div class="line"></div>
 <div class="line">  }</div>
-<div class="line">  <a name="a9"></a><a class="code" href="a00684.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
+<div class="line">  <a name="a9"></a><a class="code" href="a00813.html#ga9c2681a0070eba8a7c9fdf4dbb6db05e">PROCESS_END</a>();</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">/*---------------------------------------------------------------------------*/</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 00:57:41 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 01:15:54 for Contiki 3.x by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
